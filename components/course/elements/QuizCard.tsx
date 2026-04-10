@@ -16,7 +16,10 @@ export default function QuizCard({ element }: { element: QuizElement }) {
   const isCorrect = selected !== null && element.options[selected].correct;
 
   return (
-    <div className="bg-[var(--course-surface)] rounded-xl p-5 sm:p-6">
+    <div
+      className="rounded-xl p-5 sm:p-6"
+      style={{ backgroundColor: "var(--course-surface)" }}
+    >
       {/* Question */}
       <p className="font-heading font-bold text-lg text-[var(--course-text)] mb-4">
         {element.question}
@@ -28,14 +31,18 @@ export default function QuizCard({ element }: { element: QuizElement }) {
           const isSelected = selected === i;
           const isOptionCorrect = option.correct;
 
-          let optionStyle = "border-[var(--course-text)]/15 hover:border-[var(--course-primary)]/50 cursor-pointer";
+          let borderColor = "color-mix(in srgb, var(--course-text) 15%, transparent)";
+          let bgColor = "transparent";
+
           if (revealed) {
             if (isOptionCorrect) {
-              optionStyle = "border-emerald-400 bg-emerald-50";
+              borderColor = "var(--course-accent)";
+              bgColor = "color-mix(in srgb, var(--course-accent) 10%, var(--course-surface))";
             } else if (isSelected && !isOptionCorrect) {
-              optionStyle = "border-red-400 bg-red-50";
+              borderColor = "#E55B5B";
+              bgColor = "color-mix(in srgb, #E55B5B 10%, var(--course-surface))";
             } else {
-              optionStyle = "border-[var(--course-text)]/10 opacity-50";
+              borderColor = "color-mix(in srgb, var(--course-text) 8%, transparent)";
             }
           }
 
@@ -46,10 +53,12 @@ export default function QuizCard({ element }: { element: QuizElement }) {
               disabled={revealed}
               className={`
                 w-full text-left p-4 rounded-lg border-2 transition-all duration-200
-                ${optionStyle}
+                ${!revealed ? "cursor-pointer hover:border-[var(--course-primary)]" : ""}
+                ${revealed && !isOptionCorrect && !isSelected ? "opacity-50" : ""}
                 ${isSelected && isOptionCorrect ? "animate-celebrate" : ""}
                 ${isSelected && !isOptionCorrect ? "animate-wiggle" : ""}
               `}
+              style={{ borderColor, backgroundColor: bgColor }}
             >
               <span className="text-base text-[var(--course-text)]">
                 {option.text}
@@ -66,7 +75,10 @@ export default function QuizCard({ element }: { element: QuizElement }) {
 
       {/* Explanation after reveal */}
       {revealed && (
-        <div className="mt-4 pt-4 border-t border-[var(--course-text)]/10 animate-fade-in">
+        <div
+          className="mt-4 pt-4 animate-fade-in"
+          style={{ borderTop: "1px solid color-mix(in srgb, var(--course-text) 10%, transparent)" }}
+        >
           <div className="flex items-center gap-2 mb-2">
             <span className="text-lg">{isCorrect ? "🎯" : "💡"}</span>
             <span className="font-heading font-bold text-sm text-[var(--course-text)]">

@@ -49,8 +49,13 @@ export default function FlashcardDeck({
         >
           {/* Front */}
           <div
-            className="absolute inset-0 bg-[var(--course-surface)] border-2 border-[var(--course-primary)]/20 rounded-xl p-6 flex items-center justify-center text-center"
-            style={{ backfaceVisibility: "hidden" }}
+            className="absolute inset-0 rounded-xl p-6 flex items-center justify-center text-center border-2"
+            style={{
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+              backgroundColor: "var(--course-surface)",
+              borderColor: "color-mix(in srgb, var(--course-primary) 20%, transparent)",
+            }}
           >
             <div>
               <p className="text-xs text-[var(--course-text-muted)] mb-3 uppercase tracking-wider">
@@ -67,10 +72,13 @@ export default function FlashcardDeck({
 
           {/* Back */}
           <div
-            className="absolute inset-0 bg-[var(--course-primary)]/5 border-2 border-[var(--course-primary)]/30 rounded-xl p-6 flex items-center justify-center text-center"
+            className="absolute inset-0 rounded-xl p-6 flex items-center justify-center text-center border-2"
             style={{
               backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
               transform: "rotateY(180deg)",
+              backgroundColor: "color-mix(in srgb, var(--course-primary) 10%, var(--course-surface))",
+              borderColor: "color-mix(in srgb, var(--course-primary) 30%, transparent)",
             }}
           >
             <div>
@@ -90,7 +98,8 @@ export default function FlashcardDeck({
         <button
           onClick={handlePrev}
           disabled={currentIndex === 0}
-          className="px-3 py-1.5 text-sm rounded-lg border border-[var(--course-text)]/15 text-[var(--course-text-muted)] hover:text-[var(--course-text)] disabled:opacity-30 transition-all"
+          className="px-3 py-1.5 text-sm rounded-lg border text-[var(--course-text-muted)] hover:text-[var(--course-text)] disabled:opacity-30 transition-all"
+          style={{ borderColor: "color-mix(in srgb, var(--course-text) 15%, transparent)" }}
         >
           ← Zurück
         </button>
@@ -100,7 +109,8 @@ export default function FlashcardDeck({
         <button
           onClick={handleNext}
           disabled={currentIndex === total - 1}
-          className="px-3 py-1.5 text-sm rounded-lg border border-[var(--course-text)]/15 text-[var(--course-text-muted)] hover:text-[var(--course-text)] disabled:opacity-30 transition-all"
+          className="px-3 py-1.5 text-sm rounded-lg border text-[var(--course-text-muted)] hover:text-[var(--course-text)] disabled:opacity-30 transition-all"
+          style={{ borderColor: "color-mix(in srgb, var(--course-text) 15%, transparent)" }}
         >
           Weiter →
         </button>

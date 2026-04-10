@@ -72,12 +72,12 @@ interface CourseMeta {
 ```
 
 ### CourseDesign
-Jeder Kurs hat ein eigenes visuelles Theme:
+Jeder Kurs hat ein eigenes visuelles Theme. Kurse können **dunkel oder hell** sein — das wird allein über die Farbwerte gesteuert:
 ```typescript
 interface CourseDesign {
   theme: string;       // z.B. "knowledge-graph", "hacker-terminal", "retro-magazine"
   colors: {
-    background: string;  // Kurs-Hintergrundfarbe
+    background: string;  // Kurs-Hintergrundfarbe (dunkel ODER hell)
     surface: string;     // Karten, Boxen
     primary: string;     // Akzentfarbe (Buttons, Links, Badges)
     accent: string;      // Zweitfarbe (Highlights, Erfolg)
@@ -159,6 +159,30 @@ Vertikal: Teal (`#025671`) oben → Dark Purple (`#261C53`) unten. Immer vertika
 Jeder Kurs definiert eigene Farben in `CourseDesign.colors`. Diese werden als CSS Custom Properties auf den Kurs-Container gesetzt. Alle Kurs-Komponenten nutzen `var(--course-primary)`, `var(--course-surface)`, etc.
 
 **Wichtig:** Kurs-Themes dürfen mutig und eigenständig sein. Jeder Kurs soll sich visuell anders anfühlen. Keine generischen Template-Farben.
+
+**Light-Mode Kurs-Beispiel:**
+```typescript
+colors: {
+  background: "#FAFAFA",
+  surface: "#FFFFFF",
+  primary: "#5B2F9F",
+  accent: "#00C9A7",
+  text: "#333333",
+  textMuted: "#7F7F7F",
+}
+```
+
+**Dark-Mode Kurs-Beispiel:**
+```typescript
+colors: {
+  background: "#0E0B1A",
+  surface: "#1A1530",
+  primary: "#7B4FBF",
+  accent: "#00C9A7",
+  text: "#EDE4F8",
+  textMuted: "#9B8EC0",
+}
+```
 
 ---
 

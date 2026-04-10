@@ -48,7 +48,7 @@ export default function DatenschutzPage() {
 
           <h2>4. Newsletter</h2>
           <p>
-            Wenn Sie sich für unseren Newsletter &ldquo;Das&apos;n gutes Ding&rdquo; anmelden,
+            Wenn Sie sich für unseren Newsletter &ldquo;Ein gutes Ding&rdquo; anmelden,
             erheben wir:
           </p>
           <ul>

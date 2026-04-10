@@ -42,7 +42,7 @@ export default function Header() {
             href="/newsletter"
             className="ml-3 px-4 py-2 text-sm font-bold text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] rounded-xl transition-all duration-200 hover:shadow-md hover:shadow-[var(--accent)]/20"
           >
-            Das&apos;n gutes Ding
+            Ein gutes Ding
           </Link>
         </nav>
 

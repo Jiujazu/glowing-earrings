@@ -65,7 +65,7 @@ export default function MobileNav({ open, onClose, links }: MobileNavProps) {
             onClick={onClose}
             className="block w-full text-center px-4 py-3 text-sm font-medium text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] rounded-xl transition-colors"
           >
-            Das&apos;n gutes Ding
+            Ein gutes Ding
           </Link>
         </div>
       </div>

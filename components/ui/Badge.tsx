@@ -1,4 +1,4 @@
-type BadgeVariant = "default" | "accent" | "brand" | "muted";
+type BadgeVariant = "default" | "accent" | "brand" | "muted" | "course";
 
 interface BadgeProps {
   children: React.ReactNode;
@@ -14,7 +14,9 @@ const variantClasses: Record<BadgeVariant, string> = {
   brand:
     "bg-[var(--brand)]/10 text-[var(--brand)]",
   muted:
-    "bg-[var(--surface)] text-[var(--text-muted)]",
+    "bg-[var(--surface)] text-[var(--text-muted)] border border-[var(--border)]",
+  course:
+    "text-[var(--course-text)] border border-[var(--course-text)]/20",
 };
 
 export default function Badge({
@@ -22,6 +24,10 @@ export default function Badge({
   variant = "default",
   className = "",
 }: BadgeProps) {
+  const style = variant === "course"
+    ? { backgroundColor: "color-mix(in srgb, var(--course-primary) 15%, var(--course-surface))" }
+    : undefined;
+
   return (
     <span
       className={`
@@ -30,6 +36,7 @@ export default function Badge({
         ${variantClasses[variant]}
         ${className}
       `}
+      style={style}
     >
       {children}
     </span>

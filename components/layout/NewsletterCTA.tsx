@@ -25,11 +25,11 @@ export default function NewsletterCTA({
   const [consent, setConsent] = useState(false);
 
   const headlines: Record<Variant, string> = {
-    inline: "Das'n gutes Ding",
+    inline: "Ein gutes Ding",
     featured:
       "Jede Woche ein Tool, das deinen Workflow verändert.",
     standalone:
-      "Das'n gutes Ding — Der Newsletter",
+      "Ein gutes Ding — Der Newsletter",
   };
 
   const descriptions: Record<Variant, string> = {

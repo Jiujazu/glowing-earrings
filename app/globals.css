@@ -65,9 +65,9 @@
   --color-teal: var(--color-teal);
   --color-warm-gray: var(--color-warm-gray);
 
-  --font-heading: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
-  --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --font-heading: var(--font-space-grotesk), "Space Grotesk", system-ui, sans-serif;
+  --font-body: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
 
   /* Animations */
   --animate-float: float 3s ease-in-out infinite;

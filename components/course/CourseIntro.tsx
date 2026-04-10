@@ -13,9 +13,9 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
       <div className="max-w-3xl mx-auto">
         {/* Badges */}
         <div className="flex flex-wrap gap-2 mb-6">
-          <Badge variant="accent">{getSourceTypeLabel(meta.sourceType)}</Badge>
-          <Badge variant="brand">{getDifficultyLabel(meta.difficulty)}</Badge>
-          <Badge variant="muted">{formatDuration(meta.estimatedMinutes)}</Badge>
+          <Badge variant="course">{getSourceTypeLabel(meta.sourceType)}</Badge>
+          <Badge variant="course">{getDifficultyLabel(meta.difficulty)}</Badge>
+          <Badge variant="course">{formatDuration(meta.estimatedMinutes)}</Badge>
         </div>
 
         {/* Title */}

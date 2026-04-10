@@ -7,7 +7,7 @@ export default function CourseCard({ meta }: { meta: CourseMeta }) {
   return (
     <Link
       href={`/courses/${meta.slug}`}
-      className="group relative block rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/5"
+      className="group relative block rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-[var(--accent)]/10"
     >
       {/* Color bar top */}
       <div
@@ -16,7 +16,6 @@ export default function CourseCard({ meta }: { meta: CourseMeta }) {
       />
 
       <div className="p-6 bg-[var(--surface)] border border-[var(--border)] border-t-0 rounded-b-2xl">
-        {/* Tags */}
         <div className="flex flex-wrap gap-1.5 mb-3">
           <Badge variant="accent">{getSourceTypeLabel(meta.sourceType)}</Badge>
           <Badge variant="brand">{getDifficultyLabel(meta.difficulty)}</Badge>
@@ -25,7 +24,6 @@ export default function CourseCard({ meta }: { meta: CourseMeta }) {
           ))}
         </div>
 
-        {/* Title */}
         <h3 className="font-heading text-xl font-bold text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors mb-2">
           {meta.title}
         </h3>
@@ -33,7 +31,6 @@ export default function CourseCard({ meta }: { meta: CourseMeta }) {
           {meta.subtitle}
         </p>
 
-        {/* Meta */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3 text-xs text-[var(--text-muted)]">
             <span>{formatDuration(meta.estimatedMinutes)}</span>

@@ -10,7 +10,6 @@ interface MobileNavProps {
 }
 
 export default function MobileNav({ open, onClose, links }: MobileNavProps) {
-  // Prevent body scroll when open
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
@@ -26,17 +25,13 @@ export default function MobileNav({ open, onClose, links }: MobileNavProps) {
 
   return (
     <div className="fixed inset-0 z-50 md:hidden">
-      {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/30 backdrop-blur-sm animate-fade-in"
+        className="absolute inset-0 bg-[var(--color-dark-purple)]/40 backdrop-blur-sm animate-fade-in"
         onClick={onClose}
       />
-
-      {/* Panel */}
       <div className="absolute right-0 top-0 h-full w-72 bg-[var(--background)] shadow-xl animate-slide-up p-6 flex flex-col">
-        {/* Close button */}
         <button
-          className="self-end p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+          className="self-end p-2 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
           onClick={onClose}
           aria-label="Menü schließen"
         >
@@ -63,7 +58,7 @@ export default function MobileNav({ open, onClose, links }: MobileNavProps) {
           <Link
             href="/newsletter"
             onClick={onClose}
-            className="block w-full text-center px-4 py-3 text-sm font-medium text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] rounded-xl transition-colors"
+            className="block w-full text-center px-4 py-3 text-sm font-bold text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] rounded-xl transition-colors"
           >
             Ein gutes Ding
           </Link>

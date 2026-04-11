@@ -151,7 +151,7 @@ interface CourseOutro {
 Vertikal: Teal (`#025671`) oben → Dark Purple (`#261C53`) unten. Immer vertikal, nie horizontal.
 
 ### Typografie
-- **Headings:** Syne (Google Font, via `next/font/google`)
+- **Headings:** Space Grotesk (Google Font, via `next/font/google`)
 - **Body:** DM Sans (Google Font)
 - Fonts werden in `app/layout.tsx` geladen und als CSS-Variablen bereitgestellt
 

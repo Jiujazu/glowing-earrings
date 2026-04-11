@@ -68,7 +68,7 @@ export default function CourseNav({ modules }: CourseNavProps) {
         <ol
           className={`${
             isOpen ? "flex" : "hidden"
-          } sm:flex flex-col sm:flex-row sm:flex-wrap gap-1 sm:gap-0 mt-2 sm:mt-0`}
+          } sm:flex flex-col sm:flex-row sm:flex-wrap gap-1 sm:gap-0 mt-2 sm:mt-0 sm:bg-transparent bg-[var(--course-background)] rounded-lg p-2 sm:p-0`}
         >
           {modules.map((mod, i) => {
             const isActive = mod.id === activeId;

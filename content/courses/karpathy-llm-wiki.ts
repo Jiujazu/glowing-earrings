@@ -25,7 +25,7 @@ export const karpathyLlmWiki: Course = {
         textMuted: "#9B8EC0",
       },
       fonts: {
-        heading: '"Syne", system-ui, sans-serif',
+        heading: '"Space Grotesk", system-ui, sans-serif',
         body: '"DM Sans", system-ui, sans-serif',
       },
     },

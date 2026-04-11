@@ -69,7 +69,7 @@
   --color-pop-turquoise: var(--pop-turquoise);
   --color-dark-purple: var(--color-dark-purple);
 
-  --font-heading: var(--font-syne), "Syne", system-ui, sans-serif;
+  --font-heading: var(--font-space-grotesk), "Space Grotesk", system-ui, sans-serif;
   --font-body: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
   --font-mono: ui-monospace, monospace;
 

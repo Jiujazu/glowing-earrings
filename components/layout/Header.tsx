@@ -33,7 +33,7 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="px-3 py-2 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface)] rounded-lg transition-all duration-200"
+              className="px-3 py-2 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--surface-tinted)] rounded-lg transition-all duration-200"
             >
               {link.label}
             </Link>
@@ -48,7 +48,7 @@ export default function Header() {
 
         {/* Mobile Hamburger */}
         <button
-          className="md:hidden p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+          className="md:hidden p-2 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
           onClick={() => setMobileOpen(true)}
           aria-label="Menü öffnen"
         >

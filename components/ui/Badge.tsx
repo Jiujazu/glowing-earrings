@@ -1,4 +1,4 @@
-type BadgeVariant = "default" | "accent" | "brand" | "muted" | "course";
+type BadgeVariant = "default" | "accent" | "brand" | "muted" | "pink" | "turquoise" | "course";
 
 interface BadgeProps {
   children: React.ReactNode;
@@ -8,13 +8,17 @@ interface BadgeProps {
 
 const variantClasses: Record<BadgeVariant, string> = {
   default:
-    "bg-[var(--sand)] text-[var(--text-primary)]",
+    "bg-[var(--surface-tinted)] text-[var(--accent)]",
   accent:
     "bg-[var(--accent)]/10 text-[var(--accent)]",
   brand:
     "bg-[var(--brand)]/10 text-[var(--brand)]",
   muted:
     "bg-[var(--surface)] text-[var(--text-muted)] border border-[var(--border)]",
+  pink:
+    "bg-[var(--pop-pink)]/10 text-[var(--pop-pink)]",
+  turquoise:
+    "bg-[var(--pop-turquoise)]/10 text-[var(--pop-turquoise)]",
   course:
     "text-[var(--course-text)] border border-[var(--course-text)]/20",
 };

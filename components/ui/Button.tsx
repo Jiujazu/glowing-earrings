@@ -11,13 +11,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-[var(--brand)] text-white hover:bg-[var(--brand-light)] active:scale-[0.98]",
+    "bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)] active:scale-[0.98] shadow-sm hover:shadow-md hover:shadow-[var(--accent)]/20",
   secondary:
-    "bg-[var(--surface)] text-[var(--text-primary)] border border-[var(--border)] hover:bg-[var(--sand)] active:scale-[0.98]",
+    "bg-[var(--surface)] text-[var(--text-primary)] border border-[var(--border)] hover:border-[var(--accent)]/30 hover:bg-[var(--surface-tinted)] active:scale-[0.98]",
   ghost:
-    "bg-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface)]",
+    "bg-transparent text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--surface-tinted)]",
   accent:
-    "bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)] active:scale-[0.98]",
+    "bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)] active:scale-[0.98] shadow-sm hover:shadow-md hover:shadow-[var(--accent)]/20",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {

@@ -2,42 +2,49 @@
 
 /* ============================================
    GLOWING EARRINGS — Design System
+   Based on CME Corporate Identity + Pop-Akzente
    ============================================ */
 
 /* Platform Design Tokens */
 :root {
-  /* Warm, non-corporate palette */
-  --color-cream: #FFF8F0;
-  --color-warm-white: #FEFCF9;
-  --color-sand: #F5E6D3;
-  --color-terracotta: #C75B39;
-  --color-coral: #E8734A;
-  --color-deep-teal: #1A535C;
-  --color-teal: #2B7A78;
-  --color-dark: #1B1B1F;
-  --color-charcoal: #2D2D34;
-  --color-warm-gray: #6B6B76;
-  --color-light-gray: #E8E4DF;
+  /* CI Primary Colors */
+  --color-brand-lila: #5B2F9F;
+  --color-teal: #025671;
+  --color-dark-purple: #261C53;
+
+  /* Pop Accent Colors */
+  --color-hot-pink: #E91E8C;
+  --color-electric-turquoise: #00C9A7;
+
+  /* CI Text & Surface Colors */
+  --color-text-dark: #333333;
+  --color-text-gray: #7F7F7F;
+  --color-hint-lila: #F5F0FC;
+  --color-bg: #FAFAFA;
+  --color-border-gray: #E8E8E8;
 
   /* Semantic tokens */
-  --background: var(--color-cream);
-  --foreground: var(--color-dark);
-  --surface: var(--color-warm-white);
+  --background: var(--color-bg);
+  --foreground: var(--color-text-dark);
+  --surface: #FFFFFF;
   --surface-elevated: #FFFFFF;
-  --border: var(--color-light-gray);
-  --text-primary: var(--color-dark);
-  --text-secondary: var(--color-warm-gray);
+  --surface-tinted: var(--color-hint-lila);
+  --border: var(--color-border-gray);
+  --text-primary: var(--color-text-dark);
+  --text-secondary: var(--color-text-gray);
   --text-muted: #9B9BA3;
-  --accent: var(--color-terracotta);
-  --accent-hover: var(--color-coral);
-  --brand: var(--color-deep-teal);
-  --brand-light: var(--color-teal);
+  --accent: var(--color-brand-lila);
+  --accent-hover: #7B4FBF;
+  --brand: var(--color-teal);
+  --brand-light: #0A7E9F;
+  --pop-pink: var(--color-hot-pink);
+  --pop-turquoise: var(--color-electric-turquoise);
 
   /* Course theme defaults (overridden per course) */
   --course-bg: var(--background);
   --course-surface: var(--surface);
   --course-primary: var(--accent);
-  --course-accent: var(--brand);
+  --course-accent: var(--pop-turquoise);
   --course-text: var(--foreground);
   --course-text-muted: var(--text-secondary);
   --course-heading-font: var(--font-heading);
@@ -49,6 +56,7 @@
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
   --color-surface-elevated: var(--surface-elevated);
+  --color-surface-tinted: var(--surface-tinted);
   --color-border: var(--border);
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
@@ -57,16 +65,12 @@
   --color-accent-hover: var(--accent-hover);
   --color-brand: var(--brand);
   --color-brand-light: var(--brand-light);
-  --color-cream: var(--color-cream);
-  --color-sand: var(--color-sand);
-  --color-terracotta: var(--color-terracotta);
-  --color-coral: var(--color-coral);
-  --color-deep-teal: var(--color-deep-teal);
-  --color-teal: var(--color-teal);
-  --color-warm-gray: var(--color-warm-gray);
+  --color-pop-pink: var(--pop-pink);
+  --color-pop-turquoise: var(--pop-turquoise);
+  --color-dark-purple: var(--color-dark-purple);
 
-  --font-heading: var(--font-space-grotesk), "Space Grotesk", system-ui, sans-serif;
-  --font-body: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-heading: var(--font-syne), "Syne", system-ui, sans-serif;
+  --font-body: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
   --font-mono: ui-monospace, monospace;
 
   /* Animations */
@@ -84,8 +88,8 @@
   }
 
   @keyframes glow {
-    from { filter: drop-shadow(0 0 4px rgba(199, 91, 57, 0.3)); }
-    to { filter: drop-shadow(0 0 12px rgba(199, 91, 57, 0.6)); }
+    from { filter: drop-shadow(0 0 4px rgba(91, 47, 159, 0.3)); }
+    to { filter: drop-shadow(0 0 14px rgba(91, 47, 159, 0.6)); }
   }
 
   @keyframes wiggle {
@@ -127,10 +131,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading), system-ui, sans-serif;
 }
 
-/* Selection color */
+/* Selection color — Brand Lila */
 ::selection {
-  background-color: rgba(199, 91, 57, 0.2);
-  color: var(--color-dark);
+  background-color: rgba(91, 47, 159, 0.2);
+  color: var(--color-text-dark);
 }
 
 /* Smooth scrolling */
@@ -138,14 +142,19 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Focus styles — accessible and on-brand */
+/* Focus styles — Brand Lila */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
-/* Scrollbar styling (subtle) */
+/* Links — Brand Lila, underlined (CI-Regel) */
+a {
+  text-decoration-color: transparent;
+}
+
+/* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -161,4 +170,64 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
+}
+
+/* ============================================
+   Scroll Reveal Animations
+   ============================================ */
+
+.scroll-reveal {
+  opacity: 0;
+  will-change: opacity, transform;
+  transition-property: opacity, transform;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-reveal-up {
+  transform: translateY(24px);
+}
+
+.scroll-reveal-down {
+  transform: translateY(-24px);
+}
+
+.scroll-reveal-left {
+  transform: translateX(24px);
+}
+
+.scroll-reveal-right {
+  transform: translateX(-24px);
+}
+
+.scroll-reveal-fade {
+  transform: none;
+}
+
+.scroll-revealed {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Reduced motion — instant reveal, no animation */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Active press feedback for interactive elements */
+.press-feedback {
+  transition: transform 150ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.press-feedback:active {
+  transform: scale(0.97);
 }

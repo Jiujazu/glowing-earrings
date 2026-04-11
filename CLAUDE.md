@@ -233,3 +233,8 @@ lib/
 ## Referenz-Kurs
 
 `/content/courses/karpathy-llm-wiki.ts` ist der erste und bisher einzige Kurs. Er dient als Template für die Struktur, das Format und den Tonfall aller weiteren Kurse.
+
+## Lern-System
+
+- **`LEARNINGS.md`** — Wächst mit jedem Kurs. Lies diese Datei vor jeder Kurs-Erstellung. Sie enthält Erkenntnisse, Patterns und Anti-Patterns aus bisherigen Kursen.
+- **`COURSE-STYLEGUIDE.md`** — Didaktische Prinzipien, Struktur-Standards und Qualitäts-Checkliste. Definiert die Regeln, die LEARNINGS.md mit Praxiserfahrung ergänzt.

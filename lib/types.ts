@@ -23,16 +23,19 @@ export interface CourseMeta {
   design: CourseDesign;
 }
 
+export interface CourseColors {
+  background: string;
+  surface: string;
+  primary: string;
+  accent: string;
+  text: string;
+  textMuted: string;
+}
+
 export interface CourseDesign {
   theme: string; // e.g. "hacker-terminal", "retro-magazine", "knowledge-graph"
-  colors: {
-    background: string;
-    surface: string;
-    primary: string;
-    accent: string;
-    text: string;
-    textMuted: string;
-  };
+  colors: CourseColors;          // Light mode (default)
+  darkColors?: CourseColors;     // Dark mode (optional)
   fonts?: {
     heading?: string;
     body?: string;

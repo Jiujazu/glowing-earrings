@@ -23,8 +23,8 @@ export default function CoursePlayer({ course }: CoursePlayerProps) {
         <CourseNav modules={course.modules} />
 
         <div className="border-t border-[var(--course-text)]/10">
-          {course.modules.map((module, i) => (
-            <ModuleRenderer key={module.id} module={module} moduleIndex={i} />
+          {course.modules.map((module) => (
+            <ModuleRenderer key={module.id} module={module} />
           ))}
         </div>
 

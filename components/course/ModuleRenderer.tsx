@@ -9,8 +9,7 @@ import ReflectionPrompt from "./elements/ReflectionPrompt";
 import EasterEgg from "./elements/EasterEgg";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
-export default function ModuleRenderer({ module, moduleIndex = 0 }: { module: Module; moduleIndex?: number }) {
-  const hueShift = moduleIndex * 12;
+export default function ModuleRenderer({ module }: { module: Module }) {
   const renderedElements: React.ReactNode[] = [];
   let flashcardBuffer: FlashcardElement[] = [];
   let elementIndex = 0;
@@ -98,11 +97,7 @@ export default function ModuleRenderer({ module, moduleIndex = 0 }: { module: Mo
   flushFlashcards();
 
   return (
-    <section
-      id={`module-${module.id}`}
-      className="py-16 sm:py-20 px-4 scroll-mt-20"
-      style={hueShift ? { filter: `hue-rotate(${hueShift}deg)` } : undefined}
-    >
+    <section id={`module-${module.id}`} className="py-16 sm:py-20 px-4 scroll-mt-20">
       <div className="max-w-3xl mx-auto">
         {/* Module Header */}
         <ScrollReveal>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import type { Module } from "@/lib/types";
+import ThemeToggle from "./ThemeToggle";
 
 interface CourseNavProps {
   modules: Module[];
@@ -49,11 +50,11 @@ export default function CourseNav({ modules }: CourseNavProps) {
 
   return (
     <nav className="sticky top-16 z-50 px-4 py-2 bg-[var(--background)]/90 backdrop-blur-lg border-b border-[var(--border)]/50">
-      <div className="max-w-3xl mx-auto relative">
+      <div className="max-w-3xl mx-auto relative flex items-center gap-2">
         {/* Mobile: toggle bar */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="sm:hidden flex items-center gap-3 w-full py-1"
+          className="sm:hidden flex items-center gap-3 flex-1 min-w-0 py-1"
         >
           <span className="text-xs font-bold font-heading rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 bg-[var(--accent)] text-white">
             {activeIndex}
@@ -111,22 +112,22 @@ export default function CourseNav({ modules }: CourseNavProps) {
         )}
 
         {/* Desktop: horizontal inline */}
-        <ol className="hidden sm:flex flex-row flex-wrap gap-0">
+        <ol className="hidden sm:flex flex-1 flex-row flex-wrap items-center gap-0 py-1">
           {modules.map((mod, i) => {
             const isActive = mod.id === activeId;
             return (
               <li key={mod.id} className="flex items-center">
                 {i > 0 && (
-                  <span className="text-[var(--text-secondary)] opacity-30 mx-2 text-xs">
+                  <span className="text-[var(--text-secondary)] opacity-30 mx-2 text-sm">
                     /
                   </span>
                 )}
                 <button
                   onClick={() => scrollTo(mod.id)}
-                  className={`text-xs font-heading transition-colors duration-200 py-1 px-1.5 rounded text-left ${
+                  className={`text-sm font-heading transition-colors duration-200 py-1.5 px-2 rounded-lg text-left ${
                     isActive
-                      ? "font-bold text-[var(--accent)]"
-                      : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+                      ? "font-bold text-[var(--accent)] bg-[var(--surface-tinted)]"
+                      : "text-[var(--text-primary)] hover:text-[var(--accent)] hover:bg-[var(--surface-tinted)]"
                   }`}
                 >
                   {mod.title}
@@ -135,6 +136,11 @@ export default function CourseNav({ modules }: CourseNavProps) {
             );
           })}
         </ol>
+
+        {/* Theme toggle */}
+        <div className="flex-shrink-0">
+          <ThemeToggle />
+        </div>
       </div>
     </nav>
   );

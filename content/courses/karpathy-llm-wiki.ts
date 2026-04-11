@@ -17,6 +17,14 @@ export const karpathyLlmWiki: Course = {
     design: {
       theme: "knowledge-graph",
       colors: {
+        background: "#FAFAFA",
+        surface: "#FFFFFF",
+        primary: "#5B2F9F",
+        accent: "#00C9A7",
+        text: "#333333",
+        textMuted: "#7F7F7F",
+      },
+      darkColors: {
         background: "#0E0B1A",
         surface: "#1A1530",
         primary: "#7B4FBF",

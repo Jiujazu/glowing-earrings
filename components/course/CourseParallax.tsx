@@ -28,7 +28,7 @@ export default function CourseParallax() {
   }, []);
 
   return (
-    <div className="parallax-bg" aria-hidden="true">
+    <div className="parallax-bg overflow-hidden" aria-hidden="true">
       <div ref={containerRef}>
         <div
           className="absolute rounded-full blur-[100px] opacity-20"

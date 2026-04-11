@@ -49,8 +49,7 @@ export default function CourseNav({ modules }: CourseNavProps) {
 
   return (
     <nav
-      className="sticky top-16 z-50 px-4 py-2 border-b border-[var(--course-text)]/10"
-      style={{ backgroundColor: "var(--course-background)" }}
+      className="sticky top-16 z-50 px-4 py-2 bg-[var(--background)]/90 backdrop-blur-lg border-b border-[var(--border)]/50"
     >
       <div className="max-w-3xl mx-auto relative">
         {/* Mobile: toggle bar */}

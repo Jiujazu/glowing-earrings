@@ -51,10 +51,10 @@ export default function CourseNav({ modules }: CourseNavProps) {
   return (
     <nav className="sticky top-16 z-50 px-4 py-2 bg-[var(--background)]/90 backdrop-blur-lg border-b border-[var(--border)]/50">
       <div className="max-w-3xl mx-auto relative flex items-center gap-2">
-        {/* Mobile: toggle bar */}
+        {/* Toggle bar — same on mobile and desktop */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="sm:hidden flex items-center gap-3 flex-1 min-w-0 py-1"
+          className="flex items-center gap-3 flex-1 min-w-0 py-1"
         >
           <span className="text-xs font-bold font-heading rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 bg-[var(--accent)] text-white">
             {activeIndex}
@@ -63,7 +63,7 @@ export default function CourseNav({ modules }: CourseNavProps) {
             {activeModule?.title}
           </span>
           <svg
-            className={`w-4 h-4 ml-auto flex-shrink-0 transition-transform text-[var(--text-secondary)] ${isOpen ? "rotate-180" : ""}`}
+            className={`w-4 h-4 flex-shrink-0 transition-transform text-[var(--text-secondary)] ${isOpen ? "rotate-180" : ""}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -73,9 +73,14 @@ export default function CourseNav({ modules }: CourseNavProps) {
           </svg>
         </button>
 
-        {/* Mobile: dropdown list */}
+        {/* Theme toggle */}
+        <div className="flex-shrink-0">
+          <ThemeToggle />
+        </div>
+
+        {/* Dropdown list — same on mobile and desktop */}
         {isOpen && (
-          <ol className="sm:hidden absolute left-0 right-0 top-full flex flex-col gap-1 px-4 py-3 rounded-b-xl shadow-lg bg-[var(--background)] border border-[var(--border)]/50 border-t-0">
+          <ol className="absolute left-0 right-0 top-full flex flex-col gap-1 px-4 py-3 rounded-b-xl shadow-lg bg-[var(--background)] border border-[var(--border)]/50 border-t-0 z-50">
             {modules.map((mod, i) => {
               const isActive = mod.id === activeId;
               return (
@@ -110,37 +115,6 @@ export default function CourseNav({ modules }: CourseNavProps) {
             })}
           </ol>
         )}
-
-        {/* Desktop: horizontal inline */}
-        <ol className="hidden sm:flex flex-1 flex-row flex-wrap items-center gap-0 py-1">
-          {modules.map((mod, i) => {
-            const isActive = mod.id === activeId;
-            return (
-              <li key={mod.id} className="flex items-center">
-                {i > 0 && (
-                  <span className="text-[var(--text-secondary)] opacity-30 mx-2 text-sm">
-                    /
-                  </span>
-                )}
-                <button
-                  onClick={() => scrollTo(mod.id)}
-                  className={`text-sm font-heading transition-colors duration-200 py-1.5 px-2 rounded-lg text-left ${
-                    isActive
-                      ? "font-bold text-[var(--accent)] bg-[var(--surface-tinted)]"
-                      : "text-[var(--text-primary)] hover:text-[var(--accent)] hover:bg-[var(--surface-tinted)]"
-                  }`}
-                >
-                  {mod.title}
-                </button>
-              </li>
-            );
-          })}
-        </ol>
-
-        {/* Theme toggle */}
-        <div className="flex-shrink-0">
-          <ThemeToggle />
-        </div>
       </div>
     </nav>
   );

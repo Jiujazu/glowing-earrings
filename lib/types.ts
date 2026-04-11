@@ -34,8 +34,8 @@ export interface CourseColors {
 
 export interface CourseDesign {
   theme: string; // e.g. "hacker-terminal", "retro-magazine", "knowledge-graph"
-  colors: CourseColors;          // Light mode (default)
-  darkColors?: CourseColors;     // Dark mode (optional)
+  colors: CourseColors;          // Dark mode (default)
+  lightColors?: CourseColors;    // Light mode (optional)
   fonts?: {
     heading?: string;
     body?: string;

@@ -21,23 +21,23 @@ export default function CourseThemeProvider({
   design,
   children,
 }: CourseThemeProviderProps) {
-  const [isDark, setIsDark] = useState(false);
+  const [isLight, setIsLight] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem("course-theme-mode");
-    if (stored === "dark") setIsDark(true);
+    if (stored === "light") setIsLight(true);
   }, []);
 
   function toggle() {
-    setIsDark((prev) => {
+    setIsLight((prev) => {
       const next = !prev;
-      localStorage.setItem("course-theme-mode", next ? "dark" : "light");
+      localStorage.setItem("course-theme-mode", next ? "light" : "dark");
       return next;
     });
   }
 
-  const hasDarkMode = !!design.darkColors;
-  const colors = isDark && hasDarkMode ? design.darkColors! : design.colors;
+  const hasLightMode = !!design.lightColors;
+  const colors = isLight && hasLightMode ? design.lightColors! : design.colors;
 
   const style = {
     "--course-bg": colors.background,
@@ -56,12 +56,12 @@ export default function CourseThemeProvider({
   } as React.CSSProperties;
 
   return (
-    <ThemeModeContext.Provider value={{ isDark: isDark && hasDarkMode, toggle: hasDarkMode ? toggle : () => {} }}>
+    <ThemeModeContext.Provider value={{ isDark: !(isLight && hasLightMode), toggle: hasLightMode ? toggle : () => {} }}>
       <div
         style={style}
         className="bg-[var(--course-bg)] text-[var(--course-text)] min-h-screen relative transition-colors duration-300"
         data-theme={design.theme}
-        data-mode={isDark && hasDarkMode ? "dark" : "light"}
+        data-mode={isLight && hasLightMode ? "light" : "dark"}
       >
         {children}
       </div>

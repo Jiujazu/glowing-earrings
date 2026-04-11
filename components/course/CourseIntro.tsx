@@ -43,7 +43,7 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
 
         {/* Source Context */}
         <ScrollReveal delay={250}>
-          <div className="bg-[var(--course-surface)] rounded-xl p-5 mb-8">
+          <div className="bg-[var(--course-surface)] rounded-xl p-5">
             <p className="text-sm text-[var(--course-text-muted)] mb-2">Quelle</p>
             <p className="text-base">{intro.sourceContext}</p>
             <a
@@ -54,25 +54,6 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
             >
               Zum Original →
             </a>
-          </div>
-        </ScrollReveal>
-
-        {/* Overview */}
-        <ScrollReveal delay={300}>
-          <div>
-            <p className="text-sm font-medium text-[var(--course-text-muted)] mb-3 uppercase tracking-wide">
-              Was dich erwartet
-            </p>
-            <ol className="space-y-2">
-              {intro.overview.map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--course-primary)] text-white text-xs font-bold flex items-center justify-center mt-0.5">
-                    {i + 1}
-                  </span>
-                  <span className="text-base">{item}</span>
-                </li>
-              ))}
-            </ol>
           </div>
         </ScrollReveal>
       </div>

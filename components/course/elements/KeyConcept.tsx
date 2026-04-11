@@ -1,9 +1,40 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import type { KeyConceptElement } from "@/lib/types";
 
 export default function KeyConcept({ element }: { element: KeyConceptElement }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.style.opacity = "1";
+      el.style.transform = "none";
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("aha-revealed");
+          setTimeout(() => el.classList.add("aha-settled"), 1200);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
-      className="rounded-xl p-5 border"
+      ref={ref}
+      className="aha-glow rounded-xl p-5 border"
       style={{
         backgroundColor: "color-mix(in srgb, var(--course-primary) 6%, var(--course-surface))",
         borderColor: "color-mix(in srgb, var(--course-primary) 20%, transparent)",

@@ -9,7 +9,8 @@ import ReflectionPrompt from "./elements/ReflectionPrompt";
 import EasterEgg from "./elements/EasterEgg";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
-export default function ModuleRenderer({ module }: { module: Module }) {
+export default function ModuleRenderer({ module, moduleIndex = 0 }: { module: Module; moduleIndex?: number }) {
+  const hueShift = moduleIndex * 12;
   const renderedElements: React.ReactNode[] = [];
   let flashcardBuffer: FlashcardElement[] = [];
   let elementIndex = 0;
@@ -46,9 +47,7 @@ export default function ModuleRenderer({ module }: { module: Module }) {
         break;
       case "key-concept":
         renderedElements.push(
-          <ScrollReveal key={element.id} delay={delay} direction="left">
-            <KeyConcept element={element} />
-          </ScrollReveal>
+          <KeyConcept key={element.id} element={element} />
         );
         break;
       case "callout":
@@ -99,7 +98,11 @@ export default function ModuleRenderer({ module }: { module: Module }) {
   flushFlashcards();
 
   return (
-    <section id={`module-${module.id}`} className="py-8 px-4 scroll-mt-20">
+    <section
+      id={`module-${module.id}`}
+      className="py-16 sm:py-20 px-4 scroll-mt-20"
+      style={hueShift ? { filter: `hue-rotate(${hueShift}deg)` } : undefined}
+    >
       <div className="max-w-3xl mx-auto">
         {/* Module Header */}
         <ScrollReveal>
@@ -115,7 +118,7 @@ export default function ModuleRenderer({ module }: { module: Module }) {
         </ScrollReveal>
 
         {/* Elements */}
-        <div className="space-y-6">{renderedElements}</div>
+        <div className="space-y-8">{renderedElements}</div>
 
         {/* Transition to next module */}
         {module.transitionToNext && (

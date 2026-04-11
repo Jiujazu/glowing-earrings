@@ -27,7 +27,7 @@ export default function CourseThemeProvider({
   return (
     <div
       style={style}
-      className="bg-[var(--course-bg)] text-[var(--course-text)] min-h-screen"
+      className="bg-[var(--course-bg)] text-[var(--course-text)] min-h-screen relative overflow-hidden"
       data-theme={design.theme}
     >
       {children}

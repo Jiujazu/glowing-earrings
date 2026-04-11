@@ -10,7 +10,7 @@ interface CourseIntroProps {
 
 export default function CourseIntro({ intro, meta }: CourseIntroProps) {
   return (
-    <section className="py-12 sm:py-16 px-4">
+    <section className="py-16 sm:py-24 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Badges */}
         <ScrollReveal delay={0} duration={600}>

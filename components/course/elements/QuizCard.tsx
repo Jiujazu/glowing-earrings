@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { QuizElement } from "@/lib/types";
+import QuizConfetti from "./QuizConfetti";
 
 export default function QuizCard({ element }: { element: QuizElement }) {
   const [selected, setSelected] = useState<number | null>(null);
@@ -17,9 +18,10 @@ export default function QuizCard({ element }: { element: QuizElement }) {
 
   return (
     <div
-      className="rounded-xl p-5 sm:p-6"
+      className="rounded-xl p-5 sm:p-6 relative overflow-hidden"
       style={{ backgroundColor: "var(--course-surface)" }}
     >
+      {revealed && isCorrect && <QuizConfetti />}
       {/* Question */}
       <p className="font-heading font-bold text-lg text-[var(--course-text)] mb-4">
         {element.question}

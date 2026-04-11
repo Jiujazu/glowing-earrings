@@ -19,6 +19,8 @@
 - Quiz-Feedback war teilweise zu lang — max 2 Sätze pro Feedback-Option, Explanation darf länger sein
 - Alle Callout-Varianten sahen identisch aus — jetzt behoben (eigene Farbe pro Variante)
 - Modul-Übergänge waren generische Cliff-Hanger — bei zukünftigen Kursen bevorzugt Querverweise auf andere Kurse
+- Keine Emojis in der Modul-Navigation — nur im Modul-Header selbst. Die Nav braucht Klarheit, keine Dekoration
+- Mobile-Nav (Header) hatte Z-Index-Konflikte mit Kurs-Content — Header braucht z-[70], MobileNav z-[100]
 
 ### Patterns zum Wiederverwenden
 - **Scaffolding via Context-Box:** Fachbegriffe (z.B. "RAG") in Context-Boxen erklären, nicht im Fließtext — hält den Lesefluss für Fortgeschrittene und hilft Einsteigern

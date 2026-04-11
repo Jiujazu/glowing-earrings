@@ -40,7 +40,7 @@ export default function CourseNav({ modules }: CourseNavProps) {
   }
 
   return (
-    <nav className="sticky top-1 z-50 px-4 py-3">
+    <nav className="sticky top-16 z-50 px-4 py-3 bg-[var(--course-background)]/90 backdrop-blur-sm border-b border-[var(--course-text)]/5">
       <div className="max-w-3xl mx-auto">
         {/* Mobile: compact toggle */}
         <button
@@ -89,7 +89,6 @@ export default function CourseNav({ modules }: CourseNavProps) {
                     fontWeight: isActive ? 700 : 400,
                   }}
                 >
-                  {mod.icon && <span className="mr-1">{mod.icon}</span>}
                   {mod.title}
                 </button>
               </li>

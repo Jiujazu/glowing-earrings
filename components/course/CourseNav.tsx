@@ -33,49 +33,104 @@ export default function CourseNav({ modules }: CourseNavProps) {
   function scrollTo(id: string) {
     const el = document.getElementById(`module-${id}`);
     if (el) {
-      const y = el.getBoundingClientRect().top + window.scrollY - 80;
+      const y = el.getBoundingClientRect().top + window.scrollY - 120;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
     setIsOpen(false);
   }
 
+  const activeModule = activeId
+    ? modules.find((m) => m.id === activeId)
+    : modules[0];
+
+  const activeIndex = activeModule
+    ? modules.indexOf(activeModule) + 1
+    : 1;
+
   return (
-    <nav className="sticky top-16 z-50 px-4 py-3 bg-[var(--course-background)]/90 backdrop-blur-sm border-b border-[var(--course-text)]/5">
+    <nav className="sticky top-16 z-50 px-4 py-2 bg-[var(--course-background)] border-b border-[var(--course-text)]/10">
       <div className="max-w-3xl mx-auto">
-        {/* Mobile: compact toggle */}
+        {/* Mobile: toggle bar */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="sm:hidden flex items-center gap-2 text-xs font-heading font-semibold text-[var(--course-text-muted)] w-full"
+          className="sm:hidden flex items-center gap-3 w-full py-1"
         >
-          <span className="opacity-60">Module</span>
-          <span className="text-[var(--course-text)]">
-            {activeId
-              ? modules.find((m) => m.id === activeId)?.title
-              : modules[0]?.title}
+          <span
+            className="text-xs font-bold font-heading rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0"
+            style={{
+              backgroundColor: "var(--course-primary)",
+              color: "var(--course-background)",
+            }}
+          >
+            {activeIndex}
+          </span>
+          <span
+            className="text-sm font-heading font-semibold truncate text-left"
+            style={{ color: "var(--course-text)" }}
+          >
+            {activeModule?.title}
           </span>
           <svg
-            className={`w-3 h-3 ml-auto transition-transform ${isOpen ? "rotate-180" : ""}`}
+            className={`w-4 h-4 ml-auto flex-shrink-0 transition-transform ${isOpen ? "rotate-180" : ""}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2}
+            style={{ color: "var(--course-text-muted)" }}
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
 
-        {/* Desktop: always visible / Mobile: collapsible */}
-        <ol
-          className={`${
-            isOpen ? "flex" : "hidden"
-          } sm:flex flex-col sm:flex-row sm:flex-wrap gap-1 sm:gap-0 mt-2 sm:mt-0 sm:bg-transparent bg-[var(--course-background)] rounded-lg p-2 sm:p-0`}
-        >
+        {/* Mobile: dropdown list */}
+        {isOpen && (
+          <ol className="sm:hidden flex flex-col gap-1 mt-2 pb-1">
+            {modules.map((mod, i) => {
+              const isActive = mod.id === activeId;
+              return (
+                <li key={mod.id}>
+                  <button
+                    onClick={() => scrollTo(mod.id)}
+                    className="flex items-center gap-3 w-full py-2 px-2 rounded-lg text-left transition-colors"
+                    style={{
+                      backgroundColor: isActive
+                        ? "color-mix(in srgb, var(--course-primary) 15%, var(--course-surface))"
+                        : "transparent",
+                    }}
+                  >
+                    <span
+                      className="text-xs font-bold font-heading rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0"
+                      style={{
+                        backgroundColor: isActive ? "var(--course-primary)" : "var(--course-surface)",
+                        color: isActive ? "var(--course-background)" : "var(--course-text-muted)",
+                      }}
+                    >
+                      {i + 1}
+                    </span>
+                    <span
+                      className="text-sm font-heading"
+                      style={{
+                        color: isActive ? "var(--course-text)" : "var(--course-text-muted)",
+                        fontWeight: isActive ? 600 : 400,
+                      }}
+                    >
+                      {mod.title}
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ol>
+        )}
+
+        {/* Desktop: horizontal inline */}
+        <ol className="hidden sm:flex flex-row flex-wrap gap-0">
           {modules.map((mod, i) => {
             const isActive = mod.id === activeId;
             return (
               <li key={mod.id} className="flex items-center">
                 {i > 0 && (
-                  <span className="hidden sm:block text-[var(--course-text-muted)] opacity-30 mx-2 text-xs">
+                  <span className="text-[var(--course-text-muted)] opacity-30 mx-2 text-xs">
                     /
                   </span>
                 )}

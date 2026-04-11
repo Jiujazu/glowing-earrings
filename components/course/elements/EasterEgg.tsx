@@ -35,6 +35,19 @@ export default function EasterEgg({ element }: { element: EasterEggElement }) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [element.trigger, reveal]);
 
+  // Scroll trigger handler
+  useEffect(() => {
+    if (element.trigger !== "scroll") return;
+
+    function handleScroll() {
+      const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+      if (scrollPercent > 0.85) reveal();
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [element.trigger, reveal]);
+
   // Idle handler
   useEffect(() => {
     if (element.trigger !== "idle") return;

@@ -26,7 +26,7 @@ export default function NotFound() {
             </Link>
             <Link
               href="/courses"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-medium text-text-primary bg-surface border border-border hover:bg-sand rounded-xl transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-medium text-text-primary bg-surface border border-border hover:bg-surface-tinted rounded-xl transition-colors"
             >
               Kurse entdecken
             </Link>

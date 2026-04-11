@@ -41,7 +41,6 @@ export default function CourseThemeProvider({
 
   const style = {
     "--course-bg": colors.background,
-    "--course-background": colors.background,
     "--course-surface": colors.surface,
     "--course-primary": colors.primary,
     "--course-accent": colors.accent,

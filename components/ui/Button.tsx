@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "ghost" | "accent";
+type ButtonVariant = "primary" | "secondary" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -16,8 +16,6 @@ const variantClasses: Record<ButtonVariant, string> = {
     "bg-[var(--surface)] text-[var(--text-primary)] border border-[var(--border)] hover:border-[var(--accent)]/30 hover:bg-[var(--surface-tinted)] active:scale-[0.98]",
   ghost:
     "bg-transparent text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--surface-tinted)]",
-  accent:
-    "bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)] active:scale-[0.98] shadow-sm hover:shadow-md hover:shadow-[var(--accent)]/20",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {

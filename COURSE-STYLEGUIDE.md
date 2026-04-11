@@ -38,15 +38,14 @@
 
 ### 2.1 Intro (Pflicht)
 
-Beantwortet drei Fragen, die jeder Lernende unbewusst stellt:
+Beantwortet zwei Kernfragen:
 
 | Frage | Umsetzung | Feld |
 |---|---|---|
 | Wer spricht hier? | Kurze Einordnung der Quelle/Person | `sourceContext` |
 | Warum sollte mich das interessieren? | Hook: Problem, Versprechen, Überraschung | `hook` |
-| Was erwartet mich? | Kompakte Modul-Übersicht | `overview` |
 
-Plus: Link zum Originalmaterial.
+Plus: Link zum Originalmaterial. Die Modul-Übersicht wird automatisch durch die Kapitel-Navigation angezeigt.
 
 ### 2.2 Module
 

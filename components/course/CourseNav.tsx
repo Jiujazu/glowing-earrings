@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import type { Module } from "@/lib/types";
 import ThemeToggle from "./ThemeToggle";
 
@@ -11,6 +11,29 @@ interface CourseNavProps {
 export default function CourseNav({ modules }: CourseNavProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+
+  // Close on Escape + outside click
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setIsOpen(false);
+    }
+
+    function onClickOutside(e: MouseEvent) {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("mousedown", onClickOutside);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("mousedown", onClickOutside);
+    };
+  }, [isOpen]);
 
   const updateActive = useCallback(() => {
     const offset = 120;
@@ -49,7 +72,7 @@ export default function CourseNav({ modules }: CourseNavProps) {
     : 1;
 
   return (
-    <nav className="sticky top-16 z-50 px-4 py-2 bg-[var(--background)]/90 backdrop-blur-lg border-b border-[var(--border)]/50">
+    <nav ref={navRef} className="sticky top-16 z-50 px-4 py-2 bg-[var(--background)]/90 backdrop-blur-lg border-b border-[var(--border)]/50">
       <div className="max-w-3xl mx-auto relative flex items-center gap-2">
         {/* Toggle bar — same on mobile and desktop */}
         <button

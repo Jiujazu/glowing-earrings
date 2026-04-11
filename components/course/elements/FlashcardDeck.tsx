@@ -37,7 +37,20 @@ export default function FlashcardDeck({
       {/* Card */}
       <div
         className="relative cursor-pointer select-none"
+        role="button"
+        tabIndex={0}
+        aria-label={flipped ? "Karte zurückdrehen" : "Karte umdrehen"}
         onClick={handleFlip}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            handleFlip();
+          } else if (e.key === "ArrowRight") {
+            handleNext();
+          } else if (e.key === "ArrowLeft") {
+            handlePrev();
+          }
+        }}
         style={{ perspective: "1000px" }}
       >
         <div

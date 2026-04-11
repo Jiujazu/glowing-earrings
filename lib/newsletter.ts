@@ -18,12 +18,11 @@ export async function subscribeToNewsletter(
   const apiKey = process.env.NEWSLETTER_API_KEY;
 
   if (!apiKey) {
-    console.warn("NEWSLETTER_API_KEY not set — signup stored as placeholder");
-    // In development without a provider, just log and succeed
+    console.warn("NEWSLETTER_API_KEY not set — signup not sent");
     console.log(`[Newsletter Signup] ${email}`, options);
     return {
-      success: true,
-      message: "Willkommen! Check deine Inbox für die Bestätigung.",
+      success: false,
+      message: "Der Newsletter ist noch nicht aktiv. Schau bald wieder vorbei!",
     };
   }
 

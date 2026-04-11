@@ -43,13 +43,6 @@ export const karpathyLlmWiki: Course = {
     hook: "Du hast Hunderte Artikel gelesen, Dutzende Podcasts gehört, Notizen in fünf verschiedenen Apps verteilt — und findest trotzdem nichts wieder, wenn du es brauchst. Was wäre, wenn ein LLM das für dich organisiert?",
     sourceContext:
       'Andrej Karpathy — Ex-Director of AI bei Tesla, Mitgründer von OpenAI, eine der einflussreichsten Stimmen in der KI-Welt — hat ein Konzept veröffentlicht, das er "LLM Wiki" nennt: eine persönliche Knowledge Base, die von einem LLM gebaut, gepflegt und durchsuchbar gehalten wird.',
-    overview: [
-      "Warum klassisches RAG nicht reicht",
-      "Die 3-Schichten-Architektur des LLM Wiki",
-      "Die drei Kern-Operationen: Ingest, Query, Lint",
-      "Hands-on: Wie du dein eigenes Wiki startest",
-      "Karpathys Vision und die Verbindung zu Vannevar Bushs Memex",
-    ],
   },
 
   modules: [

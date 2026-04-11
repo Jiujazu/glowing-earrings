@@ -13,10 +13,6 @@ export function getAllCourseSlugs(): string[] {
   return courses.map((c) => c.meta.slug);
 }
 
-export function getAllCourseMeta(): CourseMeta[] {
-  return courses.map((c) => c.meta);
-}
-
 export function formatDuration(minutes: number): string {
   if (minutes < 60) return `~${minutes} Min.`;
   const hours = Math.floor(minutes / 60);

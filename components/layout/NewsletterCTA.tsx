@@ -123,7 +123,7 @@ export default function NewsletterCTA({
           />
           <Button
             type="submit"
-            variant="accent"
+            variant="primary"
             size={isFeatured ? "md" : "sm"}
             loading={status === "loading"}
             disabled={!consent || !email}

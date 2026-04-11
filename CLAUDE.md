@@ -72,21 +72,24 @@ interface CourseMeta {
 ```
 
 ### CourseDesign
-Jeder Kurs hat ein eigenes visuelles Theme. Kurse können **dunkel oder hell** sein — das wird allein über die Farbwerte gesteuert:
+Jeder Kurs hat ein eigenes visuelles Theme. Standard ist **dunkel**, mit optionalem **Light Mode** über einen Toggle:
 ```typescript
+interface CourseColors {
+  background: string;
+  surface: string;
+  primary: string;
+  accent: string;
+  text: string;
+  textMuted: string;
+}
+
 interface CourseDesign {
-  theme: string;       // z.B. "knowledge-graph", "hacker-terminal", "retro-magazine"
-  colors: {
-    background: string;  // Kurs-Hintergrundfarbe (dunkel ODER hell)
-    surface: string;     // Karten, Boxen
-    primary: string;     // Akzentfarbe (Buttons, Links, Badges)
-    accent: string;      // Zweitfarbe (Highlights, Erfolg)
-    text: string;        // Primäre Textfarbe
-    textMuted: string;   // Sekundäre Textfarbe
-  };
+  theme: string;              // z.B. "knowledge-graph", "hacker-terminal"
+  colors: CourseColors;       // Dark Mode (Standard)
+  lightColors?: CourseColors; // Light Mode (optional, Toggle im Kurs)
   fonts?: {
-    heading?: string;    // Override für Heading-Font
-    body?: string;       // Override für Body-Font
+    heading?: string;         // Override für Heading-Font
+    body?: string;            // Override für Body-Font
   };
 }
 ```

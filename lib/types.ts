@@ -45,7 +45,6 @@ export interface CourseDesign {
 export interface CourseIntro {
   hook: string;
   sourceContext: string;
-  overview: string[];
 }
 
 export interface Module {

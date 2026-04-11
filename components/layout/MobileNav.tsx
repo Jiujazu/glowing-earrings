@@ -29,7 +29,7 @@ export default function MobileNav({ open, onClose, links }: MobileNavProps) {
         className="absolute inset-0 bg-[var(--color-dark-purple)]/40 backdrop-blur-sm animate-fade-in"
         onClick={onClose}
       />
-      <div className="absolute right-0 top-0 h-full w-72 bg-[var(--background)] shadow-xl animate-slide-up p-6 flex flex-col">
+      <div className="absolute right-0 top-0 h-full w-72 bg-[var(--background)] shadow-xl animate-slide-in-right p-6 flex flex-col">
         <button
           className="self-end p-2 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
           onClick={onClose}

@@ -49,7 +49,7 @@ export default function CourseNav({ modules }: CourseNavProps) {
 
   return (
     <nav className="sticky top-16 z-50 px-4 py-2 bg-[var(--course-background)] border-b border-[var(--course-text)]/10">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto relative">
         {/* Mobile: toggle bar */}
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -84,7 +84,10 @@ export default function CourseNav({ modules }: CourseNavProps) {
 
         {/* Mobile: dropdown list */}
         {isOpen && (
-          <ol className="sm:hidden flex flex-col gap-1 mt-2 pb-1">
+          <ol
+            className="sm:hidden absolute left-0 right-0 top-full flex flex-col gap-1 px-4 py-3 rounded-b-xl shadow-lg"
+            style={{ backgroundColor: "var(--course-surface)" }}
+          >
             {modules.map((mod, i) => {
               const isActive = mod.id === activeId;
               return (

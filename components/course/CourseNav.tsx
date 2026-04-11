@@ -48,37 +48,25 @@ export default function CourseNav({ modules }: CourseNavProps) {
     : 1;
 
   return (
-    <nav
-      className="sticky top-16 z-50 px-4 py-2 bg-[var(--background)]/90 backdrop-blur-lg border-b border-[var(--border)]/50"
-    >
+    <nav className="sticky top-16 z-50 px-4 py-2 bg-[var(--background)]/90 backdrop-blur-lg border-b border-[var(--border)]/50">
       <div className="max-w-3xl mx-auto relative">
         {/* Mobile: toggle bar */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="sm:hidden flex items-center gap-3 w-full py-1"
         >
-          <span
-            className="text-xs font-bold font-heading rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0"
-            style={{
-              backgroundColor: "var(--course-primary)",
-              color: "var(--course-background)",
-            }}
-          >
+          <span className="text-xs font-bold font-heading rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 bg-[var(--accent)] text-white">
             {activeIndex}
           </span>
-          <span
-            className="text-sm font-heading font-semibold truncate text-left"
-            style={{ color: "var(--course-text)" }}
-          >
+          <span className="text-sm font-heading font-semibold truncate text-left text-[var(--text-primary)]">
             {activeModule?.title}
           </span>
           <svg
-            className={`w-4 h-4 ml-auto flex-shrink-0 transition-transform ${isOpen ? "rotate-180" : ""}`}
+            className={`w-4 h-4 ml-auto flex-shrink-0 transition-transform text-[var(--text-secondary)] ${isOpen ? "rotate-180" : ""}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2}
-            style={{ color: "var(--course-text-muted)" }}
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
           </svg>
@@ -86,38 +74,32 @@ export default function CourseNav({ modules }: CourseNavProps) {
 
         {/* Mobile: dropdown list */}
         {isOpen && (
-          <ol
-            className="sm:hidden absolute left-0 right-0 top-full flex flex-col gap-1 px-4 py-3 rounded-b-xl shadow-lg"
-            style={{ backgroundColor: "var(--course-surface)" }}
-          >
+          <ol className="sm:hidden absolute left-0 right-0 top-full flex flex-col gap-1 px-4 py-3 rounded-b-xl shadow-lg bg-[var(--background)] border border-[var(--border)]/50 border-t-0">
             {modules.map((mod, i) => {
               const isActive = mod.id === activeId;
               return (
                 <li key={mod.id}>
                   <button
                     onClick={() => scrollTo(mod.id)}
-                    className="flex items-center gap-3 w-full py-2 px-2 rounded-lg text-left transition-colors"
-                    style={{
-                      backgroundColor: isActive
-                        ? "color-mix(in srgb, var(--course-primary) 15%, var(--course-surface))"
-                        : "transparent",
-                    }}
+                    className={`flex items-center gap-3 w-full py-2.5 px-2 rounded-lg text-left transition-colors ${
+                      isActive ? "bg-[var(--surface-tinted)]" : "hover:bg-[var(--surface-tinted)]"
+                    }`}
                   >
                     <span
-                      className="text-xs font-bold font-heading rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0"
-                      style={{
-                        backgroundColor: isActive ? "var(--course-primary)" : "var(--course-surface)",
-                        color: isActive ? "var(--course-background)" : "var(--course-text-muted)",
-                      }}
+                      className={`text-xs font-bold font-heading rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 ${
+                        isActive
+                          ? "bg-[var(--accent)] text-white"
+                          : "bg-[var(--border)] text-[var(--text-secondary)]"
+                      }`}
                     >
                       {i + 1}
                     </span>
                     <span
-                      className="text-sm font-heading"
-                      style={{
-                        color: isActive ? "var(--course-text)" : "var(--course-text-muted)",
-                        fontWeight: isActive ? 600 : 400,
-                      }}
+                      className={`text-sm font-heading ${
+                        isActive
+                          ? "font-semibold text-[var(--accent)]"
+                          : "text-[var(--text-primary)]"
+                      }`}
                     >
                       {mod.title}
                     </span>
@@ -135,19 +117,17 @@ export default function CourseNav({ modules }: CourseNavProps) {
             return (
               <li key={mod.id} className="flex items-center">
                 {i > 0 && (
-                  <span className="text-[var(--course-text-muted)] opacity-30 mx-2 text-xs">
+                  <span className="text-[var(--text-secondary)] opacity-30 mx-2 text-xs">
                     /
                   </span>
                 )}
                 <button
                   onClick={() => scrollTo(mod.id)}
-                  className="text-xs font-heading transition-colors duration-200 py-1 px-1.5 rounded text-left"
-                  style={{
-                    color: isActive
-                      ? "var(--course-primary)"
-                      : "var(--course-text-muted)",
-                    fontWeight: isActive ? 700 : 400,
-                  }}
+                  className={`text-xs font-heading transition-colors duration-200 py-1 px-1.5 rounded text-left ${
+                    isActive
+                      ? "font-bold text-[var(--accent)]"
+                      : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+                  }`}
                 >
                   {mod.title}
                 </button>

@@ -69,6 +69,7 @@ Plus: Link zum Originalmaterial.
 
 **Regeln:**
 - **Element-Reihenfolge variieren.** Nicht jedes Modul: Absatz → Callout → Quiz → weiter. Ein Modul kann mit einem Quiz starten, ein anderes mit einer Reflexionsfrage.
+- **Modul-Navigation:** Jeder Kurs hat eine sticky Navigation mit allen Modul-Titeln. Die Navigation wird automatisch vom `CoursePlayer` generiert — dafür braucht jedes Modul eine aussagekräftige `title` und ein optionales `icon` (Emoji). Modul-Titel sollen kurz und prägnant sein (max 4-5 Wörter).
 - **Modul-Übergänge:** Bevorzugt: Querverweis auf einen thematisch verwandten Kurs auf der Plattform ("Du willst tiefer einsteigen? Im Kurs X geht's genau darum."). Falls kein passender Kurs existiert: Summary + Ausblick ("Du weißt jetzt X. Als nächstes schauen wir uns an..."). Innerhalb eines Kurses kann auch ein Cliff-Hanger funktionieren ("Du weißt jetzt, wie die Daten reinkommen — aber wo landen sie eigentlich?").
 - **Kein Element erzwingen.** Ein kurzes Modul mit 2 Absätzen und 1 Quiz ist besser als ein aufgeblähtes Modul mit erzwungenen Flashcards.
 
@@ -239,6 +240,7 @@ Jeder Kurs muss diese Punkte erfüllen, bevor er gepusht wird:
 - [ ] Mindestens 1 Reflexionsfrage mit konkretem Praxisbezug
 - [ ] Mindestens 1 Easter Egg
 - [ ] Element-Reihenfolge variiert zwischen Modulen
+- [ ] Modul-Titel kurz und prägnant (max 4-5 Wörter, mit Emoji-Icon)
 - [ ] Modul-Übergänge vorhanden (bevorzugt Kurs-Querverweise)
 - [ ] Humor ist subtil & clever, nie platt
 - [ ] Outro mit Synthese, konkretem nächsten Schritt und Takeaway

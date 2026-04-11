@@ -174,7 +174,7 @@ export const karpathyLlmWiki: Course = {
               text: "Schicht 2 — das Wiki mit Markdown-Seiten",
               correct: true,
               feedback:
-                "Richtig! Das Wiki ist die Schicht, die das LLM eigenständig erstellt, aktualisiert und pflegt. Hier entstehen Zusammenfassungen, Querverweise und Synthesen.",
+                "Genau. Das Wiki ist die einzige Schicht, die das LLM eigenständig besitzt. Im Gegensatz zu deinen Originaldokumenten (immutable) und dem Schema (Ko-Evolution) erstellt, aktualisiert und verknüpft das LLM hier alles selbstständig.",
             },
             {
               text: "Schicht 3 — das Schema-Dokument",
@@ -250,20 +250,20 @@ export const karpathyLlmWiki: Course = {
         {
           id: "flashcard-ops-1",
           type: "flashcard",
-          front: "Was passiert bei einer Ingest-Operation?",
-          back: "Das LLM liest die Quelle, erstellt eine Summary-Seite, aktualisiert 10-15 verwandte Wiki-Seiten, ergänzt Querverweise und loggt die Operation.",
+          front: "Warum aktualisiert eine einzige Ingest-Operation 10-15 bestehende Wiki-Seiten?",
+          back: "Weil neues Wissen selten isoliert ist. Ein Artikel über AI Agents berührt Konzepte wie Autonomie, Tool Use, Planung — all diese bestehenden Seiten brauchen Updates, Querverweise und neue Verbindungen. Ohne das zerfällt das Wiki in isolierte Inseln.",
         },
         {
           id: "flashcard-ops-2",
           type: "flashcard",
-          front: "Was ist Output Compounding?",
-          back: "Wertvolle Query-Ergebnisse werden als neue Wiki-Seiten gespeichert — so wird jede Recherche zu permanentem Wissen statt zu verschwindendem Chat-Verlauf.",
+          front: "Warum ist es wichtig, Query-Ergebnisse als Wiki-Seiten zu speichern statt sie im Chat zu lassen?",
+          back: "Ohne Speicherung ist jede Recherche Einmalarbeit — du stellst die gleiche Frage nächsten Monat nochmal. Mit Output Compounding wird jede gute Frage zu permanentem Wissen, das bei zukünftigen Queries mitgefunden wird.",
         },
         {
           id: "flashcard-ops-3",
           type: "flashcard",
-          front: "Was macht die Lint-Operation?",
-          back: "Periodische Gesundheitschecks: Widersprüche aufdecken, veraltete Inhalte finden, verwaiste Seiten identifizieren, fehlende Querverweise ergänzen.",
+          front: "Was passiert mit einem Wiki, das nie gelintet wird?",
+          back: "Es veraltet leise: Seiten widersprechen sich, verwaiste Einträge ohne Links häufen sich an, neuere Quellen entkräften ältere Behauptungen ohne dass es jemand merkt. Lint ist das Immunsystem des Wikis.",
         },
       ],
       transitionToNext:
@@ -315,9 +315,9 @@ export const karpathyLlmWiki: Course = {
           id: "reflection-workflow",
           type: "reflection",
           prompt:
-            "Stell dir vor, du hättest ein LLM Wiki mit allem, was du in den letzten 6 Monaten gelesen hast. Welche Frage würdest du als erstes stellen?",
+            "Welches Thema beschäftigt dich gerade beruflich so sehr, dass du dir wünschst, alle Artikel, Podcasts und Videos dazu wären an einem Ort — durchsuchbar und verknüpft?",
           placeholder:
-            'Z.B. "Was sind die wiederkehrenden Muster in allem, was ich über AI Agents gelesen habe?"',
+            'Z.B. "AI Agents im Kundenservice — ich lese ständig dazu, aber nichts akkumuliert."',
         },
       ],
       transitionToNext:
@@ -390,6 +390,8 @@ export const karpathyLlmWiki: Course = {
             '🕰️ Fun Fact: Vannevar Bush hat den Memex 1945 im Artikel "As We May Think" beschrieben — 44 Jahre bevor Tim Berners-Lee das World Wide Web erfand.',
         },
       ],
+      transitionToNext:
+        "Du hast jetzt das komplette Konzept — von der Architektur bis zur Philosophie dahinter. Zeit, es in die Praxis zu bringen.",
     },
   ],
 

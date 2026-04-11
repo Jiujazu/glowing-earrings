@@ -99,7 +99,7 @@ export default function ModuleRenderer({ module }: { module: Module }) {
   flushFlashcards();
 
   return (
-    <section className="py-8 px-4">
+    <section id={`module-${module.id}`} className="py-8 px-4 scroll-mt-20">
       <div className="max-w-3xl mx-auto">
         {/* Module Header */}
         <ScrollReveal>

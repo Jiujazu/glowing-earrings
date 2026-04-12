@@ -53,7 +53,7 @@ export const handySpeechToText: Course = {
         {
           id: "m1-content-1",
           type: "content",
-          text: "Handy macht genau eine Sache: **Sprache in Text umwandeln und in das aktive Textfeld einfügen.** Kein Account, keine Cloud, keine Subscription. Du drückst ein Tastenkürzel, sprichst, lässt los — und der transkribierte Text erscheint dort, wo dein Cursor steht.\n\nDas funktioniert in jeder App: E-Mail, Slack, Code-Editor, Browser, Terminal. Überall, wo du tippen kannst, kannst du stattdessen sprechen.\n\nHandy ist bewusst minimalistisch. Keine Übersetzung, keine Zusammenfassungen, keine KI-Features.\n\nNur Speech-to-Text — lokal, schnell und zuverlässig. Ein Werkzeug, das eine Sache perfekt macht.",
+          text: "Handy macht genau eine Sache: **Sprache in Text umwandeln und in das aktive Textfeld einfügen.**\n\nKein Account, keine Cloud, keine Subscription. Du drückst ein Tastenkürzel, sprichst, lässt los — und der transkribierte Text erscheint dort, wo dein Cursor steht.\n\nDas funktioniert in **jeder App:** E-Mail, Slack, Code-Editor, Browser, Terminal. Überall, wo du tippen kannst, kannst du stattdessen sprechen.\n\nHandy ist bewusst minimalistisch — keine Übersetzung, keine Zusammenfassungen, keine KI-Features. **Ein Werkzeug, das eine Sache perfekt macht.**",
         },
         {
           id: "m1-content-2",
@@ -111,7 +111,7 @@ export const handySpeechToText: Course = {
         {
           id: "m2-content-2",
           type: "content",
-          text: "### Erste Einrichtung\n\nBeim ersten Start fragt dein Betriebssystem nach zwei Berechtigungen: **Mikrofon-Zugriff** (damit Handy dich hören kann) und **Accessibility-Zugriff** (damit es Text in das aktive Textfeld einfügen kann). Beides bestätigen — ohne diese Berechtigungen funktioniert Handy nicht.\n\nDanach öffnest du die Einstellungen und konfigurierst dein Tastenkürzel. Standard ist **Push-to-Talk**: Taste drücken und halten zum Aufnehmen, loslassen zum Transkribieren. Alternativ gibt es einen Toggle-Modus — einmal drücken startet die Aufnahme, nochmal drücken stoppt sie.",
+          text: "### Erste Einrichtung\n\nBeim ersten Start fragt dein Betriebssystem nach zwei Berechtigungen:\n\n- **Mikrofon-Zugriff** — damit Handy dich hören kann\n- **Accessibility-Zugriff** — damit es Text in das aktive Textfeld einfügen kann\n\nBeides bestätigen — ohne diese Berechtigungen funktioniert Handy nicht.\n\n### Tastenkürzel wählen\n\nIn den Einstellungen konfigurierst du dein Tastenkürzel. Zwei Modi stehen zur Wahl:\n\n- **Push-to-Talk** (Standard): Taste **drücken und halten** zum Aufnehmen, **loslassen** zum Transkribieren\n- **Toggle-Modus**: Einmal drücken startet die Aufnahme, nochmal drücken stoppt sie",
         },
         {
           id: "m2-content-3",
@@ -144,7 +144,17 @@ export const handySpeechToText: Course = {
         {
           id: "m3-content-1",
           type: "content",
-          text: "Handy entfaltet seine Stärke, wenn du es in deinen Alltag einbaust. Drei Szenarien, in denen Diktieren Tippen klar schlägt:\n\n**E-Mails und Nachrichten.** Cursor ins Textfeld, Tastenkürzel drücken, Antwort sprechen. Besonders bei längeren E-Mails sparst du enorm Zeit.\n\nSprich dabei in ganzen Sätzen — die Transkription wird deutlich genauer als bei einzelnen Stichworten.\n\n**KI-Prompts diktieren.** Gute Prompts für Claude oder ChatGPT sind oft lang und kontextreich: \"Ich arbeite an X, mein Ziel ist Y, bitte beachte Z...\" Das zu tippen dauert Minuten — gesprochen sind es 30 Sekunden.\n\nBonus: Beim Sprechen formulierst du natürlicher, was oft zu besseren Prompts führt.\n\n**Brain Dump → Strukturierte Notiz.** Öffne eine leere Notiz, diktiere alles was dir im Kopf herumschwirrt — unstrukturiert, stream-of-consciousness.\n\nDann kopiere den Text in Claude und lass ihn strukturieren. Zwei Minuten Brain Dump → saubere Notiz mit Action-Points.",
+          text: "### E-Mails und Nachrichten\n\nCursor ins Textfeld, Tastenkürzel drücken, Antwort sprechen. Besonders bei längeren E-Mails sparst du **enorm** Zeit.\n\nEin Tipp: Sprich in ganzen Sätzen — die Transkription wird deutlich genauer als bei einzelnen Stichworten.",
+        },
+        {
+          id: "m3-content-1b",
+          type: "content",
+          text: "### KI-Prompts diktieren\n\nGute Prompts für Claude oder ChatGPT sind oft lang und kontextreich:\n\n*\"Ich arbeite an X, mein Ziel ist Y, bitte beachte Z...\"*\n\nDas zu tippen dauert Minuten — **gesprochen sind es 30 Sekunden.** Bonus: Beim Sprechen formulierst du natürlicher, was oft zu besseren Prompts führt.",
+        },
+        {
+          id: "m3-content-1c",
+          type: "content",
+          text: "### Brain Dump → Strukturierte Notiz\n\nÖffne eine leere Notiz und diktiere alles, was dir im Kopf herumschwirrt — unstrukturiert, stream-of-consciousness.\n\nDann kopiere den Text in Claude und lass ihn strukturieren. **Zwei Minuten Brain Dump → saubere Notiz mit Action-Points.**",
         },
         {
           id: "m3-flashcard-1",
@@ -204,7 +214,7 @@ export const handySpeechToText: Course = {
         {
           id: "m4-content-1",
           type: "content",
-          text: "Drei Dinge, die Handy noch nützlicher machen:\n\n**Custom Dictionary.** Wenn Handy bestimmte Fachbegriffe, Namen oder Abkürzungen nicht erkennt, kannst du sie in den Einstellungen als benutzerdefiniertes Wörterbuch hinzufügen. Besonders nützlich für Firmen- und Produktnamen, die nicht im Standard-Vokabular vorkommen.\n\n**Debug-Modus.** Falls die Transkription mal nicht wie erwartet funktioniert: **Cmd+Shift+D** (macOS) oder **Ctrl+Shift+D** (Windows/Linux) öffnet den Debug-Modus. Dort siehst du genau, was Handy hört und wo Probleme liegen.\n\n**Transkriptions-History.** Handy speichert alle bisherigen Transkriptionen. Praktisch, wenn du einen diktierten Text nachträglich noch brauchst.",
+          text: "### Custom Dictionary\n\nWenn Handy bestimmte Fachbegriffe, Namen oder Abkürzungen nicht erkennt, kannst du sie in den Einstellungen als **benutzerdefiniertes Wörterbuch** hinzufügen.\n\nBesonders nützlich für Firmen- und Produktnamen, die nicht im Standard-Vokabular vorkommen.\n\n### Debug-Modus\n\nFalls die Transkription mal nicht wie erwartet funktioniert:\n\n- **macOS:** `Cmd+Shift+D`\n- **Windows/Linux:** `Ctrl+Shift+D`\n\nDort siehst du genau, was Handy hört und wo Probleme liegen.\n\n### Transkriptions-History\n\nHandy speichert alle bisherigen Transkriptionen. Praktisch, wenn du einen diktierten Text nachträglich noch brauchst.",
         },
         {
           id: "m4-content-2",

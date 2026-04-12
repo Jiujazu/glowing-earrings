@@ -14,7 +14,14 @@ export default function QuizCard({ element }: { element: QuizElement }) {
     if (revealed) return;
     setSelected(index);
     setRevealed(true);
-    tracker?.onQuizComplete(element.id);
+    if (element.options[index].correct) {
+      tracker?.onQuizComplete(element.id);
+    }
+  }
+
+  function handleRetry() {
+    setSelected(null);
+    setRevealed(false);
   }
 
   const isCorrect = selected !== null && element.options[selected].correct;
@@ -113,6 +120,14 @@ export default function QuizCard({ element }: { element: QuizElement }) {
           <p className="text-sm text-[var(--course-text-muted)] leading-relaxed">
             {element.explanation}
           </p>
+          {!isCorrect && (
+            <button
+              onClick={handleRetry}
+              className="mt-3 text-sm font-medium text-[var(--course-primary)] hover:underline"
+            >
+              Nochmal versuchen →
+            </button>
+          )}
         </div>
       )}
     </div>

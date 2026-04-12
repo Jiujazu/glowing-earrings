@@ -1,5 +1,5 @@
 import type { CourseIntro as CourseIntroType, CourseMeta } from "@/lib/types";
-import { formatDuration, getDifficultyLabel, getSourceTypeLabel } from "@/lib/course-utils";
+import { formatDuration, getDifficultyLabel } from "@/lib/course-utils";
 import Badge from "@/components/ui/Badge";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
@@ -15,7 +15,6 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
         {/* Badges */}
         <ScrollReveal delay={0} duration={600}>
           <div className="flex flex-wrap gap-2 mb-6">
-            <Badge variant="course">{getSourceTypeLabel(meta.sourceType)}</Badge>
             <Badge variant="course">{getDifficultyLabel(meta.difficulty)}</Badge>
             <Badge variant="course">{formatDuration(meta.estimatedMinutes)}</Badge>
           </div>

@@ -49,6 +49,18 @@
 - **Filter brauchen Labels** (Kategorie, Schwierigkeit, Themen) — ohne visuell gruppierte Überschriften laufen die Buttons ineinander.
 - **Tags auf CourseCards als Links** → `/courses?tag=X` öffnet den Katalog vorgefiltert.
 
+### Technische Build-Learnings
+- **`opengraph-image.tsx` braucht Default Export** — kein GET-Handler, sondern `export default async function OgImage()`.
+- **Kein Edge Runtime mit Kurs-Imports** — Edge kann die Course-Daten nicht auflösen. Node.js Runtime reicht für `ImageResponse`.
+- **Kein `onClick` in Server Components** — Event-Handler erzwingen Client Components. Wenn die Card ein Server Component bleiben soll, keine Handler dranhängen.
+
+### Komponenten & Rendering
+- **Alle Text-rendernden Komponenten brauchen ReactMarkdown.** Callout, Flashcard und jede Komponente die User-Text anzeigt muss Markdown rendern — sonst erscheinen rohe `**Sternchen**` statt Bold.
+- **CourseCard: Titel muss visuell dominieren.** Tags und Badges dürfen den Titel nicht optisch erschlagen. Klare Hierarchie: Titel (groß, bold) → Subheading (mittel) → Infotext (klein, muted) → Badges (dezent).
+
+### Quell-Anonymisierung
+- **Wenn ein Autor nicht genannt werden soll:** Alle Bezüge im Kursinhalt ersetzen, `sourceAuthor` neutral halten (z.B. "Community-Tutorial"), Promotion-Inhalte entfernen. Die Quell-URL bleibt als Metadaten erhalten.
+
 ---
 
 ## Kurs 1: Das LLM Wiki (2026-04-10)

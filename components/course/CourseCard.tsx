@@ -14,7 +14,25 @@ export default function CourseCard({ meta, totalModules }: { meta: CourseMeta; t
       />
 
       <div className="p-6 bg-[var(--surface)] border border-[var(--border)] border-t-0 rounded-b-2xl">
-        <div className="flex flex-wrap gap-1.5 mb-3">
+        <Link
+          href={`/courses/${meta.slug}`}
+          className="group block mb-4"
+        >
+          <h3 className="font-heading text-2xl font-bold text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors leading-tight">
+            {meta.title}
+          </h3>
+          {meta.subheading && (
+            <p className="text-base text-[var(--text-secondary)] mt-1 font-medium">
+              {meta.subheading}
+            </p>
+          )}
+        </Link>
+
+        <p className="text-sm text-[var(--text-muted)] mb-4 leading-relaxed">
+          {meta.subtitle}
+        </p>
+
+        <div className="flex flex-wrap gap-1.5 mb-4">
           <Badge variant="brand">{getDifficultyLabel(meta.difficulty)}</Badge>
           {meta.tags.slice(0, 3).map((tag) => (
             <Link
@@ -26,23 +44,6 @@ export default function CourseCard({ meta, totalModules }: { meta: CourseMeta; t
             </Link>
           ))}
         </div>
-
-        <Link
-          href={`/courses/${meta.slug}`}
-          className="group block"
-        >
-          <h3 className="font-heading text-xl font-bold text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">
-            {meta.title}
-          </h3>
-          {meta.subheading && (
-            <p className="text-sm font-medium text-[var(--text-secondary)] mt-0.5">
-              {meta.subheading}
-            </p>
-          )}
-          <p className="text-sm text-[var(--text-muted)] mt-2 mb-5 leading-relaxed">
-            {meta.subtitle}
-          </p>
-        </Link>
 
         {totalModules && (
           <div className="mb-3">

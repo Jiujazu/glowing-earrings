@@ -17,11 +17,13 @@
 - **Quiz-Feedback max 2 Sätze**, Explanation darf länger sein.
 - **Nie mehr als 2 Content-Blöcke hintereinander** ohne interaktives Element.
 - **Kein overview im Intro** — die CourseNav übernimmt das.
+- **Fließtext ist die Basis, Boxen sind die Ausnahme.** Inhalte gehören primär in normalen Lauftext mit Markdown-Formatierung (Bold, Listen, Headings). Callouts, Key-Concepts und Context-Boxen nur für: echte Zitate, Warnungen, überraschende Fakten. Wenn ein Modul hauptsächlich aus farbigen Boxen besteht, stimmt die Balance nicht.
 
 ### Element-Einsatz
 - **`code-block` für Dateistrukturen und Configs** (CLAUDE.md, skill.md) — besser als Fließtext.
 - **`step-by-step` für mehrstufige Tutorials** — interaktiver als nummerierte Listen.
 - **`context-box` für Fachbegriffe** — hält den Lesefluss für Fortgeschrittene, hilft Einsteigern.
+- **`callout` nur für echten Mehrwert** — Zitate (quote), Warnungen (warning), überraschende Statistiken (stat). Keine Callouts für Inhalte, die genauso gut im Fließtext stehen könnten. Drei Callouts hintereinander = zu viele.
 
 ### Design
 - **Warme Farben (Amber/Orange) für Productivity-Kurse**, kühle (Lila/Teal) für technische Kurse.

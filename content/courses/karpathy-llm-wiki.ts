@@ -15,6 +15,7 @@ export const karpathyLlmWiki: Course = {
     estimatedMinutes: 18,
     difficulty: "intermediate",
     publishedAt: "2026-04-10",
+    relatedCourses: ["agentic-os-context-levels"],
     design: {
       theme: "knowledge-graph",
       colors: {

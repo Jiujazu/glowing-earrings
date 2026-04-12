@@ -14,6 +14,7 @@ export const agenticOsContextLevels: Course = {
     estimatedMinutes: 20,
     difficulty: "intermediate",
     publishedAt: "2026-04-12",
+    relatedCourses: ["karpathy-llm-wiki"],
     design: {
       theme: "agentic-os",
       colors: {

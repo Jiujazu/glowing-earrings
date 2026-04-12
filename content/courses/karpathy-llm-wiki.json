@@ -1,0 +1,328 @@
+{
+  "meta": {
+    "slug": "karpathy-llm-wiki",
+    "title": "Die Karpathy Methode",
+    "subheading": "Persönliche Knowledge Base mit KI",
+    "subtitle": "Wie du mit KI eine persönliche Knowledge Base baust, die wächst und nie veraltet — nach Andrej Karpathys Konzept.",
+    "sourceUrl": "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+    "sourceAuthor": "Andrej Karpathy",
+    "sourceType": "gist",
+    "category": "ai-tech",
+    "tags": [
+      "Knowledge Management",
+      "LLM",
+      "Productivity",
+      "RAG"
+    ],
+    "estimatedMinutes": 18,
+    "difficulty": "intermediate",
+    "publishedAt": "2026-04-10",
+    "relatedCourses": [
+      "agentic-os-context-levels"
+    ],
+    "design": {
+      "theme": "knowledge-graph",
+      "colors": {
+        "background": "#0E0B1A",
+        "surface": "#1A1530",
+        "primary": "#7B4FBF",
+        "accent": "#00C9A7",
+        "text": "#EDE4F8",
+        "textMuted": "#9B8EC0"
+      },
+      "lightColors": {
+        "background": "#FAFAFA",
+        "surface": "#FFFFFF",
+        "primary": "#5B2F9F",
+        "accent": "#00C9A7",
+        "text": "#333333",
+        "textMuted": "#7F7F7F"
+      },
+      "fonts": {
+        "heading": "\"Space Grotesk\", system-ui, sans-serif",
+        "body": "\"DM Sans\", system-ui, sans-serif"
+      }
+    }
+  },
+  "intro": {
+    "hook": "Du hast Hunderte Artikel gelesen, Dutzende Podcasts gehört, Notizen in fünf verschiedenen Apps verteilt — und findest trotzdem nichts wieder, wenn du es brauchst. Was wäre, wenn ein LLM das für dich organisiert?",
+    "sourceContext": "Andrej Karpathy — Ex-Director of AI bei Tesla, Mitgründer von OpenAI, eine der einflussreichsten Stimmen in der KI-Welt — hat ein Konzept veröffentlicht, das er \"LLM Wiki\" nennt: eine persönliche Knowledge Base, die von einem LLM gebaut, gepflegt und durchsuchbar gehalten wird."
+  },
+  "modules": [
+    {
+      "id": "problem",
+      "title": "Das Problem mit deinem Wissen",
+      "estimatedMinutes": 3,
+      "elements": [
+        {
+          "id": "problem-intro",
+          "type": "content",
+          "text": "Stell dir vor, du hast letzte Woche einen brillanten Artikel über die Zukunft von AI Agents gelesen. Jetzt fragt dich jemand danach.\n\nDu weißt, dass du ihn gelesen hast. Du weißt ungefähr, worum es ging. Aber du findest ihn nicht mehr — und selbst wenn, müsstest du ihn nochmal lesen, um die wichtigen Punkte zusammenzufassen.\n\nDas ist der Normalzustand für die meisten von uns. Wissen geht rein, aber es **akkumuliert** nicht.\n\nEs bleibt fragmentiert in Browser-Tabs, Notion-Seiten, Lesezeichen-Ordnern."
+        },
+        {
+          "id": "rag-problem",
+          "type": "key-concept",
+          "title": "Das RAG-Problem",
+          "description": "Die meisten KI-Tools (NotebookLM, ChatGPT mit Datei-Upload) nutzen RAG: Sie suchen bei jeder Frage relevante Textschnipsel und generieren eine Antwort. Aber das bedeutet, dass die KI jedes Mal von vorne anfängt — es gibt keine Akkumulation, keine Querverweise, keine Synthese über Dokumente hinweg."
+        },
+        {
+          "id": "rag-quote",
+          "type": "callout",
+          "variant": "quote",
+          "title": "Karpathy über Standard-RAG",
+          "text": "\"The LLM is rediscovering knowledge from scratch on every question. There's no accumulation.\""
+        },
+        {
+          "id": "quiz-rag",
+          "type": "quiz",
+          "question": "Was ist das Hauptproblem bei herkömmlichem RAG (Retrieval-Augmented Generation)?",
+          "options": [
+            {
+              "text": "Die Antworten sind zu langsam",
+              "correct": false,
+              "feedback": "Geschwindigkeit ist nicht das Kernproblem — sondern dass die KI jedes Mal von vorne anfängt."
+            },
+            {
+              "text": "Das Wissen akkumuliert nicht — jede Frage wird von Grund auf bearbeitet",
+              "correct": true,
+              "feedback": "Genau. Bei RAG werden Textschnipsel bei jeder Frage neu gesucht und zusammengesetzt. Querverweise und Synthesen werden nie dauerhaft gespeichert."
+            },
+            {
+              "text": "RAG kann keine langen Texte verarbeiten",
+              "correct": false,
+              "feedback": "Kontextlänge ist eine technische Einschränkung, aber nicht das konzeptuelle Problem, das Karpathy adressiert."
+            },
+            {
+              "text": "Die Quelldokumente werden verändert",
+              "correct": false,
+              "feedback": "Im Gegenteil — bei RAG bleiben die Dokumente unverändert. Das Problem ist, dass daraus nie eine strukturierte Wissensbasis entsteht."
+            }
+          ],
+          "explanation": "RAG behandelt jede Frage als isoliertes Problem. Es gibt keinen Ort, an dem Erkenntnisse dauerhaft verknüpft und gespeichert werden. Das LLM Wiki löst das, indem es eine persistente, wachsende Wissensstruktur aufbaut."
+        }
+      ],
+      "transitionToNext": "Okay — das Problem ist klar. Aber was ist die Lösung? Karpathy schlägt eine überraschend einfache Architektur vor."
+    },
+    {
+      "id": "architecture",
+      "title": "Die 3-Schichten-Architektur",
+      "estimatedMinutes": 4,
+      "elements": [
+        {
+          "id": "arch-intro",
+          "type": "content",
+          "text": "Das LLM Wiki besteht aus drei klar getrennten Schichten. Das Geniale: Es ist kein komplexes System mit Datenbanken und APIs — es sind einfach **Markdown-Dateien in einem Ordner**, die du mit Git versionieren und mit jedem Editor öffnen kannst."
+        },
+        {
+          "id": "arch-layer-1",
+          "type": "content",
+          "text": "### Schicht 1: Raw Sources\n\nDeine Originaldokumente — Artikel, Papers, Notizen, Podcast-Transkripte. Sie werden nie verändert, sie sind die Single Source of Truth. Das LLM liest sie, modifiziert sie aber nie."
+        },
+        {
+          "id": "arch-layer-2",
+          "type": "content",
+          "text": "### Schicht 2: Das Wiki\n\nVon der KI generierte Markdown-Dateien: Zusammenfassungen, Entity-Seiten (Personen, Organisationen), Konzept-Seiten (abstrakte Ideen mit Querverweisen), Synthesen aus mehreren Quellen. Die KI besitzt und pflegt diese Schicht komplett."
+        },
+        {
+          "id": "arch-layer-3",
+          "type": "content",
+          "text": "### Schicht 3: Das Schema\n\nEin Konfigurationsdokument (z.B. `CLAUDE.md`), das dem LLM sagt, wie das Wiki strukturiert ist: Namenskonventionen, Workflows, Umgang mit Widersprüchen. Dieses Dokument entwickelt sich mit der Zeit weiter — eine Ko-Evolution zwischen dir und der KI."
+        },
+        {
+          "id": "quiz-architecture",
+          "type": "quiz",
+          "question": "Welche Schicht des LLM Wiki wird von der KI eigenständig erstellt und gepflegt?",
+          "options": [
+            {
+              "text": "Schicht 1 — die Originaldokumente",
+              "correct": false,
+              "feedback": "Die Originaldokumente sind immutable — sie werden nie verändert."
+            },
+            {
+              "text": "Schicht 2 — das Wiki mit Markdown-Seiten",
+              "correct": true,
+              "feedback": "Genau. Das Wiki ist die einzige Schicht, die das LLM eigenständig besitzt — es erstellt, aktualisiert und verknüpft hier alles selbstständig."
+            },
+            {
+              "text": "Schicht 3 — das Schema-Dokument",
+              "correct": false,
+              "feedback": "Das Schema wird gemeinsam von Mensch und LLM entwickelt — es ist die Ko-Evolution der Struktur."
+            }
+          ],
+          "explanation": "Schicht 2 ist die Kernidee: Markdown-Dateien, die das LLM selbstständig pflegt. Jede neue Quelle stärkt die gesamte Struktur, weil das LLM Querverweise aktualisiert und neue Verbindungen knüpft."
+        }
+      ],
+      "transitionToNext": "Die Architektur steht. Aber was macht das LLM eigentlich konkret mit deinen Quellen? Drei Operationen sind der Kern."
+    },
+    {
+      "id": "operations",
+      "title": "Die drei Kern-Operationen",
+      "estimatedMinutes": 5,
+      "elements": [
+        {
+          "id": "ops-ingest",
+          "type": "content",
+          "text": "### Ingest — Neue Quellen aufnehmen\n\nDas LLM liest ein neues Dokument, bespricht die Kernpunkte mit dir, schreibt eine Zusammenfassung, aktualisiert den Index und modifiziert relevante Entity- und Konzeptseiten — typischerweise 10-15 Seiten pro Quelle.\n\nEin Beispiel: Du fütterst dem LLM einen Artikel über \"AI Agents in 2026\". Es erstellt eine Summary-Seite, aktualisiert die bestehenden Seiten zu \"AI Agents\", \"Autonomie\" und \"Tool Use\", ergänzt Querverweise und trägt alles im Log ein — in einer einzigen Operation."
+        },
+        {
+          "id": "ops-query",
+          "type": "content",
+          "text": "### Query — Fragen stellen\n\nDas LLM durchsucht relevante Wiki-Seiten, liest sie und synthetisiert eine Antwort mit Zitaten.\n\nDer Clou: Wertvolle Antworten können als neue Wiki-Seiten gespeichert werden. Karpathy nennt das **Output Compounding** — statt dass deine Recherche im Chat-Verlauf verschwindet, wird das Ergebnis Teil des Wikis. Jede gute Frage macht das Wiki besser."
+        },
+        {
+          "id": "ops-lint",
+          "type": "content",
+          "text": "### Lint — Qualität sichern\n\nRegelmäßige Gesundheitschecks für das Wiki: Widersprüche zwischen Seiten aufdecken, veraltete Aussagen finden, verwaiste Seiten ohne eingehende Links identifizieren, fehlende Querverweise ergänzen.\n\nLint ist das Immunsystem des Wikis — ohne regelmäßige Checks veraltet das Wissen leise."
+        },
+        {
+          "id": "flashcard-ops-1",
+          "type": "flashcard",
+          "front": "Warum aktualisiert eine einzige Ingest-Operation 10-15 bestehende Wiki-Seiten?",
+          "back": "Weil neues Wissen selten isoliert ist. Ein Artikel über AI Agents berührt Konzepte wie Autonomie, Tool Use, Planung — all diese bestehenden Seiten brauchen Updates, Querverweise und neue Verbindungen. Ohne das zerfällt das Wiki in isolierte Inseln."
+        },
+        {
+          "id": "flashcard-ops-2",
+          "type": "flashcard",
+          "front": "Warum ist es wichtig, Query-Ergebnisse als Wiki-Seiten zu speichern statt sie im Chat zu lassen?",
+          "back": "Ohne Speicherung ist jede Recherche Einmalarbeit — du stellst die gleiche Frage nächsten Monat nochmal. Mit Output Compounding wird jede gute Frage zu permanentem Wissen, das bei zukünftigen Queries mitgefunden wird."
+        },
+        {
+          "id": "flashcard-ops-3",
+          "type": "flashcard",
+          "front": "Was passiert mit einem Wiki, das nie gelintet wird?",
+          "back": "Es veraltet leise: Seiten widersprechen sich, verwaiste Einträge ohne Links häufen sich an, neuere Quellen entkräften ältere Behauptungen ohne dass es jemand merkt. Lint ist das Immunsystem des Wikis."
+        }
+      ],
+      "transitionToNext": "Jetzt wird's praktisch — wie würdest du dein eigenes LLM Wiki tatsächlich starten?"
+    },
+    {
+      "id": "navigation",
+      "title": "Navigation & Workflow",
+      "estimatedMinutes": 3,
+      "elements": [
+        {
+          "id": "nav-intro",
+          "type": "content",
+          "text": "Zwei Dateien halten das gesamte Wiki navigierbar: `index.md` und `log.md`.\n\nDie **index.md** ist ein nach Kategorien geordneter Katalog aller Wiki-Seiten — mit direkten Links, Einzeiler-Zusammenfassungen und optionalen Metadaten. Sie wird bei jeder Ingestion aktualisiert. Das LLM liest diese Datei zuerst, wenn es eine Frage beantwortet.\n\nDie **log.md** ist die chronologische Aufzeichnung aller Operationen: Ingestionen, Queries, Lint-Durchläufe. Jeder Eintrag folgt einem einheitlichen Format (`## [2026-04-02] ingest | Artikeltitel`), was Filterung mit Standard-Tools ermöglicht."
+        },
+        {
+          "id": "workflow-callout",
+          "type": "callout",
+          "variant": "quote",
+          "title": "Karpathys Workflow",
+          "text": "\"In practice, I have the LLM agent open on one side and Obsidian open on the other. The LLM makes edits based on our conversation, and I browse the results in real time — following links, checking the graph view, reading the updated pages. Obsidian is the IDE; the LLM is the programmer; the wiki is the codebase.\""
+        },
+        {
+          "id": "nav-scaling",
+          "type": "content",
+          "text": "Für etwa 100 Quellen und Hunderte Seiten reicht der einfache Index. Darüber hinaus empfiehlt Karpathy Suchinfrastruktur wie **qmd** — eine lokale Suchmaschine mit Hybrid BM25/Vektor-Suche und LLM Re-Ranking."
+        },
+        {
+          "id": "reflection-workflow",
+          "type": "reflection",
+          "prompt": "Welches Thema beschäftigt dich gerade beruflich so sehr, dass du dir wünschst, alle Artikel, Podcasts und Videos dazu wären an einem Ort — durchsuchbar und verknüpft?",
+          "placeholder": "Z.B. \"AI Agents im Kundenservice — ich lese ständig dazu, aber nichts akkumuliert.\""
+        }
+      ],
+      "transitionToNext": "Du hast die Mechanik verstanden. Jetzt schauen wir uns an, warum Karpathy glaubt, dass die KI genau der richtige Partner für diese Aufgabe ist."
+    },
+    {
+      "id": "philosophy",
+      "title": "Warum KI der perfekte Wiki-Pfleger ist",
+      "estimatedMinutes": 3,
+      "elements": [
+        {
+          "id": "philosophy-intro",
+          "type": "content",
+          "text": "Die Geschichte der persönlichen Wissensmanagement-Tools ist eine Geschichte des Scheiterns. Jeder hat mal angefangen, ein Wiki oder ein Zettelkasten-System aufzubauen.\n\nFast niemand pflegt es langfristig. Warum?"
+        },
+        {
+          "id": "bookkeeping-quote",
+          "type": "callout",
+          "variant": "quote",
+          "title": "Die Kernerkennntnis",
+          "text": "\"The tedious part of maintaining a knowledge base is not the reading or the thinking — it's the bookkeeping.\""
+        },
+        {
+          "id": "role-division",
+          "type": "content",
+          "text": "Karpathy teilt die Arbeit klar auf:\n\n**Du** wählst die Quellen, stellst die richtigen Fragen, steuerst die Analyse, denkst über Bedeutung nach.\n\n**Das LLM** fasst zusammen, pflegt Querverweise, updated 15 Seiten gleichzeitig, prüft auf Widersprüche, vergisst nie einen Link zu aktualisieren.\n\nDer Mensch macht die kreative und strategische Arbeit. Die KI macht die Fleißarbeit, an der alle scheitern."
+        },
+        {
+          "id": "memex",
+          "type": "context-box",
+          "term": "Vannevar Bushs Memex (1945)",
+          "explanation": "Schon 1945 beschrieb der Ingenieur Vannevar Bush die Vision eines \"Memex\" — eines persönlichen, kuratierten Wissensspeichers mit \"assoziativen Pfaden zwischen Dokumenten\". Karpathy sieht das LLM Wiki als die Verwirklichung dieser Vision: \"The part he couldn't solve was who does the maintenance. The LLM handles that.\""
+        },
+        {
+          "id": "quiz-philosophy",
+          "type": "quiz",
+          "question": "Warum scheitern die meisten persönlichen Wissensmanagement-Systeme laut Karpathy?",
+          "options": [
+            {
+              "text": "Weil die Tools zu kompliziert sind",
+              "correct": false,
+              "feedback": "Es gibt genug einfache Tools. Das Problem ist nicht die Komplexität der Software."
+            },
+            {
+              "text": "Weil Menschen die Pflege-Arbeit (Bookkeeping) aufgeben",
+              "correct": true,
+              "feedback": "Genau! Lesen und Denken macht Spaß. Querverweise pflegen, Seiten aktualisieren, Struktur aufrechterhalten — das ist die Arbeit, die niemand langfristig macht. Und genau das ist die Stärke des LLM."
+            },
+            {
+              "text": "Weil es keine guten Suchfunktionen gibt",
+              "correct": false,
+              "feedback": "Suche ist ein gelöstes Problem. Die Herausforderung ist, dass es überhaupt strukturiertes Wissen gibt, das durchsucht werden kann."
+            }
+          ],
+          "explanation": "Die kreative Arbeit — Quellen finden, Fragen stellen, Erkenntnisse gewinnen — machen Menschen gerne. Die administrative Pflege eines Wikis ist mühsam und repetitiv. LLMs sind genau dafür gemacht."
+        },
+        {
+          "id": "easter-egg-memex",
+          "type": "easter-egg",
+          "trigger": "click",
+          "content": "🕰️ Fun Fact: Vannevar Bush hat den Memex 1945 im Artikel \"As We May Think\" beschrieben — 44 Jahre bevor Tim Berners-Lee das World Wide Web erfand."
+        }
+      ],
+      "transitionToNext": "Du hast jetzt das komplette Konzept — von der Architektur bis zur Philosophie dahinter. Zeit, es in die Praxis zu bringen."
+    }
+  ],
+  "outro": {
+    "synthesis": [
+      "Das LLM Wiki ersetzt fragmentiertes RAG durch eine persistente, wachsende Wissensstruktur aus einfachen Markdown-Dateien.",
+      "Drei Schichten (Raw Sources → Wiki → Schema) und drei Operationen (Ingest → Query → Lint) bilden das gesamte System.",
+      "Die KI übernimmt die Pflege-Arbeit — Querverweise, Aktualisierungen, Konsistenzprüfungen — an der Menschen scheitern.",
+      "Output Compounding: Jede gute Frage und jede Recherche wird zu permanentem Wissen statt zu verschwindendem Chat-Verlauf.",
+      "Das Konzept verwirklicht Vannevar Bushs 80 Jahre alte Vision eines persönlichen Wissensspeichers mit assoziativen Verknüpfungen."
+    ],
+    "nextStep": "Erstelle einen leeren Ordner, schreib eine CLAUDE.md mit der Anweisung \"Du pflegst ein Wiki in diesem Ordner. Bei jeder neuen Quelle: Zusammenfassung erstellen, Index aktualisieren, verwandte Seiten verlinken.\" — und füttere die erste Quelle rein.",
+    "takeaway": [
+      {
+        "emoji": "📄",
+        "text": "Raw Sources bleiben immer unverändert"
+      },
+      {
+        "emoji": "🗂️",
+        "text": "Das Wiki ist die Schicht, die das LLM pflegt"
+      },
+      {
+        "emoji": "📐",
+        "text": "Das Schema steuert, wie das LLM arbeitet"
+      },
+      {
+        "emoji": "📥",
+        "text": "Ingest: Neue Quellen aufnehmen und verknüpfen"
+      },
+      {
+        "emoji": "🔍",
+        "text": "Query: Fragen stellen und Ergebnisse zurückspeichern"
+      },
+      {
+        "emoji": "🔧",
+        "text": "Lint: Regelmäßig Qualität und Konsistenz prüfen"
+      }
+    ],
+    "sourceUrl": "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+    "newsletterCTA": "Jede Woche ein Tool oder Konzept wie dieses — direkt in deiner Inbox."
+  }
+}

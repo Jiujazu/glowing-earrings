@@ -32,9 +32,9 @@ export default function CoursePlayer({ course }: CoursePlayerProps) {
         <CourseNav modules={course.modules} />
 
         <CourseErrorBoundary>
-          <div className="border-t border-[var(--course-text)]/10">
-            {course.modules.map((module) => (
-              <ModuleRenderer key={module.id} module={module} />
+          <div>
+            {course.modules.map((module, index) => (
+              <ModuleRenderer key={module.id} module={module} index={index} />
             ))}
           </div>
 

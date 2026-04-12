@@ -5,125 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>Admin | Glowing Earrings</title>
+    <script>window.CMS_MANUAL_INIT = true;</script>
   </head>
   <body>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
     <script>
-      CMS.init({
-        config: {
-          backend: { name: "github", repo: "Jiujazu/glowing-earrings", branch: "main" },
-          media_folder: "public/courses",
-          public_folder: "/courses",
-          collections: [
-            {
-              name: "courses",
-              label: "Kurse",
-              folder: "content/courses",
-              extension: "json",
-              format: "json",
-              create: true,
-              slug: "{{meta-slug}}",
-              summary: "{{meta-title}}",
-              fields: [
-                {
-                  label: "Meta", name: "meta", widget: "object", fields: [
-                    { label: "Slug", name: "slug", widget: "string" },
-                    { label: "Titel", name: "title", widget: "string" },
-                    { label: "Subheading", name: "subheading", widget: "string", required: false },
-                    { label: "Subtitle", name: "subtitle", widget: "text" },
-                    { label: "Quell-URL", name: "sourceUrl", widget: "string" },
-                    { label: "Quell-Autor", name: "sourceAuthor", widget: "string" },
-                    { label: "Quell-Typ", name: "sourceType", widget: "select", options: ["tweet","video","article","document","gist","tool","other"] },
-                    { label: "Kategorie", name: "category", widget: "select", options: [{label:"KI-Technologie & Tools",value:"ai-tech"},{label:"KI + Kreativität",value:"ai-creativity"},{label:"KI + Gesellschaft",value:"ai-society"},{label:"KI-Workflows & Productivity",value:"ai-workflows"}] },
-                    { label: "Tags", name: "tags", widget: "list" },
-                    { label: "Dauer (Min)", name: "estimatedMinutes", widget: "number", value_type: "int" },
-                    { label: "Schwierigkeit", name: "difficulty", widget: "select", options: [{label:"Einsteiger",value:"beginner"},{label:"Fortgeschritten",value:"intermediate"},{label:"Experte",value:"advanced"}] },
-                    { label: "Veröffentlicht am", name: "publishedAt", widget: "string" },
-                    { label: "Entwurf", name: "draft", widget: "boolean", default: false, required: false },
-                    { label: "Verwandte Kurse", name: "relatedCourses", widget: "list", required: false },
-                    { label: "Design", name: "design", widget: "object", fields: [
-                      { label: "Theme", name: "theme", widget: "string" },
-                      { label: "Farben (Dark)", name: "colors", widget: "object", fields: [
-                        { label: "Background", name: "background", widget: "string" },
-                        { label: "Surface", name: "surface", widget: "string" },
-                        { label: "Primary", name: "primary", widget: "string" },
-                        { label: "Accent", name: "accent", widget: "string" },
-                        { label: "Text", name: "text", widget: "string" },
-                        { label: "Text Muted", name: "textMuted", widget: "string" }
-                      ]},
-                      { label: "Farben (Light)", name: "lightColors", widget: "object", required: false, fields: [
-                        { label: "Background", name: "background", widget: "string" },
-                        { label: "Surface", name: "surface", widget: "string" },
-                        { label: "Primary", name: "primary", widget: "string" },
-                        { label: "Accent", name: "accent", widget: "string" },
-                        { label: "Text", name: "text", widget: "string" },
-                        { label: "Text Muted", name: "textMuted", widget: "string" }
-                      ]}
-                    ]}
-                  ]
-                },
-                {
-                  label: "Intro", name: "intro", widget: "object", fields: [
-                    { label: "Hook", name: "hook", widget: "text" },
-                    { label: "Quell-Kontext", name: "sourceContext", widget: "text" }
-                  ]
-                },
-                {
-                  label: "Module", name: "modules", widget: "list", fields: [
-                    { label: "ID", name: "id", widget: "string" },
-                    { label: "Titel", name: "title", widget: "string" },
-                    { label: "Dauer (Min)", name: "estimatedMinutes", widget: "number", value_type: "int" },
-                    { label: "Übergang", name: "transitionToNext", widget: "text", required: false },
-                    { label: "Elemente", name: "elements", widget: "list", fields: [
-                      { label: "ID", name: "id", widget: "string" },
-                      { label: "Typ", name: "type", widget: "select", options: ["content","key-concept","callout","context-box","quiz","flashcard","reflection","easter-egg","image","code-block","step-by-step"] },
-                      { label: "Text", name: "text", widget: "text", required: false },
-                      { label: "Titel", name: "title", widget: "string", required: false },
-                      { label: "Beschreibung", name: "description", widget: "text", required: false },
-                      { label: "Variante", name: "variant", widget: "select", options: ["quote","stat","example","warning","tip","fun-fact"], required: false },
-                      { label: "Frage", name: "question", widget: "string", required: false },
-                      { label: "Erklärung", name: "explanation", widget: "text", required: false },
-                      { label: "Optionen", name: "options", widget: "list", required: false, fields: [
-                        { label: "Text", name: "text", widget: "string" },
-                        { label: "Korrekt", name: "correct", widget: "boolean", default: false },
-                        { label: "Feedback", name: "feedback", widget: "text" }
-                      ]},
-                      { label: "Front", name: "front", widget: "text", required: false },
-                      { label: "Back", name: "back", widget: "text", required: false },
-                      { label: "Prompt", name: "prompt", widget: "text", required: false },
-                      { label: "Platzhalter", name: "placeholder", widget: "string", required: false },
-                      { label: "Trigger", name: "trigger", widget: "select", options: ["click","hover","scroll","konami","idle"], required: false },
-                      { label: "Content", name: "content", widget: "text", required: false },
-                      { label: "Bild", name: "src", widget: "image", required: false },
-                      { label: "Alt-Text", name: "alt", widget: "string", required: false },
-                      { label: "Code", name: "code", widget: "text", required: false },
-                      { label: "Sprache", name: "language", widget: "string", required: false },
-                      { label: "Dateiname", name: "filename", widget: "string", required: false },
-                      { label: "Begriff", name: "term", widget: "string", required: false },
-                      { label: "Schritte", name: "steps", widget: "list", required: false, fields: [
-                        { label: "Label", name: "label", widget: "string" },
-                        { label: "Inhalt", name: "content", widget: "text" }
-                      ]}
-                    ]}
-                  ]
-                },
-                {
-                  label: "Outro", name: "outro", widget: "object", fields: [
-                    { label: "Synthese", name: "synthesis", widget: "list" },
-                    { label: "Nächster Schritt", name: "nextStep", widget: "text" },
-                    { label: "Takeaway", name: "takeaway", widget: "list", required: false, fields: [
-                      { label: "Emoji", name: "emoji", widget: "string" },
-                      { label: "Text", name: "text", widget: "string" }
-                    ]},
-                    { label: "Quell-URL", name: "sourceUrl", widget: "string" },
-                    { label: "Newsletter-CTA", name: "newsletterCTA", widget: "text" }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      });
+      window.initCMS = function() {
+        var CMS = window.CMS;
+        CMS.init({
+          config: {
+            backend: {
+              name: "github",
+              repo: "Jiujazu/glowing-earrings",
+              branch: "main"
+            },
+            media_folder: "public/courses",
+            public_folder: "/courses",
+            collections: [
+              {
+                name: "courses",
+                label: "Kurse",
+                folder: "content/courses",
+                extension: "json",
+                format: "json",
+                create: false,
+                fields: [
+                  {
+                    label: "Meta",
+                    name: "meta",
+                    widget: "object",
+                    fields: [
+                      { label: "Slug", name: "slug", widget: "string" },
+                      { label: "Titel", name: "title", widget: "string" },
+                      { label: "Subheading", name: "subheading", widget: "string", required: false },
+                      { label: "Subtitle", name: "subtitle", widget: "text" },
+                      { label: "Quell-URL", name: "sourceUrl", widget: "string" },
+                      { label: "Quell-Autor", name: "sourceAuthor", widget: "string" },
+                      { label: "Quell-Typ", name: "sourceType", widget: "string" },
+                      { label: "Kategorie", name: "category", widget: "string" },
+                      { label: "Tags", name: "tags", widget: "list" },
+                      { label: "Dauer (Min)", name: "estimatedMinutes", widget: "number", value_type: "int" },
+                      { label: "Schwierigkeit", name: "difficulty", widget: "string" },
+                      { label: "Veröffentlicht am", name: "publishedAt", widget: "string" },
+                      { label: "Verwandte Kurse", name: "relatedCourses", widget: "list", required: false },
+                      {
+                        label: "Design",
+                        name: "design",
+                        widget: "object",
+                        fields: [
+                          { label: "Theme", name: "theme", widget: "string" },
+                          {
+                            label: "Farben (Dark)",
+                            name: "colors",
+                            widget: "object",
+                            fields: [
+                              { label: "Background", name: "background", widget: "color" },
+                              { label: "Surface", name: "surface", widget: "color" },
+                              { label: "Primary", name: "primary", widget: "color" },
+                              { label: "Accent", name: "accent", widget: "color" },
+                              { label: "Text", name: "textColor", widget: "color" },
+                              { label: "Text Muted", name: "textMuted", widget: "color" }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    label: "Intro",
+                    name: "intro",
+                    widget: "object",
+                    fields: [
+                      { label: "Hook", name: "hook", widget: "text" },
+                      { label: "Quell-Kontext", name: "sourceContext", widget: "text" }
+                    ]
+                  },
+                  {
+                    label: "Module (JSON)",
+                    name: "modules",
+                    widget: "code",
+                    default_language: "json",
+                    output_code_only: true
+                  },
+                  {
+                    label: "Outro",
+                    name: "outro",
+                    widget: "object",
+                    fields: [
+                      { label: "Synthese", name: "synthesis", widget: "list" },
+                      { label: "Nächster Schritt", name: "nextStep", widget: "text" },
+                      { label: "Quell-URL", name: "sourceUrl", widget: "string" },
+                      { label: "Newsletter-CTA", name: "newsletterCTA", widget: "text" }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        });
+      };
+
+      // Wait for CMS to be ready
+      if (document.readyState === "complete") {
+        window.initCMS();
+      } else {
+        window.addEventListener("load", window.initCMS);
+      }
     </script>
   </body>
 </html>

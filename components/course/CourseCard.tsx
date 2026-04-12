@@ -2,8 +2,9 @@ import Link from "next/link";
 import type { CourseMeta } from "@/lib/types";
 import { formatDuration, getDifficultyLabel, getSourceTypeLabel } from "@/lib/course-utils";
 import Badge from "@/components/ui/Badge";
+import CourseCardProgress from "./CourseCardProgress";
 
-export default function CourseCard({ meta }: { meta: CourseMeta }) {
+export default function CourseCard({ meta, totalModules }: { meta: CourseMeta; totalModules?: number }) {
   return (
     <Link
       href={`/courses/${meta.slug}`}
@@ -30,6 +31,12 @@ export default function CourseCard({ meta }: { meta: CourseMeta }) {
         <p className="text-sm text-[var(--text-secondary)] mb-5 leading-relaxed">
           {meta.subtitle}
         </p>
+
+        {totalModules && (
+          <div className="mb-3">
+            <CourseCardProgress slug={meta.slug} totalModules={totalModules} />
+          </div>
+        )}
 
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3 text-xs text-[var(--text-muted)]">

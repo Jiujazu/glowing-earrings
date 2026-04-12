@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getAllCourses } from "@/lib/course-utils";
-import CourseCard from "@/components/course/CourseCard";
+import CourseFilters from "@/components/course/CourseFilters";
 import Container from "@/components/ui/Container";
 
 export const metadata: Metadata = {
@@ -23,11 +23,7 @@ export default function CoursesPage() {
         </p>
 
         {courses.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {courses.map((course) => (
-              <CourseCard key={course.meta.slug} meta={course.meta} />
-            ))}
-          </div>
+          <CourseFilters courses={courses} />
         ) : (
           <div className="text-center py-16">
             <p className="text-4xl mb-4">📚</p>

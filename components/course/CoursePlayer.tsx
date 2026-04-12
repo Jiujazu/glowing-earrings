@@ -7,6 +7,7 @@ import CourseProgress from "./CourseProgress";
 import CourseNav from "./CourseNav";
 import CourseParallax from "./CourseParallax";
 import CourseErrorBoundary from "./CourseErrorBoundary";
+import CourseProgressTracker from "./CourseProgressTracker";
 
 interface CoursePlayerProps {
   course: Course;
@@ -15,6 +16,7 @@ interface CoursePlayerProps {
 export default function CoursePlayer({ course }: CoursePlayerProps) {
   return (
     <CourseThemeProvider design={course.meta.design}>
+      <CourseProgressTracker slug={course.meta.slug}>
       <CourseProgress />
       <CourseParallax />
 
@@ -41,6 +43,7 @@ export default function CoursePlayer({ course }: CoursePlayerProps) {
           </div>
         </CourseErrorBoundary>
       </article>
+      </CourseProgressTracker>
     </CourseThemeProvider>
   );
 }

@@ -19,6 +19,7 @@
 - **Kein overview im Intro** — die CourseNav übernimmt das.
 - **Fließtext ist die Basis, Boxen sind die Ausnahme.** Inhalte gehören primär in normalen Lauftext mit Markdown-Formatierung (Bold, Listen, Headings). Callouts, Key-Concepts und Context-Boxen nur für: echte Zitate, Warnungen, überraschende Fakten. Wenn ein Modul hauptsächlich aus farbigen Boxen besteht, stimmt die Balance nicht.
 - **Fließtext braucht Struktur.** Große Content-Blöcke mit `###`-Zwischenüberschriften gliedern. Lieber zwei kürzere Content-Elemente mit je einem Heading als einen riesigen Textblock. Absätze großzügig setzen.
+- **Textwüsten sind verboten.** Kein Content-Element darf mehr als ~4-5 Sätze ohne visuellen Bruch haben. Visuelle Brüche sind: Absätze (`\n\n`), Zwischenüberschriften (`###`), Listen, oder das Aufteilen in separate Content-Elemente. Wenn ein Textblock auf Mobile mehr als 1.5 Bildschirme füllt, muss er geteilt werden.
 
 ### Titel & Metadaten
 - **Drei-Ebenen-Titel:** `title` (kurz, griffig), `subheading` (erklärender Untertitel), `subtitle` (Infotext/Beschreibung). Alle drei Ebenen werden auf der CourseCard und im Kurs-Intro angezeigt.

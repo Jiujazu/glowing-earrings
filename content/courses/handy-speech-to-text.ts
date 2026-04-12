@@ -48,7 +48,6 @@ export const handySpeechToText: Course = {
     {
       id: "what-and-why",
       title: "Was Handy kann",
-      icon: "🎙️",
       estimatedMinutes: 2,
       elements: [
         {
@@ -102,7 +101,6 @@ export const handySpeechToText: Course = {
     {
       id: "setup",
       title: "Installation & Setup",
-      icon: "⚙️",
       estimatedMinutes: 3,
       elements: [
         {
@@ -141,7 +139,6 @@ export const handySpeechToText: Course = {
     {
       id: "workflows",
       title: "Praxis-Workflows",
-      icon: "🚀",
       estimatedMinutes: 3,
       elements: [
         {
@@ -202,7 +199,6 @@ export const handySpeechToText: Course = {
     {
       id: "pro-tips",
       title: "Profi-Tipps",
-      icon: "💡",
       estimatedMinutes: 2,
       elements: [
         {

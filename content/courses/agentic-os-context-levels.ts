@@ -48,7 +48,6 @@ export const agenticOsContextLevels: Course = {
     {
       id: "context-foundation",
       title: "Warum Kontext alles entscheidet",
-      icon: "🧱",
       estimatedMinutes: 3,
       elements: [
         {
@@ -128,7 +127,6 @@ export const agenticOsContextLevels: Course = {
     {
       id: "skills-gamechanger",
       title: "Skills statt Copy-Paste",
-      icon: "⚡",
       estimatedMinutes: 4,
       elements: [
         {
@@ -217,13 +215,22 @@ export const agenticOsContextLevels: Course = {
     {
       id: "file-access",
       title: "File Access & CLAUDE.md",
-      icon: "📂",
       estimatedMinutes: 3,
       elements: [
         {
           id: "m3-content-1",
           type: "content",
-          text: "Viele Aufgaben, bei denen KI helfen kann, folgen keinem festen Prozess: Ideation, Planung, Strategie, Entscheidungsfindung. Dafür brauchst du keine Skills — aber du willst trotzdem, dass die KI Kontext über dich und dein Business hat.\n\nHier wird **File Access** zum Gamechanger. Mit jedem neuen Chat kannst du Claude Zugriff auf einen Ordner auf deinem Computer geben. Und anders als bei Chat-Projekten kann Claude nicht nur lesen, sondern auch **schreiben** — neue Dateien speichern, bestehende aktualisieren, Assets direkt ablegen. Der Kontext in deinem Ordner wächst dadurch natürlich mit jeder Nutzung.\n\nEin Beispiel: Du gibst Claude Zugriff auf einen Ordner mit deiner Content-Strategie, alten Transkripten und einer Hookbank. Wenn du jetzt ein neues Video planst, zieht Claude automatisch Kontext zu deiner Marke und Zielgruppe — und pusht sogar zurück, wenn du etwas planst, das nicht zu deiner Zielgruppe passt.",
+          text: "Viele Aufgaben, bei denen KI helfen kann, folgen keinem festen Prozess: Ideation, Planung, Strategie, Entscheidungsfindung. Dafür brauchst du keine Skills — aber du willst trotzdem, dass die KI Kontext über dich und dein Business hat.",
+        },
+        {
+          id: "m3-content-1b",
+          type: "content",
+          text: "### Was File Access ändert\n\nMit jedem neuen Chat kannst du Claude Zugriff auf einen Ordner auf deinem Computer geben. Und anders als bei Chat-Projekten kann Claude nicht nur lesen, sondern auch **schreiben** — neue Dateien speichern, bestehende aktualisieren, Assets direkt ablegen.\n\nDer Kontext in deinem Ordner wächst dadurch natürlich mit jeder Nutzung.",
+        },
+        {
+          id: "m3-content-1c",
+          type: "content",
+          text: "### Ein Beispiel\n\nDu gibst Claude Zugriff auf einen Ordner mit deiner Content-Strategie, alten Transkripten und einer Hookbank. Wenn du jetzt ein neues Video planst, zieht Claude automatisch Kontext zu deiner Marke und Zielgruppe — und pusht sogar zurück, wenn du etwas planst, das nicht zu deiner Zielgruppe passt.",
         },
         {
           id: "m3-context-box",
@@ -287,7 +294,6 @@ export const agenticOsContextLevels: Course = {
     {
       id: "projects-realtime",
       title: "Projekte & Echtzeit-Kontext",
-      icon: "🗂️",
       estimatedMinutes: 3,
       elements: [
         {
@@ -338,7 +344,6 @@ export const agenticOsContextLevels: Course = {
     {
       id: "second-brain",
       title: "Das Second Brain",
-      icon: "🧠",
       estimatedMinutes: 4,
       elements: [
         {
@@ -414,7 +419,6 @@ export const agenticOsContextLevels: Course = {
     {
       id: "business-os",
       title: "Business OS für Teams",
-      icon: "🏢",
       estimatedMinutes: 3,
       elements: [
         {

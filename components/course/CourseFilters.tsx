@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import type { Course, CourseCategory } from "@/lib/types";
 import { getDifficultyLabel, categoryLabels } from "@/lib/course-utils";
 import CourseCard from "./CourseCard";
@@ -12,7 +13,14 @@ interface CourseFiltersProps {
 const difficulties = ["beginner", "intermediate", "advanced"] as const;
 
 export default function CourseFilters({ courses }: CourseFiltersProps) {
+  const searchParams = useSearchParams();
   const [activeTag, setActiveTag] = useState<string | null>(null);
+
+  // Read tag from URL on mount (e.g. /courses?tag=Claude)
+  useEffect(() => {
+    const tagFromUrl = searchParams.get("tag");
+    if (tagFromUrl) setActiveTag(tagFromUrl);
+  }, [searchParams]);
   const [activeDifficulty, setActiveDifficulty] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<CourseCategory | null>(null);
 

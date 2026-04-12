@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getAllCourses } from "@/lib/course-utils";
 import CourseFilters from "@/components/course/CourseFilters";
@@ -23,7 +24,9 @@ export default function CoursesPage() {
         </p>
 
         {courses.length > 0 ? (
-          <CourseFilters courses={courses} />
+          <Suspense>
+            <CourseFilters courses={courses} />
+          </Suspense>
         ) : (
           <div className="text-center py-16">
             <p className="text-4xl mb-4">📚</p>

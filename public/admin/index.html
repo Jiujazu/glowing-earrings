@@ -5,96 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>Admin | Glowing Earrings</title>
-    <script>window.CMS_MANUAL_INIT = true;</script>
+    <link rel="stylesheet" href="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.css" />
   </head>
   <body>
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-    <script>
-      window.initCMS = function() {
-        var CMS = window.CMS;
-        CMS.init({
-          config: {
-            load_config_file: false,
-            backend: {
-              name: "github",
-              repo: "Jiujazu/glowing-earrings",
-              branch: "main",
-              base_url: "https://glowing-earrings.vercel.app",
-              auth_endpoint: "api/auth"
-            },
-            media_folder: "public/courses",
-            public_folder: "/courses",
-            collections: [
-              {
-                name: "courses",
-                label: "Kurse",
-                folder: "content/courses",
-                extension: "json",
-                format: "json",
-                create: false,
-                fields: [
-                  {
-                    label: "Meta",
-                    name: "meta",
-                    widget: "object",
-                    fields: [
-                      { label: "Slug", name: "slug", widget: "string" },
-                      { label: "Titel", name: "title", widget: "string" },
-                      { label: "Subheading", name: "subheading", widget: "string", required: false },
-                      { label: "Subtitle", name: "subtitle", widget: "text" },
-                      { label: "Quell-URL", name: "sourceUrl", widget: "string" },
-                      { label: "Quell-Autor", name: "sourceAuthor", widget: "string" },
-                      { label: "Quell-Typ", name: "sourceType", widget: "string" },
-                      { label: "Kategorie", name: "category", widget: "string" },
-                      { label: "Tags", name: "tags", widget: "list" },
-                      { label: "Dauer (Min)", name: "estimatedMinutes", widget: "number", value_type: "int" },
-                      { label: "Schwierigkeit", name: "difficulty", widget: "string" },
-                      { label: "Veröffentlicht am", name: "publishedAt", widget: "string" },
-                      { label: "Entwurf", name: "draft", widget: "boolean", required: false },
-                      { label: "Verwandte Kurse", name: "relatedCourses", widget: "list", required: false },
-                      { label: "Design (JSON)", name: "design", widget: "code", default_language: "json", output_code_only: true }
-                    ]
-                  },
-                  {
-                    label: "Intro",
-                    name: "intro",
-                    widget: "object",
-                    fields: [
-                      { label: "Hook", name: "hook", widget: "text" },
-                      { label: "Quell-Kontext", name: "sourceContext", widget: "text" }
-                    ]
-                  },
-                  {
-                    label: "Module (JSON)",
-                    name: "modules",
-                    widget: "code",
-                    default_language: "json",
-                    output_code_only: true
-                  },
-                  {
-                    label: "Outro",
-                    name: "outro",
-                    widget: "object",
-                    fields: [
-                      { label: "Synthese", name: "synthesis", widget: "list" },
-                      { label: "Nächster Schritt", name: "nextStep", widget: "text" },
-                      { label: "Takeaway (JSON)", name: "takeaway", widget: "code", default_language: "json", output_code_only: true, required: false },
-                      { label: "Quell-URL", name: "sourceUrl", widget: "string" },
-                      { label: "Newsletter-CTA", name: "newsletterCTA", widget: "text" }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        });
-      };
-
-      if (document.readyState === "complete") {
-        window.initCMS();
-      } else {
-        window.addEventListener("load", window.initCMS);
-      }
-    </script>
+    <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
   </body>
 </html>

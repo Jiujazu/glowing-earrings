@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import type { FlashcardElement } from "@/lib/types";
 
 export default function FlashcardDeck({
@@ -74,9 +76,9 @@ export default function FlashcardDeck({
               <p className="text-xs text-[var(--course-text-muted)] mb-3 uppercase tracking-wider">
                 Frage
               </p>
-              <p className="text-lg font-medium text-[var(--course-text)]">
-                {card.front}
-              </p>
+              <div className="text-base sm:text-lg font-medium text-[var(--course-text)]">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{card.front}</ReactMarkdown>
+              </div>
               <p className="text-xs text-[var(--course-text-muted)] mt-4">
                 Klick zum Umdrehen
               </p>
@@ -98,9 +100,9 @@ export default function FlashcardDeck({
               <p className="text-xs text-[var(--course-text-muted)] mb-3 uppercase tracking-wider">
                 Antwort
               </p>
-              <p className="text-lg font-medium text-[var(--course-text)]">
-                {card.back}
-              </p>
+              <div className="text-sm sm:text-base text-[var(--course-text)] leading-relaxed text-left prose prose-sm max-w-none [&_p]:mb-1.5 [&_p:last-child]:mb-0 [&_strong]:text-[var(--course-text)]">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{card.back}</ReactMarkdown>
+              </div>
             </div>
           </div>
         </div>

@@ -169,7 +169,7 @@ export default function ModuleRenderer({ module }: { module: Module }) {
         </ScrollReveal>
 
         {/* Elements */}
-        <div className="space-y-8">{renderedElements}</div>
+        <div className="space-y-10 sm:space-y-12">{renderedElements}</div>
 
         {/* Transition to next module */}
         {module.transitionToNext && (

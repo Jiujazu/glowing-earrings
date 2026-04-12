@@ -119,42 +119,7 @@ export const karpathyLlmWiki: Course = {
         {
           id: "arch-intro",
           type: "content",
-          text: "Das LLM Wiki besteht aus drei klar getrennten Schichten. Das Geniale daran: Es ist kein komplexes System mit Datenbanken und APIs — es sind einfach **Markdown-Dateien in einem Ordner**.",
-        },
-        {
-          id: "layer-1",
-          type: "key-concept",
-          title: "Schicht 1: Raw Sources",
-          description:
-            "Deine Originaldokumente — Artikel, Papers, Notizen, Podcast-Transkripte. Sie werden nie verändert. Sie sind die Single Source of Truth. Das LLM liest sie, modifiziert sie aber nie.",
-        },
-        {
-          id: "layer-2",
-          type: "key-concept",
-          title: "Schicht 2: Das Wiki",
-          description:
-            "Von der KI generierte Markdown-Dateien: Zusammenfassungen, Entity-Seiten, Konzept-Seiten, Vergleiche, Synthesen. Die KI besitzt und pflegt diese Schicht komplett — erstellt, aktualisiert und verknüpft alle Inhalte.",
-        },
-        {
-          id: "layer-3",
-          type: "key-concept",
-          title: "Schicht 3: Das Schema",
-          description:
-            "Ein Konfigurationsdokument (z.B. CLAUDE.md), das dem LLM sagt, wie das Wiki strukturiert ist: Namenskonventionen, Workflows für Ingestion und Queries, wie mit Widersprüchen umgegangen wird. Dieses Dokument entwickelt sich mit der Zeit weiter.",
-        },
-        {
-          id: "arch-callout",
-          type: "callout",
-          variant: "tip",
-          title: "Das Elegante daran",
-          text: "Es sind nur Markdown-Dateien in einem Git-Repo. Kein Vendor Lock-in, kein Server, keine Datenbank. Du kannst die Dateien mit jedem Editor öffnen, durchsuchen und versionieren.",
-        },
-        {
-          id: "page-types",
-          type: "context-box",
-          term: "Seitentypen im Wiki",
-          explanation:
-            "Entity-Seiten (Personen, Organisationen), Konzept-Seiten (abstrakte Ideen mit Querverweisen), Source-Summaries (strukturierte Zusammenfassungen einzelner Quellen), Synthese-Seiten (Erkenntnisse aus mehreren Quellen), Vergleichs-Seiten, Index-Seiten.",
+          text: "Das LLM Wiki besteht aus drei klar getrennten Schichten. Das Geniale: Es ist kein komplexes System mit Datenbanken und APIs — es sind einfach **Markdown-Dateien in einem Ordner**, die du mit Git versionieren und mit jedem Editor öffnen kannst.\n\n**Schicht 1: Raw Sources.** Deine Originaldokumente — Artikel, Papers, Notizen, Podcast-Transkripte. Sie werden nie verändert, sie sind die Single Source of Truth. Das LLM liest sie, modifiziert sie aber nie.\n\n**Schicht 2: Das Wiki.** Von der KI generierte Markdown-Dateien: Zusammenfassungen, Entity-Seiten (Personen, Organisationen), Konzept-Seiten (abstrakte Ideen mit Querverweisen), Synthesen aus mehreren Quellen, Vergleichsseiten. Die KI besitzt und pflegt diese Schicht komplett — erstellt, aktualisiert und verknüpft alles selbstständig.\n\n**Schicht 3: Das Schema.** Ein Konfigurationsdokument (z.B. `CLAUDE.md`), das dem LLM sagt, wie das Wiki strukturiert ist: Namenskonventionen, Workflows für Ingestion und Queries, Umgang mit Widersprüchen. Dieses Dokument entwickelt sich mit der Zeit weiter — eine Ko-Evolution zwischen dir und der KI.",
         },
         {
           id: "quiz-architecture",
@@ -171,7 +136,7 @@ export const karpathyLlmWiki: Course = {
               text: "Schicht 2 — das Wiki mit Markdown-Seiten",
               correct: true,
               feedback:
-                "Genau. Das Wiki ist die einzige Schicht, die das LLM eigenständig besitzt. Im Gegensatz zu deinen Originaldokumenten (immutable) und dem Schema (Ko-Evolution) erstellt, aktualisiert und verknüpft das LLM hier alles selbstständig.",
+                "Genau. Das Wiki ist die einzige Schicht, die das LLM eigenständig besitzt — es erstellt, aktualisiert und verknüpft hier alles selbstständig.",
             },
             {
               text: "Schicht 3 — das Schema-Dokument",
@@ -181,7 +146,7 @@ export const karpathyLlmWiki: Course = {
             },
           ],
           explanation:
-            "Schicht 2 ist die Kernidee: Ein Satz Markdown-Dateien, die das LLM selbstständig erstellt und pflegt. Jede neue Quelle stärkt die gesamte Struktur, weil das LLM Querverweise aktualisiert und neue Verbindungen knüpft.",
+            "Schicht 2 ist die Kernidee: Markdown-Dateien, die das LLM selbstständig pflegt. Jede neue Quelle stärkt die gesamte Struktur, weil das LLM Querverweise aktualisiert und neue Verbindungen knüpft.",
         },
       ],
       transitionToNext:
@@ -196,49 +161,12 @@ export const karpathyLlmWiki: Course = {
         {
           id: "ops-intro",
           type: "content",
-          text: "Das LLM Wiki kennt drei fundamentale Operationen. Jede hat einen klar definierten Workflow.",
+          text: "Das LLM Wiki kennt drei fundamentale Operationen, jede mit einem klar definierten Workflow.\n\n### Ingest — Neue Quellen aufnehmen\n\nDas LLM liest ein neues Dokument, bespricht die Kernpunkte mit dir, schreibt eine Zusammenfassung, aktualisiert den Index und modifiziert relevante Entity- und Konzeptseiten — typischerweise 10-15 Seiten pro Quelle. Dann loggt es die Operation.\n\nEin Beispiel: Du fütterst dem LLM einen Artikel über \"AI Agents in 2026\". Es erstellt eine Summary-Seite, aktualisiert die bestehenden Seiten zu \"AI Agents\", \"Autonomie\" und \"Tool Use\", ergänzt Querverweise und trägt alles im Log ein — in einer einzigen Operation.",
         },
         {
-          id: "ingest",
-          type: "key-concept",
-          title: "Ingest — Neue Quellen aufnehmen",
-          description:
-            "Das LLM liest ein neues Dokument, bespricht die Kernpunkte mit dir, schreibt eine Zusammenfassung, aktualisiert den Index, modifiziert relevante Entity- und Konzeptseiten (typischerweise 10-15 Seiten pro Quelle) und loggt die Operation.",
-        },
-        {
-          id: "ingest-detail",
-          type: "callout",
-          variant: "example",
-          title: "Beispiel: Einen Artikel ingestieren",
-          text: 'Du fütterst dem LLM einen Artikel über "AI Agents in 2026". Es erstellt eine Summary-Seite, aktualisiert die Seiten zu "AI Agents", "Autonomie", "Tool Use", ergänzt Querverweise auf verwandte Konzepte und trägt alles im Log ein — in einer einzigen Operation.',
-        },
-        {
-          id: "query",
-          type: "key-concept",
-          title: "Query — Fragen stellen",
-          description:
-            'Das LLM durchsucht relevante Wiki-Seiten, liest sie, synthetisiert eine Antwort mit Zitaten. Der Clou: Wertvolle Antworten können als neue Wiki-Seiten gespeichert werden — so wird jede Recherche zu permanentem Wissen statt zu verschwindendem Chat-Verlauf.',
-        },
-        {
-          id: "query-callout",
-          type: "callout",
-          variant: "tip",
-          title: "Output, der zählt",
-          text: 'Karpathy nennt das "Output Compounding": Statt dass deine Recherche im Chat-Verlauf verschwindet, wird das Ergebnis Teil des Wikis. Jede gute Frage macht das Wiki besser.',
-        },
-        {
-          id: "lint",
-          type: "key-concept",
-          title: "Lint — Qualität sichern",
-          description:
-            "Regelmäßige Gesundheitschecks: Widersprüche zwischen Seiten aufdecken, veraltete Aussagen finden, verwaiste Seiten identifizieren, fehlende Querverweise ergänzen, Datenlücken erkennen.",
-        },
-        {
-          id: "lint-detail",
-          type: "context-box",
-          term: "Was Lint konkret prüft",
-          explanation:
-            "Widersprüche zwischen Seiten, veraltete Behauptungen (durch neuere Quellen überholt), verwaiste Seiten ohne eingehende Links, erwähnte Konzepte ohne eigene Seite, fehlende Querverweise, Datenlücken die durch Web-Suchen gefüllt werden könnten.",
+          id: "ops-query",
+          type: "content",
+          text: "### Query — Fragen stellen\n\nDas LLM durchsucht relevante Wiki-Seiten, liest sie und synthetisiert eine Antwort mit Zitaten. Der Clou: Wertvolle Antworten können als neue Wiki-Seiten gespeichert werden. Karpathy nennt das **Output Compounding** — statt dass deine Recherche im Chat-Verlauf verschwindet, wird das Ergebnis Teil des Wikis. Jede gute Frage macht das Wiki besser.\n\n### Lint — Qualität sichern\n\nRegelmäßige Gesundheitschecks für das Wiki: Widersprüche zwischen Seiten aufdecken, veraltete Aussagen finden, verwaiste Seiten ohne eingehende Links identifizieren, fehlende Querverweise ergänzen. Lint ist das Immunsystem des Wikis — ohne regelmäßige Checks veraltet das Wissen leise.",
         },
         {
           id: "flashcard-ops-1",
@@ -271,21 +199,7 @@ export const karpathyLlmWiki: Course = {
         {
           id: "nav-intro",
           type: "content",
-          text: "Zwei Dateien halten das gesamte Wiki navigierbar: `index.md` und `log.md`. Klingt simpel — ist es auch. Und genau deshalb funktioniert es.",
-        },
-        {
-          id: "index-md",
-          type: "key-concept",
-          title: "index.md — Das Inhaltsverzeichnis",
-          description:
-            "Ein nach Kategorien geordneter Katalog aller Wiki-Seiten mit direkten Links, Einzeiler-Zusammenfassungen und optionalen Metadaten. Wird bei jeder Ingestion aktualisiert. Das LLM liest diese Datei zuerst, wenn es eine Frage beantwortet.",
-        },
-        {
-          id: "log-md",
-          type: "key-concept",
-          title: "log.md — Das Logbuch",
-          description:
-            'Chronologische Aufzeichnung aller Operationen: Ingestionen, Queries, Lint-Durchläufe. Jeder Eintrag folgt einem einheitlichen Präfix (z.B. `## [2026-04-02] ingest | Artikeltitel`), was Filterung mit Standard-Tools ermöglicht.',
+          text: "Zwei Dateien halten das gesamte Wiki navigierbar: `index.md` und `log.md`.\n\nDie **index.md** ist ein nach Kategorien geordneter Katalog aller Wiki-Seiten — mit direkten Links, Einzeiler-Zusammenfassungen und optionalen Metadaten. Sie wird bei jeder Ingestion aktualisiert. Das LLM liest diese Datei zuerst, wenn es eine Frage beantwortet.\n\nDie **log.md** ist die chronologische Aufzeichnung aller Operationen: Ingestionen, Queries, Lint-Durchläufe. Jeder Eintrag folgt einem einheitlichen Format (`## [2026-04-02] ingest | Artikeltitel`), was Filterung mit Standard-Tools ermöglicht.",
         },
         {
           id: "workflow-callout",
@@ -295,11 +209,9 @@ export const karpathyLlmWiki: Course = {
           text: '"In practice, I have the LLM agent open on one side and Obsidian open on the other. The LLM makes edits based on our conversation, and I browse the results in real time — following links, checking the graph view, reading the updated pages. Obsidian is the IDE; the LLM is the programmer; the wiki is the codebase."',
         },
         {
-          id: "scale-note",
-          type: "context-box",
-          term: "Skalierung",
-          explanation:
-            "Für ~100 Quellen und Hunderte Seiten reicht der einfache Index. Darüber hinaus empfiehlt Karpathy Suchinfrastruktur wie qmd — eine lokale Suchmaschine mit Hybrid BM25/Vektor-Suche und LLM Re-Ranking.",
+          id: "nav-scaling",
+          type: "content",
+          text: "Für etwa 100 Quellen und Hunderte Seiten reicht der einfache Index. Darüber hinaus empfiehlt Karpathy Suchinfrastruktur wie **qmd** — eine lokale Suchmaschine mit Hybrid BM25/Vektor-Suche und LLM Re-Ranking.",
         },
         {
           id: "reflection-workflow",

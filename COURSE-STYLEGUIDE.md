@@ -12,6 +12,7 @@
 
 ### Absätze & Textlänge
 - **Max 2-3 Sätze pro Absatz.** Auf Mobile ist ein 5-Satz-Absatz eine Textwüste. Lieber ein Absatz zu viel als einer zu wenig.
+- **Echte Absätze mit sichtbarem Abstand.** Absätze müssen auf Mobile klar voneinander getrennt sein — nicht nur ein minimaler Zeilenumbruch, sondern eine deutlich sichtbare Leerzeile. Das wird über die ContentBlock-Komponente gesteuert (`prose-p:mb-6`).
 - **Kein Content-Element ohne visuellen Bruch nach 3 Sätzen.** Wenn ein Textblock auf Mobile mehr als 1.5 Bildschirme füllt, muss er geteilt werden.
 - **Lieber zwei kürzere Content-Elemente als ein Riesenblock.** Jedes Content-Element sollte ein klares Thema haben.
 

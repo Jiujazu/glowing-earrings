@@ -8,6 +8,8 @@
 
 > Die wichtigste Regel. Alle Inhalte werden primär auf Smartphones gelesen. Jeder Kurs muss perfekt auf einem 6-Zoll-Display funktionieren.
 
+**Grundprinzip: Der Inhalt gibt das Styling vor — nicht umgekehrt.** Formatierung ist kein nachträgliches Drüberstülpen. Wenn ein Gedanke zu einem 5-Satz-Absatz wird, muss der Gedanke anders formuliert werden — kürzer, in Teilschritte zerlegt, als Liste. Der Text muss von Anfang an so geschrieben sein, dass er auf Mobile leicht zu erfassen ist.
+
 ### Absätze & Textlänge
 - **Max 2-3 Sätze pro Absatz.** Auf Mobile ist ein 5-Satz-Absatz eine Textwüste. Lieber ein Absatz zu viel als einer zu wenig.
 - **Kein Content-Element ohne visuellen Bruch nach 3 Sätzen.** Wenn ein Textblock auf Mobile mehr als 1.5 Bildschirme füllt, muss er geteilt werden.

@@ -18,6 +18,12 @@
 - **Nie mehr als 2 Content-Blöcke hintereinander** ohne interaktives Element.
 - **Kein overview im Intro** — die CourseNav übernimmt das.
 - **Fließtext ist die Basis, Boxen sind die Ausnahme.** Inhalte gehören primär in normalen Lauftext mit Markdown-Formatierung (Bold, Listen, Headings). Callouts, Key-Concepts und Context-Boxen nur für: echte Zitate, Warnungen, überraschende Fakten. Wenn ein Modul hauptsächlich aus farbigen Boxen besteht, stimmt die Balance nicht.
+- **Fließtext braucht Struktur.** Große Content-Blöcke mit `###`-Zwischenüberschriften gliedern. Lieber zwei kürzere Content-Elemente mit je einem Heading als einen riesigen Textblock. Absätze großzügig setzen.
+
+### Titel & Metadaten
+- **Drei-Ebenen-Titel:** `title` (kurz, griffig), `subheading` (erklärender Untertitel), `subtitle` (Infotext/Beschreibung). Alle drei Ebenen werden auf der CourseCard und im Kurs-Intro angezeigt.
+- **Titel muss allein verständlich sein** — ohne Subheading. "Die Karpathy Methode" funktioniert, "Persönliche Knowledge Base mit KI" erklärt.
+- **Bei Tool-Kursen klarmachen, was das Tool ist** — "Handy App" allein wäre unklar, das Subheading erklärt.
 
 ### Element-Einsatz
 - **`code-block` für Dateistrukturen und Configs** (CLAUDE.md, skill.md) — besser als Fließtext.

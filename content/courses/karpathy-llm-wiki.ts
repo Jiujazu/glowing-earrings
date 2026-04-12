@@ -49,7 +49,6 @@ export const karpathyLlmWiki: Course = {
     {
       id: "problem",
       title: "Das Problem mit deinem Wissen",
-      icon: "🧠",
       estimatedMinutes: 3,
       elements: [
         {
@@ -63,7 +62,6 @@ export const karpathyLlmWiki: Course = {
           title: "Das RAG-Problem",
           description:
             "Die meisten KI-Tools (NotebookLM, ChatGPT mit Datei-Upload) nutzen RAG: Sie suchen bei jeder Frage relevante Textschnipsel und generieren eine Antwort. Aber das bedeutet, dass die KI jedes Mal von vorne anfängt — es gibt keine Akkumulation, keine Querverweise, keine Synthese über Dokumente hinweg.",
-          icon: "🔄",
         },
         {
           id: "rag-quote",
@@ -114,7 +112,6 @@ export const karpathyLlmWiki: Course = {
     {
       id: "architecture",
       title: "Die 3-Schichten-Architektur",
-      icon: "🏗️",
       estimatedMinutes: 4,
       elements: [
         {
@@ -128,7 +125,6 @@ export const karpathyLlmWiki: Course = {
           title: "Schicht 1: Raw Sources",
           description:
             "Deine Originaldokumente — Artikel, Papers, Notizen, Podcast-Transkripte. Sie werden nie verändert. Sie sind die Single Source of Truth. Das LLM liest sie, modifiziert sie aber nie.",
-          icon: "📄",
         },
         {
           id: "layer-2",
@@ -136,7 +132,6 @@ export const karpathyLlmWiki: Course = {
           title: "Schicht 2: Das Wiki",
           description:
             "Von der KI generierte Markdown-Dateien: Zusammenfassungen, Entity-Seiten, Konzept-Seiten, Vergleiche, Synthesen. Die KI besitzt und pflegt diese Schicht komplett — erstellt, aktualisiert und verknüpft alle Inhalte.",
-          icon: "🗂️",
         },
         {
           id: "layer-3",
@@ -144,7 +139,6 @@ export const karpathyLlmWiki: Course = {
           title: "Schicht 3: Das Schema",
           description:
             "Ein Konfigurationsdokument (z.B. CLAUDE.md), das dem LLM sagt, wie das Wiki strukturiert ist: Namenskonventionen, Workflows für Ingestion und Queries, wie mit Widersprüchen umgegangen wird. Dieses Dokument entwickelt sich mit der Zeit weiter.",
-          icon: "📐",
         },
         {
           id: "arch-callout",
@@ -195,7 +189,6 @@ export const karpathyLlmWiki: Course = {
     {
       id: "operations",
       title: "Die drei Kern-Operationen",
-      icon: "⚙️",
       estimatedMinutes: 5,
       elements: [
         {
@@ -209,7 +202,6 @@ export const karpathyLlmWiki: Course = {
           title: "Ingest — Neue Quellen aufnehmen",
           description:
             "Das LLM liest ein neues Dokument, bespricht die Kernpunkte mit dir, schreibt eine Zusammenfassung, aktualisiert den Index, modifiziert relevante Entity- und Konzeptseiten (typischerweise 10-15 Seiten pro Quelle) und loggt die Operation.",
-          icon: "📥",
         },
         {
           id: "ingest-detail",
@@ -224,7 +216,6 @@ export const karpathyLlmWiki: Course = {
           title: "Query — Fragen stellen",
           description:
             'Das LLM durchsucht relevante Wiki-Seiten, liest sie, synthetisiert eine Antwort mit Zitaten. Der Clou: Wertvolle Antworten können als neue Wiki-Seiten gespeichert werden — so wird jede Recherche zu permanentem Wissen statt zu verschwindendem Chat-Verlauf.',
-          icon: "🔍",
         },
         {
           id: "query-callout",
@@ -239,7 +230,6 @@ export const karpathyLlmWiki: Course = {
           title: "Lint — Qualität sichern",
           description:
             "Regelmäßige Gesundheitschecks: Widersprüche zwischen Seiten aufdecken, veraltete Aussagen finden, verwaiste Seiten identifizieren, fehlende Querverweise ergänzen, Datenlücken erkennen.",
-          icon: "🔧",
         },
         {
           id: "lint-detail",
@@ -274,7 +264,6 @@ export const karpathyLlmWiki: Course = {
     {
       id: "navigation",
       title: "Navigation & Workflow",
-      icon: "🗺️",
       estimatedMinutes: 3,
       elements: [
         {
@@ -288,7 +277,6 @@ export const karpathyLlmWiki: Course = {
           title: "index.md — Das Inhaltsverzeichnis",
           description:
             "Ein nach Kategorien geordneter Katalog aller Wiki-Seiten mit direkten Links, Einzeiler-Zusammenfassungen und optionalen Metadaten. Wird bei jeder Ingestion aktualisiert. Das LLM liest diese Datei zuerst, wenn es eine Frage beantwortet.",
-          icon: "📖",
         },
         {
           id: "log-md",
@@ -296,7 +284,6 @@ export const karpathyLlmWiki: Course = {
           title: "log.md — Das Logbuch",
           description:
             'Chronologische Aufzeichnung aller Operationen: Ingestionen, Queries, Lint-Durchläufe. Jeder Eintrag folgt einem einheitlichen Präfix (z.B. `## [2026-04-02] ingest | Artikeltitel`), was Filterung mit Standard-Tools ermöglicht.',
-          icon: "📋",
         },
         {
           id: "workflow-callout",
@@ -328,7 +315,6 @@ export const karpathyLlmWiki: Course = {
     {
       id: "philosophy",
       title: "Warum KI der perfekte Wiki-Pfleger ist",
-      icon: "💡",
       estimatedMinutes: 3,
       elements: [
         {

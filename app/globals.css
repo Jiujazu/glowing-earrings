@@ -188,7 +188,6 @@ a {
 
 .scroll-reveal {
   opacity: 0;
-  will-change: opacity, transform;
   transition-property: opacity, transform;
   transition-timing-function: var(--ease-premium);
 }

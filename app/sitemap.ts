@@ -3,7 +3,7 @@ import { getAllCourseSlugs } from "@/lib/course-utils";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://glowing-earrings.com";
+    process.env.NEXT_PUBLIC_SITE_URL || "https://glowing-earrings.vercel.app";
 
   const courseSlugs = getAllCourseSlugs();
 

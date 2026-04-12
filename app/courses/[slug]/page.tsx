@@ -57,7 +57,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
             provider: {
               "@type": "Organization",
               name: "Glowing Earrings — The Creative AI Academy",
-              url: process.env.NEXT_PUBLIC_SITE_URL || "https://glowing-earrings.com",
+              url: process.env.NEXT_PUBLIC_SITE_URL || "https://glowing-earrings.vercel.app",
             },
             educationalLevel: course.meta.difficulty,
             timeRequired: `PT${course.meta.estimatedMinutes}M`,

@@ -10,7 +10,7 @@
 - **Du-Ansprache** durchgehend, kein Siezen
 - **Nie mehr als 2-3 Absätze** ohne interaktives Element (Quiz, Flashcard, Reflexion, Callout)
 - **Quiz-Feedback ist lehrreich:** Nicht nur "Richtig/Falsch", sondern Kontext und Erklärung. Jede Antwort — richtig oder falsch — ist ein Lernmoment. Ton: warmherzig, nie herablassend. "Nicht ganz — aber gut zu wissen:" statt "Falsch."
-- **Emojis als visuelle Marker** für Energie und Orientierung, nicht als Dekoration
+- **Emojis nur wo sie Struktur bieten.** Erlaubt: Takeaway-Checklisten (Emoji + Text-Paare), Callout-Icons (werden von der Komponente gesetzt), Easter Eggs. Verboten: Modul-Titel, Key-Concept-Icons, Fließtext-Dekoration. Im Zweifel weglassen.
 - **Humor: subtil & clever.** Schmunzeln, nicht lachen. Clevere Formulierungen, überraschende Perspektiven, Wortspiel-Niveau — keine Witze, keine Gags, keine Memes. Der Ton ist der eines klugen Gesprächspartners, nicht eines Comedians.
 
 ### 1.2 Quelltreue

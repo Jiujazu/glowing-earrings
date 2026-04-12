@@ -1,3 +1,5 @@
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import type { CalloutElement } from "@/lib/types";
 
 const variantConfig: Record<
@@ -34,9 +36,11 @@ export default function Callout({ element }: { element: CalloutElement }) {
               {element.title}
             </p>
           )}
-          <p className="text-base text-[var(--course-text)] leading-relaxed opacity-90">
-            {element.text}
-          </p>
+          <div className="text-base text-[var(--course-text)] leading-relaxed opacity-90 prose prose-sm max-w-none [&_p]:mb-2 [&_p:last-child]:mb-0 [&_a]:text-[var(--course-primary)] [&_strong]:text-[var(--course-text)] [&_ul]:mt-1 [&_li]:mb-0.5">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {element.text}
+            </ReactMarkdown>
+          </div>
         </div>
       </div>
     </div>

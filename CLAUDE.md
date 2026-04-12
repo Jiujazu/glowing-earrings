@@ -14,6 +14,11 @@ Eine kostenlose, interaktive Lernplattform für generative KI. Kuratiert von Jul
 
 ## Kurs-Erstellungs-Workflow
 
+### 0. Pre-Flight (PFLICHT vor jeder Kurs-Erstellung)
+1. **Lies `COURSE-STYLEGUIDE.md`** — komplett, insbesondere Mobile-First (Abschnitt 1) und Qualitäts-Checkliste (Abschnitt 7)
+2. **Lies den letzten fertigen Kurs** als Referenz für Struktur, Tonfall und Element-Einsatz
+3. **Große Kurse in Blöcken schreiben** — erst Meta + Intro + Module 1-2 (Write), dann je 2 Module per Edit anhängen
+
 ### 1. Quelle identifizieren
 Julian liefert einen Link oder Inhalt: Tweet, Artikel, Video, Gist, Paper.
 
@@ -38,6 +43,10 @@ In `/content/courses/index.ts` importieren und zum `courses`-Array hinzufügen.
 
 ### 6. Prüfen
 Auf der Live-URL den Kurs durchspielen, Feedback einarbeiten.
+
+### 7. Post-Flight (PFLICHT nach jeder Kurs-Erstellung)
+1. **`COURSE-STYLEGUIDE.md` Kurs-Historie updaten** — 3-5 Erkenntnisse als neuen Kurs-Eintrag in Abschnitt 10
+2. **Regeln prüfen** — Wenn ein neues Pattern sich bewährt, als permanente Regel in den passenden Abschnitt aufnehmen
 
 ---
 
@@ -248,11 +257,16 @@ lib/
 
 ---
 
-## Referenz-Kurs
+## Referenz-Kurse
 
-`/content/courses/karpathy-llm-wiki.ts` ist der erste und bisher einzige Kurs. Er dient als Template für die Struktur, das Format und den Tonfall aller weiteren Kurse.
+- `/content/courses/karpathy-llm-wiki.ts` — Erster Kurs, technisch (ai-tech), Dark Theme (Lila/Teal)
+- `/content/courses/agentic-os-context-levels.ts` — Zweiter Kurs, Workflow (ai-workflows), Dark Theme (Amber/Blau)
+
+Der jeweils letzte Kurs dient als primäre Referenz für Struktur, Tonfall und Element-Einsatz.
 
 ## Lern-System
 
-- **`LEARNINGS.md`** — Wächst mit jedem Kurs. Lies diese Datei vor jeder Kurs-Erstellung. Sie enthält Erkenntnisse, Patterns und Anti-Patterns aus bisherigen Kursen.
-- **`COURSE-STYLEGUIDE.md`** — Didaktische Prinzipien, Struktur-Standards und Qualitäts-Checkliste. Definiert die Regeln, die LEARNINGS.md mit Praxiserfahrung ergänzt.
+Das Lern-System sorgt dafür, dass jeder neue Kurs besser wird als der vorherige:
+
+1. **`CLAUDE.md`** (diese Datei) — **Router.** Wird automatisch geladen. Definiert den Workflow inkl. Pre-Flight und Post-Flight Pflichten.
+2. **`COURSE-STYLEGUIDE.md`** — **Alle Regeln + Kurs-Historie.** Didaktische Prinzipien, Mobile-First-Regeln, Qualitäts-Checkliste, technische Regeln und die wachsende Kurs-Historie. **Immer komplett lesen vor Kurs-Erstellung.**

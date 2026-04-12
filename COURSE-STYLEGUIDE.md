@@ -1,17 +1,48 @@
 # Glowing Earrings — Kurs-Design-Guide
 
-> Dieses Dokument definiert die didaktischen Prinzipien, Struktur-Standards und Qualitätskriterien für alle Kurse auf der Plattform. Es stellt sicher, dass Kurs 1 und Kurs 20 sich anfühlen, als kämen sie vom selben Ort — ohne dass jeder Kurs gleich aussieht.
+> Zentrale Referenz für alle Kurs-Regeln, Qualitätsstandards und Learnings. Wächst mit jedem Kurs. Vor jeder Kurs-Erstellung komplett lesen.
 
 ---
 
-## 1. Didaktische Prinzipien
+## 1. Mobile-First Content-Design
 
-### 1.1 Snack-sized & Fun
+> Die wichtigste Regel. Alle Inhalte werden primär auf Smartphones gelesen. Jeder Kurs muss perfekt auf einem 6-Zoll-Display funktionieren.
+
+**Grundprinzip: Der Inhalt gibt das Styling vor — nicht umgekehrt.** Formatierung ist kein nachträgliches Drüberstülpen. Wenn ein Gedanke zu einem 5-Satz-Absatz wird, muss der Gedanke anders formuliert werden — kürzer, in Teilschritte zerlegt, als Liste. Der Text muss von Anfang an so geschrieben sein, dass er auf Mobile leicht zu erfassen ist.
+
+### Absätze & Textlänge
+- **Max 2-3 Sätze pro Absatz.** Auf Mobile ist ein 5-Satz-Absatz eine Textwüste. Lieber ein Absatz zu viel als einer zu wenig.
+- **Kein Content-Element ohne visuellen Bruch nach 3 Sätzen.** Wenn ein Textblock auf Mobile mehr als 1.5 Bildschirme füllt, muss er geteilt werden.
+- **Lieber zwei kürzere Content-Elemente als ein Riesenblock.** Jedes Content-Element sollte ein klares Thema haben.
+
+### Optische Gewichtungen (Pflicht)
+Jeder Content-Block braucht mindestens 2 verschiedene optische Gewichtungen. Ein Textblock darf **nie** uniform grau aussehen. Verfügbare Mittel:
+- **`###`-Zwischenüberschriften** — in Kursfarbe, schaffen optischen Halt und Orientierung
+- **Bold** (`**text**`) — für Kernaussagen, zentrale Begriffe, wichtige Zahlen
+- **Listen** (`- item`) — für Aufzählungen, Schritte, Optionen. Immer bevorzugen wenn 3+ parallele Punkte vorkommen
+- **Kursiv** (`*text*`) — für Beispiel-Prompts, Zitate im Fließtext
+- **Code** (`` `text` ``) — für Tool-Namen, Befehle, Dateinamen
+
+### Fließtext vs. Boxen
+- **Fließtext ist die Basis.** Inhalte gehören primär in normalen Lauftext mit Markdown-Formatierung.
+- **Boxen (Callout, Key-Concept, Context-Box) nur für:** echte Zitate, Warnungen, überraschende Fakten, Fachbegriff-Erklärungen.
+- **Drei Boxen hintereinander = zu viele.** Wenn ein Modul hauptsächlich aus farbigen Boxen besteht, stimmt die Balance nicht.
+
+### Strukturierung von Inhalten
+- **Mehrere Themen in einem Block → aufteilen.** Drei Workflows? Drei Content-Elemente mit je eigenem `###`-Heading. Nicht alles in einen Block packen.
+- **Parallele Informationen → Listen statt Prosa.** "Zwei Berechtigungen: Mikrofon und Accessibility" wird zu einer 2-Punkt-Liste.
+- **Tastenkürzel und technische Infos → Listen oder Code-Formatting.** Nicht in Fließtext verstecken.
+
+---
+
+## 2. Didaktische Prinzipien
+
+### 2.1 Snack-sized & Fun
 - **Du-Ansprache** durchgehend, kein Siezen
-- **Nie mehr als 2-3 Absätze** ohne interaktives Element (Quiz, Flashcard, Reflexion, Callout)
-- **Quiz-Feedback ist lehrreich:** Nicht nur "Richtig/Falsch", sondern Kontext und Erklärung. Jede Antwort — richtig oder falsch — ist ein Lernmoment. Ton: warmherzig, nie herablassend. "Nicht ganz — aber gut zu wissen:" statt "Falsch."
-- **Emojis nur wo sie Struktur bieten.** Erlaubt: Takeaway-Checklisten (Emoji + Text-Paare), Callout-Icons (werden von der Komponente gesetzt), Easter Eggs. Verboten: Modul-Titel, Key-Concept-Icons, Fließtext-Dekoration. Im Zweifel weglassen.
-- **Humor: subtil & clever.** Schmunzeln, nicht lachen. Clevere Formulierungen, überraschende Perspektiven, Wortspiel-Niveau — keine Witze, keine Gags, keine Memes. Der Ton ist der eines klugen Gesprächspartners, nicht eines Comedians.
+- **Nie mehr als 2 Content-Blöcke hintereinander** ohne interaktives Element (Quiz, Flashcard, Reflexion)
+- **Quiz-Feedback max 2 Sätze**, Explanation nach dem Reveal darf 2-3 Sätze lang sein. Ton: warmherzig, nie herablassend. "Nicht ganz — aber gut zu wissen:" statt "Falsch."
+- **Emojis nur in Takeaway-Checklisten und Easter Eggs.** Verboten: Modul-Titel, Modul-Icons (`icon`-Feld), Key-Concept-Icons, Fließtext-Dekoration. Im Zweifel weglassen.
+- **Humor: subtil & clever.** Der Ton ist der eines klugen Gesprächspartners, nicht eines Comedians.
 
 ### 1.2 Quelltreue
 - Inhalte stammen **ausschließlich** aus dem Ausgangsmaterial
@@ -65,6 +96,10 @@ Plus: Link zum Originalmaterial. Die Modul-Übersicht wird automatisch durch die
 | `flashcard` | Zusammenhänge und "Warum"-Fragen trainieren | Ja (min. 3 pro Kurs) |
 | `reflection` | Praxisbezug: "Wie würdest du das anwenden?" | Ja (min. 1 pro Kurs) |
 | `easter-egg` | Verstecktes Element mit Charme | Ja (min. 1 pro Kurs) |
+| `image` | Bild mit Lightbox-Zoom | Wenn vorhanden |
+| `video` | YouTube/Vimeo lazy-loaded | Wenn vorhanden |
+| `code-block` | Code/Config mit Copy-Button — für Dateistrukturen und Configs | Wenn vorhanden |
+| `step-by-step` | Akkordeon-Schritte mit Markdown — für mehrstufige Tutorials | Wenn vorhanden |
 
 **Regeln:**
 - **Element-Reihenfolge variieren.** Nicht jedes Modul: Absatz → Callout → Quiz → weiter. Ein Modul kann mit einem Quiz starten, ein anderes mit einer Reflexionsfrage.
@@ -163,10 +198,12 @@ Jeder Kurs hat ein eigenes visuelles Theme (`CourseDesign`). Das Theme muss:
 
 ### 4.2 Light vs. Dark
 
-Kurse können hell oder dunkel sein. Die Entscheidung richtet sich nach dem Thema:
-- **Dunkel:** Technische Themen, Hacking, Deep Dives, "Nachts am Rechner"-Vibe
-- **Hell:** Kreative Themen, Einsteiger-Kurse, "Sonntagmorgen mit Kaffee"-Vibe
-- **Kein Default** — jeder Kurs wird individuell entschieden
+**Dark als Standard**, Light als Option. Kurse starten dunkel. `lightColors` im CourseDesign definiert die helle Alternative. Toggle im Kurs-Header, Präferenz in localStorage.
+
+Farbsprache nach Kategorie:
+- **Warme Farben (Amber/Orange):** Productivity- und Workflow-Kurse
+- **Kühle Farben (Lila/Teal):** Technische Kurse
+- **Grün/Gelb:** Tool-fokussierte Kurse
 
 ### 4.3 Farbwahl-Regeln
 
@@ -213,10 +250,11 @@ Frei wählbar, aber konsistente Schreibweise:
 - Gesamtdauer: Summe der Module
 - Faustregel: 1 Minute pro 150 Wörter Fließtext + 30 Sekunden pro Quiz/Flashcard
 
-### 6.4 Kursname
-- Griffig, neugierig machend, deutsch (es sei denn, der englische Name ist besser)
-- Kein trockener Deskriptor ("Karpathys LLM-Workflow"), sondern ein Versprechen ("Das LLM Wiki")
-- Subtitle: 1-2 Sätze, die konkret sagen, was der Lernende lernt
+### 6.4 Kursname (Drei-Ebenen-Titel)
+- **`title`** — kurz, griffig, allein verständlich. "Die Karpathy Methode", nicht "Karpathys LLM-Workflow"
+- **`subheading`** — erklärender Untertitel. "Persönliche Knowledge Base mit KI"
+- **`subtitle`** — Infotext, 1-2 Sätze was der Lernende lernt
+- Bei Tool-Kursen muss das Subheading klarmachen, was das Tool ist
 
 ---
 
@@ -225,12 +263,23 @@ Frei wählbar, aber konsistente Schreibweise:
 Jeder Kurs muss diese Punkte erfüllen, bevor er gepusht wird:
 
 ### Inhalt
-- [ ] Kurs hat einen griffigen Namen + Subtitle
+- [ ] Kurs hat Drei-Ebenen-Titel (title + subheading + subtitle)
 - [ ] Intro beantwortet Wer/Warum/Was und enthält Quellenlink
 - [ ] ALLE Inhalte aus dem Ausgangsmaterial sind abgebildet (nichts weggelassen)
 - [ ] Konkrete Zahlen, Tool-Namen und spezifische Beispiele sind erhalten
 - [ ] Keine Inhalte erfunden (keine Halluzinationen)
 - [ ] Fachbegriffe sind in Context-Boxen erklärt
+
+### Mobile-First & Textqualität
+- [ ] Kein Absatz länger als 3 Sätze
+- [ ] Kein Content-Element füllt mehr als 1.5 Mobile-Bildschirme
+- [ ] Jeder Content-Block hat min. 2 verschiedene optische Gewichtungen (Heading + Bold, oder Bold + Liste, etc.)
+- [ ] Parallele Infos (Schritte, Optionen) als Listen formatiert, nicht als Fließtext
+- [ ] Mehrere Themen pro Block? → Aufgeteilt in separate Content-Elemente mit `###`-Headings
+- [ ] Fließtext hat `###`-Zwischenüberschriften, Bold, Listen — keine graue Wand
+- [ ] Boxen (Callout, Key-Concept) nur für echte Zitate, Warnungen, überraschende Fakten
+- [ ] Keine drei Boxen hintereinander
+- [ ] Keine Emojis außer in Takeaway-Checklisten und Easter Eggs
 
 ### Didaktik
 - [ ] Mindestens 2 Quizzes mit plausiblen Distraktoren und lehrreichem Feedback
@@ -239,10 +288,10 @@ Jeder Kurs muss diese Punkte erfüllen, bevor er gepusht wird:
 - [ ] Mindestens 1 Reflexionsfrage mit konkretem Praxisbezug
 - [ ] Mindestens 1 Easter Egg
 - [ ] Element-Reihenfolge variiert zwischen Modulen
-- [ ] Modul-Titel kurz und prägnant (max 4-5 Wörter, Emojis nur im Modul-Header)
+- [ ] Modul-Titel kurz und prägnant (max 4-5 Wörter, keine Emojis)
 - [ ] Modul-Übergänge vorhanden (bevorzugt Kurs-Querverweise)
-- [ ] Humor ist subtil & clever, nie platt
 - [ ] Outro mit Synthese, konkretem nächsten Schritt und Takeaway
+- [ ] `relatedCourses` gegenseitig gesetzt
 
 ### Design
 - [ ] Kurs-Theme hat Charakter (kein generisches Template)
@@ -253,9 +302,56 @@ Jeder Kurs muss diese Punkte erfüllen, bevor er gepusht wird:
 
 ---
 
-## 8. Referenz
+## 8. Technische Regeln
 
-- **Referenz-Kurs:** `/content/courses/karpathy-llm-wiki.ts`
+- **Alle Text-rendernden Komponenten brauchen ReactMarkdown.** Callout, Flashcard, jede Komponente die User-Text anzeigt — sonst rohe `**Sternchen**`.
+- **`opengraph-image.tsx` braucht Default Export**, kein GET-Handler. Kein Edge Runtime mit Kurs-Imports.
+- **Kein `onClick` in Server Components** — Event-Handler erzwingen Client Components.
+- **Große Kurse in 2-Modul-Blöcken schreiben.** Erst Meta + Intro + Module 1-2 (Write), dann je 2 Module per Edit anhängen. Verhindert Stream-Timeouts.
+- **sourceType-Badge nicht im UI zeigen** — nur interne Metadaten.
+- **Quell-Anonymisierung:** Wenn ein Autor nicht genannt werden soll, alle Bezüge ersetzen, `sourceAuthor` neutral halten, Promotion entfernen. Quell-URL bleibt.
+
+---
+
+## 9. Referenz
+
+- **Referenz-Kurse:** `/content/courses/karpathy-llm-wiki.ts` (ai-tech), `/content/courses/agentic-os-context-levels.ts` (ai-workflows)
 - **TypeScript-Typen:** `/lib/types.ts`
 - **Datenstruktur-Doku:** `CLAUDE.md`
 - **CI-Farben:** Brand Lila `#5B2F9F`, Teal `#025671`, Dark Purple `#261C53`, Hot Pink `#E91E8C`, Electric Türkis `#00C9A7`
+
+---
+
+## 10. Kurs-Historie
+
+> Wächst mit jedem Kurs. Nach jeder Kurs-Erstellung 3-5 Erkenntnisse hinzufügen.
+
+### Kurs 1: Die Karpathy Methode (2026-04-10)
+
+**Quelle:** Andrej Karpathy, GitHub Gist — Intermediate
+**Theme:** Dark, Knowledge-Graph (Lila + Teal)
+
+- Flashcards mit "Warum"-Fragen statt Definitionen — regt zum Nachdenken an
+- Quelltreue: Karpathys Begriffe (Ingest/Query/Lint) 1:1 übernommen
+- Easter Egg mit Vannevar Bush — charmant und thematisch passend
+- Callout-Varianten brauchten eigene Farben (jetzt behoben)
+- Mobile-Nav Z-Index-Konflikte: Header z-[70], MobileNav z-[100]
+
+### Kurs 2: Die 7 Stufen von Claude (2026-04-12)
+
+**Quelle:** Community-Tutorial (YouTube) — Intermediate
+**Theme:** Dark, Agentic-OS (Amber + Blau)
+
+- `code-block` und `step-by-step` bewährt als Lehr-Elemente
+- 7-Level-Struktur als aufsteigende Dramaturgie funktioniert
+- Quell-Attribution ohne Autor: besser inhaltliche Beschreibung statt "Community-Tutorial"
+- Stream-Timeouts bei großen Dateien → 2-Modul-Blöcke als Lösung
+
+### Kurs 3: Handy App (2026-04-12)
+
+**Quelle:** handy.computer (Tool-Website) — Beginner
+**Theme:** Dark, Minimal (Grün + Gelb)
+
+- Kurze Kurse (3-4 Module) funktionieren für fokussierte Tool-Vorstellungen
+- Prose-first bewährt — Workflows als Fließtext statt als Callout-Kette
+- Tool-Titel brauchen erklärendes Subheading ("Die beste Lösung zum Diktieren...")

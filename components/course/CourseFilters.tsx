@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import type { Course, CourseCategory } from "@/lib/types";
 import { getDifficultyLabel, categoryLabels } from "@/lib/course-utils";
 import CourseCard from "./CourseCard";
@@ -12,7 +13,14 @@ interface CourseFiltersProps {
 const difficulties = ["beginner", "intermediate", "advanced"] as const;
 
 export default function CourseFilters({ courses }: CourseFiltersProps) {
+  const searchParams = useSearchParams();
   const [activeTag, setActiveTag] = useState<string | null>(null);
+
+  // Read tag from URL on mount (e.g. /courses?tag=Claude)
+  useEffect(() => {
+    const tagFromUrl = searchParams.get("tag");
+    if (tagFromUrl) setActiveTag(tagFromUrl);
+  }, [searchParams]);
   const [activeDifficulty, setActiveDifficulty] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<CourseCategory | null>(null);
 
@@ -54,53 +62,50 @@ export default function CourseFilters({ courses }: CourseFiltersProps) {
   return (
     <div>
       {/* Filter bar */}
-      <div className="space-y-3 mb-8">
-        {/* Category filter */}
-        {usedCategories.length > 1 && (
-          <div className="flex flex-wrap gap-2">
-            {usedCategories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
-                className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 ${
-                  activeCategory === cat
-                    ? "bg-[var(--accent)] text-white"
-                    : "bg-[var(--surface)] text-[var(--text-secondary)] border border-[var(--border)] hover:border-[var(--accent)]/40 hover:text-[var(--accent)]"
-                }`}
-              >
-                {categoryLabels[cat]}
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* Difficulty tabs */}
+      <div className="mb-8 space-y-3">
+        {/* Category + Level row */}
         <div className="flex flex-wrap gap-2">
+          {usedCategories.length > 1 && usedCategories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+              className={`px-4 py-2 text-sm font-medium rounded-xl border transition-all duration-200 ${
+                activeCategory === cat
+                  ? "bg-[var(--accent)] text-white border-[var(--accent)] shadow-sm"
+                  : "bg-[var(--surface)] text-[var(--text-primary)] border-[var(--border)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
+              }`}
+            >
+              {categoryLabels[cat]}
+            </button>
+          ))}
+
+          <span className="w-px h-8 bg-[var(--border)] self-center mx-1 hidden sm:block" />
+
           {difficulties.map((diff) => (
             <button
               key={diff}
               onClick={() => setActiveDifficulty(activeDifficulty === diff ? null : diff)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 ${
+              className={`px-4 py-2 text-sm font-medium rounded-xl border transition-all duration-200 ${
                 activeDifficulty === diff
-                  ? "bg-[var(--brand)] text-white"
-                  : "bg-[var(--surface)] text-[var(--text-secondary)] border border-[var(--border)] hover:border-[var(--brand)]/40 hover:text-[var(--brand)]"
+                  ? "bg-[var(--brand)] text-white border-[var(--brand)] shadow-sm"
+                  : "bg-[var(--surface)] text-[var(--text-primary)] border-[var(--border)] hover:border-[var(--brand)] hover:text-[var(--brand)]"
               }`}
             >
               {getDifficultyLabel(diff)}
             </button>
           ))}
+        </div>
 
-          <span className="w-px h-6 bg-[var(--border)] self-center mx-1" />
-
-          {/* Tag pills */}
+        {/* Tags row */}
+        <div className="flex flex-wrap gap-1.5">
           {allTags.map((tag) => (
             <button
               key={tag}
               onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 ${
+              className={`px-3 py-1 text-xs font-medium rounded-full border transition-all duration-200 ${
                 activeTag === tag
-                  ? "bg-[var(--pop-turquoise)] text-white"
-                  : "bg-[var(--surface)] text-[var(--text-muted)] border border-[var(--border)] hover:border-[var(--pop-turquoise)]/40 hover:text-[var(--pop-turquoise)]"
+                  ? "bg-[var(--pop-turquoise)] text-white border-[var(--pop-turquoise)]"
+                  : "bg-transparent text-[var(--text-muted)] border-[var(--border)] hover:border-[var(--pop-turquoise)] hover:text-[var(--pop-turquoise)]"
               }`}
             >
               {tag}

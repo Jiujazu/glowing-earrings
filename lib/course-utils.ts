@@ -63,6 +63,7 @@ export function getSourceTypeLabel(
     article: "Artikel",
     document: "Dokument",
     gist: "Gist",
+    tool: "Tool",
     other: "Quelle",
   };
   return labels[sourceType];

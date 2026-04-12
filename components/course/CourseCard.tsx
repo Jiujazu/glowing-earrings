@@ -1,15 +1,12 @@
 import Link from "next/link";
 import type { CourseMeta } from "@/lib/types";
-import { formatDuration, getDifficultyLabel, getSourceTypeLabel } from "@/lib/course-utils";
+import { formatDuration, getDifficultyLabel } from "@/lib/course-utils";
 import Badge from "@/components/ui/Badge";
 import CourseCardProgress from "./CourseCardProgress";
 
 export default function CourseCard({ meta, totalModules }: { meta: CourseMeta; totalModules?: number }) {
   return (
-    <Link
-      href={`/courses/${meta.slug}`}
-      className="group relative block rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-[var(--accent)]/10"
-    >
+    <div className="relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-[var(--accent)]/10">
       {/* Color bar top */}
       <div
         className="h-2"
@@ -17,20 +14,36 @@ export default function CourseCard({ meta, totalModules }: { meta: CourseMeta; t
       />
 
       <div className="p-6 bg-[var(--surface)] border border-[var(--border)] border-t-0 rounded-b-2xl">
-        <div className="flex flex-wrap gap-1.5 mb-3">
-          <Badge variant="accent">{getSourceTypeLabel(meta.sourceType)}</Badge>
-          <Badge variant="brand">{getDifficultyLabel(meta.difficulty)}</Badge>
-          {meta.tags.slice(0, 2).map((tag) => (
-            <Badge key={tag} variant="muted">{tag}</Badge>
-          ))}
-        </div>
+        <Link
+          href={`/courses/${meta.slug}`}
+          className="group block mb-4"
+        >
+          <h3 className="font-heading text-2xl font-bold text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors leading-tight">
+            {meta.title}
+          </h3>
+          {meta.subheading && (
+            <p className="text-base text-[var(--text-secondary)] mt-1 font-medium">
+              {meta.subheading}
+            </p>
+          )}
+        </Link>
 
-        <h3 className="font-heading text-xl font-bold text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors mb-2">
-          {meta.title}
-        </h3>
-        <p className="text-sm text-[var(--text-secondary)] mb-5 leading-relaxed">
+        <p className="text-sm text-[var(--text-muted)] mb-4 leading-relaxed">
           {meta.subtitle}
         </p>
+
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          <Badge variant="brand">{getDifficultyLabel(meta.difficulty)}</Badge>
+          {meta.tags.slice(0, 3).map((tag) => (
+            <Link
+              key={tag}
+              href={`/courses?tag=${encodeURIComponent(tag)}`}
+              className="hover:scale-105 transition-transform"
+            >
+              <Badge variant="muted">{tag}</Badge>
+            </Link>
+          ))}
+        </div>
 
         {totalModules && (
           <div className="mb-3">
@@ -44,11 +57,14 @@ export default function CourseCard({ meta, totalModules }: { meta: CourseMeta; t
             <span>·</span>
             <span>{meta.sourceAuthor}</span>
           </div>
-          <span className="text-xs font-medium text-[var(--accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <Link
+            href={`/courses/${meta.slug}`}
+            className="text-xs font-medium text-[var(--accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          >
             Kurs starten →
-          </span>
+          </Link>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

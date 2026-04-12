@@ -1,13 +1,20 @@
+import Link from "next/link";
 import type { CourseOutro as CourseOutroType } from "@/lib/types";
+import { getCourseBySlug, formatDuration, getDifficultyLabel } from "@/lib/course-utils";
 import NewsletterCTA from "@/components/layout/NewsletterCTA";
+import Badge from "@/components/ui/Badge";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 interface CourseOutroProps {
   outro: CourseOutroType;
   courseSlug: string;
+  relatedSlugs?: string[];
 }
 
-export default function CourseOutro({ outro, courseSlug }: CourseOutroProps) {
+export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseOutroProps) {
+  const relatedCourses = (relatedSlugs || [])
+    .map((slug) => getCourseBySlug(slug))
+    .filter(Boolean);
   return (
     <section className="py-16 sm:py-24 px-4">
       <div className="max-w-3xl mx-auto">
@@ -77,6 +84,56 @@ export default function CourseOutro({ outro, courseSlug }: CourseOutroProps) {
             </a>
           </div>
         </ScrollReveal>
+
+        {/* Related Courses */}
+        {relatedCourses.length > 0 && (
+          <ScrollReveal>
+            <div className="mb-12">
+              <h3
+                className="font-heading text-xl font-bold mb-4"
+                style={{ fontFamily: "var(--course-heading-font, var(--font-heading))" }}
+              >
+                Weiter lernen
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {relatedCourses.map((course) => (
+                  <Link
+                    key={course!.meta.slug}
+                    href={`/courses/${course!.meta.slug}`}
+                    className="group block rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  >
+                    <div
+                      className="h-1.5"
+                      style={{ backgroundColor: course!.meta.design.colors.primary }}
+                    />
+                    <div
+                      className="p-4 border border-t-0 rounded-b-xl"
+                      style={{
+                        backgroundColor: "var(--course-surface)",
+                        borderColor: "color-mix(in srgb, var(--course-text) 10%, transparent)",
+                      }}
+                    >
+                      <div className="flex gap-2 mb-2">
+                        <Badge variant="course">
+                          {getDifficultyLabel(course!.meta.difficulty)}
+                        </Badge>
+                        <Badge variant="course">
+                          {formatDuration(course!.meta.estimatedMinutes)}
+                        </Badge>
+                      </div>
+                      <p className="font-heading font-bold text-[var(--course-text)] group-hover:text-[var(--course-primary)] transition-colors text-base mb-1">
+                        {course!.meta.title}
+                      </p>
+                      <p className="text-sm text-[var(--course-text-muted)] line-clamp-2">
+                        {course!.meta.subtitle}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </ScrollReveal>
+        )}
 
         {/* Newsletter CTA */}
         <ScrollReveal>

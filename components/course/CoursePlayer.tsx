@@ -39,7 +39,7 @@ export default function CoursePlayer({ course }: CoursePlayerProps) {
           </div>
 
           <div className="border-t border-[var(--course-text)]/10">
-            <CourseOutro outro={course.outro} courseSlug={course.meta.slug} />
+            <CourseOutro outro={course.outro} courseSlug={course.meta.slug} relatedSlugs={course.meta.relatedCourses} />
           </div>
         </CourseErrorBoundary>
       </article>

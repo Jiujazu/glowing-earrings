@@ -1,5 +1,5 @@
 import type { CourseIntro as CourseIntroType, CourseMeta } from "@/lib/types";
-import { formatDuration, getDifficultyLabel, getSourceTypeLabel } from "@/lib/course-utils";
+import { formatDuration, getDifficultyLabel } from "@/lib/course-utils";
 import Badge from "@/components/ui/Badge";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
@@ -15,7 +15,6 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
         {/* Badges */}
         <ScrollReveal delay={0} duration={600}>
           <div className="flex flex-wrap gap-2 mb-6">
-            <Badge variant="course">{getSourceTypeLabel(meta.sourceType)}</Badge>
             <Badge variant="course">{getDifficultyLabel(meta.difficulty)}</Badge>
             <Badge variant="course">{formatDuration(meta.estimatedMinutes)}</Badge>
           </div>
@@ -24,12 +23,17 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
         {/* Title */}
         <ScrollReveal delay={100} duration={700}>
           <h1
-            className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4"
+            className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight"
             style={{ fontFamily: "var(--course-heading-font, var(--font-heading))" }}
           >
             {meta.title}
           </h1>
-          <p className="text-lg sm:text-xl text-[var(--course-text-muted)] mb-8">
+          {meta.subheading && (
+            <p className="text-lg sm:text-xl text-[var(--course-text-muted)] mt-2">
+              {meta.subheading}
+            </p>
+          )}
+          <p className="text-base sm:text-lg text-[var(--course-text-muted)]/70 mt-3 mb-8 leading-relaxed">
             {meta.subtitle}
           </p>
         </ScrollReveal>

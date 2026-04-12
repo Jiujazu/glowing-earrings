@@ -6,13 +6,30 @@
 
 ## 1. Mobile-First Content-Design
 
-> Die wichtigste Regel. Alle Inhalte werden primär auf Smartphones gelesen.
+> Die wichtigste Regel. Alle Inhalte werden primär auf Smartphones gelesen. Jeder Kurs muss perfekt auf einem 6-Zoll-Display funktionieren.
 
-- **Absätze nach max 2-3 Sätzen.** Auf einem 6-Zoll-Display ist ein 5-Satz-Absatz eine Textwüste. Lieber ein Absatz zu viel als einer zu wenig.
-- **Kein Content-Element ohne visuellen Bruch nach 3 Sätzen.** Visuelle Brüche sind: Absätze (`\n\n`), `###`-Zwischenüberschriften, Listen, oder das Aufteilen in separate Content-Elemente.
-- **Verschiedene optische Gewichtungen nutzen.** Bold für Kernaussagen, Headings für Struktur, Listen für Aufzählungen. Ein Textblock darf nie uniform grau aussehen.
-- **Fließtext ist die Basis, Boxen sind die Ausnahme.** Callouts, Key-Concepts und Context-Boxen nur für: echte Zitate, Warnungen, überraschende Fakten. Wenn ein Modul hauptsächlich aus farbigen Boxen besteht, stimmt die Balance nicht. Drei Boxen hintereinander = zu viele.
-- **Textwüsten sind verboten.** Wenn ein Textblock auf Mobile mehr als 1.5 Bildschirme füllt, muss er geteilt werden. Lieber zwei kürzere Content-Elemente mit je einem Heading als ein Riesenblock.
+### Absätze & Textlänge
+- **Max 2-3 Sätze pro Absatz.** Auf Mobile ist ein 5-Satz-Absatz eine Textwüste. Lieber ein Absatz zu viel als einer zu wenig.
+- **Kein Content-Element ohne visuellen Bruch nach 3 Sätzen.** Wenn ein Textblock auf Mobile mehr als 1.5 Bildschirme füllt, muss er geteilt werden.
+- **Lieber zwei kürzere Content-Elemente als ein Riesenblock.** Jedes Content-Element sollte ein klares Thema haben.
+
+### Optische Gewichtungen (Pflicht)
+Jeder Content-Block braucht mindestens 2 verschiedene optische Gewichtungen. Ein Textblock darf **nie** uniform grau aussehen. Verfügbare Mittel:
+- **`###`-Zwischenüberschriften** — in Kursfarbe, schaffen optischen Halt und Orientierung
+- **Bold** (`**text**`) — für Kernaussagen, zentrale Begriffe, wichtige Zahlen
+- **Listen** (`- item`) — für Aufzählungen, Schritte, Optionen. Immer bevorzugen wenn 3+ parallele Punkte vorkommen
+- **Kursiv** (`*text*`) — für Beispiel-Prompts, Zitate im Fließtext
+- **Code** (`` `text` ``) — für Tool-Namen, Befehle, Dateinamen
+
+### Fließtext vs. Boxen
+- **Fließtext ist die Basis.** Inhalte gehören primär in normalen Lauftext mit Markdown-Formatierung.
+- **Boxen (Callout, Key-Concept, Context-Box) nur für:** echte Zitate, Warnungen, überraschende Fakten, Fachbegriff-Erklärungen.
+- **Drei Boxen hintereinander = zu viele.** Wenn ein Modul hauptsächlich aus farbigen Boxen besteht, stimmt die Balance nicht.
+
+### Strukturierung von Inhalten
+- **Mehrere Themen in einem Block → aufteilen.** Drei Workflows? Drei Content-Elemente mit je eigenem `###`-Heading. Nicht alles in einen Block packen.
+- **Parallele Informationen → Listen statt Prosa.** "Zwei Berechtigungen: Mikrofon und Accessibility" wird zu einer 2-Punkt-Liste.
+- **Tastenkürzel und technische Infos → Listen oder Code-Formatting.** Nicht in Fließtext verstecken.
 
 ---
 
@@ -254,6 +271,9 @@ Jeder Kurs muss diese Punkte erfüllen, bevor er gepusht wird:
 ### Mobile-First & Textqualität
 - [ ] Kein Absatz länger als 3 Sätze
 - [ ] Kein Content-Element füllt mehr als 1.5 Mobile-Bildschirme
+- [ ] Jeder Content-Block hat min. 2 verschiedene optische Gewichtungen (Heading + Bold, oder Bold + Liste, etc.)
+- [ ] Parallele Infos (Schritte, Optionen) als Listen formatiert, nicht als Fließtext
+- [ ] Mehrere Themen pro Block? → Aufgeteilt in separate Content-Elemente mit `###`-Headings
 - [ ] Fließtext hat `###`-Zwischenüberschriften, Bold, Listen — keine graue Wand
 - [ ] Boxen (Callout, Key-Concept) nur für echte Zitate, Warnungen, überraschende Fakten
 - [ ] Keine drei Boxen hintereinander

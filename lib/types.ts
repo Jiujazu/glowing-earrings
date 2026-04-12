@@ -17,7 +17,7 @@ export interface CourseMeta {
   subtitle: string;
   sourceUrl: string;
   sourceAuthor: string;
-  sourceType: "tweet" | "video" | "article" | "document" | "gist" | "other";
+  sourceType: "tweet" | "video" | "article" | "document" | "gist" | "tool" | "other";
   category: CourseCategory;
   tags: string[];
   estimatedMinutes: number;

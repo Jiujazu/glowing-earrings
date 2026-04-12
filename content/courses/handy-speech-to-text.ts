@@ -8,7 +8,7 @@ export const handySpeechToText: Course = {
       "Wie du mit einem kostenlosen Open-Source-Tool per Tastenkürzel in jedes Textfeld diktierst — komplett offline, auf jedem Betriebssystem.",
     sourceUrl: "https://handy.computer/",
     sourceAuthor: "cjpais (Open Source)",
-    sourceType: "other",
+    sourceType: "tool",
     category: "ai-workflows",
     tags: ["Speech-to-Text", "Open Source", "Productivity", "Privacy"],
     estimatedMinutes: 10,

@@ -21,7 +21,6 @@ export default function CourseCard({ meta, totalModules }: { meta: CourseMeta; t
               key={tag}
               href={`/courses?tag=${encodeURIComponent(tag)}`}
               className="hover:scale-105 transition-transform"
-              onClick={(e) => e.stopPropagation()}
             >
               <Badge variant="muted">{tag}</Badge>
             </Link>

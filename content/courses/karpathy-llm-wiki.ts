@@ -255,7 +255,7 @@ export const karpathyLlmWiki: Course = {
         {
           id: "philosophy-intro",
           type: "content",
-          text: "Die Geschichte der persönlichen Wissensmanagement-Tools ist eine Geschichte des Scheiterns. Jeder hat mal angefangen, ein Wiki oder ein Zettelkasten-System aufzubauen. Fast niemand pflegt es langfristig. Warum?",
+          text: "Die Geschichte der persönlichen Wissensmanagement-Tools ist eine Geschichte des Scheiterns. Jeder hat mal angefangen, ein Wiki oder ein Zettelkasten-System aufzubauen.\n\nFast niemand pflegt es langfristig. Warum?",
         },
         {
           id: "bookkeeping-quote",

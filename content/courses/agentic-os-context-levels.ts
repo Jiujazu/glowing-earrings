@@ -349,7 +349,7 @@ export const agenticOsContextLevels: Course = {
         {
           id: "m5-content-1",
           type: "content",
-          text: "Wenn du Level 4-5 intensiv nutzt, wächst dein Kontext über mehrere Projekte und Skills hinweg. Irgendwann hast du das gleiche ICP-Dokument in drei verschiedenen Projekten und fünf Skills — und wenn sich etwas ändert, musst du es überall einzeln aktualisieren.\n\nDie Lösung: **Alles in einen einzigen, zentralen Ordner packen.** Das ist dein Second Brain — ein Ort mit deinem gesamten Business-Kontext: Strategie, ICP, Prozesse, Meeting-Notizen, Analytics. Jeder Chat, jeder Skill und jedes Projekt referenziert diesen einen Ordner. Ein Update → überall aktuell.",
+          text: "Wenn du Level 4-5 intensiv nutzt, wächst dein Kontext über mehrere Projekte und Skills hinweg. Irgendwann hast du das gleiche ICP-Dokument in drei verschiedenen Projekten und fünf Skills — und wenn sich etwas ändert, musst du es überall einzeln aktualisieren.\n\nDie Lösung: **Alles in einen einzigen, zentralen Ordner packen.** Das ist dein Second Brain — ein Ort mit deinem gesamten Business-Kontext: Strategie, ICP, Prozesse, Meeting-Notizen, Analytics.\n\nJeder Chat, jeder Skill und jedes Projekt referenziert diesen einen Ordner. Ein Update → überall aktuell.",
         },
         {
           id: "m5-callout-warning",
@@ -374,7 +374,7 @@ export const agenticOsContextLevels: Course = {
         {
           id: "m5-content-3",
           type: "content",
-          text: "### Index-Dateien für Unterordner\n\nWenn dein Kontext weiter wächst, helfen **Index-Dateien** in jedem Unterordner. Das sind kleine CLAUDE.md-artige Dateien, die beschreiben, was in diesem spezifischen Ordner liegt und wie er navigiert wird.\n\n### Maintenance ist Pflicht\n\nEin Second Brain erfordert regelmäßige Pflege. Geh wöchentlich durch deine Dateien: Gibt es Duplikate? Konflikte? Veraltete Inhalte? Nutze Scheduled Tasks, um Meeting-Transkripte, Task-Updates und Analytics automatisch einzupflegen.\n\nDie Struktur wird sich weiterentwickeln — das ist normal. Wichtig ist, dass du dranbleibst. Der Kontext wird mit der Zeit besser. Je früher du startest, desto mehr profitierst du vom Compound Effect.",
+          text: "### Index-Dateien für Unterordner\n\nWenn dein Kontext weiter wächst, helfen **Index-Dateien** in jedem Unterordner. Das sind kleine CLAUDE.md-artige Dateien, die beschreiben, was in diesem spezifischen Ordner liegt und wie er navigiert wird.\n\n### Maintenance ist Pflicht\n\nEin Second Brain erfordert regelmäßige Pflege. Geh wöchentlich durch deine Dateien: Gibt es Duplikate? Konflikte? Veraltete Inhalte? Nutze Scheduled Tasks, um Meeting-Transkripte, Task-Updates und Analytics automatisch einzupflegen.\n\nDie Struktur wird sich weiterentwickeln — das ist normal. Wichtig ist, dass du dranbleibst.\n\nDer Kontext wird mit der Zeit besser. Je früher du startest, desto mehr profitierst du vom Compound Effect.",
         },
         {
           id: "m5-quiz",

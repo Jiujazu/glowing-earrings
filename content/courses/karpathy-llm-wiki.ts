@@ -57,7 +57,7 @@ export const karpathyLlmWiki: Course = {
         {
           id: "problem-intro",
           type: "content",
-          text: "Stell dir vor, du hast letzte Woche einen brillanten Artikel über die Zukunft von AI Agents gelesen. Jetzt fragt dich jemand danach. Du weißt, dass du ihn gelesen hast. Du weißt ungefähr, worum es ging. Aber du findest ihn nicht mehr — und selbst wenn, müsstest du ihn nochmal lesen, um die wichtigen Punkte zusammenzufassen.\n\nDas ist der Normalzustand für die meisten von uns. Wissen geht rein, aber es **akkumuliert** nicht. Es bleibt fragmentiert in Browser-Tabs, Notion-Seiten, Lesezeichen-Ordnern.",
+          text: "Stell dir vor, du hast letzte Woche einen brillanten Artikel über die Zukunft von AI Agents gelesen. Jetzt fragt dich jemand danach.\n\nDu weißt, dass du ihn gelesen hast. Du weißt ungefähr, worum es ging. Aber du findest ihn nicht mehr — und selbst wenn, müsstest du ihn nochmal lesen, um die wichtigen Punkte zusammenzufassen.\n\nDas ist der Normalzustand für die meisten von uns. Wissen geht rein, aber es **akkumuliert** nicht.\n\nEs bleibt fragmentiert in Browser-Tabs, Notion-Seiten, Lesezeichen-Ordnern.",
         },
         {
           id: "rag-problem",

@@ -50,28 +50,9 @@
                       { label: "Dauer (Min)", name: "estimatedMinutes", widget: "number", value_type: "int" },
                       { label: "Schwierigkeit", name: "difficulty", widget: "string" },
                       { label: "Veröffentlicht am", name: "publishedAt", widget: "string" },
+                      { label: "Entwurf", name: "draft", widget: "boolean", required: false },
                       { label: "Verwandte Kurse", name: "relatedCourses", widget: "list", required: false },
-                      {
-                        label: "Design",
-                        name: "design",
-                        widget: "object",
-                        fields: [
-                          { label: "Theme", name: "theme", widget: "string" },
-                          {
-                            label: "Farben (Dark)",
-                            name: "colors",
-                            widget: "object",
-                            fields: [
-                              { label: "Background", name: "background", widget: "string" },
-                              { label: "Surface", name: "surface", widget: "string" },
-                              { label: "Primary", name: "primary", widget: "string" },
-                              { label: "Accent", name: "accent", widget: "string" },
-                              { label: "Text", name: "text", widget: "string" },
-                              { label: "Text Muted", name: "textMuted", widget: "string" }
-                            ]
-                          }
-                        ]
-                      }
+                      { label: "Design (JSON)", name: "design", widget: "code", default_language: "json", output_code_only: true }
                     ]
                   },
                   {
@@ -97,6 +78,7 @@
                     fields: [
                       { label: "Synthese", name: "synthesis", widget: "list" },
                       { label: "Nächster Schritt", name: "nextStep", widget: "text" },
+                      { label: "Takeaway (JSON)", name: "takeaway", widget: "code", default_language: "json", output_code_only: true, required: false },
                       { label: "Quell-URL", name: "sourceUrl", widget: "string" },
                       { label: "Newsletter-CTA", name: "newsletterCTA", widget: "text" }
                     ]
@@ -108,7 +90,6 @@
         });
       };
 
-      // Wait for CMS to be ready
       if (document.readyState === "complete") {
         window.initCMS();
       } else {

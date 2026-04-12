@@ -1,11 +1,7 @@
 import { ImageResponse } from "next/og";
-import { getCourseBySlug, getAllCourseSlugs, getDifficultyLabel } from "@/lib/course-utils";
+import { getCourseBySlug, getDifficultyLabel } from "@/lib/course-utils";
 
 export const runtime = "edge";
-
-export function generateStaticParams() {
-  return getAllCourseSlugs().map((slug) => ({ slug }));
-}
 
 export async function GET(
   _request: Request,

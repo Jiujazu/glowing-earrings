@@ -29,3 +29,27 @@
 - **Dark als Standard, Light als Option:** Kurse starten dunkel. `lightColors` im CourseDesign definiert die helle Alternative. Toggle im Kurs-Header, Präferenz in localStorage
 - **Kein overview im Intro:** Die Kapitel-Navigation (CourseNav) übernimmt diese Funktion. Redundante nummerierte Listen im Intro vermeiden
 - **Custom Cursor ist Noise:** Ausprobiert und wieder entfernt. Nervt mehr als es nützt — kein Award-Feature auf Kosten der UX
+
+---
+
+## Kurs 2: Das Agentic OS (2026-04-12)
+
+**Quelle:** Community-Tutorial (YouTube Video) — Intermediate
+**Theme:** Dark, Agentic-OS-Aesthetic (Amber + Blau)
+
+### Was funktioniert hat
+- **Neue Element-Typen bewährt:** `code-block` (CLAUDE.md-Beispiel mit Highlight-Lines) und `step-by-step` (Skill-Erstellung in 4 Schritten) funktionieren als Lehr-Elemente — praxisnah und scanbar
+- **7-Level-Struktur als roter Faden:** Die aufsteigende Komplexität (Chat → Skills → File Access → Projekte → Second Brain → Business OS) gibt dem Kurs eine natürliche Dramaturgie
+- **Amber/Blau-Theme:** Hebt sich klar vom Lila/Teal des ersten Kurses ab — eigener Charakter, fühlt sich nach "System/OS" an
+- **Querverweis-Potenzial:** Der Kurs referenziert Karpathys Index-File-Konzept — perfekte Brücke zum ersten Kurs via `relatedCourses`
+
+### Was besser geht
+- **Quell-Attribution ohne Autor ist tricky:** `sourceAuthor: "Community-Tutorial"` fühlt sich vage an. Bei zukünftigen Kursen mit anonymisierter Quelle besser eine inhaltliche Beschreibung wählen (z.B. "AI Workflow Framework")
+- **6 Module für 7 Level:** Level 1-2 wurden zu einem Modul kombiniert — funktioniert, aber das erste Modul ist dadurch etwas länger als die anderen. Bei ähnlichen Strukturen: lieber gleichmäßig aufteilen
+- **Step-by-Step braucht mehr visuelle Differenzierung:** Der Akkordeon-Stil funktioniert, aber die einzelnen Schritte könnten visuell stärker voneinander abgegrenzt sein (z.B. durch farbige Nummern oder Icons)
+
+### Patterns zum Wiederverwenden
+- **Code-Block für Dateistrukturen:** `code-block` mit `highlightLines` eignet sich hervorragend, um Konfigurationsdateien (CLAUDE.md, skill.md) zu erklären — besser als Fließtext
+- **Step-by-Step für Tutorials:** Mehrstufige Prozesse (z.B. "Skill erstellen") als `step-by-step`-Element statt als nummerierte Liste im Content — interaktiver und weniger Wall-of-Text
+- **Kurs-Vernetzung via relatedCourses:** Funktioniert jetzt im Outro als "Weiter lernen"-Sektion. Immer gegenseitig verlinken
+- **Warm vs. Cool Themes:** Amber/Orange für Productivity-Kurse, Lila/Teal für technische Kurse — diese Farbsprache hilft beim schnellen Erkennen der Kurs-Kategorie

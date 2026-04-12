@@ -123,9 +123,19 @@ export const karpathyLlmWiki: Course = {
           text: "Das LLM Wiki besteht aus drei klar getrennten Schichten. Das Geniale: Es ist kein komplexes System mit Datenbanken und APIs — es sind einfach **Markdown-Dateien in einem Ordner**, die du mit Git versionieren und mit jedem Editor öffnen kannst.",
         },
         {
-          id: "arch-layers",
+          id: "arch-layer-1",
           type: "content",
-          text: "### Schicht 1: Raw Sources\n\nDeine Originaldokumente — Artikel, Papers, Notizen, Podcast-Transkripte. Sie werden nie verändert, sie sind die Single Source of Truth. Das LLM liest sie, modifiziert sie aber nie.\n\n### Schicht 2: Das Wiki\n\nVon der KI generierte Markdown-Dateien: Zusammenfassungen, Entity-Seiten (Personen, Organisationen), Konzept-Seiten (abstrakte Ideen mit Querverweisen), Synthesen aus mehreren Quellen, Vergleichsseiten. Die KI besitzt und pflegt diese Schicht komplett.\n\n### Schicht 3: Das Schema\n\nEin Konfigurationsdokument (z.B. `CLAUDE.md`), das dem LLM sagt, wie das Wiki strukturiert ist: Namenskonventionen, Workflows für Ingestion und Queries, Umgang mit Widersprüchen. Dieses Dokument entwickelt sich mit der Zeit weiter — eine Ko-Evolution zwischen dir und der KI.",
+          text: "### Schicht 1: Raw Sources\n\nDeine Originaldokumente — Artikel, Papers, Notizen, Podcast-Transkripte. Sie werden nie verändert, sie sind die Single Source of Truth. Das LLM liest sie, modifiziert sie aber nie.",
+        },
+        {
+          id: "arch-layer-2",
+          type: "content",
+          text: "### Schicht 2: Das Wiki\n\nVon der KI generierte Markdown-Dateien: Zusammenfassungen, Entity-Seiten (Personen, Organisationen), Konzept-Seiten (abstrakte Ideen mit Querverweisen), Synthesen aus mehreren Quellen. Die KI besitzt und pflegt diese Schicht komplett.",
+        },
+        {
+          id: "arch-layer-3",
+          type: "content",
+          text: "### Schicht 3: Das Schema\n\nEin Konfigurationsdokument (z.B. `CLAUDE.md`), das dem LLM sagt, wie das Wiki strukturiert ist: Namenskonventionen, Workflows, Umgang mit Widersprüchen. Dieses Dokument entwickelt sich mit der Zeit weiter — eine Ko-Evolution zwischen dir und der KI.",
         },
         {
           id: "quiz-architecture",

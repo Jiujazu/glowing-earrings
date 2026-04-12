@@ -1,14 +1,11 @@
-import fs from "fs";
-import path from "path";
 import type { Course } from "@/lib/types";
 
-const coursesDir = path.join(process.cwd(), "content/courses");
+import karpathyLlmWiki from "./karpathy-llm-wiki.json";
+import agenticOsContextLevels from "./agentic-os-context-levels.json";
+import handySpeechToText from "./handy-speech-to-text.json";
 
-const jsonFiles = fs
-  .readdirSync(coursesDir)
-  .filter((f) => f.endsWith(".json"));
-
-export const courses: Course[] = jsonFiles.map((file) => {
-  const raw = fs.readFileSync(path.join(coursesDir, file), "utf-8");
-  return JSON.parse(raw) as Course;
-});
+export const courses: Course[] = [
+  karpathyLlmWiki as Course,
+  agenticOsContextLevels as Course,
+  handySpeechToText as Course,
+];

@@ -33,13 +33,13 @@ Eine TypeScript-Datei erstellen, die dem `Course`-Interface entspricht (siehe Da
 - **Kurs-Outro** — 3-5 Kernerkenntnisse, konkreter nächster Schritt, Newsletter-CTA
 
 ### 3. Datei speichern
-Als `/content/courses/[slug].ts` — der Slug ist URL-safe, englisch, kebab-case.
+Als `/content/courses/[slug].json` — der Slug ist URL-safe, englisch, kebab-case. Kurse werden automatisch aus allen JSON-Dateien im Ordner geladen (kein manueller Import in `index.ts` nötig).
 
-### 4. Kurs registrieren
-In `/content/courses/index.ts` importieren und zum `courses`-Array hinzufügen.
-
-### 5. Commit & Push
+### 4. Commit & Push
 `git add`, `git commit`, `git push origin main` — Vercel deployed automatisch.
+
+### 5. Manuelle Anpassungen
+Julian kann Kurse auch über das Decap CMS unter `/admin` editieren (Text, Quizzes, Bilder, Meta). Decap committed direkt ins Repo.
 
 ### 6. Prüfen
 Auf der Live-URL den Kurs durchspielen, Feedback einarbeiten.
@@ -233,7 +233,7 @@ components/
 
 content/courses/              → Kurs-Daten als TypeScript-Dateien
   index.ts                    → Kurs-Registry
-  karpathy-llm-wiki.ts       → Erster Kurs (Referenz-Template)
+  karpathy-llm-wiki.json     → Erster Kurs (Referenz-Template)
 
 lib/
   types.ts                    → Alle TypeScript-Typen
@@ -259,8 +259,8 @@ lib/
 
 ## Referenz-Kurse
 
-- `/content/courses/karpathy-llm-wiki.ts` — Erster Kurs, technisch (ai-tech), Dark Theme (Lila/Teal)
-- `/content/courses/agentic-os-context-levels.ts` — Zweiter Kurs, Workflow (ai-workflows), Dark Theme (Amber/Blau)
+- `/content/courses/karpathy-llm-wiki.json` — Erster Kurs, technisch (ai-tech), Dark Theme (Lila/Teal)
+- `/content/courses/agentic-os-context-levels.json` — Zweiter Kurs, Workflow (ai-workflows), Dark Theme (Amber/Blau)
 
 Der jeweils letzte Kurs dient als primäre Referenz für Struktur, Tonfall und Element-Einsatz.
 

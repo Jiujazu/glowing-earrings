@@ -32,6 +32,7 @@
                 extension: "json",
                 format: "json",
                 create: false,
+                filter: { field: "meta", pattern: "." },
                 fields: [
                   {
                     label: "Meta",
@@ -62,12 +63,12 @@
                             name: "colors",
                             widget: "object",
                             fields: [
-                              { label: "Background", name: "background", widget: "color" },
-                              { label: "Surface", name: "surface", widget: "color" },
-                              { label: "Primary", name: "primary", widget: "color" },
-                              { label: "Accent", name: "accent", widget: "color" },
-                              { label: "Text", name: "textColor", widget: "color" },
-                              { label: "Text Muted", name: "textMuted", widget: "color" }
+                              { label: "Background", name: "background", widget: "string" },
+                              { label: "Surface", name: "surface", widget: "string" },
+                              { label: "Primary", name: "primary", widget: "string" },
+                              { label: "Accent", name: "accent", widget: "string" },
+                              { label: "Text", name: "text", widget: "string" },
+                              { label: "Text Muted", name: "textMuted", widget: "string" }
                             ]
                           }
                         ]

@@ -62,58 +62,67 @@ export default function CourseFilters({ courses }: CourseFiltersProps) {
   return (
     <div>
       {/* Filter bar */}
-      <div className="space-y-3 mb-8">
+      <div className="space-y-4 mb-8">
         {/* Category filter */}
         {usedCategories.length > 1 && (
-          <div className="flex flex-wrap gap-2">
-            {usedCategories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
-                className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 ${
-                  activeCategory === cat
-                    ? "bg-[var(--accent)] text-white"
-                    : "bg-[var(--surface)] text-[var(--text-secondary)] border border-[var(--border)] hover:border-[var(--accent)]/40 hover:text-[var(--accent)]"
-                }`}
-              >
-                {categoryLabels[cat]}
-              </button>
-            ))}
+          <div>
+            <p className="text-xs font-medium text-[var(--text-muted)] uppercase tracking-wide mb-2">Kategorie</p>
+            <div className="flex flex-wrap gap-2">
+              {usedCategories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 ${
+                    activeCategory === cat
+                      ? "bg-[var(--accent)] text-white"
+                      : "bg-[var(--surface)] text-[var(--text-secondary)] border border-[var(--border)] hover:border-[var(--accent)]/40 hover:text-[var(--accent)]"
+                  }`}
+                >
+                  {categoryLabels[cat]}
+                </button>
+              ))}
+            </div>
           </div>
         )}
 
-        {/* Difficulty tabs */}
-        <div className="flex flex-wrap gap-2">
-          {difficulties.map((diff) => (
-            <button
-              key={diff}
-              onClick={() => setActiveDifficulty(activeDifficulty === diff ? null : diff)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 ${
-                activeDifficulty === diff
-                  ? "bg-[var(--brand)] text-white"
-                  : "bg-[var(--surface)] text-[var(--text-secondary)] border border-[var(--border)] hover:border-[var(--brand)]/40 hover:text-[var(--brand)]"
-              }`}
-            >
-              {getDifficultyLabel(diff)}
-            </button>
-          ))}
+        {/* Difficulty */}
+        <div>
+          <p className="text-xs font-medium text-[var(--text-muted)] uppercase tracking-wide mb-2">Schwierigkeit</p>
+          <div className="flex flex-wrap gap-2">
+            {difficulties.map((diff) => (
+              <button
+                key={diff}
+                onClick={() => setActiveDifficulty(activeDifficulty === diff ? null : diff)}
+                className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 ${
+                  activeDifficulty === diff
+                    ? "bg-[var(--brand)] text-white"
+                    : "bg-[var(--surface)] text-[var(--text-secondary)] border border-[var(--border)] hover:border-[var(--brand)]/40 hover:text-[var(--brand)]"
+                }`}
+              >
+                {getDifficultyLabel(diff)}
+              </button>
+            ))}
+          </div>
+        </div>
 
-          <span className="w-px h-6 bg-[var(--border)] self-center mx-1" />
-
-          {/* Tag pills */}
-          {allTags.map((tag) => (
-            <button
-              key={tag}
-              onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 ${
-                activeTag === tag
-                  ? "bg-[var(--pop-turquoise)] text-white"
-                  : "bg-[var(--surface)] text-[var(--text-muted)] border border-[var(--border)] hover:border-[var(--pop-turquoise)]/40 hover:text-[var(--pop-turquoise)]"
-              }`}
-            >
-              {tag}
-            </button>
-          ))}
+        {/* Tags */}
+        <div>
+          <p className="text-xs font-medium text-[var(--text-muted)] uppercase tracking-wide mb-2">Themen</p>
+          <div className="flex flex-wrap gap-2">
+            {allTags.map((tag) => (
+              <button
+                key={tag}
+                onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+                className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 ${
+                  activeTag === tag
+                    ? "bg-[var(--pop-turquoise)] text-white"
+                    : "bg-[var(--surface)] text-[var(--text-muted)] border border-[var(--border)] hover:border-[var(--pop-turquoise)]/40 hover:text-[var(--pop-turquoise)]"
+                }`}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Active filter summary */}

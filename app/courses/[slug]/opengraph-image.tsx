@@ -1,15 +1,22 @@
 import { ImageResponse } from "next/og";
 import { getCourseBySlug, getDifficultyLabel } from "@/lib/course-utils";
 
-export async function GET(
-  _request: Request,
-  { params }: { params: Promise<{ slug: string }> }
-) {
+export const size = { width: 1200, height: 630 };
+export const contentType = "image/png";
+
+export default async function OgImage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const course = getCourseBySlug(slug);
 
   if (!course) {
-    return new Response("Not found", { status: 404 });
+    return new ImageResponse(
+      (<div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#0C0C0E", color: "#F4F4F5", fontSize: "32px" }}>Kurs nicht gefunden</div>),
+      size
+    );
   }
 
   const { meta } = course;
@@ -29,14 +36,7 @@ export async function GET(
           fontFamily: "system-ui, sans-serif",
         }}
       >
-        {/* Top: brand */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "12px",
-          }}
-        >
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <div
             style={{
               width: "8px",
@@ -51,76 +51,59 @@ export async function GET(
               fontWeight: 600,
               color: colors.textMuted,
               letterSpacing: "0.1em",
-              textTransform: "uppercase" as const,
             }}
           >
-            Glowing Earrings
+            GLOWING EARRINGS
           </span>
         </div>
 
-        {/* Center: title + subtitle */}
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-          <h1
+          <div
             style={{
               fontSize: "56px",
               fontWeight: 800,
               color: colors.text,
               lineHeight: 1.1,
-              margin: 0,
             }}
           >
             {meta.title}
-          </h1>
-          <p
+          </div>
+          <div
             style={{
               fontSize: "24px",
               color: colors.textMuted,
               lineHeight: 1.4,
-              margin: 0,
               maxWidth: "80%",
             }}
           >
             {meta.subtitle}
-          </p>
+          </div>
         </div>
 
-        {/* Bottom: metadata */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "24px",
-          }}
-        >
+        <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "8px",
               padding: "8px 16px",
               borderRadius: "9999px",
               backgroundColor: colors.primary,
+              fontSize: "16px",
+              fontWeight: 700,
+              color: "#FFFFFF",
             }}
           >
-            <span style={{ fontSize: "16px", fontWeight: 700, color: "#FFFFFF" }}>
-              {getDifficultyLabel(meta.difficulty)}
-            </span>
+            {getDifficultyLabel(meta.difficulty)}
           </div>
-          <span style={{ fontSize: "18px", color: colors.textMuted }}>
+          <div style={{ fontSize: "18px", color: colors.textMuted }}>
             ~{meta.estimatedMinutes} Min.
-          </span>
-          <span style={{ fontSize: "18px", color: colors.textMuted }}>
-            ·
-          </span>
-          <span style={{ fontSize: "18px", color: colors.textMuted }}>
+          </div>
+          <div style={{ fontSize: "18px", color: colors.textMuted }}>
             {meta.sourceAuthor}
-          </span>
+          </div>
         </div>
       </div>
     ),
-    {
-      width: 1200,
-      height: 630,
-    }
+    size
   );
 }

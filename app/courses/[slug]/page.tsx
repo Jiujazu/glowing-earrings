@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getCourseBySlug, getAllCourseSlugs, getAllCoursesIncludingDrafts } from "@/lib/course-utils";
+import { getCourseBySlug, getAllCoursesIncludingDrafts } from "@/lib/course-utils";
 import CoursePlayer from "@/components/course/CoursePlayer";
 
 interface CoursePageProps {

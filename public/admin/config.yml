@@ -1,0 +1,227 @@
+backend:
+  name: github
+  repo: Jiujazu/glowing-earrings
+  branch: main
+
+media_folder: public/courses
+public_folder: /courses
+
+collections:
+  - name: courses
+    label: Kurse
+    folder: content/courses
+    extension: json
+    format: json
+    create: true
+    slug: "{{fields.meta.slug}}"
+    identifier_field: meta.slug
+    summary: "{{fields.meta.title}} — {{fields.meta.subheading}}"
+    fields:
+      # ========== META ==========
+      - label: Meta
+        name: meta
+        widget: object
+        fields:
+          - { label: Slug, name: slug, widget: string, hint: "URL-safe, englisch, kebab-case" }
+          - { label: Titel, name: title, widget: string }
+          - { label: Subheading, name: subheading, widget: string, required: false }
+          - { label: Subtitle (Infotext), name: subtitle, widget: text }
+          - { label: Quell-URL, name: sourceUrl, widget: string }
+          - { label: Quell-Autor, name: sourceAuthor, widget: string }
+          - label: Quell-Typ
+            name: sourceType
+            widget: select
+            options: [tweet, video, article, document, gist, tool, other]
+          - label: Kategorie
+            name: category
+            widget: select
+            options:
+              - { label: "KI-Technologie & Tools", value: ai-tech }
+              - { label: "KI + Kreativität", value: ai-creativity }
+              - { label: "KI + Gesellschaft", value: ai-society }
+              - { label: "KI-Workflows & Productivity", value: ai-workflows }
+          - { label: Tags, name: tags, widget: list, allow_add: true }
+          - { label: "Dauer (Minuten)", name: estimatedMinutes, widget: number, value_type: int }
+          - label: Schwierigkeit
+            name: difficulty
+            widget: select
+            options:
+              - { label: Einsteiger, value: beginner }
+              - { label: Fortgeschritten, value: intermediate }
+              - { label: Experte, value: advanced }
+          - { label: "Veröffentlicht am", name: publishedAt, widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false }
+          - { label: Entwurf, name: draft, widget: boolean, default: false, required: false }
+          - { label: "Verwandte Kurse (Slugs)", name: relatedCourses, widget: list, required: false }
+          - label: Design
+            name: design
+            widget: object
+            fields:
+              - { label: Theme-Name, name: theme, widget: string }
+              - label: Farben (Dark)
+                name: colors
+                widget: object
+                fields:
+                  - { label: Background, name: background, widget: string }
+                  - { label: Surface, name: surface, widget: string }
+                  - { label: Primary, name: primary, widget: string }
+                  - { label: Accent, name: accent, widget: string }
+                  - { label: Text, name: text, widget: string }
+                  - { label: Text Muted, name: textMuted, widget: string }
+              - label: Farben (Light)
+                name: lightColors
+                widget: object
+                required: false
+                fields:
+                  - { label: Background, name: background, widget: string }
+                  - { label: Surface, name: surface, widget: string }
+                  - { label: Primary, name: primary, widget: string }
+                  - { label: Accent, name: accent, widget: string }
+                  - { label: Text, name: text, widget: string }
+                  - { label: Text Muted, name: textMuted, widget: string }
+
+      # ========== INTRO ==========
+      - label: Intro
+        name: intro
+        widget: object
+        fields:
+          - { label: Hook, name: hook, widget: text }
+          - { label: Quell-Kontext, name: sourceContext, widget: text }
+
+      # ========== MODULES ==========
+      - label: Module
+        name: modules
+        widget: list
+        fields:
+          - { label: ID, name: id, widget: string }
+          - { label: Titel, name: title, widget: string }
+          - { label: "Dauer (Minuten)", name: estimatedMinutes, widget: number, value_type: int }
+          - { label: "Übergang zum nächsten Modul", name: transitionToNext, widget: text, required: false }
+          - label: Elemente
+            name: elements
+            widget: list
+            types:
+              - label: Fließtext
+                name: content
+                widget: object
+                fields:
+                  - { label: ID, name: id, widget: string }
+                  - { label: Typ, name: type, widget: hidden, default: content }
+                  - { label: Text, name: text, widget: markdown }
+              - label: Key Concept
+                name: key-concept
+                widget: object
+                fields:
+                  - { label: ID, name: id, widget: string }
+                  - { label: Typ, name: type, widget: hidden, default: key-concept }
+                  - { label: Titel, name: title, widget: string }
+                  - { label: Beschreibung, name: description, widget: text }
+              - label: Callout
+                name: callout
+                widget: object
+                fields:
+                  - { label: ID, name: id, widget: string }
+                  - { label: Typ, name: type, widget: hidden, default: callout }
+                  - label: Variante
+                    name: variant
+                    widget: select
+                    options: [quote, stat, example, warning, tip, fun-fact]
+                  - { label: Titel, name: title, widget: string, required: false }
+                  - { label: Text, name: text, widget: markdown }
+              - label: Context Box
+                name: context-box
+                widget: object
+                fields:
+                  - { label: ID, name: id, widget: string }
+                  - { label: Typ, name: type, widget: hidden, default: context-box }
+                  - { label: Begriff, name: term, widget: string }
+                  - { label: Erklärung, name: explanation, widget: text }
+              - label: Quiz
+                name: quiz
+                widget: object
+                fields:
+                  - { label: ID, name: id, widget: string }
+                  - { label: Typ, name: type, widget: hidden, default: quiz }
+                  - { label: Frage, name: question, widget: string }
+                  - { label: Erklärung, name: explanation, widget: text }
+                  - label: Optionen
+                    name: options
+                    widget: list
+                    fields:
+                      - { label: Text, name: text, widget: string }
+                      - { label: Korrekt, name: correct, widget: boolean, default: false }
+                      - { label: Feedback, name: feedback, widget: text }
+              - label: Flashcard
+                name: flashcard
+                widget: object
+                fields:
+                  - { label: ID, name: id, widget: string }
+                  - { label: Typ, name: type, widget: hidden, default: flashcard }
+                  - { label: Vorderseite, name: front, widget: text }
+                  - { label: Rückseite, name: back, widget: text }
+              - label: Reflexion
+                name: reflection
+                widget: object
+                fields:
+                  - { label: ID, name: id, widget: string }
+                  - { label: Typ, name: type, widget: hidden, default: reflection }
+                  - { label: Frage, name: prompt, widget: text }
+                  - { label: Platzhalter, name: placeholder, widget: string, required: false }
+              - label: Easter Egg
+                name: easter-egg
+                widget: object
+                fields:
+                  - { label: ID, name: id, widget: string }
+                  - { label: Typ, name: type, widget: hidden, default: easter-egg }
+                  - label: Trigger
+                    name: trigger
+                    widget: select
+                    options: [click, hover, scroll, konami, idle]
+                  - { label: Inhalt, name: content, widget: text }
+              - label: Bild
+                name: image
+                widget: object
+                fields:
+                  - { label: ID, name: id, widget: string }
+                  - { label: Typ, name: type, widget: hidden, default: image }
+                  - { label: Bild, name: src, widget: image }
+                  - { label: Alt-Text, name: alt, widget: string }
+                  - { label: Bildunterschrift, name: caption, widget: string, required: false }
+              - label: Code Block
+                name: code-block
+                widget: object
+                fields:
+                  - { label: ID, name: id, widget: string }
+                  - { label: Typ, name: type, widget: hidden, default: code-block }
+                  - { label: Code, name: code, widget: text }
+                  - { label: Sprache, name: language, widget: string, required: false }
+                  - { label: Dateiname, name: filename, widget: string, required: false }
+              - label: Step by Step
+                name: step-by-step
+                widget: object
+                fields:
+                  - { label: ID, name: id, widget: string }
+                  - { label: Typ, name: type, widget: hidden, default: step-by-step }
+                  - { label: Titel, name: title, widget: string, required: false }
+                  - label: Schritte
+                    name: steps
+                    widget: list
+                    fields:
+                      - { label: Label, name: label, widget: string }
+                      - { label: Inhalt, name: content, widget: markdown }
+
+      # ========== OUTRO ==========
+      - label: Outro
+        name: outro
+        widget: object
+        fields:
+          - { label: "Synthese (Kernerkenntnisse)", name: synthesis, widget: list }
+          - { label: "Nächster Schritt", name: nextStep, widget: text }
+          - label: Takeaway-Checkliste
+            name: takeaway
+            widget: list
+            required: false
+            fields:
+              - { label: Emoji, name: emoji, widget: string }
+              - { label: Text, name: text, widget: string }
+          - { label: Quell-URL, name: sourceUrl, widget: string }
+          - { label: Newsletter-CTA, name: newsletterCTA, widget: text }

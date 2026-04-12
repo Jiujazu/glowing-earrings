@@ -13,9 +13,8 @@ collections:
     extension: json
     format: json
     create: true
-    slug: "{{fields.meta.slug}}"
-    identifier_field: meta.slug
-    summary: "{{fields.meta.title}} — {{fields.meta.subheading}}"
+    slug: "{{meta-slug}}"
+    summary: "{{meta-title}}"
     fields:
       # ========== META ==========
       - label: Meta
@@ -49,7 +48,7 @@ collections:
               - { label: Einsteiger, value: beginner }
               - { label: Fortgeschritten, value: intermediate }
               - { label: Experte, value: advanced }
-          - { label: "Veröffentlicht am", name: publishedAt, widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false }
+          - { label: "Veröffentlicht am", name: publishedAt, widget: string, hint: "ISO-Datum, z.B. 2026-04-12" }
           - { label: Entwurf, name: draft, widget: boolean, default: false, required: false }
           - { label: "Verwandte Kurse (Slugs)", name: relatedCourses, widget: list, required: false }
           - label: Design
@@ -61,7 +60,7 @@ collections:
                 name: colors
                 widget: object
                 fields:
-                  - { label: Background, name: background, widget: string }
+                  - { label: Background, name: background, widget: string, hint: "Hex, z.B. #0E0B1A" }
                   - { label: Surface, name: surface, widget: string }
                   - { label: Primary, name: primary, widget: string }
                   - { label: Accent, name: accent, widget: string }
@@ -99,115 +98,58 @@ collections:
           - label: Elemente
             name: elements
             widget: list
-            types:
-              - label: Fließtext
-                name: content
-                widget: object
+            fields:
+              - { label: ID, name: id, widget: string }
+              - label: Typ
+                name: type
+                widget: select
+                options:
+                  - content
+                  - key-concept
+                  - callout
+                  - context-box
+                  - quiz
+                  - flashcard
+                  - reflection
+                  - easter-egg
+                  - image
+                  - code-block
+                  - step-by-step
+              - { label: Text / Code, name: text, widget: text, required: false, hint: "Für content, callout" }
+              - { label: Titel / Begriff / Frage, name: title, widget: string, required: false, hint: "Für key-concept, callout, step-by-step, quiz" }
+              - { label: Beschreibung / Erklärung, name: description, widget: text, required: false, hint: "Für key-concept, context-box (als explanation)" }
+              - { label: Variante, name: variant, widget: select, options: [quote, stat, example, warning, tip, fun-fact], required: false, hint: "Nur für callout" }
+              - { label: Frage (Quiz), name: question, widget: string, required: false }
+              - { label: Erklärung (Quiz), name: explanation, widget: text, required: false }
+              - label: "Optionen (Quiz)"
+                name: options
+                widget: list
+                required: false
                 fields:
-                  - { label: ID, name: id, widget: string }
-                  - { label: Typ, name: type, widget: hidden, default: content }
-                  - { label: Text, name: text, widget: markdown }
-              - label: Key Concept
-                name: key-concept
-                widget: object
+                  - { label: Text, name: text, widget: string }
+                  - { label: Korrekt, name: correct, widget: boolean, default: false }
+                  - { label: Feedback, name: feedback, widget: text }
+              - { label: Vorderseite (Flashcard), name: front, widget: text, required: false }
+              - { label: Rückseite (Flashcard), name: back, widget: text, required: false }
+              - { label: Frage (Reflexion), name: prompt, widget: text, required: false }
+              - { label: Platzhalter, name: placeholder, widget: string, required: false }
+              - { label: Trigger (Easter Egg), name: trigger, widget: select, options: [click, hover, scroll, konami, idle], required: false }
+              - { label: Inhalt (Easter Egg), name: content, widget: text, required: false }
+              - { label: Bild, name: src, widget: image, required: false }
+              - { label: Alt-Text, name: alt, widget: string, required: false }
+              - { label: Bildunterschrift, name: caption, widget: string, required: false }
+              - { label: Code, name: code, widget: text, required: false }
+              - { label: Sprache, name: language, widget: string, required: false }
+              - { label: Dateiname, name: filename, widget: string, required: false }
+              - { label: "Context-Box Begriff", name: term, widget: string, required: false }
+              - { label: "Context-Box Erklärung", name: explanation, widget: text, required: false }
+              - label: "Schritte (Step-by-Step)"
+                name: steps
+                widget: list
+                required: false
                 fields:
-                  - { label: ID, name: id, widget: string }
-                  - { label: Typ, name: type, widget: hidden, default: key-concept }
-                  - { label: Titel, name: title, widget: string }
-                  - { label: Beschreibung, name: description, widget: text }
-              - label: Callout
-                name: callout
-                widget: object
-                fields:
-                  - { label: ID, name: id, widget: string }
-                  - { label: Typ, name: type, widget: hidden, default: callout }
-                  - label: Variante
-                    name: variant
-                    widget: select
-                    options: [quote, stat, example, warning, tip, fun-fact]
-                  - { label: Titel, name: title, widget: string, required: false }
-                  - { label: Text, name: text, widget: markdown }
-              - label: Context Box
-                name: context-box
-                widget: object
-                fields:
-                  - { label: ID, name: id, widget: string }
-                  - { label: Typ, name: type, widget: hidden, default: context-box }
-                  - { label: Begriff, name: term, widget: string }
-                  - { label: Erklärung, name: explanation, widget: text }
-              - label: Quiz
-                name: quiz
-                widget: object
-                fields:
-                  - { label: ID, name: id, widget: string }
-                  - { label: Typ, name: type, widget: hidden, default: quiz }
-                  - { label: Frage, name: question, widget: string }
-                  - { label: Erklärung, name: explanation, widget: text }
-                  - label: Optionen
-                    name: options
-                    widget: list
-                    fields:
-                      - { label: Text, name: text, widget: string }
-                      - { label: Korrekt, name: correct, widget: boolean, default: false }
-                      - { label: Feedback, name: feedback, widget: text }
-              - label: Flashcard
-                name: flashcard
-                widget: object
-                fields:
-                  - { label: ID, name: id, widget: string }
-                  - { label: Typ, name: type, widget: hidden, default: flashcard }
-                  - { label: Vorderseite, name: front, widget: text }
-                  - { label: Rückseite, name: back, widget: text }
-              - label: Reflexion
-                name: reflection
-                widget: object
-                fields:
-                  - { label: ID, name: id, widget: string }
-                  - { label: Typ, name: type, widget: hidden, default: reflection }
-                  - { label: Frage, name: prompt, widget: text }
-                  - { label: Platzhalter, name: placeholder, widget: string, required: false }
-              - label: Easter Egg
-                name: easter-egg
-                widget: object
-                fields:
-                  - { label: ID, name: id, widget: string }
-                  - { label: Typ, name: type, widget: hidden, default: easter-egg }
-                  - label: Trigger
-                    name: trigger
-                    widget: select
-                    options: [click, hover, scroll, konami, idle]
+                  - { label: Label, name: label, widget: string }
                   - { label: Inhalt, name: content, widget: text }
-              - label: Bild
-                name: image
-                widget: object
-                fields:
-                  - { label: ID, name: id, widget: string }
-                  - { label: Typ, name: type, widget: hidden, default: image }
-                  - { label: Bild, name: src, widget: image }
-                  - { label: Alt-Text, name: alt, widget: string }
-                  - { label: Bildunterschrift, name: caption, widget: string, required: false }
-              - label: Code Block
-                name: code-block
-                widget: object
-                fields:
-                  - { label: ID, name: id, widget: string }
-                  - { label: Typ, name: type, widget: hidden, default: code-block }
-                  - { label: Code, name: code, widget: text }
-                  - { label: Sprache, name: language, widget: string, required: false }
-                  - { label: Dateiname, name: filename, widget: string, required: false }
-              - label: Step by Step
-                name: step-by-step
-                widget: object
-                fields:
-                  - { label: ID, name: id, widget: string }
-                  - { label: Typ, name: type, widget: hidden, default: step-by-step }
-                  - { label: Titel, name: title, widget: string, required: false }
-                  - label: Schritte
-                    name: steps
-                    widget: list
-                    fields:
-                      - { label: Label, name: label, widget: string }
-                      - { label: Inhalt, name: content, widget: markdown }
 
       # ========== OUTRO ==========
       - label: Outro

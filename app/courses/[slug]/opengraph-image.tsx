@@ -1,8 +1,6 @@
 import { ImageResponse } from "next/og";
 import { getCourseBySlug, getDifficultyLabel } from "@/lib/course-utils";
 
-export const runtime = "edge";
-
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ slug: string }> }

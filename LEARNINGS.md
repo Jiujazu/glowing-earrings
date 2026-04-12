@@ -48,6 +48,12 @@
 - **6 Module für 7 Level:** Level 1-2 wurden zu einem Modul kombiniert — funktioniert, aber das erste Modul ist dadurch etwas länger als die anderen. Bei ähnlichen Strukturen: lieber gleichmäßig aufteilen
 - **Step-by-Step braucht mehr visuelle Differenzierung:** Der Akkordeon-Stil funktioniert, aber die einzelnen Schritte könnten visuell stärker voneinander abgegrenzt sein (z.B. durch farbige Nummern oder Icons)
 
+### Prozess-Learning: Große Kurse in Teilen schreiben
+- Die Kursdatei war zu groß, um sie in einem Stück zu generieren — wiederholte Stream-Timeouts ("API Error: Stream idle timeout")
+- **Lösung:** Kurs in 3 Schritten schreiben: (1) Meta + Intro + Module 1-2, (2) Module 3-4 per Edit anhängen, (3) Module 5-6 per Edit anhängen
+- **Faustregel für zukünftige Kurse:** Immer in Blöcken von 2 Modulen schreiben. Erst die Datei mit den ersten Modulen anlegen (Write), dann die restlichen per Edit anhängen
+- Die Outro-Sektion kann schon im ersten Schritt mit angelegt werden — sie ändert sich selten und dient als Anker für die Edits
+
 ### Patterns zum Wiederverwenden
 - **Code-Block für Dateistrukturen:** `code-block` mit `highlightLines` eignet sich hervorragend, um Konfigurationsdateien (CLAUDE.md, skill.md) zu erklären — besser als Fließtext
 - **Step-by-Step für Tutorials:** Mehrstufige Prozesse (z.B. "Skill erstellen") als `step-by-step`-Element statt als nummerierte Liste im Content — interaktiver und weniger Wall-of-Text

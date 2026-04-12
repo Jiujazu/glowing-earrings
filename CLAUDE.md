@@ -15,10 +15,9 @@ Eine kostenlose, interaktive Lernplattform für generative KI. Kuratiert von Jul
 ## Kurs-Erstellungs-Workflow
 
 ### 0. Pre-Flight (PFLICHT vor jeder Kurs-Erstellung)
-1. **Lies `LEARNINGS.md`** — komplett, insbesondere die "Goldene Regeln" am Anfang
-2. **Lies `COURSE-STYLEGUIDE.md`** — mindestens die Qualitäts-Checkliste (Abschnitt 7)
-3. **Lies den letzten fertigen Kurs** als Referenz für Struktur, Tonfall und Element-Einsatz
-4. **Große Kurse in Blöcken schreiben** — erst Meta + Intro + Module 1-2 (Write), dann je 2 Module per Edit anhängen
+1. **Lies `COURSE-STYLEGUIDE.md`** — komplett, insbesondere Mobile-First (Abschnitt 1) und Qualitäts-Checkliste (Abschnitt 7)
+2. **Lies den letzten fertigen Kurs** als Referenz für Struktur, Tonfall und Element-Einsatz
+3. **Große Kurse in Blöcken schreiben** — erst Meta + Intro + Module 1-2 (Write), dann je 2 Module per Edit anhängen
 
 ### 1. Quelle identifizieren
 Julian liefert einen Link oder Inhalt: Tweet, Artikel, Video, Gist, Paper.
@@ -46,9 +45,8 @@ In `/content/courses/index.ts` importieren und zum `courses`-Array hinzufügen.
 Auf der Live-URL den Kurs durchspielen, Feedback einarbeiten.
 
 ### 7. Post-Flight (PFLICHT nach jeder Kurs-Erstellung)
-1. **`LEARNINGS.md` updaten** — 3-5 Erkenntnisse unter "Was funktioniert hat", "Was besser geht", "Patterns"
-2. **Goldene Regeln prüfen** — Wenn ein neues Pattern sich bewährt, in die Goldene-Regeln-Sektion aufnehmen
-3. **`COURSE-STYLEGUIDE.md` prüfen** — Wenn sich ein Learning über 3+ Kurse bewährt hat, als permanente Regel hochziehen
+1. **`COURSE-STYLEGUIDE.md` Kurs-Historie updaten** — 3-5 Erkenntnisse als neuen Kurs-Eintrag in Abschnitt 10
+2. **Regeln prüfen** — Wenn ein neues Pattern sich bewährt, als permanente Regel in den passenden Abschnitt aufnehmen
 
 ---
 
@@ -266,10 +264,9 @@ lib/
 
 Der jeweils letzte Kurs dient als primäre Referenz für Struktur, Tonfall und Element-Einsatz.
 
-## Lern-System (3 Schichten)
+## Lern-System
 
 Das Lern-System sorgt dafür, dass jeder neue Kurs besser wird als der vorherige:
 
 1. **`CLAUDE.md`** (diese Datei) — **Router.** Wird automatisch geladen. Definiert den Workflow inkl. Pre-Flight und Post-Flight Pflichten.
-2. **`LEARNINGS.md`** — **Case Law.** Wächst mit jedem Kurs. Enthält "Goldene Regeln" (destilliertes Konzentrat) oben und detaillierte Erkenntnisse pro Kurs darunter. **Immer komplett lesen vor Kurs-Erstellung.**
-3. **`COURSE-STYLEGUIDE.md`** — **Verfassung.** Stabile didaktische Prinzipien und Qualitäts-Checkliste. Ändert sich selten. Learnings, die sich über 3+ Kurse bewähren, werden hier zu permanenten Regeln hochgezogen.
+2. **`COURSE-STYLEGUIDE.md`** — **Alle Regeln + Kurs-Historie.** Didaktische Prinzipien, Mobile-First-Regeln, Qualitäts-Checkliste, technische Regeln und die wachsende Kurs-Historie. **Immer komplett lesen vor Kurs-Erstellung.**

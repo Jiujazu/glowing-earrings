@@ -33,7 +33,7 @@ Eine TypeScript-Datei erstellen, die dem `Course`-Interface entspricht (siehe Da
 - **Kurs-Outro** — 3-5 Kernerkenntnisse, konkreter nächster Schritt, Newsletter-CTA
 
 ### 3. Datei speichern
-Als `/content/courses/[slug].json` — der Slug ist URL-safe, englisch, kebab-case. Kurse werden automatisch aus allen JSON-Dateien im Ordner geladen (kein manueller Import in `index.ts` nötig).
+Als `/content/courses/[slug].json` — der Slug ist URL-safe, englisch, kebab-case. Neue Kurse müssen in `/content/courses/index.ts` importiert und zum Array hinzugefügt werden.
 
 ### 4. Commit & Push
 `git add`, `git commit`, `git push origin main` — Vercel deployed automatisch.

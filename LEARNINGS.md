@@ -4,6 +4,36 @@
 
 ---
 
+## Goldene Regeln (destilliert aus allen Kursen)
+
+> Diese Regeln sind das Konzentrat aller bisherigen Kurse. Lies sie vor jeder Kurs-Erstellung. Neue Regeln kommen nur dazu, wenn sie sich in mindestens 2 Kursen bewährt haben.
+
+### Prozess
+- **Große Kurse in 2-Modul-Blöcken schreiben.** Erst Meta + Intro + Module 1-2 (Write), dann je 2 Module per Edit anhängen. Verhindert Stream-Timeouts.
+- **Outro kann im ersten Block mit angelegt werden** — ändert sich selten und dient als Anker für die Edits.
+
+### Didaktik
+- **Flashcards: "Warum"-Fragen statt Definitionen.** "Warum reicht RAG allein nicht?" statt "Was ist RAG?"
+- **Quiz-Feedback max 2 Sätze**, Explanation darf länger sein.
+- **Nie mehr als 2 Content-Blöcke hintereinander** ohne interaktives Element.
+- **Kein overview im Intro** — die CourseNav übernimmt das.
+
+### Element-Einsatz
+- **`code-block` für Dateistrukturen und Configs** (CLAUDE.md, skill.md) — besser als Fließtext.
+- **`step-by-step` für mehrstufige Tutorials** — interaktiver als nummerierte Listen.
+- **`context-box` für Fachbegriffe** — hält den Lesefluss für Fortgeschrittene, hilft Einsteigern.
+
+### Design
+- **Warme Farben (Amber/Orange) für Productivity-Kurse**, kühle (Lila/Teal) für technische Kurse.
+- **Keine Emojis in der Modul-Navigation** — nur im Modul-Header.
+- **Custom Cursor ist Noise** — ausprobiert und verworfen.
+
+### Kurs-Vernetzung
+- **`relatedCourses` immer gegenseitig setzen** — Kurs A → B und B → A.
+- **Modul-Übergänge: Querverweise auf andere Kurse** bevorzugen statt generischer Cliff-Hanger.
+
+---
+
 ## Kurs 1: Das LLM Wiki (2026-04-10)
 
 **Quelle:** Andrej Karpathy, GitHub Gist — Intermediate

@@ -14,6 +14,12 @@ Eine kostenlose, interaktive Lernplattform für generative KI. Kuratiert von Jul
 
 ## Kurs-Erstellungs-Workflow
 
+### 0. Pre-Flight (PFLICHT vor jeder Kurs-Erstellung)
+1. **Lies `LEARNINGS.md`** — komplett, insbesondere die "Goldene Regeln" am Anfang
+2. **Lies `COURSE-STYLEGUIDE.md`** — mindestens die Qualitäts-Checkliste (Abschnitt 7)
+3. **Lies den letzten fertigen Kurs** als Referenz für Struktur, Tonfall und Element-Einsatz
+4. **Große Kurse in Blöcken schreiben** — erst Meta + Intro + Module 1-2 (Write), dann je 2 Module per Edit anhängen
+
 ### 1. Quelle identifizieren
 Julian liefert einen Link oder Inhalt: Tweet, Artikel, Video, Gist, Paper.
 
@@ -38,6 +44,11 @@ In `/content/courses/index.ts` importieren und zum `courses`-Array hinzufügen.
 
 ### 6. Prüfen
 Auf der Live-URL den Kurs durchspielen, Feedback einarbeiten.
+
+### 7. Post-Flight (PFLICHT nach jeder Kurs-Erstellung)
+1. **`LEARNINGS.md` updaten** — 3-5 Erkenntnisse unter "Was funktioniert hat", "Was besser geht", "Patterns"
+2. **Goldene Regeln prüfen** — Wenn ein neues Pattern sich bewährt, in die Goldene-Regeln-Sektion aufnehmen
+3. **`COURSE-STYLEGUIDE.md` prüfen** — Wenn sich ein Learning über 3+ Kurse bewährt hat, als permanente Regel hochziehen
 
 ---
 
@@ -248,11 +259,17 @@ lib/
 
 ---
 
-## Referenz-Kurs
+## Referenz-Kurse
 
-`/content/courses/karpathy-llm-wiki.ts` ist der erste und bisher einzige Kurs. Er dient als Template für die Struktur, das Format und den Tonfall aller weiteren Kurse.
+- `/content/courses/karpathy-llm-wiki.ts` — Erster Kurs, technisch (ai-tech), Dark Theme (Lila/Teal)
+- `/content/courses/agentic-os-context-levels.ts` — Zweiter Kurs, Workflow (ai-workflows), Dark Theme (Amber/Blau)
 
-## Lern-System
+Der jeweils letzte Kurs dient als primäre Referenz für Struktur, Tonfall und Element-Einsatz.
 
-- **`LEARNINGS.md`** — Wächst mit jedem Kurs. Lies diese Datei vor jeder Kurs-Erstellung. Sie enthält Erkenntnisse, Patterns und Anti-Patterns aus bisherigen Kursen.
-- **`COURSE-STYLEGUIDE.md`** — Didaktische Prinzipien, Struktur-Standards und Qualitäts-Checkliste. Definiert die Regeln, die LEARNINGS.md mit Praxiserfahrung ergänzt.
+## Lern-System (3 Schichten)
+
+Das Lern-System sorgt dafür, dass jeder neue Kurs besser wird als der vorherige:
+
+1. **`CLAUDE.md`** (diese Datei) — **Router.** Wird automatisch geladen. Definiert den Workflow inkl. Pre-Flight und Post-Flight Pflichten.
+2. **`LEARNINGS.md`** — **Case Law.** Wächst mit jedem Kurs. Enthält "Goldene Regeln" (destilliertes Konzentrat) oben und detaillierte Erkenntnisse pro Kurs darunter. **Immer komplett lesen vor Kurs-Erstellung.**
+3. **`COURSE-STYLEGUIDE.md`** — **Verfassung.** Stabile didaktische Prinzipien und Qualitäts-Checkliste. Ändert sich selten. Learnings, die sich über 3+ Kurse bewähren, werden hier zu permanenten Regeln hochgezogen.

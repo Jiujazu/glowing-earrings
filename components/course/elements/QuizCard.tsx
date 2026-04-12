@@ -26,9 +26,13 @@ export default function QuizCard({ element }: { element: QuizElement }) {
     >
       {revealed && isCorrect && <QuizConfetti />}
       {/* Question */}
-      <p className="font-heading font-bold text-lg text-[var(--course-text)] mb-4">
+      <p className="font-heading font-bold text-lg text-[var(--course-text)] mb-1">
         {element.question}
       </p>
+      {!revealed && (
+        <p className="text-xs text-[var(--course-text-muted)] mb-4">Wähle eine Antwort</p>
+      )}
+      {revealed && <div className="mb-4" />}
 
       {/* Options */}
       <div className="space-y-2">
@@ -65,11 +69,27 @@ export default function QuizCard({ element }: { element: QuizElement }) {
               `}
               style={{ borderColor, backgroundColor: bgColor }}
             >
-              <span className="text-base text-[var(--course-text)]">
-                {option.text}
+              <span className="flex items-start gap-3">
+                <span className="flex-shrink-0 mt-0.5">
+                  {!revealed && (
+                    <span className="block w-5 h-5 rounded-full border-2 border-[var(--course-text-muted)]/40" />
+                  )}
+                  {revealed && isOptionCorrect && (
+                    <span className="block w-5 h-5 rounded-full bg-[var(--course-accent)] flex items-center justify-center text-white text-xs">✓</span>
+                  )}
+                  {revealed && !isOptionCorrect && isSelected && (
+                    <span className="block w-5 h-5 rounded-full bg-[#E55B5B] flex items-center justify-center text-white text-xs">✗</span>
+                  )}
+                  {revealed && !isOptionCorrect && !isSelected && (
+                    <span className="block w-5 h-5 rounded-full border-2 border-[var(--course-text-muted)]/20" />
+                  )}
+                </span>
+                <span className="text-base text-[var(--course-text)]">
+                  {option.text}
+                </span>
               </span>
               {revealed && isSelected && (
-                <p className="mt-2 text-sm text-[var(--course-text-muted)] animate-fade-in">
+                <p className="mt-2 ml-8 text-sm text-[var(--course-text-muted)] animate-fade-in">
                   {option.feedback}
                 </p>
               )}

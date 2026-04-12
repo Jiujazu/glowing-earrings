@@ -68,18 +68,9 @@ export const agenticOsContextLevels: Course = {
           text: "### Level 1: Manueller Chat-Kontext\n\nHier stecken leider die meisten Leute fest. Kontext wird in jedem Chat manuell per Copy-Paste mitgegeben — oder schlimmer: gar nicht.\n\nEin Prompt wie *\"Schreib mir einen LinkedIn-Post über Context Infrastructure\"* liefert einen generischen Text mit M-Dashes, der nach KI schreit.",
         },
         {
-          id: "m1-callout-example",
-          type: "callout",
-          variant: "example",
-          title: "Derselbe Prompt, aber mit Kontext",
-          text: "Wenn du dem Modell vier Dinge mitgibst, wird der Output sofort besser:\n\n1. **Wer du bist** und was dein Business macht\n2. **Für wen** das ist (Zielgruppe, ICP)\n3. **Was gut aussieht** (Beispiele, Referenzen, Stil-Beschreibungen)\n4. **Rollen und Leitplanken** für die Aufgabe\n\nDas Ergebnis: kein generischer KI-Text mehr, sondern relevanter Content in deinem Ton.",
-        },
-        {
-          id: "m1-key-concept-2",
-          type: "key-concept",
-          title: "Die 4 Kontext-Dimensionen",
-          description:
-            "Für fast jede Aufgabe brauchst du vier Arten von Kontext: (1) Wer du bist, (2) Für wen das ist, (3) Was \"gut\" bedeutet — durch Beispiele und Referenzen, (4) Welche Rolle die KI einnehmen soll und welche Grenzen gelten.",
+          id: "m1-content-dimensions",
+          type: "content",
+          text: "### Die 4 Kontext-Dimensionen\n\nWenn du dem Modell vier Dinge mitgibst, wird der Output sofort besser:\n\n1. **Wer du bist** und was dein Business macht\n2. **Für wen** das ist (Zielgruppe, ICP)\n3. **Was gut aussieht** — durch Beispiele, Referenzen oder Stil-Beschreibungen\n4. **Rollen und Leitplanken** für die Aufgabe\n\nDas Ergebnis: kein generischer KI-Text mehr, sondern relevanter Content in deinem Ton.",
         },
         {
           id: "m1-quiz-1",
@@ -231,35 +222,19 @@ export const agenticOsContextLevels: Course = {
         {
           id: "m3-content-1",
           type: "content",
-          text: "Viele Aufgaben, bei denen KI helfen kann, folgen keinem festen Prozess: Ideation, Planung, Strategie, Entscheidungsfindung. Dafür brauchst du keine Skills — aber du willst trotzdem, dass die KI Kontext über dich und dein Business hat.\n\nHier wird **File Access** in Claude Code und Co-work zum Gamechanger. Mit jedem neuen Chat kannst du Claude Zugriff auf einen Ordner auf deinem Computer geben.",
-        },
-        {
-          id: "m3-key-concept",
-          type: "key-concept",
-          title: "File Access",
-          description:
-            "Claude bekommt Lese- UND Schreibzugriff auf einen lokalen Ordner. Das bedeutet: Die KI kann deine Kontext-Dateien lesen, aber auch neue Dateien speichern, bestehende aktualisieren und Assets wie Präsentationen oder Tabellen direkt ablegen. Der Kontext in deinem Ordner wächst dadurch natürlich mit jeder Nutzung.",
-        },
-        {
-          id: "m3-callout-example",
-          type: "callout",
-          variant: "example",
-          title: "Ideation mit File Access",
-          text: "Du gibst Claude Zugriff auf einen Ordner mit deiner Content-Strategie, alten Transkripten und einer Hookbank. Wenn du jetzt ein neues Video planst, zieht Claude automatisch Kontext zu deiner Marke, Zielgruppe und Strategie — und gibt dir relevantere Ideen. Es pusht sogar zurück, wenn du etwas planst, das nicht zu deiner Zielgruppe passt.",
+          text: "Viele Aufgaben, bei denen KI helfen kann, folgen keinem festen Prozess: Ideation, Planung, Strategie, Entscheidungsfindung. Dafür brauchst du keine Skills — aber du willst trotzdem, dass die KI Kontext über dich und dein Business hat.\n\nHier wird **File Access** zum Gamechanger. Mit jedem neuen Chat kannst du Claude Zugriff auf einen Ordner auf deinem Computer geben. Und anders als bei Chat-Projekten kann Claude nicht nur lesen, sondern auch **schreiben** — neue Dateien speichern, bestehende aktualisieren, Assets direkt ablegen. Der Kontext in deinem Ordner wächst dadurch natürlich mit jeder Nutzung.\n\nEin Beispiel: Du gibst Claude Zugriff auf einen Ordner mit deiner Content-Strategie, alten Transkripten und einer Hookbank. Wenn du jetzt ein neues Video planst, zieht Claude automatisch Kontext zu deiner Marke und Zielgruppe — und pusht sogar zurück, wenn du etwas planst, das nicht zu deiner Zielgruppe passt.",
         },
         {
           id: "m3-context-box",
           type: "context-box",
           term: "CLAUDE.md",
           explanation:
-            "Eine Markdown-Datei im Root deines Ordners, die Claude erklärt, wie der Ordner strukturiert ist und wie er navigiert werden soll. Sie wird automatisch gelesen und fungiert als Navigations-Anleitung zwischen Agent und Dateisystem. Je größer der Kontext-Ordner, desto wichtiger wird eine gute CLAUDE.md.",
+            "Eine Markdown-Datei im Root deines Ordners, die Claude erklärt, wie der Ordner strukturiert ist und wie er navigiert werden soll. Sie wird automatisch gelesen. Je größer der Kontext-Ordner, desto wichtiger wird eine gute CLAUDE.md.",
         },
         {
-          id: "m3-callout-tip",
-          type: "callout",
-          variant: "tip",
-          title: "4 Kontext-Dokumente zum Starten",
-          text: "Nimm dir 30 Minuten und erstelle diese Grundlagen-Dateien:\n\n1. **Über mich / Über das Business** — Was du machst, wofür du stehst, deine Ziele\n2. **Zielgruppe / ICP** — Wen du erreichst, deren Probleme und Sprache\n3. **Tonfall & Stil** — Beispiele für guten Output, Wörter die du nutzt/vermeidest\n4. **Aktuelle Prioritäten** — Woran du gerade arbeitest, was wichtig ist\n\nTipp: Mach ein Brain-Dump per Spracheingabe und lass Claude die strukturierten Dokumente daraus erstellen.",
+          id: "m3-content-2",
+          type: "content",
+          text: "### 4 Kontext-Dokumente zum Starten\n\nNimm dir 30 Minuten und erstelle diese Grundlagen-Dateien:\n\n1. **Über mich / Über das Business** — Was du machst, wofür du stehst, deine Ziele\n2. **Zielgruppe / ICP** — Wen du erreichst, deren Probleme und Sprache\n3. **Tonfall & Stil** — Beispiele für guten Output, Wörter die du nutzt/vermeidest\n4. **Aktuelle Prioritäten** — Woran du gerade arbeitest, was wichtig ist\n\nTipp: Mach ein Brain-Dump per Spracheingabe und lass Claude die strukturierten Dokumente daraus erstellen.",
         },
         {
           id: "m3-quiz",
@@ -368,33 +343,19 @@ export const agenticOsContextLevels: Course = {
         {
           id: "m5-content-1",
           type: "content",
-          text: "Wenn du Level 4-5 intensiv nutzt, wächst dein Kontext über mehrere Projekte und Skills hinweg. Irgendwann hast du das gleiche ICP-Dokument in drei verschiedenen Projekten und fünf Skills — und wenn sich etwas ändert, musst du es überall einzeln aktualisieren.\n\nDie Lösung: **Alles in einen einzigen, zentralen Ordner packen.** Das ist dein Second Brain — oder Personal OS.",
-        },
-        {
-          id: "m5-key-concept",
-          type: "key-concept",
-          title: "Second Brain / Personal OS",
-          description:
-            "Ein zentraler Ordner mit deinem gesamten Business-Kontext: Strategie, ICP, Prozesse, Meeting-Notizen, Analytics — alles an einem Ort. Jeder Chat, jeder Skill und jedes Projekt referenziert diesen einen Ordner. Wenn du ein Dokument aktualisierst, ist es sofort überall aktuell.",
+          text: "Wenn du Level 4-5 intensiv nutzt, wächst dein Kontext über mehrere Projekte und Skills hinweg. Irgendwann hast du das gleiche ICP-Dokument in drei verschiedenen Projekten und fünf Skills — und wenn sich etwas ändert, musst du es überall einzeln aktualisieren.\n\nDie Lösung: **Alles in einen einzigen, zentralen Ordner packen.** Das ist dein Second Brain — ein Ort mit deinem gesamten Business-Kontext: Strategie, ICP, Prozesse, Meeting-Notizen, Analytics. Jeder Chat, jeder Skill und jedes Projekt referenziert diesen einen Ordner. Ein Update → überall aktuell.",
         },
         {
           id: "m5-callout-warning",
           type: "callout",
           variant: "warning",
           title: "Wann Projekte nicht mehr reichen",
-          text: "Typische Symptome:\n- Dasselbe Dokument existiert in 3+ Projekten/Skills\n- Nach einem ICP-Update musst du es an 5 Stellen ändern\n- Du weißt nicht mehr, welche Version eines Dokuments aktuell ist\n- Kontext-Konflikte zwischen verschiedenen Projekten",
+          text: "Typische Symptome: Dasselbe Dokument existiert in 3+ Projekten/Skills. Nach einem ICP-Update musst du es an 5 Stellen ändern. Du weißt nicht mehr, welche Version aktuell ist.",
         },
         {
           id: "m5-content-2",
           type: "content",
-          text: "### Skills neu denken\n\nMit einem Second Brain änderst du, wie du Skills baust. Statt Kontext-Dateien direkt in den Skill zu packen, **verweist der Skill auf Dateien im Second Brain.**\n\nSo hat dein LinkedIn-Writer-Skill nur noch eine `skill.md` mit Referenzen wie: *\"Lies das ICP-Dokument unter `/shared-context/icp.md`\"*. Wenn du das ICP aktualisierst, sind automatisch alle Skills auf dem neuesten Stand.",
-        },
-        {
-          id: "m5-callout-tip",
-          type: "callout",
-          variant: "tip",
-          title: "Obsidian als Visualisierungs-Tool",
-          text: "Obsidian ist ein kostenloses Tool, das einen lokalen Ordner als vernetzte Wissensbasis visualisiert. Wichtig: **Obsidian ist keine Cloud-Software** — es zeigt nur deinen lokalen Ordner in einer besseren Oberfläche mit Graph-Ansicht, Wiki-Links und Markdown-Rendering. Perfekt, um die wachsende Struktur deines Second Brain zu überblicken.",
+          text: "### Skills neu denken\n\nMit einem Second Brain änderst du, wie du Skills baust. Statt Kontext-Dateien direkt in den Skill zu packen, **verweist der Skill auf Dateien im Second Brain.**\n\nSo hat dein LinkedIn-Writer-Skill nur noch eine `skill.md` mit Referenzen wie: *\"Lies das ICP-Dokument unter `/shared-context/icp.md`\"*. Wenn du das ICP aktualisierst, sind automatisch alle Skills auf dem neuesten Stand.\n\n### Obsidian für den Überblick\n\nObsidian ist ein kostenloses Tool, das einen lokalen Ordner als vernetzte Wissensbasis visualisiert — mit Graph-Ansicht, Wiki-Links und Markdown-Rendering. Wichtig: **Obsidian ist keine Cloud-Software**, sondern zeigt nur deinen lokalen Ordner in einer besseren Oberfläche. Perfekt, um die wachsende Struktur deines Second Brain zu überblicken.",
         },
         {
           id: "m5-code-block",
@@ -407,14 +368,7 @@ export const agenticOsContextLevels: Course = {
         {
           id: "m5-content-3",
           type: "content",
-          text: "### Index-Dateien für Unterordner\n\nWenn dein Kontext weiter wächst, helfen **Index-Dateien** in jedem Unterordner. Das sind kleine CLAUDE.md-artige Dateien, die beschreiben, was in diesem spezifischen Ordner liegt und wie er navigiert wird. So kann Claude auch in großen Strukturen effizient den richtigen Kontext finden.",
-        },
-        {
-          id: "m5-callout-warning-2",
-          type: "callout",
-          variant: "warning",
-          title: "Maintenance ist Pflicht",
-          text: "Ein Second Brain erfordert regelmäßige Pflege:\n\n- **Wöchentlich:** Dateien auf Duplikate, Konflikte und veraltete Inhalte prüfen\n- **Scheduled Tasks:** Meeting-Transkripte, Task-Updates und Analytics automatisch einpflegen\n- **Konsistenz:** Die Struktur wird sich weiterentwickeln — das ist normal. Wichtig ist, dass du dranbleibst.\n\nDer Kontext wird mit der Zeit besser. Je früher du startest, desto mehr profitierst du vom Compound Effect.",
+          text: "### Index-Dateien für Unterordner\n\nWenn dein Kontext weiter wächst, helfen **Index-Dateien** in jedem Unterordner. Das sind kleine CLAUDE.md-artige Dateien, die beschreiben, was in diesem spezifischen Ordner liegt und wie er navigiert wird.\n\n### Maintenance ist Pflicht\n\nEin Second Brain erfordert regelmäßige Pflege. Geh wöchentlich durch deine Dateien: Gibt es Duplikate? Konflikte? Veraltete Inhalte? Nutze Scheduled Tasks, um Meeting-Transkripte, Task-Updates und Analytics automatisch einzupflegen.\n\nDie Struktur wird sich weiterentwickeln — das ist normal. Wichtig ist, dass du dranbleibst. Der Kontext wird mit der Zeit besser. Je früher du startest, desto mehr profitierst du vom Compound Effect.",
         },
         {
           id: "m5-quiz",
@@ -480,25 +434,21 @@ export const agenticOsContextLevels: Course = {
           text: "### Sync-Optionen\n\nWeil es sich um lokale Dateien handelt, ist Synchronisation nicht ganz trivial. Die gängigsten Optionen:\n\n1. **GitHub** — Versioniert, nachvollziehbar, aber technischer\n2. **Obsidian Sync** — Eingebaute Obsidian-Funktion, einfach aber kostenpflichtig\n3. **Obsidian Relay** — Community-Plugin, synchronisiert Ordner zwischen Teammitgliedern in Echtzeit (kostenlos bis 3 Personen)\n4. **Self-hosted Lösung** — Maximale Kontrolle, höchster Aufwand",
         },
         {
-          id: "m6-context-box",
-          type: "context-box",
-          term: "Obsidian Relay",
-          explanation:
-            "Ein Community-Plugin für Obsidian, das Ordner zwischen Teammitgliedern in Echtzeit synchronisiert. Für jeden Ordner kann festgelegt werden, welche Teammitglieder Zugriff bekommen. Kostenlos für bis zu 3 Personen. Zu finden unter Settings → Community Plugins → Browse → 'Relay'.",
+          id: "m6-content-3",
+          type: "content",
+          text: "Die beste Option für viele Teams ist **Obsidian Relay** — ein Community-Plugin, das Ordner zwischen Teammitgliedern in Echtzeit synchronisiert. Kostenlos für bis zu 3 Personen, zu finden unter Settings → Community Plugins → Browse → \"Relay\".",
         },
         {
           id: "m6-callout-warning",
           type: "callout",
           variant: "warning",
           title: "Permissions sind kritisch",
-          text: "Nicht jedes Teammitglied sollte jede Datei ändern — oder auch nur sehen — können.\n\n- **Strategie-Dokumente:** Nur Geschäftsführung mit Schreibzugriff, Rest read-only\n- **Abteilungs-Kontext:** Nur die jeweilige Abteilung mit Vollzugriff\n- **Geteilter Kontext (ICP, Brand):** Alle lesen, nur definierte Personen schreiben\n\nNative Permission-Settings in Relay sind noch begrenzt — es gibt aber Custom-Setups und die Funktion ist in der Entwicklung.",
+          text: "Nicht jedes Teammitglied sollte jede Datei ändern oder sehen können. Strategie-Dokumente: nur Geschäftsführung mit Schreibzugriff. Abteilungs-Kontext: nur die jeweilige Abteilung. Geteilter Kontext (ICP, Brand): alle lesen, nur definierte Personen schreiben.",
         },
         {
-          id: "m6-key-concept",
-          type: "key-concept",
-          title: "Der Context Operator",
-          description:
-            "Eine dedizierte Person im Unternehmen, die für die Pflege und Weiterentwicklung der gesamten Kontext-Infrastruktur verantwortlich ist. Sie sorgt für Konsistenz, verhindert Duplikate, testet Skills und hält die Struktur aktuell. Ohne diesen Operator verwahrlost das System über Zeit.",
+          id: "m6-content-4",
+          type: "content",
+          text: "### Der Context Operator\n\nEin Business OS braucht eine dedizierte Person, die für die Pflege der gesamten Kontext-Infrastruktur verantwortlich ist. Sie sorgt für Konsistenz, verhindert Duplikate, testet Skills und hält die Struktur aktuell. Ohne diesen Operator verwahrlost das System über Zeit — und verwahrloste Kontexte machen AI-Outputs schlechter statt besser.",
         },
         {
           id: "m6-flashcard",

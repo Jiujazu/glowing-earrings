@@ -62,72 +62,71 @@ export default function CourseFilters({ courses }: CourseFiltersProps) {
   return (
     <div>
       {/* Filter bar */}
-      <div className="space-y-4 mb-8">
-        {/* Category filter */}
-        {usedCategories.length > 1 && (
-          <div>
-            <p className="text-xs font-medium text-[var(--text-muted)] uppercase tracking-wide mb-2">Kategorie</p>
-            <div className="flex flex-wrap gap-2">
-              {usedCategories.map((cat) => (
+      <div className="rounded-xl bg-[var(--surface)] border border-[var(--border)] p-4 sm:p-5 mb-8 space-y-4">
+        {/* Row 1: Category + Difficulty inline */}
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+          {usedCategories.length > 1 && (
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-medium text-[var(--text-muted)] uppercase tracking-wide whitespace-nowrap">Kategorie</span>
+              <div className="flex gap-1.5">
+                {usedCategories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+                    className={`px-3 py-1 text-xs font-semibold rounded-full transition-all duration-200 ${
+                      activeCategory === cat
+                        ? "bg-[var(--accent)] text-white shadow-sm"
+                        : "text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--accent)]/5"
+                    }`}
+                  >
+                    {categoryLabels[cat]}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-medium text-[var(--text-muted)] uppercase tracking-wide whitespace-nowrap">Level</span>
+            <div className="flex gap-1">
+              {difficulties.map((diff) => (
                 <button
-                  key={cat}
-                  onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
-                  className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 ${
-                    activeCategory === cat
-                      ? "bg-[var(--accent)] text-white"
-                      : "bg-[var(--surface)] text-[var(--text-secondary)] border border-[var(--border)] hover:border-[var(--accent)]/40 hover:text-[var(--accent)]"
+                  key={diff}
+                  onClick={() => setActiveDifficulty(activeDifficulty === diff ? null : diff)}
+                  className={`px-2.5 py-1 text-xs font-semibold rounded-full transition-all duration-200 ${
+                    activeDifficulty === diff
+                      ? "bg-[var(--brand)] text-white shadow-sm"
+                      : "text-[var(--text-secondary)] hover:text-[var(--brand)] hover:bg-[var(--brand)]/5"
                   }`}
                 >
-                  {categoryLabels[cat]}
+                  {getDifficultyLabel(diff)}
                 </button>
               ))}
             </div>
           </div>
-        )}
-
-        {/* Difficulty */}
-        <div>
-          <p className="text-xs font-medium text-[var(--text-muted)] uppercase tracking-wide mb-2">Schwierigkeit</p>
-          <div className="flex flex-wrap gap-2">
-            {difficulties.map((diff) => (
-              <button
-                key={diff}
-                onClick={() => setActiveDifficulty(activeDifficulty === diff ? null : diff)}
-                className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 ${
-                  activeDifficulty === diff
-                    ? "bg-[var(--brand)] text-white"
-                    : "bg-[var(--surface)] text-[var(--text-secondary)] border border-[var(--border)] hover:border-[var(--brand)]/40 hover:text-[var(--brand)]"
-                }`}
-              >
-                {getDifficultyLabel(diff)}
-              </button>
-            ))}
-          </div>
         </div>
 
-        {/* Tags */}
-        <div>
-          <p className="text-xs font-medium text-[var(--text-muted)] uppercase tracking-wide mb-2">Themen</p>
-          <div className="flex flex-wrap gap-2">
-            {allTags.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-                className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 ${
-                  activeTag === tag
-                    ? "bg-[var(--pop-turquoise)] text-white"
-                    : "bg-[var(--surface)] text-[var(--text-muted)] border border-[var(--border)] hover:border-[var(--pop-turquoise)]/40 hover:text-[var(--pop-turquoise)]"
-                }`}
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
+        {/* Row 2: Tags as small pills */}
+        <div className="flex flex-wrap items-center gap-1.5">
+          <span className="text-xs font-medium text-[var(--text-muted)] uppercase tracking-wide mr-1">Themen</span>
+          {allTags.map((tag) => (
+            <button
+              key={tag}
+              onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+              className={`px-2.5 py-0.5 text-[11px] font-medium rounded-full transition-all duration-200 ${
+                activeTag === tag
+                  ? "bg-[var(--pop-turquoise)] text-white"
+                  : "text-[var(--text-muted)] border border-[var(--border)] hover:border-[var(--pop-turquoise)]/40 hover:text-[var(--pop-turquoise)]"
+              }`}
+            >
+              {tag}
+            </button>
+          ))}
         </div>
 
         {/* Active filter summary */}
         {hasFilters && (
-          <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
+          <div className="flex items-center gap-2 text-xs text-[var(--text-muted)] pt-1 border-t border-[var(--border)]">
             <span>
               {filtered.length} {filtered.length === 1 ? "Kurs" : "Kurse"}
             </span>

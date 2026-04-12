@@ -3,7 +3,8 @@ import type { Course } from "@/lib/types";
 export const karpathyLlmWiki: Course = {
   meta: {
     slug: "karpathy-llm-wiki",
-    title: "Die Karpathy Methode — Persönliche Knowledge Base mit KI",
+    title: "Die Karpathy Methode",
+    subheading: "Persönliche Knowledge Base mit KI",
     subtitle:
       "Wie du mit KI eine persönliche Knowledge Base baust, die wächst und nie veraltet — nach Andrej Karpathys Konzept.",
     sourceUrl:

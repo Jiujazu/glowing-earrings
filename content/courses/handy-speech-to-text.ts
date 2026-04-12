@@ -3,7 +3,8 @@ import type { Course } from "@/lib/types";
 export const handySpeechToText: Course = {
   meta: {
     slug: "handy-speech-to-text",
-    title: "Handy App — Die beste Lösung zum Diktieren ohne Cloud auf dem Desktop",
+    title: "Handy App",
+    subheading: "Die beste Lösung zum Diktieren ohne Cloud auf dem Desktop",
     subtitle:
       "Wie du mit einem kostenlosen Open-Source-Tool per Tastenkürzel in jedes Textfeld diktierst — komplett offline, auf jedem Betriebssystem.",
     sourceUrl: "https://handy.computer/",

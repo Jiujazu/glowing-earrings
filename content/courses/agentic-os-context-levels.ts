@@ -3,7 +3,8 @@ import type { Course } from "@/lib/types";
 export const agenticOsContextLevels: Course = {
   meta: {
     slug: "agentic-os-context-levels",
-    title: "Die 7 Stufen von Claude — Kontext-Struktur für das eigene KI-Betriebssystem erklärt",
+    title: "Die 7 Stufen von Claude",
+    subheading: "Kontext-Struktur für das eigene KI-Betriebssystem erklärt",
     subtitle:
       "In 7 Stufen vom Chat-Prompt zum KI-Betriebssystem — für Solo-Arbeit und ganze Teams.",
     sourceUrl: "https://youtu.be/l5Diqeoffa4?is=XOhAGiM3wwofATUS",

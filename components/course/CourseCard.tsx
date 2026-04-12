@@ -31,10 +31,15 @@ export default function CourseCard({ meta, totalModules }: { meta: CourseMeta; t
           href={`/courses/${meta.slug}`}
           className="group block"
         >
-          <h3 className="font-heading text-xl font-bold text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors mb-2">
+          <h3 className="font-heading text-xl font-bold text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">
             {meta.title}
           </h3>
-          <p className="text-sm text-[var(--text-secondary)] mb-5 leading-relaxed">
+          {meta.subheading && (
+            <p className="text-sm font-medium text-[var(--text-secondary)] mt-0.5">
+              {meta.subheading}
+            </p>
+          )}
+          <p className="text-sm text-[var(--text-muted)] mt-2 mb-5 leading-relaxed">
             {meta.subtitle}
           </p>
         </Link>

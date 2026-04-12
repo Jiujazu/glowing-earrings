@@ -14,6 +14,7 @@ export type CourseCategory = "ai-tech" | "ai-creativity" | "ai-society" | "ai-wo
 export interface CourseMeta {
   slug: string;
   title: string;
+  subheading?: string;
   subtitle: string;
   sourceUrl: string;
   sourceAuthor: string;

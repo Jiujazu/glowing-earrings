@@ -25,6 +25,11 @@
 - **`context-box` für Fachbegriffe** — hält den Lesefluss für Fortgeschrittene, hilft Einsteigern.
 - **`callout` nur für echten Mehrwert** — Zitate (quote), Warnungen (warning), überraschende Statistiken (stat). Keine Callouts für Inhalte, die genauso gut im Fließtext stehen könnten. Drei Callouts hintereinander = zu viele.
 
+### UX & Interaktion
+- **Quizzes brauchen visuelle Interaktions-Hinweise.** Radio-Circles vor jeder Option + "Wähle eine Antwort"-Text unter der Frage. Ohne diese sehen Quiz-Optionen aus wie statische Textblöcke.
+- **Falsche Quiz-Antworten müssen korrigierbar sein.** "Nochmal versuchen"-Button bei falscher Antwort. Progress wird nur bei richtiger Antwort getrackt.
+- **sourceType-Badge nicht im UI zeigen** — ist interne Metadaten, kein Mehrwert für User. Nur Schwierigkeit und Dauer als Badges.
+
 ### Design
 - **Warme Farben (Amber/Orange) für Productivity-Kurse**, kühle (Lila/Teal) für technische Kurse.
 - **Keine Emojis in der Modul-Navigation** — nur im Modul-Header.
@@ -33,6 +38,10 @@
 ### Kurs-Vernetzung
 - **`relatedCourses` immer gegenseitig setzen** — Kurs A → B und B → A.
 - **Modul-Übergänge: Querverweise auf andere Kurse** bevorzugen statt generischer Cliff-Hanger.
+
+### Katalog & Filter
+- **Filter brauchen Labels** (Kategorie, Schwierigkeit, Themen) — ohne visuell gruppierte Überschriften laufen die Buttons ineinander.
+- **Tags auf CourseCards als Links** → `/courses?tag=X` öffnet den Katalog vorgefiltert.
 
 ---
 

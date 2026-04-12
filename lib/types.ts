@@ -9,6 +9,8 @@ export interface Course {
   outro: CourseOutro;
 }
 
+export type CourseCategory = "ai-tech" | "ai-creativity" | "ai-society" | "ai-workflows";
+
 export interface CourseMeta {
   slug: string;
   title: string;
@@ -16,10 +18,13 @@ export interface CourseMeta {
   sourceUrl: string;
   sourceAuthor: string;
   sourceType: "tweet" | "video" | "article" | "document" | "gist" | "other";
+  category: CourseCategory;
   tags: string[];
   estimatedMinutes: number;
   difficulty: "beginner" | "intermediate" | "advanced";
   publishedAt: string; // ISO date
+  draft?: boolean;
+  relatedCourses?: string[]; // slugs
   design: CourseDesign;
 }
 
@@ -65,7 +70,11 @@ export type ModuleElement =
   | FlashcardElement
   | ReflectionElement
   | InteractiveElement
-  | EasterEggElement;
+  | EasterEggElement
+  | ImageElement
+  | VideoElement
+  | CodeBlockElement
+  | StepByStepElement;
 
 interface BaseElement {
   id: string;
@@ -132,6 +141,44 @@ export interface EasterEggElement extends BaseElement {
   trigger: "click" | "hover" | "scroll" | "konami" | "idle";
   content: string;
   component?: string;
+}
+
+export interface ImageElement extends BaseElement {
+  type: "image";
+  src: string;
+  alt: string;
+  caption?: string;
+  width?: number;
+  height?: number;
+  fullWidth?: boolean;
+}
+
+export interface VideoElement extends BaseElement {
+  type: "video";
+  platform: "youtube" | "vimeo";
+  videoId: string;
+  title?: string;
+  startAt?: number;
+}
+
+export interface CodeBlockElement extends BaseElement {
+  type: "code-block";
+  code: string;
+  language?: string;
+  filename?: string;
+  highlightLines?: number[];
+}
+
+export interface StepByStepElement extends BaseElement {
+  type: "step-by-step";
+  title?: string;
+  steps: StepItem[];
+}
+
+export interface StepItem {
+  label: string;
+  content: string;
+  image?: string;
 }
 
 export interface CourseOutro {

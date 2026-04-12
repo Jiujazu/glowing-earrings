@@ -10,6 +10,7 @@ export const karpathyLlmWiki: Course = {
       "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
     sourceAuthor: "Andrej Karpathy",
     sourceType: "gist",
+    category: "ai-tech",
     tags: ["Knowledge Management", "LLM", "Productivity", "RAG"],
     estimatedMinutes: 18,
     difficulty: "intermediate",

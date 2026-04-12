@@ -1,9 +1,31 @@
 import { courses } from "@/content/courses";
-import type { Course, CourseMeta } from "./types";
+import type { Course, CourseMeta, CourseCategory } from "./types";
 
 export function getAllCourses(): Course[] {
+  return courses.filter((c) => !c.meta.draft);
+}
+
+export function getAllCoursesIncludingDrafts(): Course[] {
   return courses;
 }
+
+export function getAllTags(): string[] {
+  const tagSet = new Set<string>();
+  for (const course of courses) {
+    if (course.meta.draft) continue;
+    for (const tag of course.meta.tags) {
+      tagSet.add(tag);
+    }
+  }
+  return Array.from(tagSet).sort();
+}
+
+export const categoryLabels: Record<CourseCategory, string> = {
+  "ai-tech": "KI-Technologie & Tools",
+  "ai-creativity": "KI + Kreativität",
+  "ai-society": "KI + Gesellschaft",
+  "ai-workflows": "KI-Workflows & Productivity",
+};
 
 export function getCourseBySlug(slug: string): Course | undefined {
   return courses.find((c) => c.meta.slug === slug);

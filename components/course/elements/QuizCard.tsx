@@ -3,15 +3,18 @@
 import { useState } from "react";
 import type { QuizElement } from "@/lib/types";
 import QuizConfetti from "./QuizConfetti";
+import { useProgressTracker } from "../CourseProgressTracker";
 
 export default function QuizCard({ element }: { element: QuizElement }) {
   const [selected, setSelected] = useState<number | null>(null);
   const [revealed, setRevealed] = useState(false);
+  const tracker = useProgressTracker();
 
   function handleSelect(index: number) {
     if (revealed) return;
     setSelected(index);
     setRevealed(true);
+    tracker?.onQuizComplete(element.id);
   }
 
   const isCorrect = selected !== null && element.options[selected].correct;

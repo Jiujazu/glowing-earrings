@@ -63,10 +63,13 @@ interface CourseMeta {
   sourceUrl: string;         // Link zum Originalmaterial
   sourceAuthor: string;      // Name des Autors
   sourceType: "tweet" | "video" | "article" | "document" | "gist" | "other";
+  category: "ai-tech" | "ai-creativity" | "ai-society" | "ai-workflows";
   tags: string[];            // z.B. ["Knowledge Management", "LLM"]
   estimatedMinutes: number;  // Geschätzte Gesamtdauer
   difficulty: "beginner" | "intermediate" | "advanced";
   publishedAt: string;       // ISO-Datum, z.B. "2026-04-10"
+  draft?: boolean;           // true = nur per Direkt-URL erreichbar
+  relatedCourses?: string[]; // Slugs verwandter Kurse
   design: CourseDesign;
 }
 ```
@@ -118,6 +121,10 @@ interface Module {
 | `flashcard` | Lernkarte | `front`, `back` |
 | `reflection` | Nachdenkfrage | `prompt`, optional `placeholder` |
 | `easter-egg` | Verstecktes Element | `trigger` (click/hover/scroll/konami/idle), `content` |
+| `image` | Bild mit Lightbox | `src`, `alt`, optional `caption`, `width`, `height`, `fullWidth` |
+| `video` | YouTube/Vimeo-Embed | `platform` (youtube/vimeo), `videoId`, optional `title`, `startAt` |
+| `code-block` | Code mit Copy-Button | `code`, optional `language`, `filename`, `highlightLines` |
+| `step-by-step` | Schritt-für-Schritt | `steps[]` (je `label`, `content`, optional `image`), optional `title` |
 
 Jedes Element braucht eine unique `id` und ein `type`-Feld.
 
@@ -205,7 +212,14 @@ app/                          → Seiten (Next.js App Router)
 components/
   layout/                     → Header, Footer, NewsletterCTA, MobileNav
   course/                     → CoursePlayer, CourseIntro, CourseOutro, ModuleRenderer
+  course/CourseFilters.tsx     → Tag/Schwierigkeits-Filter für Katalog
+  course/CourseProgressTracker.tsx → localStorage Progress-Tracking
+  course/CourseCardProgress.tsx → Fortschrittsbalken auf CourseCard
   course/elements/            → ContentBlock, QuizCard, FlashcardDeck, Callout, etc.
+  course/elements/ImageBlock   → Bilder mit Lightbox-Zoom
+  course/elements/VideoEmbed   → YouTube/Vimeo lazy-loaded
+  course/elements/CodeBlock    → Code mit Zeilennummern + Copy
+  course/elements/StepByStep   → Akkordeon-Schritte mit Markdown
   ui/                         → Button, Input, Badge, Container
 
 content/courses/              → Kurs-Daten als TypeScript-Dateien
@@ -215,6 +229,7 @@ content/courses/              → Kurs-Daten als TypeScript-Dateien
 lib/
   types.ts                    → Alle TypeScript-Typen
   course-utils.ts             → Helper-Funktionen
+  progress.ts                 → localStorage Fortschritts-Tracking
   newsletter.ts               → Newsletter-Provider-Abstraktion
 ```
 

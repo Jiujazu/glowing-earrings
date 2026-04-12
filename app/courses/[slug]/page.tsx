@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getCourseBySlug, getAllCourseSlugs } from "@/lib/course-utils";
+import { getCourseBySlug, getAllCourseSlugs, getAllCoursesIncludingDrafts } from "@/lib/course-utils";
 import CoursePlayer from "@/components/course/CoursePlayer";
 
 interface CoursePageProps {
@@ -8,7 +8,8 @@ interface CoursePageProps {
 }
 
 export function generateStaticParams() {
-  return getAllCourseSlugs().map((slug) => ({ slug }));
+  // Generate pages for all courses including drafts (drafts are accessible by URL)
+  return getAllCoursesIncludingDrafts().map((c) => ({ slug: c.meta.slug }));
 }
 
 export async function generateMetadata({

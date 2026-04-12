@@ -74,7 +74,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {courses.map((course, i) => (
                 <ScrollReveal key={course.meta.slug} delay={i * 100}>
-                  <CourseCard meta={course.meta} />
+                  <CourseCard meta={course.meta} totalModules={course.modules.length} />
                 </ScrollReveal>
               ))}
             </div>

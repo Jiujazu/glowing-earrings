@@ -1,0 +1,446 @@
+{
+  "meta": {
+    "slug": "storytelling-bildung",
+    "title": "Storytelling in der Bildung",
+    "subheading": "Wie du Inhalte auf den Punkt bringst",
+    "subtitle": "Warum gute Geschichten mehr bewirken als jede PowerPoint und wie du das nutzen kannst.",
+    "sourceUrl": "https://www.youtube.com/watch?v=SDrZuTAbN9M",
+    "sourceAuthor": "Julian van Dieken",
+    "sourceType": "video",
+    "category": "ai-creativity",
+    "tags": ["Storytelling", "Education", "Skills"],
+    "estimatedMinutes": 20,
+    "difficulty": "beginner",
+    "publishedAt": "2026-04-13",
+    "design": {
+      "theme": "storytelling-warm",
+      "colors": {
+        "background": "#0F0E17",
+        "surface": "#1A1926",
+        "primary": "#E8A838",
+        "accent": "#FF6B6B",
+        "text": "#FFFFFE",
+        "textMuted": "#A7A9BE"
+      },
+      "lightColors": {
+        "background": "#FFFFFE",
+        "surface": "#F4F0ED",
+        "primary": "#D4920B",
+        "accent": "#E05555",
+        "text": "#2B2C34",
+        "textMuted": "#6B6C7B"
+      }
+    }
+  },
+  "intro": {
+    "hook": "Du hast eine Idee, einen Sachverhalt, eine wichtige Erkenntnis. Aber wenn du sie vermittelst, bleibt wenig haengen. Das Problem ist nicht der Inhalt. Das Problem ist die Form.",
+    "sourceContext": "Dieser Kurs basiert auf dem Vortrag von Julian van Dieken, Freelancer fuer Creative Media und Education in Berlin. Julian zeigt darin, wie Storytelling-Prinzipien die Wissensvermittlung grundlegend verbessern, mit Beispielen aus drei realen Bildungsprojekten."
+  },
+  "modules": [
+    {
+      "id": "problem",
+      "title": "Das Problem mit der Wissensvermittlung",
+      "icon": "\uD83C\uDFAF",
+      "estimatedMinutes": 3,
+      "elements": [
+        {
+          "id": "problem-intro",
+          "type": "content",
+          "text": "Stell dir vor: Du hast einen brillanten Inhalt. Eine wichtige Erkenntnis. Eine Idee, die dein Publikum weiterbringen wuerde.\n\nUnd dann passiert das hier:\n\n**Person** hat eine **Idee** und macht daraus eine **Faktenliste**.\n\nDas Ergebnis? Eine PowerPoint mit Bulletpoints. Ein Vortrag, den alle nach zwei Tagen vergessen haben."
+        },
+        {
+          "id": "storytelling-definition",
+          "type": "key-concept",
+          "title": "Storytelling",
+          "description": "Das Erzaehlen von Geschichten. Ueber Audio, Video oder Text. Kein Marketing-Buzzword, sondern eine uralte Technik, um Informationen so zu verpacken, dass sie haengen bleiben.",
+          "icon": "\uD83D\uDCD6"
+        },
+        {
+          "id": "not-new",
+          "type": "content",
+          "text": "Storytelling ist kein neuer Trend. Menschen erzaehlen sich seit Jahrtausenden Geschichten am Lagerfeuer, in der Bibel, auf YouTube.\n\nDer Punkt ist: **Jede gute Geschichte funktioniert nach dem gleichen Muster.** Und dieses Muster kannst du bewusst einsetzen."
+        },
+        {
+          "id": "quiz-kern",
+          "type": "quiz",
+          "question": "Was ist der Kern von Storytelling in der Bildung?",
+          "options": [
+            {
+              "text": "Moeglichst emotionale Geschichten erfinden",
+              "correct": false,
+              "feedback": "Es geht nicht ums Erfinden, sondern darum, echte Inhalte in einer Form zu verpacken, die haengen bleibt."
+            },
+            {
+              "text": "Inhalte so strukturieren, dass sie emotional verankert werden",
+              "correct": true,
+              "feedback": "Genau. Storytelling gibt deinen Inhalten Struktur und emotionale Verankerung."
+            },
+            {
+              "text": "Videos statt Texte produzieren",
+              "correct": false,
+              "feedback": "Storytelling funktioniert in jedem Medium: Text, Audio, Video."
+            },
+            {
+              "text": "Marketing-Techniken im Unterricht einsetzen",
+              "correct": false,
+              "feedback": "Marketing nutzt Storytelling, aber der Kern ist Kommunikation, nicht Verkaufen."
+            }
+          ],
+          "explanation": "Storytelling in der Bildung bedeutet: Inhalte so strukturieren und verknuepfen, dass sie emotional andocken."
+        }
+      ],
+      "transitionToNext": "Gut. Aber wie sieht das konkret aus? Dafuer gibt es ein Modell, das jede gute Geschichte beschreibt."
+    },
+    {
+      "id": "hook-hold-payoff",
+      "title": "Hook, Hold, Payoff",
+      "icon": "\uD83C\uDFA3",
+      "estimatedMinutes": 4,
+      "elements": [
+        {
+          "id": "modell-intro",
+          "type": "content",
+          "text": "Es gibt ein Modell, das Christina Maria Schollerer in Deutschland populaer gemacht hat. Es beschreibt, wie **jede gute Geschichte** aufgebaut ist, egal ob Bibel, YouTube-Clip oder dein naechster Vortrag."
+        },
+        {
+          "id": "hhp-steps",
+          "type": "step-by-step",
+          "title": "Das Hook-Hold-Payoff-Modell",
+          "steps": [
+            {
+              "label": "Hook: Einfangen",
+              "content": "Was zieht die Zuschauer rein? Ein unerwarteter Anfang, eine Frage, ein Widerspruch. Bei einem viralen Video eines kleinen Jungen auf dem Fussballplatz: Was macht er da? Schafft er es?"
+            },
+            {
+              "label": "Hold: Dranbleiben",
+              "content": "Die Spannung steigt. Es wird schwieriger, es kommt mehr hinzu. Der Junge faellt hin, die Zuschauer feuern ihn an. **Du willst wissen, wie es ausgeht.**"
+            },
+            {
+              "label": "Payoff: Belohnung",
+              "content": "Die Aufloesung. Die aufgebaute Spannung loest sich. Der Junge trifft, die Menge jubelt. **Das Gefuehl der Befriedigung** ist es, was bleibt."
+            }
+          ]
+        },
+        {
+          "id": "video-original",
+          "type": "video",
+          "platform": "youtube",
+          "videoId": "SDrZuTAbN9M",
+          "title": "Der Original-Vortrag von Julian van Dieken"
+        },
+        {
+          "id": "hhp-example",
+          "type": "callout",
+          "variant": "example",
+          "title": "Hook-Hold-Payoff im Alltag",
+          "text": "Denk an die letzte Serie, die dich gefesselt hat. Jede einzelne Episode hat einen Hook (Cliffhanger am Anfang), einen Hold (steigende Spannung) und einen Payoff (Aufloesung). Game of Thrones, Breaking Bad, jeder gute YouTube-Clip: das Muster ist immer dasselbe."
+        },
+        {
+          "id": "quiz-hook",
+          "type": "quiz",
+          "question": "Ein kleiner Junge versucht, einen Ball ins Tor zu schiessen. Was ist der Hook?",
+          "options": [
+            {
+              "text": "Dass er den Ball trifft",
+              "correct": false,
+              "feedback": "Das waere der Payoff, die Belohnung am Ende."
+            },
+            {
+              "text": "Dass er ein unerwarteter Protagonist ist und man wissen will, ob er es schafft",
+              "correct": true,
+              "feedback": "Genau. Die Neugier, ob dieser kleine Kerl es tatsaechlich schafft."
+            },
+            {
+              "text": "Dass die Zuschauer ihn anfeuern",
+              "correct": false,
+              "feedback": "Das gehoert zum Hold, der Spannung, die uns dranbleiben laesst."
+            },
+            {
+              "text": "Dass es ein Fussballvideo ist",
+              "correct": false,
+              "feedback": "Das Thema allein ist noch kein Hook. Es braucht das Unerwartete."
+            }
+          ],
+          "explanation": "Der Hook ist das Unerwartete: ein kleines Kind als Protagonist, von dem man nicht erwartet, dass es den Ball bis ins Tor bringt."
+        },
+        {
+          "id": "fc-hhp-clips",
+          "type": "flashcard",
+          "front": "Warum funktioniert Hook-Hold-Payoff auch bei kurzen 30-Sekunden-Clips?",
+          "back": "Weil das Muster skaliert. Es geht nicht um Laenge, sondern um die Struktur: Neugier wecken, Spannung aufbauen, aufloesen. Das kann in 30 Sekunden genauso funktionieren wie in 2 Stunden."
+        }
+      ],
+      "transitionToNext": "Das Modell funktioniert. Aber es reicht nicht, eine gute Geschichte zu erzaehlen. Du musst sie aus der Perspektive deines Publikums denken."
+    },
+    {
+      "id": "nutzerzentriert",
+      "title": "Denke vom Publikum her",
+      "icon": "\uD83E\uDDED",
+      "estimatedMinutes": 4,
+      "elements": [
+        {
+          "id": "nutzer-intro",
+          "type": "content",
+          "text": "Hook-Hold-Payoff gibt dir die Struktur. Aber **fuer wen** erzaehlst du die Geschichte?\n\nStorytelling in der Bildung erfordert eine **nutzerzentrierte Sichtweise**. Nicht: Was will ich sagen? Sondern: Was bleibt bei meinem Publikum haengen?"
+        },
+        {
+          "id": "nutzer-concept",
+          "type": "key-concept",
+          "title": "Nutzerzentrierte Sichtweise",
+          "description": "Statt von deinem Wissen auszugehen, denkst du von deinem Publikum her: Was fuehlen sie? Was wissen sie schon? Was brauchen sie, um den naechsten Schritt zu machen?",
+          "icon": "\uD83C\uDFAF"
+        },
+        {
+          "id": "abfolge-content",
+          "type": "content",
+          "text": "Klassischerweise haben wir eine Menge Informationen und stellen sie in eine **Abfolge**:\n\nInformation 1, Information 2, Information 3.\n\nDas macht noch keine Geschichte. Eine Geschichte entsteht erst, wenn wir die Informationen **verknuepfen** und emotional aufladen."
+        },
+        {
+          "id": "fussball-verknuepfung",
+          "type": "callout",
+          "variant": "example",
+          "title": "Abfolge vs. Geschichte",
+          "text": "**Abfolge:** Ein Junge. Ein Fussballplatz. Fans. Jubel. Ein Ball.\n\n**Geschichte:** Der kleine Junge war auf dem Weg zum Tor, unsicher ob er es mit seinen kleinen Beinen erreichen wuerde. Je naeher er dem Tor kam, desto staerker feuerten die Zuschauer ihn an.\n\nGleiche Fakten. Komplett anderes Erlebnis."
+        },
+        {
+          "id": "emotion-warning",
+          "type": "callout",
+          "variant": "warning",
+          "title": "Ohne Emotion bleibt nichts",
+          "text": "Wenn keinerlei Emotionen in deiner Unterrichtsstunde vorhanden sind, wird man sich das bis zum naechsten Test merken. Und das wars dann auch."
+        },
+        {
+          "id": "memo-content",
+          "type": "content",
+          "text": "Das kennt man auch von **Memotechniken**. Profis, die sich hunderte Gegenstaende merken, verbinden jeden mit einer Geschichte.\n\nBeispiel: Gluehbirne, Apfel, Teddy. Drei Gegenstaende, die erstmal nichts miteinander zu tun haben.\n\nAber stell dir vor: *Ralf kam frustriert nach Hause und biss in die Gluehbirne. Er hatte gerade einen Apfel blau angemalt, und die ganze Wut musste raus, so dass er auch noch seinen Teddy anzuendete.*\n\n**Absurd? Ja. Und genau deshalb merkst du es dir.**"
+        },
+        {
+          "id": "fc-absurd",
+          "type": "flashcard",
+          "front": "Warum merken wir uns absurde Geschichten besser als normale Fakten?",
+          "back": "Je weiter ausserhalb des normalen Kontextes, desto staerker die emotionale Reaktion und desto staerker die Verankerung im Gedaechtnis. Memotechniken nutzen genau diesen Effekt."
+        },
+        {
+          "id": "quiz-abfolge",
+          "type": "quiz",
+          "question": "Was unterscheidet eine blosse Abfolge von einer Geschichte?",
+          "options": [
+            {
+              "text": "Eine Geschichte hat mehr Informationen",
+              "correct": false,
+              "feedback": "Es geht nicht um Menge, sondern um Verknuepfung und Emotion."
+            },
+            {
+              "text": "Die Informationen werden emotional verknuepft und in Kontext gebracht",
+              "correct": true,
+              "feedback": "Genau. Gleiche Fakten, aber durch Verknuepfung und Emotion wird daraus ein Erlebnis."
+            },
+            {
+              "text": "Eine Geschichte muss erfunden sein",
+              "correct": false,
+              "feedback": "Auch wahre Sachverhalte werden zu Geschichten, durch die Art wie du sie erzaehlst."
+            },
+            {
+              "text": "Bei einer Geschichte gibt es immer einen Helden",
+              "correct": false,
+              "feedback": "Nicht jede Geschichte braucht einen Helden, aber jede braucht eine emotionale Verbindung."
+            }
+          ],
+          "explanation": "Eine Abfolge listet Fakten auf. Eine Geschichte verknuepft dieselben Fakten emotional. Genau das macht den Unterschied beim Behalten."
+        },
+        {
+          "id": "reflection-emotion",
+          "type": "reflection",
+          "prompt": "Denk an deine letzte Unterrichtsstunde oder Praesentation: Gab es einen Moment, der bei deinem Publikum eine emotionale Reaktion ausgeloest hat? Wenn nein, was haettest du anders machen koennen?",
+          "placeholder": "Z.B. eine persoenliche Anekdote, eine ueberraschende Zahl, ein provokantes Beispiel..."
+        }
+      ],
+      "transitionToNext": "Theorie ist gut. Aber wie sieht das in der Praxis aus? Drei Projekte zeigen, was moeglich ist."
+    },
+    {
+      "id": "praxis-projekte",
+      "title": "Drei Projekte, drei Ansaetze",
+      "icon": "\uD83D\uDD2C",
+      "estimatedMinutes": 5,
+      "elements": [
+        {
+          "id": "projekte-intro",
+          "type": "content",
+          "text": "Jetzt wirds konkret. Drei reale Bildungsprojekte mit ganz unterschiedlichen Ansaetzen, Zielgruppen und Budgets.\n\nDabei gilt: **Immer zwei Ebenen im Blick behalten.**"
+        },
+        {
+          "id": "zwei-ebenen",
+          "type": "callout",
+          "variant": "tip",
+          "title": "Die zwei Ebenen",
+          "text": "**Inhalt:** Was wird erzaehlt? Welches Thema wird vermittelt?\n\n**Aufbereitung:** Wie wird es dargestellt? Welche Formate, welches Design, welche Interaktion?"
+        },
+        {
+          "id": "fos-content",
+          "type": "content",
+          "text": "### 1. The Future of Storytelling\n\nEin MOOC der **FH Potsdam** mit ueber **90.000 Teilnehmenden**. Thema: Wie Storytelling in Games, Serien, Filmen und Buechern funktioniert.\n\nDas Besondere: Experten wurden interviewt, und die Teilnehmenden bekamen jede Woche eine **kreative Aufgabe**."
+        },
+        {
+          "id": "mooc-context",
+          "type": "context-box",
+          "term": "MOOC",
+          "explanation": "Massive Open Online Course. Ein offener Online-Kurs fuer beliebig viele Teilnehmende. Oft kostenlos, mit Video-Lektionen, Aufgaben und Diskussionsforen."
+        },
+        {
+          "id": "tante-reni",
+          "type": "callout",
+          "variant": "example",
+          "title": "Creative Task: Tante Reni",
+          "text": "Die Aufgabe: Entwickle eine Geschichte mit dem Charakter Tante Reni. Das Ergebnis? Hunderte Einreichungen: Collagen, Comics, Fotomontagen. Tante Reni wurde auf Reisen geschickt, vor das Taj Mahal gestellt, in Familienfotos retuschiert.\n\n**Interaktion muss nicht immer ein Klick sein.** Manchmal ist die beste Interaktion eine kreative Aufgabe."
+        },
+        {
+          "id": "mm-content",
+          "type": "content",
+          "text": "### 2. Migration Matters\n\nAkademische Lernvideos mit einem klaren Ziel: In der Migrationsdiskussion **nicht die lauten Stimmen verstaerken**, sondern nuancierte, wissenschaftliche Perspektiven zeigen.\n\nDas Projekt Migrant Lives in Pandemic Times coachte diverse Menschen weltweit, mit **einfachsten Mitteln** kleine Dokumentarfilme zu drehen."
+        },
+        {
+          "id": "story-vs-tech",
+          "type": "callout",
+          "variant": "quote",
+          "title": "Julian van Dieken",
+          "text": "Story ist wichtiger als Technik. Natuerlich sieht es professioneller aus mit einer teuren Kamera. Aber man kann auch mit einem aelteren Handy loslegen, wenn man ein paar Tipps befolgt."
+        },
+        {
+          "id": "wka-content",
+          "type": "content",
+          "text": "### 3. Waterkant Academy\n\nDigitale Weiterbildung fuer Erzieherinnen und Erzieher. Verschiedenste Formate: Audio, Video, Lesen, eigene Erfahrungen machen.\n\nEin Highlight: das **Ich-als-Kind-Buch**, ein physisches Buch, das die Teilnehmenden am Anfang bekommen und ueber den Kurs hinweg befuellen."
+        },
+        {
+          "id": "fc-ichbuch",
+          "type": "flashcard",
+          "front": "Was ist das Ich-als-Kind-Buch und warum ist es so effektiv?",
+          "back": "Ein physisches Buch fuer biografische Selbstreflexion. Die Teilnehmenden schreiben rein, was sie als Kind gerne gemacht haben. Es verbindet persoenliche Erinnerungen mit dem Lerninhalt und genau das macht es unvergesslich."
+        },
+        {
+          "id": "ee-waterkant",
+          "type": "easter-egg",
+          "trigger": "hover",
+          "content": "Fun Fact: Julian hat die Waterkant Academy zusammen mit seiner Mutter Crystal van Dieken gegruendet. Familienunternehmen!"
+        }
+      ],
+      "transitionToNext": "Drei inspirierende Projekte. Aber es gibt einen Faktor, der ueber Erfolg und Scheitern entscheidet und der wird massiv unterschaetzt."
+    },
+    {
+      "id": "design-fokus",
+      "title": "Design ist kein Tuepfelchen auf dem i",
+      "icon": "\uD83C\uDFA8",
+      "estimatedMinutes": 4,
+      "elements": [
+        {
+          "id": "design-intro",
+          "type": "content",
+          "text": "Jetzt kommt der Punkt, den die meisten unterschaetzen.\n\n**Design heisst nicht Dinge huebsch machen.** Design bietet Fokus und Struktur. Es entscheidet darueber, ob dein Inhalt ankommt oder in einem Meer von Bulletpoints untergeht."
+        },
+        {
+          "id": "design-concept",
+          "type": "key-concept",
+          "title": "Design = Fokus + Struktur",
+          "description": "Gutes Design lenkt die Aufmerksamkeit, schafft Hierarchie und gibt dem Auge einen Weg. Schlechtes Design sorgt dafuer, dass alles gleichzeitig um Aufmerksamkeit schreit.",
+          "icon": "\uD83C\uDFA8"
+        },
+        {
+          "id": "ppt-suenden",
+          "type": "content",
+          "text": "Die klassischen **PowerPoint-Suenden** kennst du vermutlich:\n\n- Komplette Saetze auf der Folie, die als Notizen dienen\n- Alle Infos auf eine Folie gepackt\n- Schrift so klein, dass man sie nicht lesen kann\n- Keine Hierarchie: alles gleich gross, gleich wichtig"
+        },
+        {
+          "id": "ppt-image",
+          "type": "image",
+          "src": "/courses/storytelling-bildung/12_chaos-powerpoint.png",
+          "alt": "Eine ueberladene PowerPoint-Folie des Pentagon als Negativbeispiel",
+          "caption": "Ja, das ist eine echte Folie. Vom Pentagon."
+        },
+        {
+          "id": "multitasking-myth",
+          "type": "callout",
+          "variant": "warning",
+          "title": "Der Multitasking-Mythos",
+          "text": "Wir koennen **eine Information pro Zeitpunkt** aufnehmen. Nicht mehr. Wenn du sprichst UND eine ueberladene Folie zeigst, geht 90% verloren. Dein Publikum versucht beides gleichzeitig und kriegt nichts davon richtig mit."
+        },
+        {
+          "id": "animation-tip",
+          "type": "callout",
+          "variant": "tip",
+          "title": "Animationen?",
+          "text": "Keine Animation, es sei denn sie ist **inhaltlich motiviert**. Wenn du erzaehlst, dass etwas von links kommt, dann kann das Wort von links erscheinen. Aber nicht willkuerlich alle Animationsknoepfe druecken."
+        },
+        {
+          "id": "renate-intro",
+          "type": "content",
+          "text": "### Einfach anfangen: Das Beispiel Renate Schmitz\n\nRenate Schmitz ist Dozentin an der Hochschule Rhein-Waal. Nicht besonders digital-affin. Aber **angstfrei**.\n\nSie hat sich eine **Plastikkiste** ins Zimmer gebaut, eine Kamera draufgestellt, ein Flipchart hinter sich und losgelegt."
+        },
+        {
+          "id": "renate-quote",
+          "type": "callout",
+          "variant": "quote",
+          "title": "Das Geheimnis",
+          "text": "Die erste Version ist immer schlecht. Die zehnte ist immer besser als die erste. Einfach loslegen. Die Leute kommen am weitesten, die Spass daran haben und angstfrei auf alle Knoepfe druecken."
+        },
+        {
+          "id": "quiz-ppt",
+          "type": "quiz",
+          "question": "Was ist das groesste Problem bei einer ueberladenen PowerPoint-Folie?",
+          "options": [
+            {
+              "text": "Sie sieht unprofessionell aus",
+              "correct": false,
+              "feedback": "Aesthetik ist ein Faktor, aber nicht das Kernproblem."
+            },
+            {
+              "text": "Das Publikum kann nur eine Information gleichzeitig aufnehmen und verliert 90%",
+              "correct": true,
+              "feedback": "Genau. Wenn du sprichst und gleichzeitig eine ueberladene Folie zeigst, kriegt dein Publikum weder das eine noch das andere richtig mit."
+            },
+            {
+              "text": "Die Datei wird zu gross",
+              "correct": false,
+              "feedback": "Technisch vielleicht, aber das ist nicht das didaktische Problem."
+            },
+            {
+              "text": "Man braucht laenger zum Erstellen",
+              "correct": false,
+              "feedback": "Tatsaechlich ist es oft andersherum: weniger auf eine Folie zu packen erfordert mehr Denkarbeit."
+            }
+          ],
+          "explanation": "Unser Gehirn kann nur eine Information pro Zeitpunkt verarbeiten. Eine ueberladene Folie zwingt das Publikum, zwischen Lesen und Zuhoeren zu waehlen. Beides scheitert."
+        },
+        {
+          "id": "fc-renate",
+          "type": "flashcard",
+          "front": "Warum ist Renate Schmitz' Low-Tech-Ansatz so ein gutes Beispiel?",
+          "back": "Weil er zeigt: Du brauchst kein Team, kein Budget und keine teure Ausruestung. Du brauchst Mut, Spass am Ausprobieren und die Bereitschaft, auch mal was Unfertiges zu zeigen."
+        },
+        {
+          "id": "reflection-experiment",
+          "type": "reflection",
+          "prompt": "Was waere ein kleines Experiment, das du diese Woche ausprobieren koenntest? Ein einminuetiges Video? Eine Folie mit nur einem Satz? Ein kreatives Format, das du noch nie versucht hast?",
+          "placeholder": "Z.B. ein 60-Sekunden-Erklaervideo zu einem Thema aus meinem Fachgebiet..."
+        }
+      ]
+    }
+  ],
+  "outro": {
+    "synthesis": [
+      "Hook-Hold-Payoff ist das Grundgeruest jeder guten Geschichte.",
+      "Denke immer vom Publikum her: Was fuehlen sie? Was bleibt haengen?",
+      "Verknuepfung statt Abfolge. Emotionen sind der Kleber, der Wissen fixiert.",
+      "Design ist nicht Dekoration, sondern Fokus und Struktur.",
+      "Du brauchst kein Team und keine teure Technik. Nur den Mut, einfach anzufangen."
+    ],
+    "nextStep": "Filme heute ein 1-Minuten-Video, das einen einzigen Sachverhalt vermittelt. Egal wie es aussieht. Die erste Version ist immer schlecht, die zehnte ist immer besser.",
+    "takeaway": [
+      { "emoji": "\uD83C\uDFA3", "text": "Hook: Fang dein Publikum mit etwas Unerwartetem ein" },
+      { "emoji": "\uD83C\uDFAF", "text": "Fokus: Eine Information pro Zeitpunkt, nicht mehr" },
+      { "emoji": "\u2764\uFE0F", "text": "Emotion: Ohne Gefuehl bleibt nichts haengen" },
+      { "emoji": "\uD83C\uDFA8", "text": "Design: Gibt deinen Inhalten Struktur, nicht nur Aesthetik" },
+      { "emoji": "\uD83D\uDE80", "text": "Einfach starten: Plastikkiste und Kamera reicht" }
+    ],
+    "sourceUrl": "https://www.youtube.com/watch?v=SDrZuTAbN9M",
+    "newsletterCTA": "Jede Woche ein neues Tool fuer kreatives Lehren und Lernen. Kostenlos."
+  }
+}

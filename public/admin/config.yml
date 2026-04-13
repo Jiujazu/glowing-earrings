@@ -78,8 +78,8 @@ collections:
         widget: object
         collapsed: false
         fields:
-          - { label: "Hook (erster Eindruck)", name: hook, widget: text, hint: "Was den Leser sofort packt" }
-          - { label: "Quell-Kontext", name: sourceContext, widget: text, hint: "Wer ist die Quelle und warum relevant?" }
+          - { label: "Hook (erster Eindruck)", name: hook, widget: markdown, hint: "Was den Leser sofort packt" }
+          - { label: "Quell-Kontext", name: sourceContext, widget: markdown, hint: "Wer ist die Quelle und warum relevant?" }
 
       # ========== MODULE ==========
       - label: "Module & Inhalte"
@@ -103,14 +103,14 @@ collections:
               - { label: ID, name: id, widget: string }
               - { label: Typ, name: type, widget: select, options: [content, key-concept, callout, context-box, quiz, flashcard, reflection, easter-egg, image, code-block, step-by-step], hint: "Art des Elements" }
               # Fließtext
-              - { label: Text, name: text, widget: text, required: false, hint: "Fließtext (Markdown)" }
+              - { label: Text, name: text, widget: markdown, required: false }
               # Key-Concept / Callout / Step-by-Step
               - { label: Titel, name: title, widget: string, required: false }
-              - { label: Beschreibung, name: description, widget: text, required: false }
+              - { label: Beschreibung, name: description, widget: markdown, required: false }
               - { label: Variante, name: variant, widget: select, options: [quote, stat, example, warning, tip, fun-fact], required: false, hint: "Nur für Callouts" }
               # Quiz
               - { label: Frage, name: question, widget: string, required: false }
-              - { label: Erklärung, name: explanation, widget: text, required: false }
+              - { label: Erklärung, name: explanation, widget: markdown, required: false }
               - label: Antwort-Optionen
                 name: options
                 widget: list
@@ -157,7 +157,7 @@ collections:
         collapsed: false
         fields:
           - { label: "Kernerkenntnisse", name: synthesis, widget: list, label_singular: Erkenntnis }
-          - { label: "Nächster Schritt", name: nextStep, widget: text, hint: "Konkreter Handlungsimpuls" }
+          - { label: "Nächster Schritt", name: nextStep, widget: markdown, hint: "Konkreter Handlungsimpuls" }
           - label: Takeaway-Checkliste
             name: takeaway
             widget: list

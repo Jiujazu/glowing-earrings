@@ -176,8 +176,8 @@ export default function CourseFilters({
 
   const filtered = useMemo(() => {
     return courses.filter((c) => {
-      // Tags: OR logic — course must have at least one of the active tags
-      if (activeTags.size > 0 && !c.meta.tags.some((t) => activeTags.has(t)))
+      // Tags: AND logic — course must have ALL selected tags
+      if (activeTags.size > 0 && ![...activeTags].every((t) => c.meta.tags.includes(t)))
         return false;
       if (activeDifficulty && c.meta.difficulty !== activeDifficulty)
         return false;

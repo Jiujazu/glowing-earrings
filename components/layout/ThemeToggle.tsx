@@ -2,17 +2,16 @@
 
 import { useState, useEffect, useCallback } from "react";
 
-function getTheme(): "light" | "dark" {
-  if (typeof document !== "undefined") {
-    return document.documentElement.classList.contains("dark")
-      ? "dark"
-      : "light";
-  }
-  return "light";
-}
-
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">(getTheme);
+  const [mounted, setMounted] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    setTheme(
+      document.documentElement.classList.contains("dark") ? "dark" : "light"
+    );
+    setMounted(true);
+  }, []);
 
   const toggleTheme = useCallback(() => {
     setTheme((prev) => {
@@ -44,15 +43,14 @@ export default function ThemeToggle() {
   }, []);
 
   useEffect(() => {
-    // Listen for OS theme changes when no explicit preference is stored
-    try {
-      if (localStorage.getItem("ge-theme")) return;
-    } catch {
-      return;
-    }
-
+    // Listen for OS theme changes only when no explicit preference is stored
     const mq = matchMedia("(prefers-color-scheme: dark)");
     function onChange(e: MediaQueryListEvent) {
+      try {
+        if (localStorage.getItem("ge-theme")) return;
+      } catch {
+        return;
+      }
       const next = e.matches ? "dark" : "light";
       setTheme(next);
       document.documentElement.classList.toggle("dark", e.matches);
@@ -62,6 +60,18 @@ export default function ThemeToggle() {
   }, []);
 
   const isDark = theme === "dark";
+
+  // Render placeholder during SSR/hydration to avoid mismatch
+  if (!mounted) {
+    return (
+      <button
+        className="p-2 rounded-lg"
+        aria-hidden="true"
+      >
+        <span className="block w-[18px] h-[18px]" />
+      </button>
+    );
+  }
 
   return (
     <button

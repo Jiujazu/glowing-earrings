@@ -60,6 +60,7 @@
    Global Dark Mode
    ============================================ */
 html.dark {
+  color-scheme: dark;
   --background: #0F0A1A;
   --foreground: #EDE4F8;
   --surface: #1A1530;

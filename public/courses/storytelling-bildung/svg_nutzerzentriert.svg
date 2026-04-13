@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <rect width="400" height="400" rx="16" fill="#1A1926"/>
+  <!-- Center person -->
+  <circle cx="200" cy="170" r="22" fill="none" stroke="#FFFFFE" stroke-width="3"/>
+  <path d="M200 198 C170 198 158 220 158 235 L242 235 C242 220 230 198 200 198Z" fill="none" stroke="#FFFFFE" stroke-width="3"/>
+  <!-- Incoming arrows (8 directions) -->
+  <line x1="200" y1="80" x2="200" y2="120" stroke="#E8A838" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M193 125 L200 135 L207 125" fill="none" stroke="#E8A838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="200" y1="290" x2="200" y2="260" stroke="#E8A838" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M193 255 L200 245 L207 255" fill="none" stroke="#E8A838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="90" y1="195" x2="130" y2="195" stroke="#E8A838" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M135 188 L145 195 L135 202" fill="none" stroke="#E8A838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="310" y1="195" x2="270" y2="195" stroke="#E8A838" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M265 188 L255 195 L265 202" fill="none" stroke="#E8A838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Diagonal arrows -->
+  <line x1="120" y1="110" x2="152" y2="142" stroke="#E8A838" stroke-width="2" stroke-linecap="round"/>
+  <path d="M148 150 L160 150 L155 138" fill="none" stroke="#E8A838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="280" y1="110" x2="248" y2="142" stroke="#E8A838" stroke-width="2" stroke-linecap="round"/>
+  <path d="M245 138 L240 150 L252 150" fill="none" stroke="#E8A838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="120" y1="280" x2="152" y2="248" stroke="#E8A838" stroke-width="2" stroke-linecap="round"/>
+  <path d="M155 252 L160 240 L148 240" fill="none" stroke="#E8A838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="280" y1="280" x2="248" y2="248" stroke="#E8A838" stroke-width="2" stroke-linecap="round"/>
+  <path d="M252 240 L240 240 L245 252" fill="none" stroke="#E8A838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Label -->
+  <text x="200" y="350" text-anchor="middle" font-family="system-ui,sans-serif" font-size="22" font-weight="700" fill="#FFFFFE">Nutzerzentrierte Sichtweise</text>
+  <text x="200" y="375" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#A7A9BE">Denke vom Publikum her, nicht von dir</text>
+</svg>

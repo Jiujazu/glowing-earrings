@@ -49,6 +49,13 @@
           "text": "Stell dir vor: Du hast einen brillanten Inhalt. Eine wichtige Erkenntnis. Eine Idee, die dein Publikum weiterbringen wuerde.\n\nUnd dann passiert das hier:\n\n**Person** hat eine **Idee** und macht daraus eine **Faktenliste**.\n\nDas Ergebnis? Eine PowerPoint mit Bulletpoints. Ein Vortrag, den alle nach zwei Tagen vergessen haben."
         },
         {
+          "id": "problem-svg",
+          "type": "image",
+          "src": "/courses/storytelling-bildung/svg_problem-visualisierung.svg",
+          "alt": "Visualisierung: Person hat Idee, macht daraus eine Faktenliste",
+          "caption": "Das typische Muster: Gute Ideen enden als Bulletpoints."
+        },
+        {
           "id": "storytelling-definition",
           "type": "key-concept",
           "title": "Storytelling",
@@ -101,6 +108,12 @@
           "id": "modell-intro",
           "type": "content",
           "text": "Es gibt ein Modell, das Christina Maria Schollerer in Deutschland populaer gemacht hat. Es beschreibt, wie **jede gute Geschichte** aufgebaut ist, egal ob Bibel, YouTube-Clip oder dein naechster Vortrag."
+        },
+        {
+          "id": "hhp-svg",
+          "type": "image",
+          "src": "/courses/storytelling-bildung/svg_hook-hold-payoff.svg",
+          "alt": "Hook-Hold-Payoff Modell: Drei Stufen mit Geschenk-Metapher"
         },
         {
           "id": "hhp-steps",
@@ -184,6 +197,12 @@
           "text": "Hook-Hold-Payoff gibt dir die Struktur. Aber **fuer wen** erzaehlst du die Geschichte?\n\nStorytelling in der Bildung erfordert eine **nutzerzentrierte Sichtweise**. Nicht: Was will ich sagen? Sondern: Was bleibt bei meinem Publikum haengen?"
         },
         {
+          "id": "nutzer-svg",
+          "type": "image",
+          "src": "/courses/storytelling-bildung/svg_nutzerzentriert.svg",
+          "alt": "Nutzerzentrierte Sichtweise: Pfeile zeigen auf eine Person im Zentrum"
+        },
+        {
           "id": "nutzer-concept",
           "type": "key-concept",
           "title": "Nutzerzentrierte Sichtweise",
@@ -194,6 +213,12 @@
           "id": "abfolge-content",
           "type": "content",
           "text": "Klassischerweise haben wir eine Menge Informationen und stellen sie in eine **Abfolge**:\n\nInformation 1, Information 2, Information 3.\n\nDas macht noch keine Geschichte. Eine Geschichte entsteht erst, wenn wir die Informationen **verknuepfen** und emotional aufladen."
+        },
+        {
+          "id": "abfolge-svg",
+          "type": "image",
+          "src": "/courses/storytelling-bildung/svg_abfolge-vs-verknuepfung.svg",
+          "alt": "Vergleich: Abfolge (einzelne Fakten) vs. Verknuepfung (verbundene Geschichte)"
         },
         {
           "id": "fussball-verknuepfung",

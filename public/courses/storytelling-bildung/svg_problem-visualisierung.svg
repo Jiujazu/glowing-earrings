@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" fill="none">
+  <rect width="800" height="300" rx="16" fill="#1A1926"/>
+  <text x="400" y="40" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" font-weight="600" fill="#A7A9BE" letter-spacing="0.1em">PROBLEM</text>
+  <!-- Person icon -->
+  <circle cx="150" cy="140" r="28" fill="none" stroke="#FFFFFE" stroke-width="3"/>
+  <path d="M150 175 C110 175 95 205 95 225 L205 225 C205 205 190 175 150 175Z" fill="none" stroke="#FFFFFE" stroke-width="3" stroke-linecap="round"/>
+  <text x="150" y="265" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="500" fill="#A7A9BE">Person</text>
+  <!-- Arrow 1 -->
+  <path d="M220 180 L310 180" stroke="#E8A838" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M300 170 L315 180 L300 190" fill="none" stroke="#E8A838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Lightbulb icon -->
+  <circle cx="400" cy="150" r="30" fill="none" stroke="#E8A838" stroke-width="3"/>
+  <path d="M387 120 L400 110 L413 120" fill="none" stroke="#E8A838" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="400" y1="105" x2="400" y2="95" stroke="#E8A838" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="370" y1="130" x2="362" y2="122" stroke="#E8A838" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="430" y1="130" x2="438" y2="122" stroke="#E8A838" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="390" y="185" width="20" height="12" rx="3" fill="none" stroke="#E8A838" stroke-width="2.5"/>
+  <text x="400" y="265" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="500" fill="#A7A9BE">Idee</text>
+  <!-- Arrow 2 -->
+  <path d="M470 180 L560 180" stroke="#FF6B6B" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M550 170 L565 180 L550 190" fill="none" stroke="#FF6B6B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- List icon -->
+  <rect x="620" y="125" width="110" height="110" rx="8" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+  <line x1="645" y1="155" x2="705" y2="155" stroke="#FF6B6B" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="645" y1="175" x2="700" y2="175" stroke="#FF6B6B" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="645" y1="195" x2="695" y2="195" stroke="#FF6B6B" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="645" y1="215" x2="690" y2="215" stroke="#FF6B6B" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="650" y="265" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="500" fill="#A7A9BE">Faktenliste</text>
+</svg>

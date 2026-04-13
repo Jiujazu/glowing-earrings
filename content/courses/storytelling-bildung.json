@@ -349,10 +349,24 @@
           "text": "Die klassischen **PowerPoint-Suenden** kennst du vermutlich:\n\n- Komplette Saetze auf der Folie, die als Notizen dienen\n- Alle Infos auf eine Folie gepackt\n- Schrift so klein, dass man sie nicht lesen kann\n- Keine Hierarchie: alles gleich gross, gleich wichtig"
         },
         {
-          "id": "ppt-image",
+          "id": "textwall-image",
+          "type": "image",
+          "src": "/courses/storytelling-bildung/10_delegation-temptation-textwall.png",
+          "alt": "Eine Folie voller Text ohne Fokus oder Struktur",
+          "caption": "Klassiker: Die Folie als Notizbuch. Das Publikum liest oder hoert zu, aber nie beides."
+        },
+        {
+          "id": "pisa-image",
+          "type": "image",
+          "src": "/courses/storytelling-bildung/11_unlesbare-balkendiagramme.png",
+          "alt": "Unleserliche Balkendiagramme der PISA-Studie",
+          "caption": "PISA-Ergebnisse im Bundestag. Die Daten sind da, aber niemand kann sie lesen."
+        },
+        {
+          "id": "pentagon-image",
           "type": "image",
           "src": "/courses/storytelling-bildung/12_chaos-powerpoint.png",
-          "alt": "Eine ueberladene PowerPoint-Folie des Pentagon als Negativbeispiel",
+          "alt": "Eine grotesk ueberladene PowerPoint-Folie des Pentagon",
           "caption": "Ja, das ist eine echte Folie. Vom Pentagon."
         },
         {
@@ -361,6 +375,13 @@
           "variant": "warning",
           "title": "Der Multitasking-Mythos",
           "text": "Wir koennen **eine Information pro Zeitpunkt** aufnehmen. Nicht mehr. Wenn du sprichst UND eine ueberladene Folie zeigst, geht 90% verloren. Dein Publikum versucht beides gleichzeitig und kriegt nichts davon richtig mit."
+        },
+        {
+          "id": "grelle-image",
+          "type": "image",
+          "src": "/courses/storytelling-bildung/13_grelle-produktivity-apps.png",
+          "alt": "Folie mit grellen Farben und zu vielen App-Icons",
+          "caption": "Wenn alles bunt ist, ist nichts hervorgehoben."
         },
         {
           "id": "animation-tip",
@@ -373,6 +394,13 @@
           "id": "renate-intro",
           "type": "content",
           "text": "### Einfach anfangen: Das Beispiel Renate Schmitz\n\nRenate Schmitz ist Dozentin an der Hochschule Rhein-Waal. Nicht besonders digital-affin. Aber **angstfrei**.\n\nSie hat sich eine **Plastikkiste** ins Zimmer gebaut, eine Kamera draufgestellt, ein Flipchart hinter sich und losgelegt."
+        },
+        {
+          "id": "renate-image",
+          "type": "image",
+          "src": "/courses/storytelling-bildung/14_lehrerinnen-werkstatt.png",
+          "alt": "Renate Schmitz mit Studierenden in ihrem improvisierten Setup",
+          "caption": "Renate Schmitz: Plastikkiste, Kamera, Flipchart. Mehr braucht es nicht."
         },
         {
           "id": "renate-quote",

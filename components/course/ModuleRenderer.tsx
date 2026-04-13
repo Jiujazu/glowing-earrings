@@ -154,32 +154,34 @@ export default function ModuleRenderer({ module, index }: { module: Module; inde
 
   return (
     <section ref={sectionRef} id={`module-${module.id}`} className="scroll-mt-20">
-      {/* Chapter Divider Banner */}
-      <div
-        className="py-8 sm:py-10 px-4 border-t border-[var(--course-text)]/10"
-        style={{
-          backgroundColor: "color-mix(in srgb, var(--course-primary) 8%, var(--course-bg))",
-        }}
-      >
-        <div className="max-w-3xl mx-auto">
-          <ScrollReveal>
-            <div className="flex items-center gap-4">
-              <span
-                className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full font-heading font-bold text-lg sm:text-xl text-white flex-shrink-0"
-                style={{ backgroundColor: "var(--course-primary)" }}
-              >
-                {index + 1}
-              </span>
-              <h2
-                className="font-heading text-xl sm:text-2xl font-bold text-[var(--course-text)]"
-                style={{ fontFamily: "var(--course-heading-font, var(--font-heading))" }}
-              >
-                {module.title}
-              </h2>
-            </div>
-          </ScrollReveal>
+      {/* Chapter Divider Banner — skip for first module (CourseNav already shows it) */}
+      {index > 0 && (
+        <div
+          className="py-8 sm:py-10 px-4 border-t border-[var(--course-text)]/10"
+          style={{
+            backgroundColor: "color-mix(in srgb, var(--course-primary) 8%, var(--course-bg))",
+          }}
+        >
+          <div className="max-w-3xl mx-auto">
+            <ScrollReveal>
+              <div className="flex items-center gap-4">
+                <span
+                  className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full font-heading font-bold text-lg sm:text-xl text-white flex-shrink-0"
+                  style={{ backgroundColor: "var(--course-primary)" }}
+                >
+                  {index + 1}
+                </span>
+                <h2
+                  className="font-heading text-xl sm:text-2xl font-bold text-[var(--course-text)]"
+                  style={{ fontFamily: "var(--course-heading-font, var(--font-heading))" }}
+                >
+                  {module.title}
+                </h2>
+              </div>
+            </ScrollReveal>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Module Content */}
       <div className="py-12 sm:py-16 px-4">

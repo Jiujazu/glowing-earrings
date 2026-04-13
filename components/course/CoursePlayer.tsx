@@ -23,12 +23,6 @@ export default function CoursePlayer({ course }: CoursePlayerProps) {
       <article className="relative z-10">
         <CourseIntro intro={course.intro} meta={course.meta} />
 
-        <div className="max-w-3xl mx-auto px-4 pt-8 pb-2">
-          <p className="text-sm font-medium text-[var(--course-text-muted)] uppercase tracking-wide">
-            Kapitel
-          </p>
-        </div>
-
         <CourseNav modules={course.modules} />
 
         <CourseErrorBoundary>

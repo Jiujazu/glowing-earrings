@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import { getAllCourses } from "@/lib/course-utils";
 import CourseCard from "@/components/course/CourseCard";
+import CourseFilters from "@/components/course/CourseFilters";
 import NewsletterCTA from "@/components/layout/NewsletterCTA";
 import Container from "@/components/ui/Container";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -71,13 +73,9 @@ export default function Home() {
                 </span>
               </div>
             </ScrollReveal>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {courses.map((course, i) => (
-                <ScrollReveal key={course.meta.slug} delay={i * 100}>
-                  <CourseCard meta={course.meta} totalModules={course.modules.length} />
-                </ScrollReveal>
-              ))}
-            </div>
+            <Suspense>
+              <CourseFilters courses={courses} />
+            </Suspense>
           </Container>
         </section>
       )}

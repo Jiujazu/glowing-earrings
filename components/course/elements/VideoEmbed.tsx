@@ -17,7 +17,7 @@ function getEmbedUrl(platform: string, videoId: string, startAt?: number): strin
       rel: "0",
     });
     if (startAt) params.set("start", String(startAt));
-    return `https://www.youtube-nocookie.com/embed/${videoId}?${params}`;
+    return `https://www.youtube.com/embed/${videoId}?${params}`;
   }
   const params = new URLSearchParams({ autoplay: "1" });
   if (startAt) params.set("t", `${startAt}s`);

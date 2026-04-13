@@ -42,7 +42,7 @@ export default function ChapterBanner({
     setIsOpen(false);
   }
 
-  const module = modules[currentIndex];
+  const currentModule = modules[currentIndex];
 
   return (
     <div
@@ -72,7 +72,7 @@ export default function ChapterBanner({
               fontFamily: "var(--course-heading-font, var(--font-heading))",
             }}
           >
-            {module.title}
+            {currentModule.title}
           </h2>
           <svg
             className={`w-5 h-5 flex-shrink-0 transition-transform text-[var(--course-text-muted)] group-hover:text-[var(--course-text)] ${isOpen ? "rotate-180" : ""}`}

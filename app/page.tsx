@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import { getAllCourses } from "@/lib/course-utils";
-import CourseCard from "@/components/course/CourseCard";
 import CourseFilters from "@/components/course/CourseFilters";
 import NewsletterCTA from "@/components/layout/NewsletterCTA";
 import Container from "@/components/ui/Container";

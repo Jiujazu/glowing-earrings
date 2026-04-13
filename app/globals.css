@@ -56,6 +56,27 @@
   --course-body-font: var(--font-body);
 }
 
+/* ============================================
+   Global Dark Mode
+   ============================================ */
+html.dark {
+  --background: #0F0A1A;
+  --foreground: #EDE4F8;
+  --surface: #1A1530;
+  --surface-elevated: #231E3D;
+  --surface-tinted: #1E1640;
+  --border: #2D2650;
+  --text-primary: #EDE4F8;
+  --text-secondary: #A099B0;
+  --text-muted: #6E6880;
+  --accent: #7B4FBF;
+  --accent-hover: #9B6FDF;
+  --brand: #0A7E9F;
+  --brand-light: #12B5D0;
+  --pop-pink: #E91E8C;
+  --pop-turquoise: #00C9A7;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -145,7 +166,22 @@ h1, h2, h3, h4, h5, h6 {
 /* Selection color — Brand Lila */
 ::selection {
   background-color: rgba(91, 47, 159, 0.2);
-  color: var(--color-text-dark);
+  color: var(--text-primary);
+}
+
+html.dark ::selection {
+  background-color: rgba(123, 79, 191, 0.35);
+}
+
+/* Dark mode prose overrides for Impressum/Datenschutz */
+html.dark .prose {
+  --tw-prose-body: var(--text-secondary);
+  --tw-prose-headings: var(--text-primary);
+  --tw-prose-links: var(--accent);
+  --tw-prose-bold: var(--text-primary);
+  --tw-prose-bullets: var(--text-muted);
+  --tw-prose-counters: var(--text-muted);
+  --tw-prose-hr: var(--border);
 }
 
 /* Smooth scrolling */

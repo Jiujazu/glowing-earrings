@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import MobileNav from "./MobileNav";
+import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   { href: "/courses", label: "Kurse" },
@@ -39,6 +40,7 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+            <ThemeToggle />
             <Link
               href="/newsletter"
               className="ml-3 px-4 py-2 text-sm font-bold text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] rounded-xl transition-all duration-200 hover:shadow-md hover:shadow-[var(--accent)]/20"
@@ -47,18 +49,21 @@ export default function Header() {
             </Link>
           </nav>
 
-          {/* Mobile Hamburger */}
-          <button
-            className="md:hidden p-2 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
-            onClick={() => setMobileOpen(true)}
-            aria-label="Menü öffnen"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <line x1="3" y1="12" x2="21" y2="12" />
-              <line x1="3" y1="18" x2="21" y2="18" />
-            </svg>
-          </button>
+          {/* Mobile: Theme toggle + Hamburger */}
+          <div className="md:hidden flex items-center gap-1">
+            <ThemeToggle />
+            <button
+              className="p-2 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+              onClick={() => setMobileOpen(true)}
+              aria-label="Menü öffnen"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            </button>
+          </div>
         </div>
       </header>
 

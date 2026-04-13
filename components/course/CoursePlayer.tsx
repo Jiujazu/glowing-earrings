@@ -8,6 +8,7 @@ import CourseNav from "./CourseNav";
 import CourseParallax from "./CourseParallax";
 import CourseErrorBoundary from "./CourseErrorBoundary";
 import CourseProgressTracker from "./CourseProgressTracker";
+import ScrollToTop from "./ScrollToTop";
 
 interface CoursePlayerProps {
   course: Course;
@@ -37,6 +38,7 @@ export default function CoursePlayer({ course }: CoursePlayerProps) {
           </div>
         </CourseErrorBoundary>
       </article>
+      <ScrollToTop />
       </CourseProgressTracker>
     </CourseThemeProvider>
   );

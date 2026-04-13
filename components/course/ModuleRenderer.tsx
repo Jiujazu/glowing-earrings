@@ -157,28 +157,26 @@ export default function ModuleRenderer({ module, index }: { module: Module; inde
       {/* Chapter Divider Banner — skip for first module (CourseNav already shows it) */}
       {index > 0 && (
         <div
-          className="py-8 sm:py-10 px-4 border-t border-[var(--course-text)]/10"
+          className="sticky top-16 z-[55] py-6 sm:py-8 px-4 border-t border-[var(--course-text)]/10 backdrop-blur-lg"
           style={{
-            backgroundColor: "color-mix(in srgb, var(--course-primary) 8%, var(--course-bg))",
+            backgroundColor: "color-mix(in srgb, var(--course-primary) 12%, var(--course-bg) 95%)",
           }}
         >
           <div className="max-w-3xl mx-auto">
-            <ScrollReveal>
-              <div className="flex items-center gap-4">
-                <span
-                  className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full font-heading font-bold text-lg sm:text-xl text-white flex-shrink-0"
-                  style={{ backgroundColor: "var(--course-primary)" }}
-                >
-                  {index + 1}
-                </span>
-                <h2
-                  className="font-heading text-xl sm:text-2xl font-bold text-[var(--course-text)]"
-                  style={{ fontFamily: "var(--course-heading-font, var(--font-heading))" }}
-                >
-                  {module.title}
-                </h2>
-              </div>
-            </ScrollReveal>
+            <div className="flex items-center gap-4">
+              <span
+                className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full font-heading font-bold text-sm sm:text-base text-white flex-shrink-0"
+                style={{ backgroundColor: "var(--course-primary)" }}
+              >
+                {index + 1}
+              </span>
+              <h2
+                className="font-heading text-lg sm:text-xl font-bold text-[var(--course-text)]"
+                style={{ fontFamily: "var(--course-heading-font, var(--font-heading))" }}
+              >
+                {module.title}
+              </h2>
+            </div>
           </div>
         </div>
       )}

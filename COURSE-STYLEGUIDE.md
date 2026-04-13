@@ -241,10 +241,21 @@ Farbsprache nach Kategorie:
 | `advanced` | Erfahrung mit dem Thema vorausgesetzt. Wenig Scaffolding, mehr Tiefe. |
 
 ### 6.2 Tags
-Frei wählbar, aber konsistente Schreibweise:
-- Englisch, Title Case: "Knowledge Management", "Prompt Engineering", "Creative Tools"
-- Maximal 4-5 Tags pro Kurs
-- Bestehende Tags bevorzugen, neue nur wenn nötig
+Tags sind das primäre Filtersystem für User. Sie müssen spezifisch und nützlich sein.
+
+**Regeln:**
+- **Ein Wort pro Tag.** Keine Phrasen wie "KI-Technologie & Tools". Stattdessen: "Claude", "RAG", "Obsidian".
+- **Spezifisch, nicht generisch.** "Productivity" ist zu vage — ein User weiß nicht, was ihn erwartet. "Skills" oder "Agents" sagt sofort, worum es geht.
+- **Max 3 Tags pro Kurs.** Weniger ist mehr. Jeder Tag muss sein Gewicht tragen.
+- **Bestehende Tags bevorzugen,** neue nur wenn kein existierender passt.
+- **Perspektive des Users:** Stell dir vor, du kommst auf die Seite und willst einen Kurs finden. Welches Wort würdest du suchen?
+
+**Drei Filter-Bereiche im UI:**
+1. **Thema** — die Tags (ein Wort, spezifisch)
+2. **Schwierigkeit** — Einsteiger / Fortgeschritten / Experte
+3. **Länge** — Kurz (<10 Min) / Mittel (10-20 Min) / Lang (>20 Min)
+
+Kategorien (`category` in CourseMeta) werden im UI **nicht** angezeigt — sie sind reine Backend-Metadaten.
 
 ### 6.3 Zeitschätzung
 - Pro Modul: geschätzt in Minuten (inkl. Quizzes und Flashcards)

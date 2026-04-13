@@ -24,7 +24,7 @@ export default function MobileNav({ open, onClose, links }: MobileNavProps) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] md:hidden">
+    <div className="fixed inset-0 z-[100] md:hidden" role="dialog" aria-modal="true" aria-label="Navigation">
       <div
         className="absolute inset-0 bg-[var(--color-dark-purple)]/40 backdrop-blur-sm animate-fade-in"
         onClick={onClose}

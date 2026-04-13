@@ -77,6 +77,8 @@ export default function CourseNav({ modules }: CourseNavProps) {
         {/* Toggle bar — same on mobile and desktop */}
         <button
           onClick={() => setIsOpen(!isOpen)}
+          aria-expanded={isOpen}
+          aria-label="Kapitel-Navigation"
           className="flex items-center gap-3 flex-1 min-w-0 py-1"
         >
           <span className="text-xs font-bold font-heading rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 bg-[var(--accent)] text-white">

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import type { Module, FlashcardElement } from "@/lib/types";
+import ChapterBanner from "./ChapterBanner";
 import ContentBlock from "./elements/ContentBlock";
 import KeyConcept from "./elements/KeyConcept";
 import Callout from "./elements/Callout";
@@ -17,7 +18,7 @@ import StepByStep from "./elements/StepByStep";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { useProgressTracker } from "./CourseProgressTracker";
 
-export default function ModuleRenderer({ module, index }: { module: Module; index: number }) {
+export default function ModuleRenderer({ module, index, allModules }: { module: Module; index: number; allModules: Module[] }) {
   const sectionRef = useRef<HTMLElement>(null);
   const tracker = useProgressTracker();
 
@@ -154,32 +155,8 @@ export default function ModuleRenderer({ module, index }: { module: Module; inde
 
   return (
     <section ref={sectionRef} id={`module-${module.id}`} className="scroll-mt-20">
-      {/* Chapter Divider Banner — skip for first module (CourseNav already shows it) */}
-      {index > 0 && (
-        <div
-          className="sticky top-16 z-[55] py-6 sm:py-8 px-4 border-t border-[var(--course-text)]/10 backdrop-blur-lg"
-          style={{
-            backgroundColor: "color-mix(in srgb, var(--course-primary) 12%, var(--course-bg) 95%)",
-          }}
-        >
-          <div className="max-w-3xl mx-auto">
-            <div className="flex items-center gap-4">
-              <span
-                className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full font-heading font-bold text-sm sm:text-base text-white flex-shrink-0"
-                style={{ backgroundColor: "var(--course-primary)" }}
-              >
-                {index + 1}
-              </span>
-              <h2
-                className="font-heading text-lg sm:text-xl font-bold text-[var(--course-text)]"
-                style={{ fontFamily: "var(--course-heading-font, var(--font-heading))" }}
-              >
-                {module.title}
-              </h2>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Sticky Chapter Banner with dropdown navigation */}
+      <ChapterBanner modules={allModules} currentIndex={index} />
 
       {/* Module Content */}
       <div className="py-12 sm:py-16 px-4">

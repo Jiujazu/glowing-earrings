@@ -4,7 +4,6 @@ import CourseIntro from "./CourseIntro";
 import ModuleRenderer from "./ModuleRenderer";
 import CourseOutro from "./CourseOutro";
 import CourseProgress from "./CourseProgress";
-import CourseNav from "./CourseNav";
 import CourseParallax from "./CourseParallax";
 import CourseErrorBoundary from "./CourseErrorBoundary";
 import CourseProgressTracker from "./CourseProgressTracker";
@@ -24,12 +23,10 @@ export default function CoursePlayer({ course }: CoursePlayerProps) {
       <article className="relative z-10">
         <CourseIntro intro={course.intro} meta={course.meta} />
 
-        <CourseNav modules={course.modules} />
-
         <CourseErrorBoundary>
           <div>
             {course.modules.map((module, index) => (
-              <ModuleRenderer key={module.id} module={module} index={index} />
+              <ModuleRenderer key={module.id} module={module} index={index} allModules={course.modules} />
             ))}
           </div>
 
@@ -38,7 +35,7 @@ export default function CoursePlayer({ course }: CoursePlayerProps) {
           </div>
         </CourseErrorBoundary>
       </article>
-      <ScrollToTop />
+      <ScrollToTop modules={course.modules} />
       </CourseProgressTracker>
     </CourseThemeProvider>
   );

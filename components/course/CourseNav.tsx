@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import type { Module } from "@/lib/types";
-import ThemeToggle from "./ThemeToggle";
 
 interface CourseNavProps {
   modules: Module[];
@@ -97,11 +96,6 @@ export default function CourseNav({ modules }: CourseNavProps) {
             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
-
-        {/* Theme toggle */}
-        <div className="flex-shrink-0">
-          <ThemeToggle />
-        </div>
 
         {/* Dropdown list — same on mobile and desktop */}
         {isOpen && (

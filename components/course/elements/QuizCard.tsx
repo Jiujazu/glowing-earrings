@@ -52,8 +52,8 @@ export default function QuizCard({ element }: { element: QuizElement }) {
 
           if (revealed) {
             if (isOptionCorrect) {
-              borderColor = "var(--course-accent)";
-              bgColor = "color-mix(in srgb, var(--course-accent) 10%, var(--course-surface))";
+              borderColor = "#22C55E";
+              bgColor = "color-mix(in srgb, #22C55E 10%, var(--course-surface))";
             } else if (isSelected && !isOptionCorrect) {
               borderColor = "#E55B5B";
               bgColor = "color-mix(in srgb, #E55B5B 10%, var(--course-surface))";
@@ -82,7 +82,7 @@ export default function QuizCard({ element }: { element: QuizElement }) {
                     <span className="block w-5 h-5 rounded-full border-2 border-[var(--course-text-muted)]/40" />
                   )}
                   {revealed && isOptionCorrect && (
-                    <span className="block w-5 h-5 rounded-full bg-[var(--course-accent)] flex items-center justify-center text-white text-xs">✓</span>
+                    <span className="block w-5 h-5 rounded-full bg-[#22C55E] flex items-center justify-center text-white text-xs">✓</span>
                   )}
                   {revealed && !isOptionCorrect && isSelected && (
                     <span className="block w-5 h-5 rounded-full bg-[#E55B5B] flex items-center justify-center text-white text-xs">✗</span>

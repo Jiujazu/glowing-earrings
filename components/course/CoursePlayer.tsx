@@ -1,6 +1,7 @@
 import type { Course } from "@/lib/types";
 import CourseThemeProvider from "./CourseThemeProvider";
 import CourseIntro from "./CourseIntro";
+import CourseTOC from "./CourseTOC";
 import ModuleRenderer from "./ModuleRenderer";
 import CourseOutro from "./CourseOutro";
 import CourseProgress from "./CourseProgress";
@@ -22,6 +23,7 @@ export default function CoursePlayer({ course }: CoursePlayerProps) {
 
       <article className="relative z-10">
         <CourseIntro intro={course.intro} meta={course.meta} />
+        <CourseTOC modules={course.modules} />
 
         <CourseErrorBoundary>
           <div>

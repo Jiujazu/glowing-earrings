@@ -61,7 +61,7 @@ export default function ScrollToTop({ modules }: ScrollToTopProps) {
 
   return (
     <div
-      className="fixed z-[60] flex flex-col gap-2 animate-fade-in bottom-6 right-6 lg:bottom-auto lg:right-auto lg:top-32 lg:left-[calc(50%+25rem)]"
+      className="fixed z-[60] flex flex-col gap-2 animate-fade-in bottom-6 right-6 lg:bottom-auto lg:right-auto lg:top-40 lg:left-[calc(50%+25rem)]"
     >
       {hasPrev && (
         <button

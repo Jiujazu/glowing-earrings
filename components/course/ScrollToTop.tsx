@@ -60,7 +60,9 @@ export default function ScrollToTop({ modules }: ScrollToTopProps) {
     "w-10 h-10 rounded-full bg-[var(--course-surface)] border border-[var(--course-text)]/15 text-[var(--course-text-muted)] hover:text-[var(--course-text)] hover:border-[var(--course-primary)]/40 shadow-lg backdrop-blur-sm transition-all duration-200 flex items-center justify-center";
 
   return (
-    <div className="fixed bottom-6 right-6 z-[60] flex flex-col gap-2 animate-fade-in">
+    <div
+      className="fixed z-[60] flex flex-col gap-2 animate-fade-in bottom-6 right-6 lg:bottom-auto lg:right-auto lg:top-32 lg:left-[calc(50%+25rem)]"
+    >
       {hasPrev && (
         <button
           onClick={() => scrollToModule(activeIndex - 1)}

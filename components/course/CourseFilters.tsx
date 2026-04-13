@@ -32,11 +32,12 @@ function getDurationCategory(minutes: number): DurationFilter {
 }
 
 /* -------------------------------------------------- */
-/*  FilterDropdown — reusable for Schwierigkeit/Dauer  */
+/*  FilterDropdown — compact select for meta filters   */
 /* -------------------------------------------------- */
 
 interface FilterDropdownProps<T extends string> {
   label: string;
+  icon: React.ReactNode;
   value: T | null;
   options: { value: T; label: string; hint?: string }[];
   onChange: (value: T | null) => void;
@@ -44,6 +45,7 @@ interface FilterDropdownProps<T extends string> {
 
 function FilterDropdown<T extends string>({
   label,
+  icon,
   value,
   options,
   onChange,
@@ -77,15 +79,16 @@ function FilterDropdown<T extends string>({
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-haspopup="listbox"
-        className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-xl border transition-all duration-200 ${
+        className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 ${
           value
-            ? "bg-[var(--accent)] text-white border-[var(--accent)] shadow-sm"
-            : "bg-[var(--surface)] text-[var(--text-primary)] border-[var(--border)] hover:border-[var(--accent)]/50"
+            ? "text-[var(--accent)] bg-[var(--accent)]/10"
+            : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-tinted)]"
         }`}
       >
+        {icon}
         <span>{activeOption ? activeOption.label : label}</span>
         <svg
-          className={`w-3.5 h-3.5 transition-transform ${open ? "rotate-180" : ""} ${value ? "text-white/70" : "text-[var(--text-muted)]"}`}
+          className={`w-3 h-3 transition-transform ${open ? "rotate-180" : ""}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -98,7 +101,7 @@ function FilterDropdown<T extends string>({
       {open && (
         <div
           role="listbox"
-          className="absolute left-0 top-full mt-1 min-w-[180px] bg-[var(--surface)] border border-[var(--border)] rounded-xl shadow-lg z-20 py-1 animate-fade-in"
+          className="absolute left-0 top-full mt-1 min-w-[180px] bg-[var(--surface-elevated)] border border-[var(--border)] rounded-xl shadow-lg z-20 py-1 animate-fade-in"
         >
           {options.map((option) => (
             <button
@@ -138,7 +141,7 @@ export default function CourseFilters({
   showGrid = true,
 }: CourseFiltersProps) {
   const searchParams = useSearchParams();
-  const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [activeTags, setActiveTags] = useState<Set<string>>(new Set());
   const [activeDifficulty, setActiveDifficulty] = useState<string | null>(null);
   const [activeDuration, setActiveDuration] = useState<DurationFilter | null>(
     null
@@ -146,8 +149,20 @@ export default function CourseFilters({
 
   useEffect(() => {
     const tagFromUrl = searchParams.get("tag");
-    if (tagFromUrl) setActiveTag(tagFromUrl);
+    if (tagFromUrl) setActiveTags(new Set([tagFromUrl]));
   }, [searchParams]);
+
+  function toggleTag(tag: string) {
+    setActiveTags((prev) => {
+      const next = new Set(prev);
+      if (next.has(tag)) {
+        next.delete(tag);
+      } else {
+        next.add(tag);
+      }
+      return next;
+    });
+  }
 
   const allTags = useMemo(() => {
     const tagSet = new Set<string>();
@@ -161,7 +176,9 @@ export default function CourseFilters({
 
   const filtered = useMemo(() => {
     return courses.filter((c) => {
-      if (activeTag && !c.meta.tags.includes(activeTag)) return false;
+      // Tags: OR logic — course must have at least one of the active tags
+      if (activeTags.size > 0 && !c.meta.tags.some((t) => activeTags.has(t)))
+        return false;
       if (activeDifficulty && c.meta.difficulty !== activeDifficulty)
         return false;
       if (
@@ -171,20 +188,15 @@ export default function CourseFilters({
         return false;
       return true;
     });
-  }, [courses, activeTag, activeDifficulty, activeDuration]);
+  }, [courses, activeTags, activeDifficulty, activeDuration]);
 
-  const hasFilters = activeTag || activeDifficulty || activeDuration;
+  const hasFilters = activeTags.size > 0 || activeDifficulty || activeDuration;
 
   function clearFilters() {
-    setActiveTag(null);
+    setActiveTags(new Set());
     setActiveDifficulty(null);
     setActiveDuration(null);
   }
-
-  const tagButton =
-    "px-4 py-2 text-sm font-medium rounded-xl border transition-all duration-200";
-  const tagInactive =
-    "bg-[var(--surface)] text-[var(--text-primary)] border-[var(--border)] hover:border-[var(--accent)]/50 hover:text-[var(--accent)]";
 
   const difficultyOptions = difficulties.map((d) => ({
     value: d as string,
@@ -212,11 +224,11 @@ export default function CourseFilters({
             {allTags.map((tag) => (
               <button
                 key={tag}
-                onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-                className={`${tagButton} ${
-                  activeTag === tag
+                onClick={() => toggleTag(tag)}
+                className={`px-4 py-2 text-sm font-medium rounded-xl border transition-all duration-200 ${
+                  activeTags.has(tag)
                     ? "bg-[var(--accent)] text-white border-[var(--accent)] shadow-sm"
-                    : tagInactive
+                    : "bg-[var(--surface)] text-[var(--text-primary)] border-[var(--border)] hover:border-[var(--accent)]/50 hover:text-[var(--accent)]"
                 }`}
               >
                 {tag}
@@ -225,16 +237,27 @@ export default function CourseFilters({
           </div>
         </div>
 
-        {/* Schwierigkeit + Dauer Dropdowns */}
-        <div className="flex flex-wrap items-start gap-3">
+        {/* Schwierigkeit + Dauer Dropdowns — visually distinct from tags */}
+        <div className="flex flex-wrap items-center gap-1">
           <FilterDropdown
             label="Schwierigkeit"
+            icon={
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            }
             value={activeDifficulty}
             options={difficultyOptions}
             onChange={setActiveDifficulty}
           />
           <FilterDropdown
             label="Dauer"
+            icon={
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            }
             value={activeDuration}
             options={durationOptions}
             onChange={setActiveDuration}

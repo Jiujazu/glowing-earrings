@@ -1,11 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import type { ImageElement } from "@/lib/types";
 
 export default function ImageBlock({ element }: { element: ImageElement }) {
   const [isZoomed, setIsZoomed] = useState(false);
+
+  useEffect(() => {
+    if (!isZoomed) return;
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setIsZoomed(false);
+    }
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [isZoomed]);
 
   return (
     <>
@@ -36,8 +45,8 @@ export default function ImageBlock({ element }: { element: ImageElement }) {
         <div
           className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 backdrop-blur-sm cursor-zoom-out p-4"
           onClick={() => setIsZoomed(false)}
-          onKeyDown={(e) => e.key === "Escape" && setIsZoomed(false)}
           role="dialog"
+          aria-modal="true"
           aria-label={element.alt}
         >
           <Image

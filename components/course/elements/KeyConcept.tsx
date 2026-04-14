@@ -1,10 +1,17 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 import type { KeyConceptElement } from "@/lib/types";
+import { useEditMode } from "@/components/editor/EditModeProvider";
+
+const EditableText = dynamic(() => import("@/components/editor/EditableText"), {
+  ssr: false,
+});
 
 export default function KeyConcept({ element }: { element: KeyConceptElement }) {
   const ref = useRef<HTMLDivElement>(null);
+  const { isEditMode } = useEditMode();
 
   useEffect(() => {
     const el = ref.current;
@@ -31,6 +38,18 @@ export default function KeyConcept({ element }: { element: KeyConceptElement }) 
     return () => observer.disconnect();
   }, []);
 
+  const titleContent = (
+    <h3 className="font-heading font-bold text-lg text-[var(--course-text)] mb-1">
+      {element.title}
+    </h3>
+  );
+
+  const descContent = (
+    <p className="text-base text-[var(--course-text)] leading-relaxed opacity-85">
+      {element.description}
+    </p>
+  );
+
   return (
     <div
       ref={ref}
@@ -45,12 +64,21 @@ export default function KeyConcept({ element }: { element: KeyConceptElement }) 
           <span className="text-2xl flex-shrink-0">{element.icon}</span>
         )}
         <div>
-          <h3 className="font-heading font-bold text-lg text-[var(--course-text)] mb-1">
-            {element.title}
-          </h3>
-          <p className="text-base text-[var(--course-text)] leading-relaxed opacity-85">
-            {element.description}
-          </p>
+          {isEditMode ? (
+            <>
+              <EditableText elementId={element.id} content={element.title} fieldPath="title">
+                {titleContent}
+              </EditableText>
+              <EditableText elementId={element.id} content={element.description} fieldPath="description">
+                {descContent}
+              </EditableText>
+            </>
+          ) : (
+            <>
+              {titleContent}
+              {descContent}
+            </>
+          )}
         </div>
       </div>
     </div>

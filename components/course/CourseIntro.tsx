@@ -1,7 +1,15 @@
+"use client";
+
 import type { CourseIntro as CourseIntroType, CourseMeta } from "@/lib/types";
 import { formatDuration, getDifficultyLabel } from "@/lib/course-utils";
 import Badge from "@/components/ui/Badge";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import dynamic from "next/dynamic";
+import { useEditMode } from "@/components/editor/EditModeProvider";
+
+const EditableText = dynamic(() => import("@/components/editor/EditableText"), {
+  ssr: false,
+});
 
 interface CourseIntroProps {
   intro: CourseIntroType;
@@ -9,6 +17,18 @@ interface CourseIntroProps {
 }
 
 export default function CourseIntro({ intro, meta }: CourseIntroProps) {
+  const { isEditMode } = useEditMode();
+
+  const hookContent = (
+    <div className="text-lg leading-relaxed mb-8 border-l-4 border-[var(--course-primary)] pl-4">
+      {intro.hook}
+    </div>
+  );
+
+  const sourceContent = (
+    <p className="text-base">{intro.sourceContext}</p>
+  );
+
   return (
     <section className="py-16 sm:py-24 px-4">
       <div className="max-w-3xl mx-auto">
@@ -40,16 +60,26 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
 
         {/* Hook */}
         <ScrollReveal delay={200} duration={700}>
-          <div className="text-lg leading-relaxed mb-8 border-l-4 border-[var(--course-primary)] pl-4">
-            {intro.hook}
-          </div>
+          {isEditMode ? (
+            <EditableText elementId="intro-hook" content={intro.hook} fieldPath="hook">
+              {hookContent}
+            </EditableText>
+          ) : (
+            hookContent
+          )}
         </ScrollReveal>
 
         {/* Source Context */}
         <ScrollReveal delay={250}>
           <div className="bg-[var(--course-surface)] rounded-xl p-5">
             <p className="text-sm text-[var(--course-text-muted)] mb-2">Quelle</p>
-            <p className="text-base">{intro.sourceContext}</p>
+            {isEditMode ? (
+              <EditableText elementId="intro-source" content={intro.sourceContext} fieldPath="sourceContext">
+                {sourceContent}
+              </EditableText>
+            ) : (
+              sourceContent
+            )}
             <a
               href={meta.sourceUrl}
               target="_blank"

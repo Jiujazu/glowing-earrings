@@ -1,35 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
 
 /**
- * Validates editor access via either:
- * 1. NextAuth session (GitHub OAuth) — preferred
- * 2. EDITOR_SECRET Bearer token — fallback
- *
- * Also validates Origin header for CSRF protection.
+ * Validates editor access via EDITOR_SECRET Bearer token.
  * Returns null if valid, or an error NextResponse if invalid.
  */
 export async function validateEditorAuth(request: NextRequest): Promise<NextResponse | null> {
-  // CSRF: Validate Origin header if present
+  // CSRF: Validate Origin header in production
   const origin = request.headers.get("origin");
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
-  if (origin && siteUrl && !origin.includes(new URL(siteUrl).hostname)) {
-    // In production, reject cross-origin requests
-    if (process.env.NODE_ENV === "production") {
-      return NextResponse.json(
-        { success: false, message: "Ungültiger Origin." },
-        { status: 403 }
-      );
+  if (origin && siteUrl && process.env.NODE_ENV === "production") {
+    try {
+      const originHost = new URL(origin).hostname;
+      const siteHost = new URL(siteUrl).hostname;
+      if (originHost !== siteHost && !originHost.endsWith(`.${siteHost}`)) {
+        return NextResponse.json(
+          { success: false, message: "Ungültiger Origin." },
+          { status: 403 }
+        );
+      }
+    } catch {
+      // Invalid URL — skip
     }
   }
 
-  // Method 1: Check NextAuth session
-  const session = await auth();
-  if (session?.user) {
-    return null; // Authenticated via OAuth
-  }
-
-  // Method 2: Check EDITOR_SECRET token
+  // Check EDITOR_SECRET token
   const editorSecret = process.env.EDITOR_SECRET;
   if (editorSecret) {
     const authHeader = request.headers.get("Authorization");
@@ -38,12 +32,12 @@ export async function validateEditorAuth(request: NextRequest): Promise<NextResp
       : null;
 
     if (token && token === editorSecret) {
-      return null; // Authenticated via token
+      return null;
     }
   }
 
-  // No EDITOR_SECRET configured and no session — allow in dev mode
-  if (!process.env.EDITOR_SECRET && !process.env.AUTH_GITHUB_ID) {
+  // No EDITOR_SECRET configured — allow in dev mode
+  if (!process.env.EDITOR_SECRET) {
     return null;
   }
 

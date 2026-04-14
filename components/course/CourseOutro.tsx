@@ -1,9 +1,49 @@
+"use client";
+
+import { useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import type { CourseOutro as CourseOutroType } from "@/lib/types";
 import { getCourseBySlug, formatDuration, getDifficultyLabel } from "@/lib/course-utils";
 import NewsletterCTA from "@/components/layout/NewsletterCTA";
 import Badge from "@/components/ui/Badge";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { useEditMode } from "@/components/editor/EditModeProvider";
+
+const EditableText = dynamic(() => import("@/components/editor/EditableText"), {
+  ssr: false,
+});
+
+function InlineOutroEdit({
+  value,
+  onChange,
+  className,
+}: {
+  value: string;
+  onChange: (newValue: string) => void;
+  className?: string;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    if (ref.current && ref.current.textContent !== value) {
+      ref.current.textContent = value;
+    }
+  }, [value]);
+
+  return (
+    <span
+      ref={ref}
+      contentEditable
+      suppressContentEditableWarning
+      className={`outline-none focus:ring-1 focus:ring-[var(--course-primary)] rounded px-1 -mx-1 ${className || ""}`}
+      onBlur={() => {
+        const text = ref.current?.textContent || "";
+        if (text !== value) onChange(text);
+      }}
+    />
+  );
+}
 
 interface CourseOutroProps {
   outro: CourseOutroType;
@@ -12,9 +52,39 @@ interface CourseOutroProps {
 }
 
 export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseOutroProps) {
+  const editMode = useEditMode();
+  const isEditMode = editMode.isEditMode;
+  const [localSynthesis, setLocalSynthesis] = useState<string[]>(outro.synthesis);
+
+  const updateSynthesis = useCallback(
+    (index: number, value: string) => {
+      const updated = localSynthesis.map((s, i) => (i === index ? value : s));
+      setLocalSynthesis(updated);
+      if ("registerChange" in editMode) {
+        editMode.registerChange({
+          elementId: "outro",
+          fieldPath: "synthesis",
+          newValue: JSON.stringify(updated),
+        });
+      }
+    },
+    [localSynthesis, editMode]
+  );
+
   const relatedCourses = (relatedSlugs || [])
     .map((slug) => getCourseBySlug(slug))
     .filter(Boolean);
+
+  const synthesis = isEditMode ? localSynthesis : outro.synthesis;
+
+  const nextStepContent = (
+    <p className="text-base leading-relaxed">{outro.nextStep}</p>
+  );
+
+  const ctaContent = (
+    <p className="text-base leading-relaxed">{outro.newsletterCTA}</p>
+  );
+
   return (
     <section className="py-16 sm:py-24 px-4">
       <div className="max-w-3xl mx-auto">
@@ -28,11 +98,19 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
           </h2>
         </ScrollReveal>
         <ul className="space-y-3 mb-8">
-          {outro.synthesis.map((point, i) => (
+          {synthesis.map((point, i) => (
             <ScrollReveal key={i} delay={i * 80}>
               <li className="flex items-start gap-3 text-base leading-relaxed">
                 <span className="text-[var(--course-primary)] mt-1">✦</span>
-                <span>{point}</span>
+                {isEditMode ? (
+                  <InlineOutroEdit
+                    value={point}
+                    onChange={(val) => updateSynthesis(i, val)}
+                    className="flex-1"
+                  />
+                ) : (
+                  <span>{point}</span>
+                )}
               </li>
             </ScrollReveal>
           ))}
@@ -67,7 +145,13 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
             <p className="text-sm font-medium text-[var(--course-primary)] mb-1 uppercase tracking-wide">
               Dein nächster Schritt
             </p>
-            <p className="text-base leading-relaxed">{outro.nextStep}</p>
+            {isEditMode ? (
+              <EditableText elementId="outro" content={outro.nextStep} fieldPath="nextStep">
+                {nextStepContent}
+              </EditableText>
+            ) : (
+              nextStepContent
+            )}
           </div>
         </ScrollReveal>
 
@@ -137,6 +221,14 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
 
         {/* Newsletter CTA */}
         <ScrollReveal>
+          {isEditMode ? (
+            <div className="mb-4">
+              <p className="text-xs text-[var(--course-text-muted)] uppercase tracking-wider mb-1">Newsletter-CTA Text</p>
+              <EditableText elementId="outro" content={outro.newsletterCTA} fieldPath="newsletterCTA">
+                {ctaContent}
+              </EditableText>
+            </div>
+          ) : null}
           <NewsletterCTA
             variant="featured"
             source={`course-${courseSlug}`}

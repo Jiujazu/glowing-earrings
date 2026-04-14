@@ -108,6 +108,45 @@ function applyChanges(
       }
     }
 
+    // Check outro fields
+    if (!found && change.elementId === "outro") {
+      const allowedOutroFields = ["nextStep", "newsletterCTA", "synthesis"];
+      if (allowedOutroFields.includes(change.fieldPath) && change.fieldPath in course.outro) {
+        // synthesis is an array — parse JSON
+        if (change.fieldPath === "synthesis") {
+          try {
+            course.outro[change.fieldPath] = JSON.parse(change.newValue);
+          } catch {
+            // skip invalid JSON
+          }
+        } else {
+          course.outro[change.fieldPath] = change.newValue;
+        }
+        applied++;
+        found = true;
+      }
+    }
+
+    // Check course-level modules replacement
+    if (!found && change.elementId === "course" && change.fieldPath === "modules") {
+      try {
+        const parsed = JSON.parse(change.newValue);
+        if (
+          Array.isArray(parsed) &&
+          parsed.every(
+            (m: unknown) =>
+              typeof m === "object" && m !== null && "id" in m && "title" in m && "elements" in m
+          )
+        ) {
+          course.modules = parsed;
+          applied++;
+          found = true;
+        }
+      } catch {
+        // Invalid JSON
+      }
+    }
+
     if (!found) {
       notFound.push(change.elementId);
     }

@@ -1,7 +1,10 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { useEditMode } from "./EditModeProvider";
+
+const ImageCropModal = dynamic(() => import("./ImageCropModal"), { ssr: false });
 
 interface EditableImageProps {
   elementId: string;
@@ -20,6 +23,7 @@ export default function EditableImage({
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState("");
   const [previewSrc, setPreviewSrc] = useState<string | null>(null);
+  const [showCrop, setShowCrop] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const hasContext = "courseSlug" in editMode;
@@ -173,6 +177,23 @@ export default function EditableImage({
             </svg>
             Bild ersetzen
           </button>
+          {currentSrc && currentSrc !== "/placeholder.svg" && (
+            <button
+              onClick={() => setShowCrop(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium shadow-lg transition-all duration-200 hover:scale-105"
+              style={{
+                backgroundColor: "var(--course-surface)",
+                color: "var(--course-text)",
+                border: "1px solid color-mix(in srgb, var(--course-text) 20%, transparent)",
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6.13 1L6 16a2 2 0 0 0 2 2h15" />
+                <path d="M1 6.13L16 6a2 2 0 0 1 2 2v15" />
+              </svg>
+              Zuschneiden
+            </button>
+          )}
         </div>
       )}
 
@@ -199,6 +220,18 @@ export default function EditableImage({
       />
 
       {children}
+
+      {/* Crop modal */}
+      {showCrop && currentSrc && (
+        <ImageCropModal
+          src={currentSrc}
+          onCrop={(file) => {
+            setShowCrop(false);
+            handleFile(file);
+          }}
+          onCancel={() => setShowCrop(false)}
+        />
+      )}
     </div>
   );
 }

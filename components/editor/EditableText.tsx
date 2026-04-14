@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 import TurndownService from "turndown";
@@ -69,6 +71,7 @@ export default function EditableText({
   const editMode = useEditMode();
   const [isEditing, setIsEditing] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [localContent, setLocalContent] = useState<string | null>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -89,6 +92,7 @@ export default function EditableText({
       debounceRef.current = setTimeout(() => {
         const html = ed.getHTML();
         const markdown = turndown.turndown(html);
+        setLocalContent(markdown);
         editMode.registerChange({
           elementId,
           fieldPath,
@@ -251,7 +255,14 @@ export default function EditableText({
         </div>
       )}
 
-      {children}
+      {/* Show optimistic preview if content was edited, otherwise original */}
+      {localContent !== null ? (
+        <div className={COURSE_PROSE_CLASSES}>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{localContent}</ReactMarkdown>
+        </div>
+      ) : (
+        children
+      )}
     </div>
   );
 }

@@ -37,9 +37,9 @@ function createNewElement(type: string): ModuleElement {
     case "reflection":
       return { id, type: "reflection", prompt: "Neue Reflexionsfrage?" };
     case "image":
-      return { id, type: "image", src: "", alt: "Neues Bild" };
+      return { id, type: "image", src: "/placeholder.svg", alt: "Bild — klicke zum Ersetzen" };
     case "video":
-      return { id, type: "video", platform: "youtube", videoId: "" };
+      return { id, type: "video", platform: "youtube", videoId: "dQw4w9WgXcQ", title: "Video — klicke zum Ändern" };
     default:
       return { id, type: "content", text: "Neuer Text." };
   }

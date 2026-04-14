@@ -46,12 +46,17 @@ export default function Callout({ element }: { element: CalloutElement }) {
         <span className="text-xl flex-shrink-0">{config.icon}</span>
         <div>
           {element.title && (
-            <p
-              className="font-heading font-bold text-sm mb-1"
-              style={{ color: config.color }}
-            >
-              {element.title}
-            </p>
+            isEditMode ? (
+              <EditableText elementId={element.id} content={element.title} fieldPath="title">
+                <p className="font-heading font-bold text-sm mb-1" style={{ color: config.color }}>
+                  {element.title}
+                </p>
+              </EditableText>
+            ) : (
+              <p className="font-heading font-bold text-sm mb-1" style={{ color: config.color }}>
+                {element.title}
+              </p>
+            )
           )}
           {isEditMode ? (
             <EditableText elementId={element.id} content={element.text} fieldPath="text">

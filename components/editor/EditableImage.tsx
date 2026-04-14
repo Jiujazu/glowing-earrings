@@ -152,9 +152,9 @@ export default function EditableImage({
         </div>
       )}
 
-      {/* Hover controls */}
-      {isHovered && !isDragging && !isUploading && (
-        <div className="absolute top-3 right-3 z-20 flex gap-2">
+      {/* Upload controls — always visible on mobile, hover on desktop */}
+      {(isHovered || true) && !isDragging && !isUploading && (
+        <div className={`absolute top-3 right-3 z-20 flex gap-2 ${isHovered ? "opacity-100" : "opacity-60 sm:opacity-0"} transition-opacity duration-200`}>
           <button
             onClick={() => fileInputRef.current?.click()}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium shadow-lg transition-all duration-200 hover:scale-105"

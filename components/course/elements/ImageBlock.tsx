@@ -2,10 +2,17 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import type { ImageElement } from "@/lib/types";
+import { useEditMode } from "@/components/editor/EditModeProvider";
+
+const EditableImage = dynamic(() => import("@/components/editor/EditableImage"), {
+  ssr: false,
+});
 
 export default function ImageBlock({ element }: { element: ImageElement }) {
   const [isZoomed, setIsZoomed] = useState(false);
+  const { isEditMode } = useEditMode();
 
   useEffect(() => {
     if (!isZoomed) return;
@@ -16,13 +23,17 @@ export default function ImageBlock({ element }: { element: ImageElement }) {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [isZoomed]);
 
-  return (
+  const imageContent = (
     <>
       <figure className={element.fullWidth ? "-mx-4 sm:-mx-8" : ""}>
         <button
           type="button"
-          onClick={() => setIsZoomed(true)}
-          className="block w-full rounded-xl overflow-hidden cursor-zoom-in transition-shadow duration-300 hover:shadow-lg hover:shadow-[var(--course-primary)]/10"
+          onClick={() => {
+            if (!isEditMode) setIsZoomed(true);
+          }}
+          className={`block w-full rounded-xl overflow-hidden transition-shadow duration-300 hover:shadow-lg hover:shadow-[var(--course-primary)]/10 ${
+            isEditMode ? "cursor-default" : "cursor-zoom-in"
+          }`}
         >
           <Image
             src={element.src}
@@ -61,4 +72,14 @@ export default function ImageBlock({ element }: { element: ImageElement }) {
       )}
     </>
   );
+
+  if (isEditMode) {
+    return (
+      <EditableImage elementId={element.id} currentSrc={element.src}>
+        {imageContent}
+      </EditableImage>
+    );
+  }
+
+  return imageContent;
 }

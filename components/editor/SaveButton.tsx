@@ -28,6 +28,9 @@ export default function SaveButton() {
     setErrorMessage("");
 
     try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 30000);
+
       const response = await fetch("/api/editor/save", {
         method: "POST",
         headers: {
@@ -38,8 +41,14 @@ export default function SaveButton() {
           slug: courseSlug,
           changes: Array.from(pendingChanges.values()),
         }),
+        signal: controller.signal,
       });
 
+      clearTimeout(timeout);
+
+      if (!response.ok && response.status >= 500) {
+        throw new Error(`Server error: ${response.status}`);
+      }
       const data = await response.json();
 
       if (data.success) {

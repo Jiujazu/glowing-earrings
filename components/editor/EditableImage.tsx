@@ -68,6 +68,9 @@ export default function EditableImage({
         body: formData,
       });
 
+      if (!response.ok && response.status >= 500) {
+        throw new Error(`Server error: ${response.status}`);
+      }
       const data = await response.json();
 
       if (data.success && data.src) {

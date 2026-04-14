@@ -9,6 +9,7 @@ import CourseParallax from "./CourseParallax";
 import CourseErrorBoundary from "./CourseErrorBoundary";
 import CourseProgressTracker from "./CourseProgressTracker";
 import ScrollToTop from "./ScrollToTop";
+import EditModeWrapper from "@/components/editor/EditModeWrapper";
 
 interface CoursePlayerProps {
   course: Course;
@@ -18,6 +19,7 @@ export default function CoursePlayer({ course }: CoursePlayerProps) {
   return (
     <CourseThemeProvider design={course.meta.design}>
       <CourseProgressTracker slug={course.meta.slug}>
+      <EditModeWrapper courseSlug={course.meta.slug}>
       <CourseProgress />
       <CourseParallax />
 
@@ -38,6 +40,7 @@ export default function CoursePlayer({ course }: CoursePlayerProps) {
         </CourseErrorBoundary>
       </article>
       <ScrollToTop modules={course.modules} />
+      </EditModeWrapper>
       </CourseProgressTracker>
     </CourseThemeProvider>
   );

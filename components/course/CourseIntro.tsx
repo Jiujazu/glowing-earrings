@@ -19,6 +19,27 @@ interface CourseIntroProps {
 export default function CourseIntro({ intro, meta }: CourseIntroProps) {
   const { isEditMode } = useEditMode();
 
+  const titleContent = (
+    <h1
+      className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight"
+      style={{ fontFamily: "var(--course-heading-font, var(--font-heading))" }}
+    >
+      {meta.title}
+    </h1>
+  );
+
+  const subheadingContent = meta.subheading ? (
+    <p className="text-lg sm:text-xl text-[var(--course-text-muted)] mt-2">
+      {meta.subheading}
+    </p>
+  ) : null;
+
+  const subtitleContent = (
+    <p className="text-base sm:text-lg text-[var(--course-text-muted)]/70 mt-3 mb-8 leading-relaxed">
+      {meta.subtitle}
+    </p>
+  );
+
   const hookContent = (
     <div className="text-lg leading-relaxed mb-8 border-l-4 border-[var(--course-primary)] pl-4">
       {intro.hook}
@@ -40,22 +61,31 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
           </div>
         </ScrollReveal>
 
-        {/* Title */}
+        {/* Title + Subtitle */}
         <ScrollReveal delay={100} duration={700}>
-          <h1
-            className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight"
-            style={{ fontFamily: "var(--course-heading-font, var(--font-heading))" }}
-          >
-            {meta.title}
-          </h1>
-          {meta.subheading && (
-            <p className="text-lg sm:text-xl text-[var(--course-text-muted)] mt-2">
-              {meta.subheading}
-            </p>
+          {isEditMode ? (
+            <EditableText elementId="meta:title" content={meta.title} fieldPath="title">
+              {titleContent}
+            </EditableText>
+          ) : (
+            titleContent
           )}
-          <p className="text-base sm:text-lg text-[var(--course-text-muted)]/70 mt-3 mb-8 leading-relaxed">
-            {meta.subtitle}
-          </p>
+
+          {isEditMode && meta.subheading ? (
+            <EditableText elementId="meta:subheading" content={meta.subheading} fieldPath="subheading">
+              {subheadingContent}
+            </EditableText>
+          ) : (
+            subheadingContent
+          )}
+
+          {isEditMode ? (
+            <EditableText elementId="meta:subtitle" content={meta.subtitle} fieldPath="subtitle">
+              {subtitleContent}
+            </EditableText>
+          ) : (
+            subtitleContent
+          )}
         </ScrollReveal>
 
         {/* Hook */}

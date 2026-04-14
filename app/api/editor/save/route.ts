@@ -97,6 +97,17 @@ function applyChanges(
       found = true;
     }
 
+    // Check meta fields
+    if (!found && change.elementId.startsWith("meta:")) {
+      const metaField = change.elementId.replace("meta:", "");
+      const allowedMetaFields = ["title", "subheading", "subtitle"];
+      if (allowedMetaFields.includes(metaField) && metaField in course.meta) {
+        course.meta[metaField] = change.newValue;
+        applied++;
+        found = true;
+      }
+    }
+
     if (!found) {
       notFound.push(change.elementId);
     }

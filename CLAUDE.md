@@ -39,7 +39,7 @@ Als `/content/courses/[slug].json` — der Slug ist URL-safe, englisch, kebab-ca
 `git add`, `git commit`, `git push origin main` — Vercel deployed automatisch.
 
 ### 5. Manuelle Anpassungen
-Julian kann Kurse auch über das Decap CMS unter `/admin` editieren (Text, Quizzes, Bilder, Meta). Decap committed direkt ins Repo.
+Julian kann Kurse direkt auf der Live-Seite editieren via Custom Inline Editor (`?edit=TOKEN`). Änderungen werden via GitHub API committed. Siehe `EDITOR-PLAN.md` für Details.
 
 ### 6. Prüfen
 Auf der Live-URL den Kurs durchspielen, Feedback einarbeiten.

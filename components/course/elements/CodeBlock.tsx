@@ -11,7 +11,8 @@ const EditableText = dynamic(() => import("@/components/editor/EditableText"), {
 
 export default function CodeBlock({ element }: { element: CodeBlockElement }) {
   const [copied, setCopied] = useState(false);
-  const { isEditMode } = useEditMode();
+  const editMode = useEditMode();
+  const isEditMode = editMode.isEditMode;
 
   const copyCode = useCallback(() => {
     navigator.clipboard.writeText(element.code);
@@ -53,15 +54,44 @@ export default function CodeBlock({ element }: { element: CodeBlockElement }) {
             <span className="w-2.5 h-2.5 rounded-full bg-[var(--course-text)]/15" />
             <span className="w-2.5 h-2.5 rounded-full bg-[var(--course-text)]/15" />
           </div>
-          {element.filename && (
-            <span className="text-xs text-[var(--course-text-muted)] font-mono ml-2">
-              {element.filename}
+          {isEditMode ? (
+            <span className="flex items-center gap-1 ml-2">
+              <input
+                type="text"
+                defaultValue={element.language || ""}
+                placeholder="Sprache"
+                className="text-xs text-[var(--course-text-muted)] font-mono bg-transparent border-b border-[var(--course-text-muted)]/30 focus:border-[var(--course-primary)] outline-none w-20 px-1"
+                onBlur={(e) => {
+                  if ("registerChange" in editMode) {
+                    editMode.registerChange({ elementId: element.id, fieldPath: "language", newValue: e.target.value });
+                  }
+                }}
+              />
+              <input
+                type="text"
+                defaultValue={element.filename || ""}
+                placeholder="Dateiname"
+                className="text-xs text-[var(--course-text-muted)] font-mono bg-transparent border-b border-[var(--course-text-muted)]/30 focus:border-[var(--course-primary)] outline-none w-28 px-1"
+                onBlur={(e) => {
+                  if ("registerChange" in editMode) {
+                    editMode.registerChange({ elementId: element.id, fieldPath: "filename", newValue: e.target.value });
+                  }
+                }}
+              />
             </span>
-          )}
-          {!element.filename && element.language && (
-            <span className="text-xs text-[var(--course-text-muted)] font-mono ml-2">
-              {element.language}
-            </span>
+          ) : (
+            <>
+              {element.filename && (
+                <span className="text-xs text-[var(--course-text-muted)] font-mono ml-2">
+                  {element.filename}
+                </span>
+              )}
+              {!element.filename && element.language && (
+                <span className="text-xs text-[var(--course-text-muted)] font-mono ml-2">
+                  {element.language}
+                </span>
+              )}
+            </>
           )}
         </div>
         <button

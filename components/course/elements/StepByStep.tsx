@@ -1,20 +1,72 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import type { StepByStepElement } from "@/lib/types";
+import type { StepByStepElement, StepItem } from "@/lib/types";
 import { useEditMode } from "@/components/editor/EditModeProvider";
 
 const EditableText = dynamic(() => import("@/components/editor/EditableText"), {
   ssr: false,
 });
 
+function InlineStepEdit({
+  value,
+  onChange,
+  className,
+}: {
+  value: string;
+  onChange: (newValue: string) => void;
+  className?: string;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    if (ref.current && ref.current.textContent !== value) {
+      ref.current.textContent = value;
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return (
+    <span
+      ref={ref}
+      contentEditable
+      suppressContentEditableWarning
+      className={`outline-none focus:ring-1 focus:ring-[var(--course-primary)] rounded px-1 -mx-1 ${className || ""}`}
+      onBlur={() => {
+        const text = ref.current?.textContent || "";
+        if (text !== value) onChange(text);
+      }}
+    />
+  );
+}
+
 export default function StepByStep({ element }: { element: StepByStepElement }) {
   const [expandedStep, setExpandedStep] = useState<number | null>(0);
-  const { isEditMode } = useEditMode();
+  const [localSteps, setLocalSteps] = useState<StepItem[]>(element.steps);
+  const editMode = useEditMode();
+  const isEditMode = editMode.isEditMode;
+
+  const updateStep = useCallback(
+    (index: number, field: "label" | "content", value: string) => {
+      const updated = localSteps.map((step, i) =>
+        i === index ? { ...step, [field]: value } : step
+      );
+      setLocalSteps(updated);
+      if ("registerChange" in editMode) {
+        editMode.registerChange({
+          elementId: element.id,
+          fieldPath: "steps",
+          newValue: JSON.stringify(updated),
+        });
+      }
+    },
+    [localSteps, editMode, element.id]
+  );
+
+  const steps = isEditMode ? localSteps : element.steps;
 
   return (
     <div className="rounded-xl overflow-hidden bg-[var(--course-surface)] border border-[var(--course-text)]/10">
@@ -41,7 +93,7 @@ export default function StepByStep({ element }: { element: StepByStepElement }) 
       )}
 
       <ol className="divide-y divide-[var(--course-text)]/5">
-        {element.steps.map((step, i) => {
+        {steps.map((step, i) => {
           const isExpanded = expandedStep === i || isEditMode;
           return (
             <li key={i}>
@@ -56,7 +108,15 @@ export default function StepByStep({ element }: { element: StepByStepElement }) 
                   {i + 1}
                 </span>
                 <span className="flex-1 font-medium text-[var(--course-text)] text-sm sm:text-base">
-                  {step.label}
+                  {isEditMode ? (
+                    <InlineStepEdit
+                      value={step.label}
+                      onChange={(val) => updateStep(i, "label", val)}
+                      className="block"
+                    />
+                  ) : (
+                    step.label
+                  )}
                 </span>
                 {!isEditMode && (
                   <svg
@@ -73,11 +133,21 @@ export default function StepByStep({ element }: { element: StepByStepElement }) 
 
               {isExpanded && (
                 <div className="px-5 pb-5 pl-[4.25rem] animate-slide-up">
-                  <div className="prose prose-sm max-w-none text-[var(--course-text)] [&_a]:text-[var(--course-primary)] [&_strong]:text-[var(--course-text)]">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                      {step.content}
-                    </ReactMarkdown>
-                  </div>
+                  {isEditMode ? (
+                    <div className="prose prose-sm max-w-none text-[var(--course-text)]">
+                      <InlineStepEdit
+                        value={step.content}
+                        onChange={(val) => updateStep(i, "content", val)}
+                        className="block text-sm leading-relaxed min-h-[2em]"
+                      />
+                    </div>
+                  ) : (
+                    <div className="prose prose-sm max-w-none text-[var(--course-text)] [&_a]:text-[var(--course-primary)] [&_strong]:text-[var(--course-text)]">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {step.content}
+                      </ReactMarkdown>
+                    </div>
+                  )}
                   {step.image && (
                     <div className="mt-3 rounded-lg overflow-hidden">
                       <Image

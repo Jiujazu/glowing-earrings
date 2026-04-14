@@ -6,9 +6,23 @@ import { auth } from "@/lib/auth";
  * 1. NextAuth session (GitHub OAuth) — preferred
  * 2. EDITOR_SECRET Bearer token — fallback
  *
- * Returns null if valid, or a 401 NextResponse if invalid.
+ * Also validates Origin header for CSRF protection.
+ * Returns null if valid, or an error NextResponse if invalid.
  */
 export async function validateEditorAuth(request: NextRequest): Promise<NextResponse | null> {
+  // CSRF: Validate Origin header if present
+  const origin = request.headers.get("origin");
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
+  if (origin && siteUrl && !origin.includes(new URL(siteUrl).hostname)) {
+    // In production, reject cross-origin requests
+    if (process.env.NODE_ENV === "production") {
+      return NextResponse.json(
+        { success: false, message: "Ungültiger Origin." },
+        { status: 403 }
+      );
+    }
+  }
+
   // Method 1: Check NextAuth session
   const session = await auth();
   if (session?.user) {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import dynamic from "next/dynamic";
 import type { QuizElement, QuizOption } from "@/lib/types";
 import QuizConfetti from "./QuizConfetti";
@@ -22,6 +22,13 @@ function InlineEdit({
 }) {
   const ref = useRef<HTMLSpanElement>(null);
 
+  // Set initial text content safely (no HTML injection)
+  useEffect(() => {
+    if (ref.current && ref.current.textContent !== value) {
+      ref.current.textContent = value;
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <span
       ref={ref}
@@ -32,7 +39,6 @@ function InlineEdit({
         const text = ref.current?.textContent || "";
         if (text !== value) onChange(text);
       }}
-      dangerouslySetInnerHTML={{ __html: value }}
     />
   );
 }
@@ -60,7 +66,7 @@ export default function QuizCard({ element }: { element: QuizElement }) {
   }
 
   const updateOption = useCallback(
-    (index: number, field: "text" | "feedback", value: string) => {
+    (index: number, field: "text" | "feedback" | "correct", value: string | boolean) => {
       const updated = localOptions.map((opt, i) =>
         i === index ? { ...opt, [field]: value } : opt
       );
@@ -153,9 +159,23 @@ export default function QuizCard({ element }: { element: QuizElement }) {
             >
               <span className="flex items-start gap-3">
                 <span className="flex-shrink-0 mt-0.5">
-                  {(isEditMode && isOptionCorrect) || (!isEditMode && revealed && isOptionCorrect) ? (
+                  {isEditMode ? (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        updateOption(i, "correct", !isOptionCorrect);
+                      }}
+                      className={`block w-5 h-5 rounded-full flex items-center justify-center text-white text-xs transition-all ${
+                        isOptionCorrect ? "bg-[#22C55E]" : "border-2 border-[var(--course-text-muted)]/40 hover:border-[#22C55E]"
+                      }`}
+                      title={isOptionCorrect ? "Klick: als falsch markieren" : "Klick: als richtig markieren"}
+                    >
+                      {isOptionCorrect && "✓"}
+                    </button>
+                  ) : revealed && isOptionCorrect ? (
                     <span className="block w-5 h-5 rounded-full bg-[#22C55E] flex items-center justify-center text-white text-xs">✓</span>
-                  ) : (!isEditMode && revealed && !isOptionCorrect && isSelected) ? (
+                  ) : revealed && !isOptionCorrect && isSelected ? (
                     <span className="block w-5 h-5 rounded-full bg-[#E55B5B] flex items-center justify-center text-white text-xs">✗</span>
                   ) : (
                     <span className="block w-5 h-5 rounded-full border-2 border-[var(--course-text-muted)]/40" />

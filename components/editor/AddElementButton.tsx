@@ -9,12 +9,17 @@ interface AddElementButtonProps {
 
 const elementTypes = [
   { type: "content", label: "Text", icon: "📝" },
-  { type: "callout", label: "Callout", icon: "💡", variant: "tip" },
+  { type: "callout", label: "Callout", icon: "💡" },
   { type: "key-concept", label: "Konzept", icon: "🔑" },
   { type: "context-box", label: "Kontext", icon: "📋" },
+  { type: "quiz", label: "Quiz", icon: "❓" },
+  { type: "flashcard", label: "Flashcard", icon: "🃏" },
   { type: "reflection", label: "Reflexion", icon: "🤔" },
+  { type: "code-block", label: "Code", icon: "💻" },
+  { type: "step-by-step", label: "Schritte", icon: "📐" },
   { type: "image", label: "Bild", icon: "🖼️" },
   { type: "video", label: "Video", icon: "🎬" },
+  { type: "easter-egg", label: "Easter Egg", icon: "🥚" },
 ] as const;
 
 let nextId = 1;
@@ -36,10 +41,34 @@ function createNewElement(type: string): ModuleElement {
       return { id, type: "context-box", term: "Begriff", explanation: "Erklärung hinzufügen." };
     case "reflection":
       return { id, type: "reflection", prompt: "Neue Reflexionsfrage?" };
+    case "quiz":
+      return {
+        id, type: "quiz", question: "Neue Quizfrage?",
+        options: [
+          { text: "Antwort A", correct: true, feedback: "Richtig!" },
+          { text: "Antwort B", correct: false, feedback: "Leider nicht." },
+          { text: "Antwort C", correct: false, feedback: "Leider nicht." },
+        ],
+        explanation: "Erklärung hinzufügen.",
+      };
+    case "flashcard":
+      return { id, type: "flashcard", front: "Frage?", back: "Antwort." };
+    case "code-block":
+      return { id, type: "code-block", code: "// Code hier einfügen", language: "javascript" };
+    case "step-by-step":
+      return {
+        id, type: "step-by-step", title: "Schritte",
+        steps: [
+          { label: "Schritt 1", content: "Beschreibung..." },
+          { label: "Schritt 2", content: "Beschreibung..." },
+        ],
+      };
     case "image":
       return { id, type: "image", src: "/placeholder.svg", alt: "Bild — klicke zum Ersetzen" };
     case "video":
       return { id, type: "video", platform: "youtube", videoId: "dQw4w9WgXcQ", title: "Video — klicke zum Ändern" };
+    case "easter-egg":
+      return { id, type: "easter-egg", trigger: "click", content: "Easter Egg Inhalt hier." };
     default:
       return { id, type: "content", text: "Neuer Text." };
   }

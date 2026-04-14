@@ -6,6 +6,7 @@ import {
   useState,
   useCallback,
   useEffect,
+  useRef,
 } from "react";
 import { useSearchParams } from "next/navigation";
 
@@ -21,6 +22,10 @@ interface EditModeContextValue {
   pendingChanges: Map<string, EditorChange>;
   registerChange: (change: EditorChange) => void;
   clearChanges: () => void;
+  undo: () => void;
+  redo: () => void;
+  canUndo: boolean;
+  canRedo: boolean;
   courseSlug: string;
   editorToken: string;
 }
@@ -33,6 +38,14 @@ export function useEditMode() {
   return ctx;
 }
 
+function serializeMap(map: Map<string, EditorChange>): string {
+  return JSON.stringify(Array.from(map.entries()));
+}
+
+function deserializeMap(str: string): Map<string, EditorChange> {
+  return new Map(JSON.parse(str));
+}
+
 export default function EditModeProvider({
   courseSlug,
   children,
@@ -42,12 +55,36 @@ export default function EditModeProvider({
 }) {
   const searchParams = useSearchParams();
   const editorToken = searchParams.get("edit") || "";
-  const canEdit = editorToken.length > 0;
+  const [sessionAuth, setSessionAuth] = useState(false);
+
+  // Check for OAuth session
+  useEffect(() => {
+    if (editorToken) return; // Token auth takes priority
+    fetch("/api/auth/session")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data?.user) setSessionAuth(true);
+      })
+      .catch(() => {});
+  }, [editorToken]);
+
+  const canEdit = editorToken.length > 0 || sessionAuth;
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [pendingChanges, setPendingChanges] = useState<Map<string, EditorChange>>(
     () => new Map()
   );
+
+  // Undo/Redo history
+  const historyRef = useRef<string[]>([serializeMap(new Map())]);
+  const historyIndexRef = useRef(0);
+  const [canUndo, setCanUndo] = useState(false);
+  const [canRedo, setCanRedo] = useState(false);
+
+  const updateHistoryState = useCallback(() => {
+    setCanUndo(historyIndexRef.current > 0);
+    setCanRedo(historyIndexRef.current < historyRef.current.length - 1);
+  }, []);
 
   const toggleEditMode = useCallback(() => {
     if (!canEdit) return;
@@ -58,13 +95,44 @@ export default function EditModeProvider({
     setPendingChanges((prev) => {
       const next = new Map(prev);
       next.set(`${change.elementId}:${change.fieldPath}`, change);
+
+      // Push to history (discard any redo states)
+      const serialized = serializeMap(next);
+      historyRef.current = historyRef.current.slice(0, historyIndexRef.current + 1);
+      historyRef.current.push(serialized);
+      // Keep max 50 history entries
+      if (historyRef.current.length > 50) {
+        historyRef.current = historyRef.current.slice(-50);
+      }
+      historyIndexRef.current = historyRef.current.length - 1;
+
       return next;
     });
-  }, []);
+    updateHistoryState();
+  }, [updateHistoryState]);
 
   const clearChanges = useCallback(() => {
     setPendingChanges(new Map());
-  }, []);
+    historyRef.current = [serializeMap(new Map())];
+    historyIndexRef.current = 0;
+    updateHistoryState();
+  }, [updateHistoryState]);
+
+  const undo = useCallback(() => {
+    if (historyIndexRef.current <= 0) return;
+    historyIndexRef.current--;
+    const restored = deserializeMap(historyRef.current[historyIndexRef.current]);
+    setPendingChanges(restored);
+    updateHistoryState();
+  }, [updateHistoryState]);
+
+  const redo = useCallback(() => {
+    if (historyIndexRef.current >= historyRef.current.length - 1) return;
+    historyIndexRef.current++;
+    const restored = deserializeMap(historyRef.current[historyIndexRef.current]);
+    setPendingChanges(restored);
+    updateHistoryState();
+  }, [updateHistoryState]);
 
   // Warn before leaving with unsaved changes
   useEffect(() => {
@@ -78,7 +146,7 @@ export default function EditModeProvider({
     return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, [pendingChanges]);
 
-  // Keyboard shortcut: Cmd+E / Ctrl+E
+  // Keyboard shortcuts: Cmd+E, Cmd+Z, Cmd+Shift+Z
   useEffect(() => {
     if (!canEdit) return;
 
@@ -87,11 +155,19 @@ export default function EditModeProvider({
         e.preventDefault();
         setIsEditMode((prev) => !prev);
       }
+      if ((e.metaKey || e.ctrlKey) && e.key === "z" && !e.shiftKey) {
+        e.preventDefault();
+        undo();
+      }
+      if ((e.metaKey || e.ctrlKey) && e.key === "z" && e.shiftKey) {
+        e.preventDefault();
+        redo();
+      }
     }
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [canEdit]);
+  }, [canEdit, undo, redo]);
 
   // If can't edit, just render children without context
   if (!canEdit) {
@@ -106,6 +182,10 @@ export default function EditModeProvider({
         pendingChanges,
         registerChange,
         clearChanges,
+        undo,
+        redo,
+        canUndo,
+        canRedo,
         courseSlug,
         editorToken,
       }}

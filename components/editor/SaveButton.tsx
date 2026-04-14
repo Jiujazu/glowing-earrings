@@ -10,14 +10,14 @@ export default function SaveButton() {
   const [saveState, setSaveState] = useState<SaveState>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Type guard: full context available
-  if (!("pendingChanges" in editMode)) return null;
-
-  const { pendingChanges, clearChanges, courseSlug } = editMode;
-  const changeCount = pendingChanges.size;
+  const hasContext = "pendingChanges" in editMode;
+  const pendingChanges = hasContext ? editMode.pendingChanges : null;
+  const clearChanges = hasContext ? editMode.clearChanges : null;
+  const courseSlug = hasContext ? editMode.courseSlug : "";
+  const changeCount = pendingChanges?.size ?? 0;
 
   const handleSave = useCallback(async () => {
-    if (changeCount === 0 || saveState === "saving") return;
+    if (!pendingChanges || !clearChanges || changeCount === 0 || saveState === "saving") return;
 
     setSaveState("saving");
     setErrorMessage("");
@@ -63,8 +63,8 @@ export default function SaveButton() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleSave, changeCount]);
 
-  // Don't render if no changes and not showing success
-  if (changeCount === 0 && saveState !== "success") return null;
+  // Don't render if no context, no changes, and not showing success
+  if (!hasContext || (changeCount === 0 && saveState !== "success")) return null;
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">

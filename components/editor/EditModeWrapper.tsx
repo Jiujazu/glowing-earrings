@@ -3,6 +3,8 @@
 import { Suspense } from "react";
 import EditModeProvider from "./EditModeProvider";
 import SaveButton from "./SaveButton";
+import ToastProvider from "./EditorToast";
+import ShortcutHelp from "./ShortcutHelp";
 
 export default function EditModeWrapper({
   courseSlug,
@@ -14,8 +16,11 @@ export default function EditModeWrapper({
   return (
     <Suspense fallback={<>{children}</>}>
       <EditModeProvider courseSlug={courseSlug}>
-        {children}
-        <SaveButton />
+        <ToastProvider>
+          {children}
+          <SaveButton />
+          <ShortcutHelp />
+        </ToastProvider>
       </EditModeProvider>
     </Suspense>
   );

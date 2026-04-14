@@ -108,6 +108,25 @@ function applyChanges(
       }
     }
 
+    // Check outro fields
+    if (!found && change.elementId === "outro") {
+      const allowedOutroFields = ["nextStep", "newsletterCTA", "synthesis"];
+      if (allowedOutroFields.includes(change.fieldPath) && change.fieldPath in course.outro) {
+        // synthesis is an array — parse JSON
+        if (change.fieldPath === "synthesis") {
+          try {
+            course.outro[change.fieldPath] = JSON.parse(change.newValue);
+          } catch {
+            // skip invalid JSON
+          }
+        } else {
+          course.outro[change.fieldPath] = change.newValue;
+        }
+        applied++;
+        found = true;
+      }
+    }
+
     if (!found) {
       notFound.push(change.elementId);
     }

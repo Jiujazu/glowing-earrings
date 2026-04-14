@@ -1,7 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import type { VideoElement } from "@/lib/types";
+import { useEditMode } from "@/components/editor/EditModeProvider";
+
+const EditableVideo = dynamic(() => import("@/components/editor/EditableVideo"), {
+  ssr: false,
+});
 
 function getThumbnailUrl(platform: string, videoId: string): string {
   if (platform === "youtube") {
@@ -26,14 +32,19 @@ function getEmbedUrl(platform: string, videoId: string, startAt?: number): strin
 
 export default function VideoEmbed({ element }: { element: VideoElement }) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const { isEditMode } = useEditMode();
 
-  return (
+  const videoContent = (
     <div className="rounded-xl overflow-hidden bg-[var(--course-surface)]">
       {!isPlaying ? (
         <button
           type="button"
-          onClick={() => setIsPlaying(true)}
-          className="relative block w-full aspect-video group cursor-pointer"
+          onClick={() => {
+            if (!isEditMode) setIsPlaying(true);
+          }}
+          className={`relative block w-full aspect-video group ${
+            isEditMode ? "cursor-default" : "cursor-pointer"
+          }`}
           aria-label={element.title ? `Video abspielen: ${element.title}` : "Video abspielen"}
         >
           {/* Thumbnail */}
@@ -45,13 +56,15 @@ export default function VideoEmbed({ element }: { element: VideoElement }) {
           />
 
           {/* Play overlay */}
-          <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 group-hover:bg-white group-hover:scale-110 transition-all duration-300 flex items-center justify-center shadow-lg">
-              <svg className="w-7 h-7 sm:w-8 sm:h-8 text-[var(--course-primary)] ml-1" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M8 5v14l11-7z" />
-              </svg>
+          {!isEditMode && (
+            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 group-hover:bg-white group-hover:scale-110 transition-all duration-300 flex items-center justify-center shadow-lg">
+                <svg className="w-7 h-7 sm:w-8 sm:h-8 text-[var(--course-primary)] ml-1" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
             </div>
-          </div>
+          )}
         </button>
       ) : (
         <div className="relative w-full aspect-video">
@@ -72,4 +85,19 @@ export default function VideoEmbed({ element }: { element: VideoElement }) {
       )}
     </div>
   );
+
+  if (isEditMode) {
+    return (
+      <EditableVideo
+        elementId={element.id}
+        currentPlatform={element.platform}
+        currentVideoId={element.videoId}
+        currentTitle={element.title}
+      >
+        {videoContent}
+      </EditableVideo>
+    );
+  }
+
+  return videoContent;
 }

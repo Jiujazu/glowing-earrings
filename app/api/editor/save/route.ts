@@ -107,7 +107,7 @@ function applyChanges(
 
 export async function POST(request: NextRequest) {
   try {
-    const authError = validateEditorAuth(request);
+    const authError = await validateEditorAuth(request);
     if (authError) return authError;
 
     const githubToken = process.env.GITHUB_TOKEN;

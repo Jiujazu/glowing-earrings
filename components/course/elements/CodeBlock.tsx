@@ -1,10 +1,17 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import dynamic from "next/dynamic";
 import type { CodeBlockElement } from "@/lib/types";
+import { useEditMode } from "@/components/editor/EditModeProvider";
+
+const EditableText = dynamic(() => import("@/components/editor/EditableText"), {
+  ssr: false,
+});
 
 export default function CodeBlock({ element }: { element: CodeBlockElement }) {
   const [copied, setCopied] = useState(false);
+  const { isEditMode } = useEditMode();
 
   const copyCode = useCallback(() => {
     navigator.clipboard.writeText(element.code);
@@ -14,12 +21,33 @@ export default function CodeBlock({ element }: { element: CodeBlockElement }) {
 
   const lines = element.code.split("\n");
 
+  const codeContent = (
+    <div className="overflow-x-auto">
+      <pre className="p-4 text-sm leading-relaxed font-mono">
+        {lines.map((line, i) => {
+          const lineNum = i + 1;
+          const isHighlighted = element.highlightLines?.includes(lineNum);
+          return (
+            <div
+              key={i}
+              className={`flex ${isHighlighted ? "bg-[var(--course-primary)]/10 -mx-4 px-4 border-l-2 border-[var(--course-primary)]" : ""}`}
+            >
+              <span className="inline-block w-8 text-right mr-4 text-[var(--course-text-muted)]/50 select-none flex-shrink-0 text-xs leading-relaxed">
+                {lineNum}
+              </span>
+              <code className="text-[var(--course-text)] whitespace-pre">{line}</code>
+            </div>
+          );
+        })}
+      </pre>
+    </div>
+  );
+
   return (
     <div className="rounded-xl overflow-hidden bg-[var(--course-surface)] border border-[var(--course-text)]/10">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-2.5 border-b border-[var(--course-text)]/10">
         <div className="flex items-center gap-2">
-          {/* Terminal dots */}
           <div className="flex gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-[var(--course-text)]/15" />
             <span className="w-2.5 h-2.5 rounded-full bg-[var(--course-text)]/15" />
@@ -62,25 +90,13 @@ export default function CodeBlock({ element }: { element: CodeBlockElement }) {
       </div>
 
       {/* Code */}
-      <div className="overflow-x-auto">
-        <pre className="p-4 text-sm leading-relaxed font-mono">
-          {lines.map((line, i) => {
-            const lineNum = i + 1;
-            const isHighlighted = element.highlightLines?.includes(lineNum);
-            return (
-              <div
-                key={i}
-                className={`flex ${isHighlighted ? "bg-[var(--course-primary)]/10 -mx-4 px-4 border-l-2 border-[var(--course-primary)]" : ""}`}
-              >
-                <span className="inline-block w-8 text-right mr-4 text-[var(--course-text-muted)]/50 select-none flex-shrink-0 text-xs leading-relaxed">
-                  {lineNum}
-                </span>
-                <code className="text-[var(--course-text)] whitespace-pre">{line}</code>
-              </div>
-            );
-          })}
-        </pre>
-      </div>
+      {isEditMode ? (
+        <EditableText elementId={element.id} content={element.code} fieldPath="code">
+          {codeContent}
+        </EditableText>
+      ) : (
+        codeContent
+      )}
     </div>
   );
 }

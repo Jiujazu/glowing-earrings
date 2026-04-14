@@ -34,6 +34,36 @@ export default function VideoEmbed({ element }: { element: VideoElement }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const { isEditMode } = useEditMode();
 
+  // Empty video placeholder
+  if (!element.videoId) {
+    const placeholder = (
+      <div className="rounded-xl overflow-hidden bg-[var(--course-surface)] aspect-video flex items-center justify-center">
+        <div className="text-center text-[var(--course-text-muted)]">
+          <svg className="w-12 h-12 mx-auto mb-2 opacity-30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18" />
+            <line x1="7" y1="2" x2="7" y2="22" />
+            <line x1="17" y1="2" x2="17" y2="22" />
+            <line x1="2" y1="12" x2="22" y2="12" />
+            <line x1="2" y1="7" x2="7" y2="7" />
+            <line x1="2" y1="17" x2="7" y2="17" />
+            <line x1="17" y1="7" x2="22" y2="7" />
+            <line x1="17" y1="17" x2="22" y2="17" />
+          </svg>
+          <p className="text-sm">Video-URL einfügen</p>
+        </div>
+      </div>
+    );
+
+    if (isEditMode) {
+      return (
+        <EditableVideo elementId={element.id} currentPlatform={element.platform} currentVideoId={element.videoId}>
+          {placeholder}
+        </EditableVideo>
+      );
+    }
+    return placeholder;
+  }
+
   const videoContent = (
     <div className="rounded-xl overflow-hidden bg-[var(--course-surface)]">
       {!isPlaying ? (

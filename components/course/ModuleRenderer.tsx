@@ -47,6 +47,8 @@ function renderElement(element: ModuleElement): React.ReactNode {
       return <ContextBox element={element} />;
     case "quiz":
       return <QuizCard element={element} />;
+    case "flashcard":
+      return <FlashcardDeck elements={[element]} />;
     case "reflection":
       return <ReflectionPrompt element={element} />;
     case "easter-egg":

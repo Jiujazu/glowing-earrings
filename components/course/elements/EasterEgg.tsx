@@ -1,16 +1,23 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import dynamic from "next/dynamic";
 import type { EasterEggElement } from "@/lib/types";
+import { useEditMode } from "@/components/editor/EditModeProvider";
+
+const EditableText = dynamic(() => import("@/components/editor/EditableText"), {
+  ssr: false,
+});
 
 export default function EasterEgg({ element }: { element: EasterEggElement }) {
   const [revealed, setRevealed] = useState(false);
+  const { isEditMode } = useEditMode();
 
   const reveal = useCallback(() => setRevealed(true), []);
 
   // Konami code handler
   useEffect(() => {
-    if (element.trigger !== "konami") return;
+    if (element.trigger !== "konami" || isEditMode) return;
 
     const konamiCode = [
       "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown",
@@ -33,11 +40,11 @@ export default function EasterEgg({ element }: { element: EasterEggElement }) {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [element.trigger, reveal]);
+  }, [element.trigger, reveal, isEditMode]);
 
   // Scroll trigger handler
   useEffect(() => {
-    if (element.trigger !== "scroll") return;
+    if (element.trigger !== "scroll" || isEditMode) return;
 
     function handleScroll() {
       const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
@@ -46,17 +53,17 @@ export default function EasterEgg({ element }: { element: EasterEggElement }) {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [element.trigger, reveal]);
+  }, [element.trigger, reveal, isEditMode]);
 
   // Idle handler
   useEffect(() => {
-    if (element.trigger !== "idle") return;
+    if (element.trigger !== "idle" || isEditMode) return;
 
     let timer: NodeJS.Timeout;
 
     function resetTimer() {
       clearTimeout(timer);
-      timer = setTimeout(reveal, 30000); // 30 seconds idle
+      timer = setTimeout(reveal, 30000);
     }
 
     resetTimer();
@@ -68,7 +75,31 @@ export default function EasterEgg({ element }: { element: EasterEggElement }) {
       window.removeEventListener("mousemove", resetTimer);
       window.removeEventListener("keydown", resetTimer);
     };
-  }, [element.trigger, reveal]);
+  }, [element.trigger, reveal, isEditMode]);
+
+  // Edit mode: always show content with label
+  if (isEditMode) {
+    const easterContent = (
+      <p className="text-sm text-[var(--course-text)]">{element.content}</p>
+    );
+
+    return (
+      <div
+        className="rounded-xl p-4 border border-dashed"
+        style={{
+          borderColor: "color-mix(in srgb, var(--course-accent) 40%, transparent)",
+          backgroundColor: "color-mix(in srgb, var(--course-accent) 5%, var(--course-surface))",
+        }}
+      >
+        <p className="text-xs font-medium text-[var(--course-text-muted)] uppercase tracking-wider mb-2">
+          Easter Egg ({element.trigger})
+        </p>
+        <EditableText elementId={element.id} content={element.content} fieldPath="content">
+          {easterContent}
+        </EditableText>
+      </div>
+    );
+  }
 
   if (element.trigger === "click") {
     return (

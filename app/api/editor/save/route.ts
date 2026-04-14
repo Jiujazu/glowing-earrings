@@ -65,7 +65,17 @@ function applyChanges(
       for (const element of mod.elements) {
         if (element.id === change.elementId) {
           if (change.fieldPath in element) {
-            element[change.fieldPath] = change.newValue;
+            // For array/object fields (e.g., options), parse JSON
+            let value: unknown = change.newValue;
+            try {
+              const parsed = JSON.parse(change.newValue);
+              if (Array.isArray(parsed) || (typeof parsed === "object" && parsed !== null)) {
+                value = parsed;
+              }
+            } catch {
+              // Not JSON — use raw string value
+            }
+            element[change.fieldPath] = value;
             applied++;
             found = true;
           }

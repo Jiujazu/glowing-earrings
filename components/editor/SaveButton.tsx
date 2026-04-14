@@ -15,6 +15,10 @@ export default function SaveButton() {
   const clearChanges = hasContext ? editMode.clearChanges : null;
   const courseSlug = hasContext ? editMode.courseSlug : "";
   const editorToken = hasContext ? editMode.editorToken : "";
+  const canUndo = hasContext ? editMode.canUndo : false;
+  const canRedo = hasContext ? editMode.canRedo : false;
+  const undo = hasContext ? editMode.undo : undefined;
+  const redo = hasContext ? editMode.redo : undefined;
   const changeCount = pendingChanges?.size ?? 0;
 
   const handleSave = useCallback(async () => {
@@ -67,11 +71,49 @@ export default function SaveButton() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleSave, changeCount]);
 
-  // Don't render if no context, no changes, and not showing success
-  if (!hasContext || (changeCount === 0 && saveState !== "success")) return null;
+  // Don't render if no context, or if not in edit mode with nothing to show
+  if (!hasContext || (changeCount === 0 && saveState !== "success" && !canUndo && !canRedo)) return null;
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+      {/* Undo/Redo buttons */}
+      {(canUndo || canRedo) && (
+        <div className="flex gap-1">
+          <button
+            onClick={undo}
+            disabled={!canUndo}
+            className="p-2 rounded-lg text-sm shadow-md transition-all duration-200 disabled:opacity-30"
+            style={{
+              backgroundColor: "var(--course-surface)",
+              color: "var(--course-text)",
+              border: "1px solid color-mix(in srgb, var(--course-text) 15%, transparent)",
+            }}
+            title="Rückgängig (⌘Z)"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="1 4 1 10 7 10" />
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
+            </svg>
+          </button>
+          <button
+            onClick={redo}
+            disabled={!canRedo}
+            className="p-2 rounded-lg text-sm shadow-md transition-all duration-200 disabled:opacity-30"
+            style={{
+              backgroundColor: "var(--course-surface)",
+              color: "var(--course-text)",
+              border: "1px solid color-mix(in srgb, var(--course-text) 15%, transparent)",
+            }}
+            title="Wiederholen (⌘⇧Z)"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="23 4 23 10 17 10" />
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+            </svg>
+          </button>
+        </div>
+      )}
+
       {/* Error message */}
       {saveState === "error" && errorMessage && (
         <div

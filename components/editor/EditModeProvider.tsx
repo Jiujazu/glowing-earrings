@@ -22,6 +22,7 @@ interface EditModeContextValue {
   registerChange: (change: EditorChange) => void;
   clearChanges: () => void;
   courseSlug: string;
+  editorToken: string;
 }
 
 const EditModeContext = createContext<EditModeContextValue | null>(null);
@@ -40,8 +41,8 @@ export default function EditModeProvider({
   children: React.ReactNode;
 }) {
   const searchParams = useSearchParams();
-  const editParam = searchParams.get("edit");
-  const canEdit = editParam === "true" || (editParam !== null && editParam.length > 0);
+  const editorToken = searchParams.get("edit") || "";
+  const canEdit = editorToken.length > 0;
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [pendingChanges, setPendingChanges] = useState<Map<string, EditorChange>>(
@@ -64,6 +65,17 @@ export default function EditModeProvider({
   const clearChanges = useCallback(() => {
     setPendingChanges(new Map());
   }, []);
+
+  // Warn before leaving with unsaved changes
+  useEffect(() => {
+    function handleBeforeUnload(e: BeforeUnloadEvent) {
+      if (pendingChanges.size > 0) {
+        e.preventDefault();
+      }
+    }
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [pendingChanges]);
 
   // Keyboard shortcut: Cmd+E / Ctrl+E
   useEffect(() => {
@@ -94,6 +106,7 @@ export default function EditModeProvider({
         registerChange,
         clearChanges,
         courseSlug,
+        editorToken,
       }}
     >
       {children}

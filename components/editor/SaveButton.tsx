@@ -14,6 +14,7 @@ export default function SaveButton() {
   const pendingChanges = hasContext ? editMode.pendingChanges : null;
   const clearChanges = hasContext ? editMode.clearChanges : null;
   const courseSlug = hasContext ? editMode.courseSlug : "";
+  const editorToken = hasContext ? editMode.editorToken : "";
   const changeCount = pendingChanges?.size ?? 0;
 
   const handleSave = useCallback(async () => {
@@ -25,7 +26,10 @@ export default function SaveButton() {
     try {
       const response = await fetch("/api/editor/save", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(editorToken && { Authorization: `Bearer ${editorToken}` }),
+        },
         body: JSON.stringify({
           slug: courseSlug,
           changes: Array.from(pendingChanges.values()),

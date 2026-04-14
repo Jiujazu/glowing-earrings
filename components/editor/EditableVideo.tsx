@@ -7,22 +7,38 @@ interface EditableVideoProps {
   elementId: string;
   currentPlatform: string;
   currentVideoId: string;
-  currentTitle?: string;
   children: React.ReactNode;
 }
 
 function parseVideoUrl(url: string): { platform: "youtube" | "vimeo"; videoId: string } | null {
-  // YouTube: youtube.com/watch?v=ID, youtu.be/ID, youtube.com/embed/ID
-  const ytMatch = url.match(
-    /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
-  );
-  if (ytMatch) return { platform: "youtube", videoId: ytMatch[1] };
+  // Validate URL structure first
+  let parsed: URL;
+  try {
+    parsed = new URL(url);
+  } catch {
+    return null;
+  }
 
-  // Vimeo: vimeo.com/ID, player.vimeo.com/video/ID
-  const vimeoMatch = url.match(
-    /(?:vimeo\.com\/|player\.vimeo\.com\/video\/)(\d+)/
-  );
-  if (vimeoMatch) return { platform: "vimeo", videoId: vimeoMatch[1] };
+  // Only allow HTTPS
+  if (parsed.protocol !== "https:") return null;
+
+  const host = parsed.hostname.replace("www.", "");
+
+  // YouTube
+  if (host === "youtube.com" || host === "youtu.be") {
+    const ytMatch = url.match(
+      /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+    );
+    if (ytMatch) return { platform: "youtube", videoId: ytMatch[1] };
+  }
+
+  // Vimeo
+  if (host === "vimeo.com" || host === "player.vimeo.com") {
+    const vimeoMatch = url.match(
+      /(?:vimeo\.com\/|player\.vimeo\.com\/video\/)(\d+)/
+    );
+    if (vimeoMatch) return { platform: "vimeo", videoId: vimeoMatch[1] };
+  }
 
   return null;
 }
@@ -31,7 +47,6 @@ export default function EditableVideo({
   elementId,
   currentPlatform,
   currentVideoId,
-  currentTitle,
   children,
 }: EditableVideoProps) {
   const editMode = useEditMode();

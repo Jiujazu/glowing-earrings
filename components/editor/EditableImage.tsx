@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useEditMode } from "./EditModeProvider";
 
 interface EditableImageProps {
@@ -24,6 +24,16 @@ export default function EditableImage({
 
   const hasContext = "courseSlug" in editMode;
   const courseSlug = hasContext ? editMode.courseSlug : "";
+  const editorToken = hasContext ? editMode.editorToken : "";
+
+  // Revoke object URLs on cleanup to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      if (previewSrc?.startsWith("blob:")) {
+        URL.revokeObjectURL(previewSrc);
+      }
+    };
+  }, [previewSrc]);
 
   if (!editMode.isEditMode) {
     return <>{children}</>;
@@ -52,6 +62,9 @@ export default function EditableImage({
 
       const response = await fetch("/api/editor/upload", {
         method: "POST",
+        headers: {
+          ...(editorToken && { Authorization: `Bearer ${editorToken}` }),
+        },
         body: formData,
       });
 

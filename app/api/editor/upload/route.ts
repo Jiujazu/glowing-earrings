@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Octokit } from "octokit";
+import { validateEditorAuth } from "@/lib/editor-auth";
 
 export async function POST(request: NextRequest) {
   try {
+    const authError = validateEditorAuth(request);
+    if (authError) return authError;
+
     const githubToken = process.env.GITHUB_TOKEN;
     if (!githubToken) {
       return NextResponse.json(

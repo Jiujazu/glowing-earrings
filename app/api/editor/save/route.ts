@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Octokit } from "octokit";
+import { validateEditorAuth } from "@/lib/editor-auth";
 
 interface EditorChange {
   elementId: string;
@@ -30,7 +31,23 @@ function applyChanges(
       for (const mod of course.modules) {
         if (mod.id === moduleId) {
           try {
-            mod.elements = JSON.parse(change.newValue);
+            const parsed = JSON.parse(change.newValue);
+            // Validate: must be an array where each item has id and type
+            if (
+              !Array.isArray(parsed) ||
+              !parsed.every(
+                (el: unknown) =>
+                  typeof el === "object" &&
+                  el !== null &&
+                  "id" in el &&
+                  "type" in el &&
+                  typeof (el as { id: unknown }).id === "string" &&
+                  typeof (el as { type: unknown }).type === "string"
+              )
+            ) {
+              break;
+            }
+            mod.elements = parsed;
             applied++;
             found = true;
           } catch {
@@ -80,6 +97,9 @@ function applyChanges(
 
 export async function POST(request: NextRequest) {
   try {
+    const authError = validateEditorAuth(request);
+    if (authError) return authError;
+
     const githubToken = process.env.GITHUB_TOKEN;
     if (!githubToken) {
       return NextResponse.json(

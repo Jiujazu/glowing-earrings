@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback, useRef } from "react";
 import dynamic from "next/dynamic";
-import type { QuizElement } from "@/lib/types";
+import type { QuizElement, QuizOption } from "@/lib/types";
 import QuizConfetti from "./QuizConfetti";
 import { useProgressTracker } from "../CourseProgressTracker";
 import { useEditMode } from "@/components/editor/EditModeProvider";
@@ -11,11 +11,39 @@ const EditableText = dynamic(() => import("@/components/editor/EditableText"), {
   ssr: false,
 });
 
+function InlineEdit({
+  value,
+  onChange,
+  className,
+}: {
+  value: string;
+  onChange: (newValue: string) => void;
+  className?: string;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+
+  return (
+    <span
+      ref={ref}
+      contentEditable
+      suppressContentEditableWarning
+      className={`outline-none focus:ring-1 focus:ring-[var(--course-primary)] rounded px-1 -mx-1 ${className || ""}`}
+      onBlur={() => {
+        const text = ref.current?.textContent || "";
+        if (text !== value) onChange(text);
+      }}
+      dangerouslySetInnerHTML={{ __html: value }}
+    />
+  );
+}
+
 export default function QuizCard({ element }: { element: QuizElement }) {
   const [selected, setSelected] = useState<number | null>(null);
   const [revealed, setRevealed] = useState(false);
+  const [localOptions, setLocalOptions] = useState<QuizOption[]>(element.options);
   const tracker = useProgressTracker();
-  const { isEditMode } = useEditMode();
+  const editMode = useEditMode();
+  const isEditMode = editMode.isEditMode;
 
   function handleSelect(index: number) {
     if (revealed || isEditMode) return;
@@ -31,7 +59,25 @@ export default function QuizCard({ element }: { element: QuizElement }) {
     setRevealed(false);
   }
 
+  const updateOption = useCallback(
+    (index: number, field: "text" | "feedback", value: string) => {
+      const updated = localOptions.map((opt, i) =>
+        i === index ? { ...opt, [field]: value } : opt
+      );
+      setLocalOptions(updated);
+      if ("registerChange" in editMode) {
+        editMode.registerChange({
+          elementId: element.id,
+          fieldPath: "options",
+          newValue: JSON.stringify(updated),
+        });
+      }
+    },
+    [localOptions, editMode, element.id]
+  );
+
   const isCorrect = selected !== null && element.options[selected].correct;
+  const options = isEditMode ? localOptions : element.options;
 
   const questionContent = (
     <p className="font-heading font-bold text-lg text-[var(--course-text)] mb-1">
@@ -68,7 +114,7 @@ export default function QuizCard({ element }: { element: QuizElement }) {
 
       {/* Options */}
       <div className="space-y-2">
-        {element.options.map((option, i) => {
+        {options.map((option, i) => {
           const isSelected = selected === i;
           const isOptionCorrect = option.correct;
 
@@ -93,10 +139,8 @@ export default function QuizCard({ element }: { element: QuizElement }) {
           }
 
           return (
-            <button
+            <div
               key={i}
-              onClick={() => handleSelect(i)}
-              disabled={revealed || isEditMode}
               className={`
                 w-full text-left p-4 rounded-lg border-2 transition-all duration-200
                 ${!revealed && !isEditMode ? "cursor-pointer hover:border-[var(--course-primary)]" : "cursor-default"}
@@ -105,43 +149,54 @@ export default function QuizCard({ element }: { element: QuizElement }) {
                 ${isSelected && !isOptionCorrect ? "animate-wiggle" : ""}
               `}
               style={{ borderColor, backgroundColor: bgColor }}
+              onClick={() => !isEditMode && handleSelect(i)}
             >
               <span className="flex items-start gap-3">
                 <span className="flex-shrink-0 mt-0.5">
-                  {isEditMode && isOptionCorrect && (
+                  {(isEditMode && isOptionCorrect) || (!isEditMode && revealed && isOptionCorrect) ? (
                     <span className="block w-5 h-5 rounded-full bg-[#22C55E] flex items-center justify-center text-white text-xs">✓</span>
-                  )}
-                  {isEditMode && !isOptionCorrect && (
-                    <span className="block w-5 h-5 rounded-full border-2 border-[var(--course-text-muted)]/40" />
-                  )}
-                  {!isEditMode && !revealed && (
-                    <span className="block w-5 h-5 rounded-full border-2 border-[var(--course-text-muted)]/40" />
-                  )}
-                  {!isEditMode && revealed && isOptionCorrect && (
-                    <span className="block w-5 h-5 rounded-full bg-[#22C55E] flex items-center justify-center text-white text-xs">✓</span>
-                  )}
-                  {!isEditMode && revealed && !isOptionCorrect && isSelected && (
+                  ) : (!isEditMode && revealed && !isOptionCorrect && isSelected) ? (
                     <span className="block w-5 h-5 rounded-full bg-[#E55B5B] flex items-center justify-center text-white text-xs">✗</span>
-                  )}
-                  {!isEditMode && revealed && !isOptionCorrect && !isSelected && (
-                    <span className="block w-5 h-5 rounded-full border-2 border-[var(--course-text-muted)]/20" />
+                  ) : (
+                    <span className="block w-5 h-5 rounded-full border-2 border-[var(--course-text-muted)]/40" />
                   )}
                 </span>
-                <span className="text-base text-[var(--course-text)]">
-                  {option.text}
+                <span className="flex-1">
+                  {isEditMode ? (
+                    <InlineEdit
+                      value={option.text}
+                      onChange={(val) => updateOption(i, "text", val)}
+                      className="text-base text-[var(--course-text)] block"
+                    />
+                  ) : (
+                    <span className="text-base text-[var(--course-text)]">{option.text}</span>
+                  )}
                 </span>
               </span>
-              {revealed && isSelected && (
-                <p className="mt-2 ml-8 text-sm text-[var(--course-text-muted)] animate-fade-in">
-                  {option.feedback}
-                </p>
+
+              {/* Feedback */}
+              {isEditMode ? (
+                <div className="mt-2 ml-8">
+                  <span className="text-xs text-[var(--course-text-muted)] mr-1">Feedback:</span>
+                  <InlineEdit
+                    value={option.feedback}
+                    onChange={(val) => updateOption(i, "feedback", val)}
+                    className="text-sm text-[var(--course-text-muted)] italic"
+                  />
+                </div>
+              ) : (
+                revealed && isSelected && (
+                  <p className="mt-2 ml-8 text-sm text-[var(--course-text-muted)] animate-fade-in">
+                    {option.feedback}
+                  </p>
+                )
               )}
-            </button>
+            </div>
           );
         })}
       </div>
 
-      {/* Explanation — always visible in edit mode */}
+      {/* Explanation */}
       {(revealed || isEditMode) && (
         <div
           className="mt-4 pt-4 animate-fade-in"

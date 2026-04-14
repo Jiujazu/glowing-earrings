@@ -23,6 +23,26 @@ function applyChanges(
   for (const change of changes) {
     let found = false;
 
+    // Structural change: replace entire module elements array
+    // Convention: elementId = "module:{moduleId}", fieldPath = "elements"
+    if (change.elementId.startsWith("module:") && change.fieldPath === "elements") {
+      const moduleId = change.elementId.replace("module:", "");
+      for (const mod of course.modules) {
+        if (mod.id === moduleId) {
+          try {
+            mod.elements = JSON.parse(change.newValue);
+            applied++;
+            found = true;
+          } catch {
+            // Invalid JSON — skip
+          }
+          break;
+        }
+      }
+      if (!found) notFound.push(change.elementId);
+      continue;
+    }
+
     // Search through all modules and elements
     for (const mod of course.modules) {
       for (const element of mod.elements) {

@@ -20,7 +20,7 @@ function InlineModuleTitle({
     if (ref.current && ref.current.textContent !== value) {
       ref.current.textContent = value;
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [value]);
 
   return (
     <span
@@ -38,10 +38,9 @@ function InlineModuleTitle({
 
 interface ModuleManagerProps {
   modules: Module[];
-  children: (modules: Module[], index: number, allModules: Module[]) => React.ReactNode;
 }
 
-export default function ModuleManager({ modules: initialModules, children }: ModuleManagerProps) {
+export default function ModuleManager({ modules: initialModules }: ModuleManagerProps) {
   const editMode = useEditMode();
   const isEditMode = editMode.isEditMode;
   const [localModules, setLocalModules] = useState<Module[]>(initialModules);
@@ -80,7 +79,7 @@ export default function ModuleManager({ modules: initialModules, children }: Mod
 
   const deleteModule = useCallback(
     (index: number) => {
-      if (localModules.length <= 1) return; // Keep at least one module
+      if (localModules.length <= 1) return;
       const updated = localModules.filter((_, i) => i !== index);
       setLocalModules(updated);
       registerModulesChange(updated);
@@ -111,16 +110,18 @@ export default function ModuleManager({ modules: initialModules, children }: Mod
     [localModules, registerModulesChange]
   );
 
+  // Read-only mode: render modules directly
   if (!isEditMode) {
     return (
       <>
         {initialModules.map((module, index) => (
-          <div key={module.id}>{children(initialModules, index, initialModules)}</div>
+          <ModuleRenderer key={module.id} module={module} index={index} allModules={initialModules} />
         ))}
       </>
     );
   }
 
+  // Edit mode: render with controls
   return (
     <>
       {localModules.map((module, index) => (
@@ -167,9 +168,9 @@ export default function ModuleManager({ modules: initialModules, children }: Mod
             </div>
           </div>
 
-          {children(localModules, index, localModules)}
+          <ModuleRenderer module={module} index={index} allModules={localModules} />
 
-          {/* Add module button between modules */}
+          {/* Add module button */}
           <div className="flex justify-center py-4">
             <button
               onClick={() => addModule(index)}

@@ -2,7 +2,6 @@ import type { Course } from "@/lib/types";
 import CourseThemeProvider from "./CourseThemeProvider";
 import CourseIntro from "./CourseIntro";
 import CourseTOC from "./CourseTOC";
-import ModuleRenderer from "./ModuleRenderer";
 import CourseOutro from "./CourseOutro";
 import CourseProgress from "./CourseProgress";
 import CourseParallax from "./CourseParallax";
@@ -30,11 +29,7 @@ export default function CoursePlayer({ course }: CoursePlayerProps) {
 
         <CourseErrorBoundary>
           <div>
-            <ModuleManager modules={course.modules}>
-              {(modules, index, allModules) => (
-                <ModuleRenderer module={modules[index]} index={index} allModules={allModules} />
-              )}
-            </ModuleManager>
+            <ModuleManager modules={course.modules} />
           </div>
 
           <div className="border-t border-[var(--course-text)]/10">

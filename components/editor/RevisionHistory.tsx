@@ -84,7 +84,7 @@ export default function RevisionHistory() {
 
       {isOpen && (
         <div
-          className="fixed bottom-16 left-16 z-50 rounded-xl p-4 shadow-2xl w-80 max-h-96 overflow-y-auto"
+          className="fixed bottom-16 left-16 z-50 rounded-xl p-4 shadow-2xl w-80 max-h-[60vh] sm:max-h-96 overflow-y-auto"
           style={{
             backgroundColor: "var(--course-surface)",
             border: "1px solid color-mix(in srgb, var(--course-text) 15%, transparent)",

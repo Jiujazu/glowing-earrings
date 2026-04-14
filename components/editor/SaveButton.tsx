@@ -80,18 +80,24 @@ export default function SaveButton() {
     }
   }, [courseSlug, pendingChanges, clearChanges, editorToken, toast]);
 
+  // Track latest handleSave in ref to avoid resetting interval
+  const handleSaveRef = useRef(handleSave);
+  handleSaveRef.current = handleSave;
+  const pendingChangesRef = useRef(pendingChanges);
+  pendingChangesRef.current = pendingChanges;
+
   // Autosave: every 30 seconds if there are pending changes
   useEffect(() => {
     if (!hasContext) return;
 
     autosaveTimerRef.current = setInterval(() => {
-      if (pendingChanges && pendingChanges.size > 0) {
-        handleSave(true);
+      if (pendingChangesRef.current && pendingChangesRef.current.size > 0) {
+        handleSaveRef.current(true);
       }
     }, AUTOSAVE_INTERVAL);
 
     return () => clearInterval(autosaveTimerRef.current);
-  }, [hasContext, pendingChanges, handleSave]);
+  }, [hasContext]);
 
   // Keyboard shortcut: Cmd+S / Ctrl+S
   useEffect(() => {

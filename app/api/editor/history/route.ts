@@ -35,6 +35,10 @@ export async function GET(request: NextRequest) {
       per_page: 10,
     });
 
+    if (!Array.isArray(commits) || commits.length === 0) {
+      return NextResponse.json({ success: true, history: [] });
+    }
+
     const history = commits.map((commit) => ({
       sha: commit.sha.slice(0, 7),
       message: commit.commit.message.split("\n")[0],

@@ -1,8 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
-import ReactCrop, { type Crop, type PixelCrop } from "react-image-crop";
-import "react-image-crop/dist/ReactCrop.css";
+import { useState, useRef, useCallback, useEffect } from "react";
 
 interface ImageCropModalProps {
   src: string;
@@ -10,48 +8,94 @@ interface ImageCropModalProps {
   onCancel: () => void;
 }
 
-function getCroppedCanvas(
-  image: HTMLImageElement,
-  crop: PixelCrop
-): HTMLCanvasElement {
-  const canvas = document.createElement("canvas");
-  const scaleX = image.naturalWidth / image.width;
-  const scaleY = image.naturalHeight / image.height;
-  canvas.width = crop.width * scaleX;
-  canvas.height = crop.height * scaleY;
-
-  const ctx = canvas.getContext("2d")!;
-  ctx.drawImage(
-    image,
-    crop.x * scaleX,
-    crop.y * scaleY,
-    crop.width * scaleX,
-    crop.height * scaleY,
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
-
-  return canvas;
+interface CropArea {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
 }
 
 export default function ImageCropModal({ src, onCrop, onCancel }: ImageCropModalProps) {
-  const [crop, setCrop] = useState<Crop>();
-  const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [crop, setCrop] = useState<CropArea | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [imgLoaded, setImgLoaded] = useState(false);
+
+  // Get mouse position relative to image
+  const getRelativePos = useCallback((e: React.MouseEvent) => {
+    const rect = imgRef.current?.getBoundingClientRect();
+    if (!rect) return { x: 0, y: 0 };
+    return {
+      x: Math.max(0, Math.min(e.clientX - rect.left, rect.width)),
+      y: Math.max(0, Math.min(e.clientY - rect.top, rect.height)),
+    };
+  }, []);
+
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    const pos = getRelativePos(e);
+    setDragStart(pos);
+    setCrop({ x: pos.x, y: pos.y, width: 0, height: 0 });
+    setIsDragging(true);
+  }, [getRelativePos]);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!isDragging) return;
+    const pos = getRelativePos(e);
+    setCrop({
+      x: Math.min(dragStart.x, pos.x),
+      y: Math.min(dragStart.y, pos.y),
+      width: Math.abs(pos.x - dragStart.x),
+      height: Math.abs(pos.y - dragStart.y),
+    });
+  }, [isDragging, dragStart, getRelativePos]);
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+  }, []);
 
   const handleCrop = useCallback(() => {
-    if (!imgRef.current || !completedCrop) return;
+    if (!imgRef.current || !crop || crop.width < 10 || crop.height < 10) return;
 
-    const canvas = getCroppedCanvas(imgRef.current, completedCrop);
+    const img = imgRef.current;
+    const scaleX = img.naturalWidth / img.width;
+    const scaleY = img.naturalHeight / img.height;
+
+    const canvas = document.createElement("canvas");
+    canvas.width = crop.width * scaleX;
+    canvas.height = crop.height * scaleY;
+
+    const ctx = canvas.getContext("2d")!;
+    ctx.drawImage(
+      img,
+      crop.x * scaleX,
+      crop.y * scaleY,
+      crop.width * scaleX,
+      crop.height * scaleY,
+      0, 0,
+      canvas.width,
+      canvas.height
+    );
+
     canvas.toBlob((blob) => {
       if (blob) {
-        const file = new File([blob], "cropped.png", { type: "image/png" });
-        onCrop(file);
+        onCrop(new File([blob], "cropped.png", { type: "image/png" }));
       }
     }, "image/png");
-  }, [completedCrop, onCrop]);
+  }, [crop, onCrop]);
+
+  // Close on Escape
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "Escape") onCancel();
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [onCancel]);
+
+  const hasCrop = crop && crop.width > 10 && crop.height > 10;
 
   return (
     <div
@@ -59,28 +103,66 @@ export default function ImageCropModal({ src, onCrop, onCancel }: ImageCropModal
       onClick={onCancel}
     >
       <div
-        className="rounded-xl p-4 max-w-2xl w-full max-h-[90vh] overflow-auto shadow-2xl"
+        className="rounded-xl p-4 max-w-2xl w-full shadow-2xl"
         style={{ backgroundColor: "var(--course-surface)" }}
         onClick={(e) => e.stopPropagation()}
       >
         <p className="text-sm font-medium text-[var(--course-text)] mb-3">
-          Bild zuschneiden
+          Bild zuschneiden — ziehe einen Bereich auf
         </p>
 
-        <div className="flex justify-center mb-4">
-          <ReactCrop
-            crop={crop}
-            onChange={(c) => setCrop(c)}
-            onComplete={(c) => setCompletedCrop(c)}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              ref={imgRef}
-              src={src}
-              alt="Zuschneiden"
-              className="max-h-[60vh] w-auto"
+        <div
+          ref={containerRef}
+          className="relative flex justify-center mb-4 cursor-crosshair select-none"
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            ref={imgRef}
+            src={src}
+            alt="Zuschneiden"
+            className="max-h-[60vh] w-auto rounded-lg"
+            onLoad={() => setImgLoaded(true)}
+            draggable={false}
+          />
+
+          {/* Dark overlay outside crop area */}
+          {imgLoaded && hasCrop && (
+            <div
+              className="absolute rounded-lg pointer-events-none"
+              style={{
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                boxShadow: `0 0 0 9999px rgba(0,0,0,0.5)`,
+                clipPath: `polygon(
+                  0% 0%, 0% 100%, 100% 100%, 100% 0%, 0% 0%,
+                  ${crop!.x}px ${crop!.y}px,
+                  ${crop!.x}px ${crop!.y + crop!.height}px,
+                  ${crop!.x + crop!.width}px ${crop!.y + crop!.height}px,
+                  ${crop!.x + crop!.width}px ${crop!.y}px,
+                  ${crop!.x}px ${crop!.y}px
+                )`,
+              }}
             />
-          </ReactCrop>
+          )}
+
+          {/* Crop selection border */}
+          {imgLoaded && hasCrop && (
+            <div
+              className="absolute border-2 border-white pointer-events-none"
+              style={{
+                left: crop!.x,
+                top: crop!.y,
+                width: crop!.width,
+                height: crop!.height,
+              }}
+            />
+          )}
         </div>
 
         <div className="flex justify-end gap-2">
@@ -96,7 +178,7 @@ export default function ImageCropModal({ src, onCrop, onCancel }: ImageCropModal
           </button>
           <button
             onClick={handleCrop}
-            disabled={!completedCrop}
+            disabled={!hasCrop}
             className="px-4 py-2 rounded-lg text-sm font-medium text-white disabled:opacity-50 transition-all"
             style={{ backgroundColor: "var(--course-primary)" }}
           >

@@ -55,20 +55,7 @@ export default function EditModeProvider({
 }) {
   const searchParams = useSearchParams();
   const editorToken = searchParams.get("edit") || "";
-  const [sessionAuth, setSessionAuth] = useState(false);
-
-  // Check for OAuth session
-  useEffect(() => {
-    if (editorToken) return; // Token auth takes priority
-    fetch("/api/auth/session")
-      .then((r) => r.json())
-      .then((data) => {
-        if (data?.user) setSessionAuth(true);
-      })
-      .catch(() => {});
-  }, [editorToken]);
-
-  const canEdit = editorToken.length > 0 || sessionAuth;
+  const canEdit = editorToken.length > 0;
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [pendingChanges, setPendingChanges] = useState<Map<string, EditorChange>>(

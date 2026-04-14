@@ -27,7 +27,7 @@ function InlineStepEdit({
     if (ref.current && ref.current.textContent !== value) {
       ref.current.textContent = value;
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [value]);
 
   return (
     <span

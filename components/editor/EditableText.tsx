@@ -4,8 +4,10 @@ import { useState, useRef, useEffect } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { marked } from "marked";
+import DOMPurify from "dompurify";
 import TurndownService from "turndown";
 import { useEditMode } from "./EditModeProvider";
+import { COURSE_PROSE_CLASSES } from "@/lib/prose-classes";
 
 const turndown = new TurndownService({
   headingStyle: "atx",
@@ -40,8 +42,10 @@ export default function EditableText({
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  // Convert markdown to HTML for TipTap initialization
-  const htmlContent = marked.parse(content, { async: false }) as string;
+  // Convert markdown to HTML for TipTap initialization (sanitized against XSS)
+  const htmlContent = DOMPurify.sanitize(
+    marked.parse(content, { async: false }) as string
+  );
 
   const editor = useEditor({
     extensions: [StarterKit],
@@ -111,7 +115,7 @@ export default function EditableText({
           Wird bearbeitet
         </div>
 
-        <div className="prose prose-base sm:prose-lg max-w-none prose-headings:font-heading prose-headings:text-[var(--course-text)] prose-h3:text-lg prose-h3:sm:text-xl prose-h3:font-bold prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-[var(--course-primary)] prose-p:text-[var(--course-text)] prose-p:leading-[1.8] prose-p:mb-6 prose-a:text-[var(--course-primary)] prose-a:underline-offset-2 prose-strong:text-[var(--course-text)] prose-code:text-[var(--course-primary)] prose-code:bg-[var(--course-surface)] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-li:text-[var(--course-text)] prose-ul:my-5 prose-ol:my-5 prose-li:mb-2 prose-li:leading-[1.7]">
+        <div className={COURSE_PROSE_CLASSES}>
           <EditorContent editor={editor} />
         </div>
       </div>

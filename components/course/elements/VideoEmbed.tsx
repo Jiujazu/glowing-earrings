@@ -92,7 +92,6 @@ export default function VideoEmbed({ element }: { element: VideoElement }) {
         elementId={element.id}
         currentPlatform={element.platform}
         currentVideoId={element.videoId}
-        currentTitle={element.title}
       >
         {videoContent}
       </EditableVideo>

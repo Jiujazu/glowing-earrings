@@ -101,7 +101,7 @@ export default function EditModeProvider({
       {/* Edit mode toggle button */}
       <button
         onClick={toggleEditMode}
-        className="fixed top-4 right-4 z-50 flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 shadow-lg"
+        className="fixed top-20 right-4 z-[80] flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 shadow-lg"
         style={{
           backgroundColor: isEditMode ? "var(--course-primary)" : "var(--course-surface)",
           color: isEditMode ? "#fff" : "var(--course-text)",

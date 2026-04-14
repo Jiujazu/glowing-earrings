@@ -10,6 +10,7 @@ import CourseErrorBoundary from "./CourseErrorBoundary";
 import CourseProgressTracker from "./CourseProgressTracker";
 import ScrollToTop from "./ScrollToTop";
 import EditModeWrapper from "@/components/editor/EditModeWrapper";
+import ModuleManager from "@/components/editor/ModuleManager";
 
 interface CoursePlayerProps {
   course: Course;
@@ -29,9 +30,11 @@ export default function CoursePlayer({ course }: CoursePlayerProps) {
 
         <CourseErrorBoundary>
           <div>
-            {course.modules.map((module, index) => (
-              <ModuleRenderer key={module.id} module={module} index={index} allModules={course.modules} />
-            ))}
+            <ModuleManager modules={course.modules}>
+              {(modules, index, allModules) => (
+                <ModuleRenderer module={modules[index]} index={index} allModules={allModules} />
+              )}
+            </ModuleManager>
           </div>
 
           <div className="border-t border-[var(--course-text)]/10">

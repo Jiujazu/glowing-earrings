@@ -5,6 +5,7 @@ import EditModeProvider from "./EditModeProvider";
 import SaveButton from "./SaveButton";
 import ToastProvider from "./EditorToast";
 import ShortcutHelp from "./ShortcutHelp";
+import RevisionHistory from "./RevisionHistory";
 
 export default function EditModeWrapper({
   courseSlug,
@@ -20,6 +21,7 @@ export default function EditModeWrapper({
           {children}
           <SaveButton />
           <ShortcutHelp />
+          <RevisionHistory />
         </ToastProvider>
       </EditModeProvider>
     </Suspense>

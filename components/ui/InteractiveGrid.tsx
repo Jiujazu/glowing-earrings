@@ -520,6 +520,11 @@ export default function InteractiveGrid({
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("grid-wave", onWaveEvent);
 
+    function onScroll() {
+      cachedRectRef.current = canvas!.getBoundingClientRect();
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+
     const resizeObserver = new ResizeObserver(() => {
       cachedRectRef.current = canvas.getBoundingClientRect();
       lastDrawRef.current = { x: -9999, y: -9999 };
@@ -553,6 +558,7 @@ export default function InteractiveGrid({
       document.removeEventListener("contextmenu", onContextMenu);
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("grid-wave", onWaveEvent);
+      window.removeEventListener("scroll", onScroll);
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
     };

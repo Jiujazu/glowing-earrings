@@ -16,14 +16,16 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-[70] bg-[var(--background)]/90 backdrop-blur-lg border-b border-[var(--border)]/50">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      <header className="sticky top-0 z-[70] bg-[var(--background)] border-b-4 border-[var(--neo-border)]">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
           {/* Logo */}
           <Link
             href="/"
-            className="group flex items-center gap-2.5 font-heading text-lg font-bold tracking-tight text-[var(--text-primary)]"
+            className="group flex items-center gap-2.5 font-heading text-lg font-black uppercase tracking-tight text-[var(--text-primary)]"
           >
-            <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-[var(--accent)] text-white text-sm transition-all duration-300 group-hover:rotate-12 group-hover:scale-110 group-hover:shadow-md group-hover:shadow-[var(--accent)]/30">
+            <span className="inline-flex items-center justify-center w-9 h-9 border-4 border-[var(--neo-border)] bg-[var(--accent)] text-white text-sm font-black transition-all duration-100 group-hover:rotate-12 group-hover:scale-110"
+              style={{ boxShadow: '3px 3px 0px 0px var(--neo-shadow-color)' }}
+            >
               ✦
             </span>
             <span className="hidden sm:inline">Glowing Earrings</span>
@@ -35,7 +37,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-3 py-2 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--surface-tinted)] rounded-lg transition-all duration-200"
+                className="px-3 py-2 text-sm font-bold uppercase tracking-wide text-[var(--text-primary)] hover:bg-[var(--accent)] hover:text-white border-2 border-transparent hover:border-[var(--neo-border)] transition-all duration-100"
               >
                 {link.label}
               </Link>
@@ -43,7 +45,8 @@ export default function Header() {
             <ThemeToggle />
             <Link
               href="/newsletter"
-              className="ml-3 px-4 py-2 text-sm font-bold text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] rounded-xl transition-all duration-200 hover:shadow-md hover:shadow-[var(--accent)]/20"
+              className="ml-3 px-4 py-2 text-sm font-black uppercase tracking-wide text-white bg-[var(--accent)] border-4 border-[var(--neo-border)] transition-all duration-100 hover:-translate-y-0.5 press-feedback"
+              style={{ boxShadow: '4px 4px 0px 0px var(--neo-shadow-color)' }}
             >
               Ein gutes Ding
             </Link>
@@ -53,11 +56,12 @@ export default function Header() {
           <div className="md:hidden flex items-center gap-1">
             <ThemeToggle />
             <button
-              className="p-2 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+              className="p-2 border-2 border-[var(--neo-border)] text-[var(--text-primary)] hover:bg-[var(--accent)] hover:text-white transition-all duration-100"
+              style={{ boxShadow: '3px 3px 0px 0px var(--neo-shadow-color)' }}
               onClick={() => setMobileOpen(true)}
               aria-label="Menü öffnen"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <line x1="3" y1="12" x2="21" y2="12" />
                 <line x1="3" y1="18" x2="21" y2="18" />

@@ -8,17 +8,17 @@ interface BadgeProps {
 
 const variantClasses: Record<BadgeVariant, string> = {
   default:
-    "bg-[var(--surface-tinted)] text-[var(--accent)]",
+    "bg-[var(--surface-tinted)] text-[var(--text-primary)] border-2 border-[var(--neo-border)]",
   accent:
-    "bg-[var(--accent)]/10 text-[var(--accent)]",
+    "bg-[var(--accent)] text-white border-2 border-[var(--neo-border)]",
   brand:
-    "bg-[var(--brand)]/10 text-[var(--brand)]",
+    "bg-[var(--pop-turquoise)] text-black border-2 border-[var(--neo-border)]",
   muted:
-    "bg-[var(--surface)] text-[var(--text-muted)] border border-[var(--border)]",
+    "bg-[var(--surface)] text-[var(--text-primary)] border-2 border-[var(--neo-border)]",
   pink:
-    "bg-[var(--pop-pink)]/10 text-[var(--pop-pink)]",
+    "bg-[var(--pop-pink)] text-white border-2 border-[var(--neo-border)]",
   turquoise:
-    "bg-[var(--pop-turquoise)]/10 text-[var(--pop-turquoise)]",
+    "bg-[var(--pop-turquoise)] text-black border-2 border-[var(--neo-border)]",
   course:
     "text-[var(--course-text)] border border-[var(--course-text)]/20",
 };
@@ -36,7 +36,7 @@ export default function Badge({
     <span
       className={`
         inline-flex items-center px-2.5 py-0.5
-        text-xs font-medium rounded-full
+        text-xs font-bold uppercase tracking-wide
         ${variantClasses[variant]}
         ${className}
       `}

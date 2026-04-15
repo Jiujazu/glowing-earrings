@@ -20,13 +20,13 @@ export default function CourseCardProgress({
 
   return (
     <div className="flex items-center gap-2">
-      <div className="flex-1 h-1.5 rounded-full bg-[var(--border)] overflow-hidden">
+      <div className="flex-1 h-2 border-2 border-[var(--neo-border)] bg-[var(--surface)] overflow-hidden">
         <div
-          className="h-full rounded-full bg-[var(--pop-turquoise)] transition-all duration-500"
+          className="h-full bg-[var(--pop-turquoise)] transition-all duration-500"
           style={{ width: `${percent}%` }}
         />
       </div>
-      <span className="text-xs text-[var(--text-muted)] tabular-nums">
+      <span className="text-xs font-bold text-[var(--text-primary)] tabular-nums uppercase">
         {percent}%
       </span>
     </div>

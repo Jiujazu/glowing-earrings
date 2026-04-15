@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
+import { BUTTON_TEXT } from "@/lib/typography";
 
 type ButtonVariant = "primary" | "secondary" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
@@ -46,7 +47,7 @@ export default function Button({
     <button
       className={`
         inline-flex items-center justify-center gap-2
-        font-heading font-bold uppercase tracking-wide
+        ${BUTTON_TEXT}
         transition-all duration-100 cursor-pointer
         disabled:opacity-50 disabled:cursor-not-allowed
         press-feedback

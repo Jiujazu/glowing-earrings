@@ -1,3 +1,5 @@
+import { BADGE_TEXT } from "@/lib/typography";
+
 type BadgeVariant = "default" | "accent" | "brand" | "muted" | "pink" | "turquoise" | "course";
 
 interface BadgeProps {
@@ -36,7 +38,7 @@ export default function Badge({
     <span
       className={`
         inline-flex items-center px-2.5 py-0.5
-        text-xs font-bold uppercase tracking-wide
+        text-xs ${BADGE_TEXT}
         ${variantClasses[variant]}
         ${className}
       `}

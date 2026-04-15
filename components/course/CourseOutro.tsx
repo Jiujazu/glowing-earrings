@@ -8,6 +8,7 @@ import type { CourseOutro as CourseOutroType } from "@/lib/types";
 import { getCourseBySlug, formatDuration, getDifficultyLabel } from "@/lib/course-utils";
 import NewsletterCTA from "@/components/layout/NewsletterCTA";
 import Badge from "@/components/ui/Badge";
+import { HEADING, LABEL } from "@/lib/typography";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { useEditMode } from "@/components/editor/EditModeProvider";
 
@@ -92,7 +93,7 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
         {/* Synthesis */}
         <ScrollReveal>
           <h2
-            className="font-heading text-2xl sm:text-3xl font-black mb-6 uppercase tracking-tight"
+            className={`${HEADING} text-2xl sm:text-3xl mb-6`}
             style={{ fontFamily: "var(--course-heading-font, var(--font-heading))" }}
           >
             Das nimmst du mit
@@ -177,7 +178,7 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
           <ScrollReveal>
             <div className="mb-12">
               <h3
-                className="font-heading text-xl font-black mb-4 uppercase tracking-tight"
+                className={`${HEADING} text-xl mb-4`}
                 style={{ fontFamily: "var(--course-heading-font, var(--font-heading))" }}
               >
                 Weiter lernen

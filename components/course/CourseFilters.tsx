@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import type { Course } from "@/lib/types";
 import { getDifficultyLabel } from "@/lib/course-utils";
 import CourseCard from "./CourseCard";
+import { LABEL } from "@/lib/typography";
 
 interface CourseFiltersProps {
   courses: Course[];
@@ -219,7 +220,7 @@ export default function CourseFilters({
       <div className="mb-8 space-y-4">
         {/* Themen-Tags */}
         <div>
-          <p className="text-xs font-black text-[var(--text-primary)] uppercase tracking-widest mb-2">
+          <p className={`text-xs ${LABEL} text-[var(--text-primary)] mb-2`}>
             Themen
           </p>
           <div className="flex flex-wrap gap-2">

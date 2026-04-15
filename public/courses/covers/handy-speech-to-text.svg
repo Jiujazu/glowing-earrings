@@ -8,7 +8,6 @@
   </defs>
   <rect width="800" height="400" fill="url(#dots3)"/>
   <!-- Border -->
-  <rect x="2" y="2" width="796" height="396" fill="none" stroke="#000" stroke-width="4"/>
   <!-- Audio waveform — sharp rectangular bars, no radius -->
   <g transform="translate(60, 200)">
     <rect x="0" y="-20" width="12" height="40" fill="#22C55E" stroke="#000" stroke-width="2"/>

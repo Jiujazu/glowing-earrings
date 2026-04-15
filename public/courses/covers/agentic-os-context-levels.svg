@@ -9,7 +9,6 @@
   </defs>
   <rect width="800" height="400" fill="url(#grid)"/>
   <!-- Border -->
-  <rect x="2" y="2" width="796" height="396" fill="none" stroke="#000" stroke-width="4"/>
   <!-- 7 ascending level bars — sharp, no radius -->
   <rect x="80" y="300" width="70" height="50" fill="#F59E0B" stroke="#000" stroke-width="4" opacity="0.4"/>
   <rect x="170" y="260" width="70" height="90" fill="#F59E0B" stroke="#000" stroke-width="4" opacity="0.5"/>

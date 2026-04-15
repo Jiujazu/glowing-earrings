@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import NewsletterCTA from "@/components/layout/NewsletterCTA";
 import Container from "@/components/ui/Container";
+import { HEADING } from "@/lib/typography";
 
 export const metadata: Metadata = {
   title: "Newsletter — Ein gutes Ding",
@@ -14,7 +15,7 @@ export default function NewsletterPage() {
       <Container size="narrow">
         <div className="text-center mb-12">
           <p className="text-4xl mb-4">💌</p>
-          <h1 className="font-heading text-4xl sm:text-5xl font-black text-[var(--text-primary)] mb-4 uppercase tracking-tight">
+          <h1 className={`${HEADING} text-4xl sm:text-5xl text-[var(--text-primary)] mb-4`}>
             Ein gutes Ding
           </h1>
           <p className="text-lg font-medium text-[var(--text-primary)]">

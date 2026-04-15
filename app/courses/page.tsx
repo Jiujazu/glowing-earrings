@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getAllCourses } from "@/lib/course-utils";
 import CourseFilters from "@/components/course/CourseFilters";
 import Container from "@/components/ui/Container";
+import { HEADING } from "@/lib/typography";
 
 export const metadata: Metadata = {
   title: "Kurse",
@@ -16,7 +17,7 @@ export default function CoursesPage() {
   return (
     <section className="py-12 sm:py-16">
       <Container size="wide">
-        <h1 className="font-heading text-4xl sm:text-5xl font-black text-[var(--text-primary)] mb-2 uppercase tracking-tight">
+        <h1 className={`${HEADING} text-4xl sm:text-5xl text-[var(--text-primary)] mb-2`}>
           Kurse
         </h1>
         <p className="text-lg font-medium text-[var(--text-primary)] mb-8">

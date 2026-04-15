@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import NewsletterCTA from "@/components/layout/NewsletterCTA";
+import { HEADING } from "@/lib/typography";
 
 export const metadata: Metadata = {
   title: "Über uns",
@@ -12,7 +13,7 @@ export default function AboutPage() {
   return (
     <section className="py-12 sm:py-16">
       <Container size="narrow">
-        <h1 className="font-heading text-4xl sm:text-5xl font-black text-[var(--text-primary)] mb-8 uppercase tracking-tight">
+        <h1 className={`${HEADING} text-4xl sm:text-5xl text-[var(--text-primary)] mb-8`}>
           Warum Glowing Earrings?
         </h1>
 
@@ -39,7 +40,7 @@ export default function AboutPage() {
         <div className="bg-[var(--surface)] border-4 border-[var(--neo-border)] p-6 sm:p-8 mb-12"
           style={{ boxShadow: '8px 8px 0px 0px var(--neo-shadow-color)' }}
         >
-          <h2 className="font-heading text-xl font-black text-[var(--text-primary)] mb-3 uppercase">
+          <h2 className="${HEADING} text-xl text-[var(--text-primary)] mb-3">
             Der Name
           </h2>
           <p className="text-[var(--text-primary)] leading-relaxed">
@@ -54,7 +55,7 @@ export default function AboutPage() {
 
         {/* Julian */}
         <div className="mb-12">
-          <h2 className="font-heading text-xl font-black text-[var(--text-primary)] mb-3 uppercase">
+          <h2 className="${HEADING} text-xl text-[var(--text-primary)] mb-3">
             Über Julian
           </h2>
           <p className="text-[var(--text-primary)] leading-relaxed">

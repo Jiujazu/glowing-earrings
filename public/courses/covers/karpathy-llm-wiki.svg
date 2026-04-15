@@ -8,7 +8,6 @@
   </defs>
   <rect width="800" height="400" fill="url(#dots)"/>
   <!-- Border -->
-  <rect x="2" y="2" width="796" height="396" fill="none" stroke="#000" stroke-width="4"/>
   <!-- Knowledge graph nodes — sharp squares -->
   <rect x="120" y="100" width="70" height="70" fill="#7B4FBF" stroke="#000" stroke-width="4"/>
   <rect x="320" y="60" width="55" height="55" fill="#00C9A7" stroke="#000" stroke-width="4"/>

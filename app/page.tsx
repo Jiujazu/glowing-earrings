@@ -7,6 +7,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import InteractiveGrid from "@/components/ui/InteractiveGrid";
 import FloatingShape from "@/components/ui/FloatingShape";
 import { Star, Sparkles, Zap } from "lucide-react";
+import { HEADING, HEADING_DISPLAY, LABEL } from "@/lib/typography";
 
 export default function Home() {
   const courses = getAllCourses();
@@ -38,7 +39,7 @@ export default function Home() {
         <Container size="wide" className="relative">
           <div className="max-w-4xl">
             <ScrollReveal delay={0} duration={600}>
-              <div className="inline-block px-4 py-2 bg-[var(--pop-turquoise)] border-4 border-[var(--neo-border)] text-black font-heading font-black text-sm uppercase tracking-widest mb-8 -rotate-2"
+              <div className={`inline-block px-4 py-2 bg-[var(--pop-turquoise)] border-4 border-[var(--neo-border)] text-black text-sm ${LABEL} mb-8 -rotate-2`}
                 style={{ boxShadow: '4px 4px 0px 0px var(--neo-shadow-color)' }}
               >
                 The Creative AI Academy
@@ -46,7 +47,7 @@ export default function Home() {
             </ScrollReveal>
 
             <ScrollReveal delay={100} duration={600}>
-              <h1 className="font-heading font-black tracking-tighter text-[var(--text-primary)] leading-[0.9]">
+              <h1 className={`${HEADING_DISPLAY} text-[var(--text-primary)] leading-[0.9]`}>
                 <span className="block text-5xl sm:text-7xl lg:text-8xl">
                   Lern KI
                 </span>
@@ -90,10 +91,10 @@ export default function Home() {
           <Container size="wide">
             <ScrollReveal>
               <div className="flex items-end justify-between mb-8">
-                <h2 className="font-heading text-4xl sm:text-5xl font-black text-[var(--text-primary)] uppercase tracking-tight">
+                <h2 className={`${HEADING} text-4xl sm:text-5xl text-[var(--text-primary)]`}>
                   Kurse
                 </h2>
-                <span className="text-sm font-black text-[var(--text-primary)] uppercase tracking-widest px-3 py-1 border-2 border-[var(--neo-border)] bg-[var(--surface)]">
+                <span className={`text-sm ${LABEL} text-[var(--text-primary)] px-3 py-1 border-2 border-[var(--neo-border)] bg-[var(--surface)]`}>
                   {courses.length} {courses.length === 1 ? "Kurs" : "Kurse"}
                 </span>
               </div>
@@ -114,7 +115,7 @@ export default function Home() {
       <section className="py-16 sm:py-20 bg-[var(--pop-turquoise)]">
         <Container size="wide">
           <ScrollReveal>
-            <h2 className="font-heading text-4xl sm:text-5xl font-black text-black mb-12 uppercase tracking-tight">
+            <h2 className={`${HEADING} text-4xl sm:text-5xl text-black mb-12`}>
               Warum das hier
               <br />
               <span className="inline-block bg-black text-white px-3 py-1 -rotate-1 mt-2"

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
+import { HEADING, PROSE_HEADINGS } from "@/lib/typography";
 
 export const metadata: Metadata = {
   title: "Impressum",
@@ -10,10 +11,10 @@ export default function ImpressumPage() {
   return (
     <section className="py-12 sm:py-16">
       <Container size="narrow">
-        <h1 className="font-heading text-4xl font-black text-[var(--text-primary)] mb-8 uppercase tracking-tight">
+        <h1 className={`${HEADING} text-4xl text-[var(--text-primary)] mb-8`}>
           Impressum
         </h1>
-        <div className="prose prose-lg max-w-none text-[var(--text-primary)] prose-headings:font-heading prose-headings:font-black prose-headings:uppercase prose-headings:text-[var(--text-primary)] prose-p:text-[var(--text-primary)] prose-strong:text-[var(--text-primary)]">
+        <div className={`prose prose-lg max-w-none text-[var(--text-primary)] ${PROSE_HEADINGS} prose-headings:text-[var(--text-primary)] prose-p:text-[var(--text-primary)] prose-strong:text-[var(--text-primary)]`}>
           <h2>Angaben gemäß § 5 DDG</h2>
           <p>
             Julian van Dieken

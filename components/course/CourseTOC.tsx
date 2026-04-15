@@ -2,6 +2,7 @@
 
 import type { Module } from "@/lib/types";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { LABEL } from "@/lib/typography";
 
 interface CourseTOCProps {
   modules: Module[];
@@ -27,7 +28,7 @@ export default function CourseTOC({ modules }: CourseTOCProps) {
                 "color-mix(in srgb, var(--course-primary) 6%, var(--course-surface))",
             }}
           >
-            <p className="text-xs font-black text-[var(--course-text-muted)] uppercase tracking-widest mb-4">
+            <p className={`text-xs ${LABEL} text-[var(--course-text-muted)] mb-4`}>
               Inhalt
             </p>
             <ol className="space-y-1">

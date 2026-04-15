@@ -4,6 +4,7 @@ import Image from "next/image";
 import type { CourseIntro as CourseIntroType, CourseMeta } from "@/lib/types";
 import { formatDuration, getDifficultyLabel } from "@/lib/course-utils";
 import Badge from "@/components/ui/Badge";
+import { HEADING, LABEL } from "@/lib/typography";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import dynamic from "next/dynamic";
 import { useEditMode } from "@/components/editor/EditModeProvider";
@@ -22,7 +23,7 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
 
   const titleContent = (
     <h1
-      className="font-heading text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight uppercase"
+      className={`${HEADING} text-3xl sm:text-4xl lg:text-5xl`}
       style={{ fontFamily: "var(--course-heading-font, var(--font-heading))" }}
     >
       {meta.title}
@@ -123,7 +124,7 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
             className="p-5 border-4 border-[var(--course-text)]/20"
             style={{ backgroundColor: "var(--course-surface)" }}
           >
-            <p className="text-xs font-black text-[var(--course-text-muted)] uppercase tracking-widest mb-2">Quelle</p>
+            <p className={`text-xs ${LABEL} text-[var(--course-text-muted)] mb-2`}>Quelle</p>
             {isEditMode ? (
               <EditableText elementId="intro-source" content={intro.sourceContext} fieldPath="sourceContext">
                 {sourceContent}

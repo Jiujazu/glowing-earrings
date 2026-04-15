@@ -67,7 +67,7 @@ export default function InteractiveGrid({
           const ringFactor = 1 - distFromRing / waveWidth;
           // Fade out over time
           const fade = Math.max(0, 1 - elapsed * 1.2);
-          const amplitude = ringFactor * fade * wave.intensity * 8;
+          const amplitude = ringFactor * fade * wave.intensity * 14;
 
           if (wDist > 0) {
             dx += (wdx / wDist) * amplitude;
@@ -246,7 +246,7 @@ export default function InteractiveGrid({
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       if (x < 0 || x > rect.width || y < 0 || y > rect.height) return;
-      wavesRef.current.push({ x, y, time: performance.now(), intensity: 1.2 });
+      wavesRef.current.push({ x, y, time: performance.now(), intensity: 2.5 });
       if (!isActiveRef.current) {
         isActiveRef.current = true;
         loop();

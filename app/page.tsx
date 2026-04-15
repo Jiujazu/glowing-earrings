@@ -22,7 +22,7 @@ export default function Home() {
         <InteractiveGrid />
 
         {/* Decorative shapes layer — drifts up slightly = feels closer */}
-        <Parallax speed={-0.04} className="absolute inset-0 pointer-events-none z-10">
+        <Parallax speed={-0.12} className="absolute inset-0 pointer-events-none z-10">
           <WaveShape className="absolute top-12 right-8 sm:right-16 w-16 h-16 hidden sm:block rotate-12 pointer-events-auto">
             <div className="w-full h-full bg-[var(--pop-turquoise)] border-4 border-[var(--neo-border)]"
               style={{ boxShadow: '4px 4px 0px 0px var(--neo-shadow-color)' }} />
@@ -37,7 +37,7 @@ export default function Home() {
         </Parallax>
 
         {/* Content layer — lags behind slightly = feels further away */}
-        <Parallax speed={0.03}>
+        <Parallax speed={0.08}>
         <Container size="wide" className="relative">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left: Hero image */}

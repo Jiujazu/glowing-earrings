@@ -17,15 +17,19 @@ export default function Parallax({ children, speed = 0.05, className = "" }: Par
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let ticking = false;
+    function update() {
+      el!.style.transform = `translateY(${window.scrollY * speed}px)`;
+    }
     function onScroll() {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        el!.style.transform = `translateY(${window.scrollY * speed}px)`;
+        update();
         ticking = false;
       });
     }
 
+    update(); // set initial position
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [speed]);

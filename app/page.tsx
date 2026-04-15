@@ -37,7 +37,7 @@ export default function Home() {
         </Parallax>
 
         {/* Content layer — lags behind slightly = feels further away */}
-        <Parallax speed={0.15}>
+        <Parallax speed={0.35}>
         <Container size="wide" className="relative">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left: Hero image */}

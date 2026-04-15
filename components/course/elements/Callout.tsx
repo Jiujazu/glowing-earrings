@@ -36,7 +36,7 @@ export default function Callout({ element }: { element: CalloutElement }) {
 
   return (
     <div
-      className="border-l-4 rounded-r-xl p-5"
+      className="border-l-4 p-5"
       style={{
         borderLeftColor: config.color,
         backgroundColor: `color-mix(in srgb, ${config.color} 8%, var(--course-surface))`,

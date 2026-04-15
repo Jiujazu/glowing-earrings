@@ -22,7 +22,7 @@ export default function ReflectionPrompt({
   );
 
   return (
-    <div className="bg-[var(--course-surface)] rounded-xl p-6 border border-dashed border-[var(--course-primary)]/30">
+    <div className="bg-[var(--course-surface)] p-6 border-4 border-dashed border-[var(--course-primary)]/30">
       <div className="flex items-start gap-3">
         <span className="text-2xl flex-shrink-0">🤔</span>
         <div>

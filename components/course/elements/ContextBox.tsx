@@ -25,7 +25,7 @@ export default function ContextBox({ element }: { element: ContextBoxElement }) 
 
   return (
     <div
-      className="rounded-xl p-5 border"
+      className="p-5 border-4"
       style={{
         backgroundColor: "color-mix(in srgb, var(--course-accent) 5%, var(--course-surface))",
         borderColor: "color-mix(in srgb, var(--course-text) 10%, transparent)",

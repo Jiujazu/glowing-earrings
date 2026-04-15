@@ -119,7 +119,7 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
         {/* Takeaway */}
         {outro.takeaway && outro.takeaway.length > 0 && (
           <ScrollReveal>
-            <div className="bg-[var(--course-surface)] rounded-xl p-5 mb-8">
+            <div className="bg-[var(--course-surface)] p-5 mb-8 border-4 border-[var(--course-text)]/15">
               <h3 className="font-heading font-bold text-lg mb-3">Checkliste</h3>
               <ul className="space-y-2">
                 {outro.takeaway.map((item, i) => (
@@ -136,7 +136,7 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
         {/* Next Step */}
         <ScrollReveal>
           <div
-            className="rounded-xl p-5 mb-8 border"
+            className="p-5 mb-8 border-4"
             style={{
               backgroundColor: "color-mix(in srgb, var(--course-primary) 5%, var(--course-surface))",
               borderColor: "color-mix(in srgb, var(--course-primary) 20%, transparent)",
@@ -184,14 +184,14 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
                   <Link
                     key={course!.meta.slug}
                     href={`/courses/${course!.meta.slug}`}
-                    className="group block rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                    className="group block overflow-hidden border-4 border-[var(--course-text)]/15 transition-all duration-200 hover:-translate-y-1"
                   >
                     <div
                       className="h-1.5"
                       style={{ backgroundColor: course!.meta.design.colors.primary }}
                     />
                     <div
-                      className="p-4 border border-t-0 rounded-b-xl"
+                      className="p-4 border-t-4 border-[var(--course-text)]/10"
                       style={{
                         backgroundColor: "var(--course-surface)",
                         borderColor: "color-mix(in srgb, var(--course-text) 10%, transparent)",

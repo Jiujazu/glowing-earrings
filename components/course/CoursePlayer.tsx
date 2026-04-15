@@ -32,7 +32,7 @@ export default function CoursePlayer({ course }: CoursePlayerProps) {
             <ModuleManager modules={course.modules} />
           </div>
 
-          <div className="border-t border-[var(--course-text)]/10">
+          <div className="border-t-4 border-[var(--course-text)]/10">
             <CourseOutro outro={course.outro} courseSlug={course.meta.slug} relatedSlugs={course.meta.relatedCourses} />
           </div>
         </CourseErrorBoundary>

@@ -53,7 +53,7 @@ export default function KeyConcept({ element }: { element: KeyConceptElement }) 
   return (
     <div
       ref={ref}
-      className="aha-glow rounded-xl p-5 border"
+      className="aha-glow p-5 border-4"
       style={{
         backgroundColor: "color-mix(in srgb, var(--course-primary) 6%, var(--course-surface))",
         borderColor: "color-mix(in srgb, var(--course-primary) 20%, transparent)",

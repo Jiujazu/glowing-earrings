@@ -4,6 +4,7 @@ import CourseFilters from "@/components/course/CourseFilters";
 import NewsletterCTA from "@/components/layout/NewsletterCTA";
 import Container from "@/components/ui/Container";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import InteractiveGrid from "@/components/ui/InteractiveGrid";
 import { Star, Sparkles, Zap } from "lucide-react";
 
 export default function Home() {
@@ -13,8 +14,8 @@ export default function Home() {
     <>
       {/* Hero — Neo-Brutal, asymmetric */}
       <section className="relative py-16 sm:py-24 lg:py-32 overflow-hidden">
-        {/* Grid texture background */}
-        <div className="absolute inset-0 neo-grid pointer-events-none" />
+        {/* Interactive grid — dots inflate around cursor */}
+        <InteractiveGrid />
 
         {/* Decorative floating shapes */}
         <div className="absolute top-12 right-8 sm:right-16 w-16 h-16 bg-[var(--pop-turquoise)] border-4 border-[var(--neo-border)] rotate-12 hidden sm:block"

@@ -58,7 +58,7 @@ export default function FlashcardDeck({
   if (isEditMode) {
     return (
       <div className="space-y-4">
-        <div className="rounded-xl p-6 border-2" style={{
+        <div className="p-6 border-4" style={{
           backgroundColor: "var(--course-surface)",
           borderColor: "color-mix(in srgb, var(--course-primary) 20%, transparent)",
         }}>
@@ -70,7 +70,7 @@ export default function FlashcardDeck({
           </EditableText>
         </div>
 
-        <div className="rounded-xl p-6 border-2" style={{
+        <div className="p-6 border-4" style={{
           backgroundColor: "color-mix(in srgb, var(--course-primary) 10%, var(--course-surface))",
           borderColor: "color-mix(in srgb, var(--course-primary) 30%, transparent)",
         }}>
@@ -86,13 +86,13 @@ export default function FlashcardDeck({
         {total > 1 && (
           <div className="flex items-center justify-between">
             <button onClick={handlePrev} disabled={currentIndex === 0}
-              className="px-3 py-1.5 text-sm rounded-lg border text-[var(--course-text-muted)] hover:text-[var(--course-text)] disabled:opacity-30 transition-all"
+              className="px-3 py-1.5 text-sm font-bold uppercase tracking-wide border-2 border-[var(--course-text)]/20 text-[var(--course-text-muted)] hover:text-[var(--course-text)] hover:border-[var(--course-text)]/40 disabled:opacity-30 transition-all duration-100"
               style={{ borderColor: "color-mix(in srgb, var(--course-text) 15%, transparent)" }}>
               ← Zurück
             </button>
             <span className="text-sm text-[var(--course-text-muted)]">{currentIndex + 1} von {total}</span>
             <button onClick={handleNext} disabled={currentIndex === total - 1}
-              className="px-3 py-1.5 text-sm rounded-lg border text-[var(--course-text-muted)] hover:text-[var(--course-text)] disabled:opacity-30 transition-all"
+              className="px-3 py-1.5 text-sm font-bold uppercase tracking-wide border-2 border-[var(--course-text)]/20 text-[var(--course-text-muted)] hover:text-[var(--course-text)] hover:border-[var(--course-text)]/40 disabled:opacity-30 transition-all duration-100"
               style={{ borderColor: "color-mix(in srgb, var(--course-text) 15%, transparent)" }}>
               Weiter →
             </button>
@@ -132,7 +132,7 @@ export default function FlashcardDeck({
         >
           {/* Front */}
           <div
-            className="absolute inset-0 rounded-xl p-6 flex items-center justify-center text-center border-2"
+            className="absolute inset-0 p-6 flex items-center justify-center text-center border-4"
             style={{
               backfaceVisibility: "hidden",
               WebkitBackfaceVisibility: "hidden",
@@ -153,7 +153,7 @@ export default function FlashcardDeck({
 
           {/* Back */}
           <div
-            className="absolute inset-0 rounded-xl p-6 flex items-center justify-center text-center border-2"
+            className="absolute inset-0 p-6 flex items-center justify-center text-center border-4"
             style={{
               backfaceVisibility: "hidden",
               WebkitBackfaceVisibility: "hidden",
@@ -175,13 +175,13 @@ export default function FlashcardDeck({
       {/* Navigation */}
       <div className="flex items-center justify-between">
         <button onClick={handlePrev} disabled={currentIndex === 0}
-          className="px-3 py-1.5 text-sm rounded-lg border text-[var(--course-text-muted)] hover:text-[var(--course-text)] disabled:opacity-30 transition-all"
+          className="px-3 py-1.5 text-sm font-bold uppercase tracking-wide border-2 border-[var(--course-text)]/20 text-[var(--course-text-muted)] hover:text-[var(--course-text)] hover:border-[var(--course-text)]/40 disabled:opacity-30 transition-all duration-100"
           style={{ borderColor: "color-mix(in srgb, var(--course-text) 15%, transparent)" }}>
           ← Zurück
         </button>
         <span className="text-sm text-[var(--course-text-muted)]">{currentIndex + 1} von {total}</span>
         <button onClick={handleNext} disabled={currentIndex === total - 1}
-          className="px-3 py-1.5 text-sm rounded-lg border text-[var(--course-text-muted)] hover:text-[var(--course-text)] disabled:opacity-30 transition-all"
+          className="px-3 py-1.5 text-sm font-bold uppercase tracking-wide border-2 border-[var(--course-text)]/20 text-[var(--course-text-muted)] hover:text-[var(--course-text)] hover:border-[var(--course-text)]/40 disabled:opacity-30 transition-all duration-100"
           style={{ borderColor: "color-mix(in srgb, var(--course-text) 15%, transparent)" }}>
           Weiter →
         </button>

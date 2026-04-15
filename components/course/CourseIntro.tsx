@@ -21,7 +21,7 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
 
   const titleContent = (
     <h1
-      className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight"
+      className="font-heading text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight uppercase"
       style={{ fontFamily: "var(--course-heading-font, var(--font-heading))" }}
     >
       {meta.title}
@@ -29,19 +29,19 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
   );
 
   const subheadingContent = meta.subheading ? (
-    <p className="text-lg sm:text-xl text-[var(--course-text-muted)] mt-2">
+    <p className="text-lg sm:text-xl text-[var(--course-text-muted)] mt-2 font-bold">
       {meta.subheading}
     </p>
   ) : null;
 
   const subtitleContent = (
-    <p className="text-base sm:text-lg text-[var(--course-text-muted)]/70 mt-3 mb-8 leading-relaxed">
+    <p className="text-base sm:text-lg text-[var(--course-text-muted)] mt-3 mb-8 leading-relaxed">
       {meta.subtitle}
     </p>
   );
 
   const hookContent = (
-    <div className="text-lg leading-relaxed mb-8 border-l-4 border-[var(--course-primary)] pl-4">
+    <div className="text-lg leading-relaxed mb-8 border-l-4 border-[var(--course-primary)] pl-4 font-medium">
       {intro.hook}
     </div>
   );
@@ -101,8 +101,11 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
 
         {/* Source Context */}
         <ScrollReveal delay={250}>
-          <div className="bg-[var(--course-surface)] rounded-xl p-5">
-            <p className="text-sm text-[var(--course-text-muted)] mb-2">Quelle</p>
+          <div
+            className="p-5 border-4 border-[var(--course-text)]/20"
+            style={{ backgroundColor: "var(--course-surface)" }}
+          >
+            <p className="text-xs font-black text-[var(--course-text-muted)] uppercase tracking-widest mb-2">Quelle</p>
             {isEditMode ? (
               <EditableText elementId="intro-source" content={intro.sourceContext} fieldPath="sourceContext">
                 {sourceContent}
@@ -114,7 +117,7 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
               href={meta.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-sm text-[var(--course-primary)] hover:underline mt-2"
+              className="inline-flex items-center gap-1 text-sm font-bold text-[var(--course-primary)] hover:underline decoration-2 mt-2 uppercase tracking-wide"
             >
               Zum Original →
             </a>

@@ -10,10 +10,10 @@ export default function DatenschutzPage() {
   return (
     <section className="py-12 sm:py-16">
       <Container size="narrow">
-        <h1 className="font-heading text-3xl font-bold text-text-primary mb-8">
+        <h1 className="font-heading text-4xl font-black text-[var(--text-primary)] mb-8 uppercase tracking-tight">
           Datenschutzerklärung
         </h1>
-        <div className="prose prose-lg max-w-none text-text-primary prose-headings:font-heading prose-headings:text-text-primary prose-p:text-text-secondary">
+        <div className="prose prose-lg max-w-none text-[var(--text-primary)] prose-headings:font-heading prose-headings:font-black prose-headings:uppercase prose-headings:text-[var(--text-primary)] prose-p:text-[var(--text-primary)] prose-strong:text-[var(--text-primary)] prose-li:text-[var(--text-primary)]">
           <h2>1. Verantwortlicher</h2>
           <p>
             Julian van Dieken
@@ -104,7 +104,7 @@ export default function DatenschutzPage() {
             Datenschutz und Informationsfreiheit.
           </p>
 
-          <p className="text-sm text-text-muted mt-8">
+          <p className="text-sm font-bold uppercase tracking-wide mt-8">
             Stand: April 2026
           </p>
         </div>

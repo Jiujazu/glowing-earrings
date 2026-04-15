@@ -69,7 +69,7 @@ export default function StepByStep({ element }: { element: StepByStepElement }) 
   const steps = isEditMode ? localSteps : element.steps;
 
   return (
-    <div className="rounded-xl overflow-hidden bg-[var(--course-surface)] border border-[var(--course-text)]/10">
+    <div className="overflow-hidden bg-[var(--course-surface)] border-4 border-[var(--course-text)]/15">
       {element.title && (
         <div className="px-5 pt-5 pb-2">
           {isEditMode ? (
@@ -105,7 +105,7 @@ export default function StepByStep({ element }: { element: StepByStepElement }) 
                   isEditMode ? "cursor-default" : "hover:bg-[var(--course-text)]/3"
                 }`}
               >
-                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--course-primary)]/15 text-[var(--course-primary)] text-sm font-bold font-heading flex-shrink-0">
+                <span className="flex items-center justify-center w-8 h-8 border-2 border-[var(--course-text)]/15 bg-[var(--course-primary)]/15 text-[var(--course-primary)] text-sm font-black font-heading flex-shrink-0">
                   {i + 1}
                 </span>
                 <span className="flex-1 font-medium text-[var(--course-text)] text-sm sm:text-base">
@@ -150,7 +150,7 @@ export default function StepByStep({ element }: { element: StepByStepElement }) 
                     </div>
                   )}
                   {step.image && (
-                    <div className="mt-3 rounded-lg overflow-hidden">
+                    <div className="mt-3 overflow-hidden border-2 border-[var(--course-text)]/10">
                       <Image
                         src={step.image}
                         alt={`Schritt ${i + 1}: ${step.label}`}

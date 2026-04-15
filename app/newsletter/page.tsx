@@ -14,10 +14,10 @@ export default function NewsletterPage() {
       <Container size="narrow">
         <div className="text-center mb-12">
           <p className="text-4xl mb-4">💌</p>
-          <h1 className="font-heading text-3xl sm:text-4xl font-bold text-text-primary mb-4">
+          <h1 className="font-heading text-4xl sm:text-5xl font-black text-[var(--text-primary)] mb-4 uppercase tracking-tight">
             Ein gutes Ding
           </h1>
-          <p className="text-lg text-text-secondary">
+          <p className="text-lg font-medium text-[var(--text-primary)]">
             Der Newsletter von Julian van Dieken.
           </p>
         </div>

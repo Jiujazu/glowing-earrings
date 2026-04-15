@@ -12,11 +12,11 @@ export default function AboutPage() {
   return (
     <section className="py-12 sm:py-16">
       <Container size="narrow">
-        <h1 className="font-heading text-3xl sm:text-4xl font-bold text-text-primary mb-8">
+        <h1 className="font-heading text-4xl sm:text-5xl font-black text-[var(--text-primary)] mb-8 uppercase tracking-tight">
           Warum Glowing Earrings?
         </h1>
 
-        <div className="space-y-6 text-text-secondary text-lg leading-relaxed mb-12">
+        <div className="space-y-6 text-[var(--text-primary)] text-lg leading-relaxed mb-12">
           <p>
             Der öffentliche Diskurs über generative KI ist gefangen zwischen drei
             Extremen: <strong>Hype-Erzeuger</strong>, die Produkte verkaufen wollen;{" "}
@@ -36,11 +36,13 @@ export default function AboutPage() {
         </div>
 
         {/* The Name */}
-        <div className="bg-surface rounded-2xl p-6 sm:p-8 border border-border mb-12">
-          <h2 className="font-heading text-xl font-bold text-text-primary mb-3">
+        <div className="bg-[var(--surface)] border-4 border-[var(--neo-border)] p-6 sm:p-8 mb-12"
+          style={{ boxShadow: '8px 8px 0px 0px var(--neo-shadow-color)' }}
+        >
+          <h2 className="font-heading text-xl font-black text-[var(--text-primary)] mb-3 uppercase">
             Der Name
           </h2>
-          <p className="text-text-secondary leading-relaxed">
+          <p className="text-[var(--text-primary)] leading-relaxed">
             &ldquo;Glowing Earrings&rdquo; verweist auf das KI-Kunstwerk
             &ldquo;A Girl with Glowing Earrings&rdquo;, das 2023 als erstes
             KI-generiertes Bild in einem traditionellen Museum (Mauritshuis,
@@ -52,10 +54,10 @@ export default function AboutPage() {
 
         {/* Julian */}
         <div className="mb-12">
-          <h2 className="font-heading text-xl font-bold text-text-primary mb-3">
+          <h2 className="font-heading text-xl font-black text-[var(--text-primary)] mb-3 uppercase">
             Über Julian
           </h2>
-          <p className="text-text-secondary leading-relaxed">
+          <p className="text-[var(--text-primary)] leading-relaxed">
             Julian van Dieken ist Freelancer für Creative Media &amp; Education in
             Berlin. Er baut Glowing Earrings als Solo-Projekt — kuratiert die
             Quellen, designt die Kurse und nutzt Claude Code als primäres
@@ -65,37 +67,24 @@ export default function AboutPage() {
 
         {/* How it works */}
         <div className="mb-12">
-          <h2 className="font-heading text-xl font-bold text-text-primary mb-4">
+          <h2 className="font-heading text-xl font-black text-[var(--text-primary)] mb-4 uppercase">
             Wie die Kurse entstehen
           </h2>
-          <ol className="space-y-3 text-text-secondary">
-            <li className="flex items-start gap-3">
-              <span className="flex-shrink-0 w-7 h-7 rounded-full bg-accent text-white text-sm font-bold flex items-center justify-center mt-0.5">
-                1
-              </span>
-              <span>
-                Julian findet eine Quelle — ein Tweet, ein Vortrag, ein Artikel —
-                die es verdient, interaktiv vermittelt zu werden.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="flex-shrink-0 w-7 h-7 rounded-full bg-accent text-white text-sm font-bold flex items-center justify-center mt-0.5">
-                2
-              </span>
-              <span>
-                Die Quelle wird in einen interaktiven Kurs transformiert: mit
-                Quizzes, Flashcards, Reflexionsfragen und einem eigenen visuellen
-                Design.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="flex-shrink-0 w-7 h-7 rounded-full bg-accent text-white text-sm font-bold flex items-center justify-center mt-0.5">
-                3
-              </span>
-              <span>
-                Der Kurs geht live — kostenlos, ohne Registrierung, für alle.
-              </span>
-            </li>
+          <ol className="space-y-3 text-[var(--text-primary)]">
+            {[
+              "Julian findet eine Quelle — ein Tweet, ein Vortrag, ein Artikel — die es verdient, interaktiv vermittelt zu werden.",
+              "Die Quelle wird in einen interaktiven Kurs transformiert: mit Quizzes, Flashcards, Reflexionsfragen und einem eigenen visuellen Design.",
+              "Der Kurs geht live — kostenlos, ohne Registrierung, für alle.",
+            ].map((text, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-8 h-8 border-4 border-[var(--neo-border)] bg-[var(--accent)] text-white text-sm font-black flex items-center justify-center mt-0.5"
+                  style={{ boxShadow: '3px 3px 0px 0px var(--neo-shadow-color)' }}
+                >
+                  {i + 1}
+                </span>
+                <span>{text}</span>
+              </li>
+            ))}
           </ol>
         </div>
 

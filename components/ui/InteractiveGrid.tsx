@@ -7,7 +7,6 @@ interface Wave {
   y: number;
   time: number;
   intensity: number;
-  rainbow?: boolean;
 }
 
 interface BendPoint {
@@ -17,7 +16,7 @@ interface BendPoint {
   strength: number;
 }
 
-interface Portal {
+interface Implosion {
   x: number;
   y: number;
   time: number;
@@ -46,12 +45,13 @@ export default function InteractiveGrid({
   const isActiveRef = useRef(false);
   const wavesRef = useRef<Wave[]>([]);
   const bendsRef = useRef<BendPoint[]>([]);
-  const portalsRef = useRef<Portal[]>([]);
+  const implosionsRef = useRef<Implosion[]>([]);
   const cachedRectRef = useRef<DOMRect | null>(null);
   const isVisibleRef = useRef(true);
   const lastMouseRef = useRef({ x: 0, y: 0, time: 0 });
   const konamiRef = useRef<string[]>([]);
-  const rainbowUntilRef = useRef(0);
+  const rainbowActiveRef = useRef(false);
+  const shakeUntilRef = useRef(0);
 
   const getDisplaced = useCallback(
     (gx: number, gy: number, mx: number, my: number, now: number) => {
@@ -116,29 +116,27 @@ export default function InteractiveGrid({
         }
       }
 
-      // Portal displacement (push points outward from portal center)
-      for (const portal of portalsRef.current) {
-        const pdx = gx - portal.x;
-        const pdy = gy - portal.y;
-        const pDist2 = pdx * pdx + pdy * pdy;
-        const elapsed = (now - portal.time) / 1000;
-        const portalRadius = Math.max(0, 60 * (1 - elapsed / 2.5));
-        const portalOuter = portalRadius + 40;
-        if (pDist2 < portalOuter * portalOuter && pDist2 > 0) {
-          const pDist = Math.sqrt(pDist2);
-          if (pDist < portalRadius) {
-            // Inside portal: push outward strongly
-            const pushStrength = (1 - pDist / portalRadius) * 30;
-            dx += (pdx / pDist) * pushStrength;
-            dy += (pdy / pDist) * pushStrength;
-            factor = Math.max(factor, 0.8);
-          } else if (pDist < portalOuter) {
-            // Edge of portal: slight inward pull
-            const edgeFactor = 1 - (pDist - portalRadius) / 40;
-            dx -= (pdx / pDist) * edgeFactor * 8;
-            dy -= (pdy / pDist) * edgeFactor * 8;
-            factor = Math.max(factor, edgeFactor * 0.5);
+      // Implosion displacement (gravity well — pulls inward, then snaps back)
+      for (const imp of implosionsRef.current) {
+        const idx = gx - imp.x;
+        const idy = gy - imp.y;
+        const iDist2 = idx * idx + idy * idy;
+        const impRadius = 160;
+        if (iDist2 < impRadius * impRadius && iDist2 > 0) {
+          const iDist = Math.sqrt(iDist2);
+          const elapsed = (now - imp.time) / 1000;
+          // Phase 1 (0-0.4s): suck inward. Phase 2 (0.4-1.2s): bounce outward and settle
+          let pull: number;
+          if (elapsed < 0.4) {
+            pull = -(elapsed / 0.4) * 35; // negative = inward
+          } else {
+            const t2 = elapsed - 0.4;
+            pull = 35 * Math.cos(t2 * 8) * Math.exp(-t2 * 4); // oscillate outward
           }
+          const impFactor = (1 - iDist / impRadius);
+          dx += (idx / iDist) * impFactor * pull;
+          dy += (idy / iDist) * impFactor * pull;
+          factor = Math.max(factor, Math.abs(impFactor * pull) / 35 * 0.6);
         }
       }
 
@@ -172,15 +170,25 @@ export default function InteractiveGrid({
     // Prune expired effects
     wavesRef.current = wavesRef.current.filter(w => (now - w.time) < 2000);
     bendsRef.current = bendsRef.current.filter(b => (now - b.time) < 1500);
-    portalsRef.current = portalsRef.current.filter(p => (now - p.time) < 2500);
+    implosionsRef.current = implosionsRef.current.filter(imp => (now - imp.time) < 1500);
 
-    ctx.clearRect(0, 0, w, h);
+    // Screen shake
+    const isShaking = now < shakeUntilRef.current;
+    if (isShaking) {
+      const shakeDecay = (shakeUntilRef.current - now) / 1500;
+      const shakeX = (Math.random() - 0.5) * 12 * shakeDecay;
+      const shakeY = (Math.random() - 0.5) * 12 * shakeDecay;
+      ctx.save();
+      ctx.translate(shakeX, shakeY);
+    }
+
+    ctx.clearRect(-20, -20, w + 40, h + 40);
 
     const style = getComputedStyle(canvas);
     const isDark = document.documentElement.classList.contains("dark");
     const borderColor = style.getPropertyValue("--neo-border").trim() || (isDark ? "#FFF" : "#000");
 
-    const isRainbow = now < rainbowUntilRef.current;
+    const isRainbow = rainbowActiveRef.current;
 
     const cols = Math.ceil(w / spacing) + 2;
     const rows = Math.ceil(h / spacing) + 2;
@@ -199,9 +207,9 @@ export default function InteractiveGrid({
     ctx.globalAlpha = 0.15;
 
     if (isRainbow) {
-      const rainbowProgress = 1 - (rainbowUntilRef.current - now) / 3000;
+      const rainbowCycle = now / 400;
       for (let row = 0; row < rows; row++) {
-        const colorIdx = (row + Math.floor(rainbowProgress * 20)) % RAINBOW_COLORS.length;
+        const colorIdx = (row + Math.floor(rainbowCycle)) % RAINBOW_COLORS.length;
         ctx.strokeStyle = RAINBOW_COLORS[colorIdx];
         ctx.globalAlpha = 0.25;
         ctx.beginPath();
@@ -213,7 +221,7 @@ export default function InteractiveGrid({
         ctx.stroke();
       }
       for (let col = 0; col < cols; col++) {
-        const colorIdx = (col + Math.floor(rainbowProgress * 20)) % RAINBOW_COLORS.length;
+        const colorIdx = (col + Math.floor(rainbowCycle)) % RAINBOW_COLORS.length;
         ctx.strokeStyle = RAINBOW_COLORS[colorIdx];
         ctx.globalAlpha = 0.25;
         ctx.beginPath();
@@ -287,32 +295,34 @@ export default function InteractiveGrid({
       }
     }
 
-    // Portal holes — draw dark circle where grid is torn open
-    for (const portal of portalsRef.current) {
-      const elapsed = (now - portal.time) / 1000;
-      const portalRadius = Math.max(0, 60 * (1 - elapsed / 2.5));
-      if (portalRadius > 1) {
-        const portalAlpha = Math.min(1, portalRadius / 30);
-        // Dark void
-        ctx.globalAlpha = portalAlpha * 0.6;
-        ctx.fillStyle = isDark ? "#1a0030" : "#F5F0FC";
+    // Implosion visuals — pulsing ring at collapse point
+    for (const imp of implosionsRef.current) {
+      const elapsed = (now - imp.time) / 1000;
+      const fade = Math.max(0, 1 - elapsed / 1.5);
+      if (fade <= 0) continue;
+      // Ring contracts then expands
+      let ringRadius: number;
+      if (elapsed < 0.4) {
+        ringRadius = 80 * (1 - elapsed / 0.4); // contract to center
+      } else {
+        const t2 = elapsed - 0.4;
+        ringRadius = 30 * t2 * Math.exp(-t2 * 3) * 8; // expand outward
+      }
+      ctx.globalAlpha = fade * 0.5;
+      ctx.strokeStyle = isRainbow
+        ? RAINBOW_COLORS[Math.floor(elapsed * 10) % RAINBOW_COLORS.length]
+        : (isDark ? "#7B4FBF" : "#5B2F9F");
+      ctx.lineWidth = 2 + fade * 2;
+      ctx.beginPath();
+      ctx.arc(imp.x, imp.y, Math.max(1, ringRadius), 0, Math.PI * 2);
+      ctx.stroke();
+      // Inner dot
+      if (elapsed < 0.5) {
+        ctx.globalAlpha = fade * 0.7;
+        ctx.fillStyle = "#00C9A7";
         ctx.beginPath();
-        ctx.arc(portal.x, portal.y, portalRadius, 0, Math.PI * 2);
+        ctx.arc(imp.x, imp.y, 3 * (1 - elapsed * 2), 0, Math.PI * 2);
         ctx.fill();
-        // Glowing rim
-        ctx.globalAlpha = portalAlpha * 0.8;
-        ctx.strokeStyle = isDark ? "#7B4FBF" : "#5B2F9F";
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.arc(portal.x, portal.y, portalRadius, 0, Math.PI * 2);
-        ctx.stroke();
-        // Inner glow
-        ctx.globalAlpha = portalAlpha * 0.3;
-        ctx.strokeStyle = "#00C9A7";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.arc(portal.x, portal.y, portalRadius * 0.6, 0, Math.PI * 2);
-        ctx.stroke();
       }
     }
 
@@ -335,6 +345,10 @@ export default function InteractiveGrid({
     }
 
     ctx.globalAlpha = 1;
+
+    if (isShaking) {
+      ctx.restore();
+    }
   }, [spacing, getDisplaced]);
 
   useEffect(() => {
@@ -375,7 +389,7 @@ export default function InteractiveGrid({
           isActiveRef.current = true;
           loop();
         }
-      } else if (isActiveRef.current && wavesRef.current.length === 0 && bendsRef.current.length === 0 && portalsRef.current.length === 0) {
+      } else if (isActiveRef.current && wavesRef.current.length === 0 && bendsRef.current.length === 0 && implosionsRef.current.length === 0) {
         mouseRef.current = { x: -1000, y: -1000 };
         lastDrawRef.current = { x: -9999, y: -9999 };
         draw();
@@ -387,7 +401,7 @@ export default function InteractiveGrid({
       mouseRef.current = { x: -1000, y: -1000 };
       lastDrawRef.current = { x: -9999, y: -9999 };
       draw();
-      if (wavesRef.current.length === 0 && bendsRef.current.length === 0 && portalsRef.current.length === 0) {
+      if (wavesRef.current.length === 0 && bendsRef.current.length === 0 && implosionsRef.current.length === 0) {
         isActiveRef.current = false;
       }
     }
@@ -425,7 +439,7 @@ export default function InteractiveGrid({
       }
     }
 
-    // Right click → portal
+    // Right click → gravity well (implosion)
     function onContextMenu(e: MouseEvent) {
       if (!isVisibleRef.current) return;
       const rect = cachedRectRef.current;
@@ -434,7 +448,7 @@ export default function InteractiveGrid({
       const y = e.clientY - rect.top;
       if (x < 0 || x > rect.width || y < 0 || y > rect.height) return;
       e.preventDefault();
-      portalsRef.current.push({ x, y, time: performance.now() });
+      implosionsRef.current.push({ x, y, time: performance.now() });
       if (!isActiveRef.current) {
         isActiveRef.current = true;
         loop();
@@ -453,12 +467,22 @@ export default function InteractiveGrid({
         konamiRef.current = [];
         const rect = cachedRectRef.current;
         if (!rect) return;
+        const now = performance.now();
         const cx = rect.width / 2;
         const cy = rect.height / 2;
-        const now = performance.now();
-        // Mega rainbow wave from center
-        wavesRef.current.push({ x: cx, y: cy, time: now, intensity: 8, rainbow: true });
-        rainbowUntilRef.current = now + 3000;
+        // Mega explosion: multiple shockwaves from center
+        wavesRef.current.push({ x: cx, y: cy, time: now, intensity: 12 });
+        wavesRef.current.push({ x: cx, y: cy, time: now + 150, intensity: 10 });
+        wavesRef.current.push({ x: cx, y: cy, time: now + 300, intensity: 8 });
+        // Corner explosions
+        wavesRef.current.push({ x: 0, y: 0, time: now + 200, intensity: 6 });
+        wavesRef.current.push({ x: rect.width, y: 0, time: now + 250, intensity: 6 });
+        wavesRef.current.push({ x: 0, y: rect.height, time: now + 300, intensity: 6 });
+        wavesRef.current.push({ x: rect.width, y: rect.height, time: now + 350, intensity: 6 });
+        // Screen shake
+        shakeUntilRef.current = now + 1500;
+        // Permanent rainbow
+        rainbowActiveRef.current = true;
         if (!isActiveRef.current) {
           isActiveRef.current = true;
           loop();
@@ -489,8 +513,8 @@ export default function InteractiveGrid({
       const now = performance.now();
       // Keep running if any effects are active
       if (wavesRef.current.length > 0 || mouseRef.current.x > -500 ||
-          bendsRef.current.length > 0 || portalsRef.current.length > 0 ||
-          now < rainbowUntilRef.current) {
+          bendsRef.current.length > 0 || implosionsRef.current.length > 0 ||
+          now < shakeUntilRef.current || rainbowActiveRef.current) {
         rafRef.current = requestAnimationFrame(loop);
       } else {
         isActiveRef.current = false;

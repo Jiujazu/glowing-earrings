@@ -63,7 +63,7 @@ export default function Home() {
 
             <ScrollReveal delay={200} duration={600}>
               <p className="text-lg sm:text-xl text-[var(--text-primary)] max-w-lg mt-8 mb-10 leading-relaxed font-medium">
-                Kostenlose Kurse zu generativer KI von Julian van Dieken.
+                Kurse zu generativer KI von Julian van Dieken. Für Normalsterbliche, Enthusiasten und Voll-Profis. Kostenlos.
               </p>
             </ScrollReveal>
 

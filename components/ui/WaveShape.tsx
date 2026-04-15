@@ -106,7 +106,7 @@ export default function WaveShape({ children, className = "" }: WaveShapeProps) 
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div ref={spinRef}>
+      <div ref={spinRef} className="w-full h-full">
         {children}
       </div>
     </div>

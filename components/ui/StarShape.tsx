@@ -31,10 +31,13 @@ export default function StarShape({ className = "" }: StarShapeProps) {
       }));
     }
 
-    // Big bouncy scale with overshoot
-    outer.style.transition = "transform 0.5s cubic-bezier(0.34, 2.2, 0.64, 1), color 0.15s ease-out";
+    // Big bouncy scale + color fill interior
+    outer.style.transition = "transform 0.5s cubic-bezier(0.34, 2.2, 0.64, 1)";
     outer.style.transform = "scale(1.8)";
-    outer.style.color = "var(--pop-turquoise, #00C9A7)";
+
+    // Fill star interior (keep stroke as-is)
+    const paths = outer.querySelectorAll("svg polygon, svg path");
+    paths.forEach(p => (p as SVGElement).setAttribute("fill", "var(--pop-turquoise, #00C9A7)"));
 
     // Spin
     if (spin) {
@@ -50,9 +53,12 @@ export default function StarShape({ className = "" }: StarShapeProps) {
     const outer = outerRef.current;
     const spin = spinRef.current;
     if (!outer) return;
-    outer.style.transition = "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease-out";
+    outer.style.transition = "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)";
     outer.style.transform = "";
-    outer.style.color = "";
+
+    // Reset star interior fill
+    const paths = outer.querySelectorAll("svg polygon, svg path");
+    paths.forEach(p => (p as SVGElement).setAttribute("fill", "none"));
 
     if (spin) {
       spin.style.transition = "rotate 0.4s cubic-bezier(0.16, 1, 0.3, 1)";

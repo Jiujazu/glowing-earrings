@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type { CourseIntro as CourseIntroType, CourseMeta } from "@/lib/types";
 import { formatDuration, getDifficultyLabel } from "@/lib/course-utils";
 import Badge from "@/components/ui/Badge";
@@ -51,10 +52,27 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
   );
 
   return (
-    <section className="py-16 sm:py-24 px-4">
+    <section className="pt-0 pb-16 sm:pb-24 px-4">
+      {/* Cover Image as Hero Banner */}
+      {meta.coverImage && (
+        <ScrollReveal delay={0} duration={600}>
+          <div className="max-w-3xl mx-auto mb-10 mt-8 sm:mt-12 overflow-hidden border-4 border-[var(--course-text)]/20">
+            <Image
+              src={meta.coverImage}
+              alt={meta.title}
+              width={800}
+              height={400}
+              className="w-full h-auto"
+              sizes="(max-width: 768px) 100vw, 768px"
+              priority
+            />
+          </div>
+        </ScrollReveal>
+      )}
+
       <div className="max-w-3xl mx-auto">
         {/* Badges */}
-        <ScrollReveal delay={0} duration={600}>
+        <ScrollReveal delay={meta.coverImage ? 50 : 0} duration={600}>
           <div className="flex flex-wrap gap-2 mb-6">
             <Badge variant="course">{getDifficultyLabel(meta.difficulty)}</Badge>
             <Badge variant="course">{formatDuration(meta.estimatedMinutes)}</Badge>
@@ -62,7 +80,7 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
         </ScrollReveal>
 
         {/* Title + Subtitle */}
-        <ScrollReveal delay={100} duration={700}>
+        <ScrollReveal delay={meta.coverImage ? 100 : 100} duration={700}>
           {isEditMode ? (
             <EditableText elementId="meta:title" content={meta.title} fieldPath="title">
               {titleContent}

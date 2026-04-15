@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import MobileNav from "./MobileNav";
 import ThemeToggle from "./ThemeToggle";
+import LogoIcon from "@/components/ui/LogoIcon";
 
 const navLinks = [
   { href: "/courses", label: "Kurse" },
@@ -23,10 +24,10 @@ export default function Header() {
             href="/"
             className="group flex items-center gap-2.5 font-heading text-lg font-black uppercase tracking-tight text-[var(--text-primary)]"
           >
-            <span className="inline-flex items-center justify-center w-9 h-9 border-4 border-[var(--neo-border)] bg-[var(--accent)] text-white text-sm font-black transition-all duration-100 group-hover:rotate-12 group-hover:scale-110"
+            <span className="inline-flex items-center justify-center w-9 h-9 border-4 border-[var(--neo-border)] bg-[var(--accent)] text-white transition-all duration-100 group-hover:rotate-12 group-hover:scale-110"
               style={{ boxShadow: '3px 3px 0px 0px var(--neo-shadow-color)' }}
             >
-              ✦
+              <LogoIcon className="w-5 h-5" strokeWidth={2.5} />
             </span>
             <span className="hidden sm:inline">Glowing Earrings</span>
           </Link>

@@ -20,15 +20,15 @@ export default function Home() {
 
         {/* Pushable floating shapes — react to cursor, bounce off edges */}
         <div className="hidden sm:block">
-          <FloatingShape initialX={700} initialY={80} size={64}>
+          <FloatingShape startX={0.82} startY={0.15} size={64}>
             <div className="w-full h-full bg-[var(--pop-turquoise)] border-4 border-[var(--neo-border)]"
               style={{ boxShadow: '4px 4px 0px 0px var(--neo-shadow-color)' }} />
           </FloatingShape>
-          <FloatingShape initialX={80} initialY={320} size={48} pushForce={10}>
+          <FloatingShape startX={0.08} startY={0.75} size={48}>
             <div className="w-full h-full bg-[var(--accent)] border-4 border-[var(--neo-border)]"
               style={{ boxShadow: '3px 3px 0px 0px var(--neo-shadow-color)' }} />
           </FloatingShape>
-          <FloatingShape initialX={200} initialY={60} size={36} pushForce={12} className="hidden lg:block">
+          <FloatingShape startX={0.18} startY={0.12} size={36} className="hidden lg:block">
             <div className="w-full h-full flex items-center justify-center">
               <Star className="w-8 h-8 text-[var(--neo-border)]" strokeWidth={3} />
             </div>

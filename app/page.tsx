@@ -108,6 +108,7 @@ export default function Home() {
             </Parallax>
           </div>
         </Container>
+        <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-[var(--neo-border)]" />
       </section>
 
       {/* Courses */}

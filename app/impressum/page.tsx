@@ -20,7 +20,9 @@ export default function ImpressumPage() {
             <br />
             Creative Media &amp; Education van Dieken
             <br />
-            Berlin, Deutschland
+            [Straße + Hausnummer]
+            <br />
+            [PLZ] Berlin
           </p>
 
           <h2>Kontakt</h2>
@@ -32,7 +34,9 @@ export default function ImpressumPage() {
           <p>
             Julian van Dieken
             <br />
-            Berlin, Deutschland
+            [Straße + Hausnummer]
+            <br />
+            [PLZ] Berlin
           </p>
 
           <h2>Haftungsausschluss</h2>
@@ -47,7 +51,9 @@ export default function ImpressumPage() {
           <p>
             Unser Angebot enthält Links zu externen Webseiten Dritter, auf
             deren Inhalte wir keinen Einfluss haben. Deshalb können wir für
-            diese fremden Inhalte auch keine Gewähr übernehmen.
+            diese fremden Inhalte auch keine Gewähr übernehmen. Für die
+            Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter
+            oder Betreiber der Seiten verantwortlich.
           </p>
 
           <h3>Urheberrecht</h3>
@@ -55,7 +61,9 @@ export default function ImpressumPage() {
             Die Inhalte und Werke auf diesen Seiten unterliegen dem
             deutschen Urheberrecht. Die Kursinhalte basieren auf
             öffentlich zugänglichen Quellen und werden mit Quellenangabe
-            transformiert dargestellt.
+            transformiert dargestellt. Die Vervielfältigung, Bearbeitung
+            und Verbreitung außerhalb der Grenzen des Urheberrechts
+            bedürfen der schriftlichen Zustimmung des Betreibers.
           </p>
         </div>
       </Container>

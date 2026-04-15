@@ -8,6 +8,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import InteractiveGrid from "@/components/ui/InteractiveGrid";
 import Parallax from "@/components/ui/Parallax";
 import WaveShape from "@/components/ui/WaveShape";
+import StarShape from "@/components/ui/StarShape";
 import { Star, Sparkles, Zap } from "lucide-react";
 import { HEADING, HEADING_DISPLAY, LABEL } from "@/lib/typography";
 
@@ -31,16 +32,14 @@ export default function Home() {
             <div className="w-full h-full bg-[var(--accent)] border-4 border-[var(--neo-border)]"
               style={{ boxShadow: '3px 3px 0px 0px var(--neo-shadow-color)' }} />
           </WaveShape>
-          <WaveShape className="absolute bottom-20 right-[18%] hidden lg:block pointer-events-auto">
-            <Star className="w-8 h-8 text-[var(--neo-border)]" strokeWidth={3} />
-          </WaveShape>
+          <StarShape className="absolute top-1/3 right-[18%] hidden lg:block pointer-events-auto" />
         </Parallax>
 
-        {/* Content layer — lags behind slightly = feels further away */}
-        <Parallax speed={0.15}>
+        {/* Content layers — image and text at different parallax speeds */}
         <Container size="wide" className="relative">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Left: Hero image */}
+            {/* Left: Hero image — heavy, drifts slower */}
+            <Parallax speed={0.2}>
             <ScrollReveal delay={0} duration={700} direction="left">
               <div
                 className="border-4 border-[var(--neo-border)] -rotate-2 overflow-hidden max-w-sm mx-auto md:max-w-none"
@@ -56,8 +55,10 @@ export default function Home() {
                 />
               </div>
             </ScrollReveal>
+            </Parallax>
 
-            {/* Right: Text content */}
+            {/* Right: Text content — lighter, drifts faster */}
+            <Parallax speed={0.45}>
             <div>
               <ScrollReveal delay={100} duration={600}>
                 <div className={`inline-block px-4 py-2 bg-[var(--pop-turquoise)] border-4 border-[var(--neo-border)] text-black text-sm ${LABEL} mb-8 -rotate-2`}
@@ -103,9 +104,10 @@ export default function Home() {
                 </ScrollReveal>
               )}
             </div>
+            </Parallax>
           </div>
         </Container>
-        </Parallax>
+        <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-[var(--neo-border)]" />
       </section>
 
       {/* Courses */}

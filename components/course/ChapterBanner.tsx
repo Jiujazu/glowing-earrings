@@ -49,7 +49,7 @@ export default function ChapterBanner({
       ref={ref}
       className="sticky top-16 z-[55] py-5 sm:py-6 px-4 border-b-4 border-[var(--course-text)]/15"
       style={{
-        backgroundColor: "var(--course-bg)",
+        backgroundColor: "color-mix(in srgb, var(--course-primary) 10%, var(--course-bg))",
       }}
     >
       <div className="max-w-3xl mx-auto relative">

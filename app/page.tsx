@@ -72,7 +72,7 @@ export default function Home() {
                 </span>
               </div>
             </ScrollReveal>
-            <Suspense>
+            <Suspense fallback={<div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-pulse"><div className="h-64 rounded-2xl bg-surface" /><div className="h-64 rounded-2xl bg-surface" /></div>}>
               <CourseFilters courses={courses} />
             </Suspense>
           </Container>
@@ -95,7 +95,7 @@ export default function Home() {
             ].map((item, i) => (
               <ScrollReveal key={item.title} delay={i * 120}>
                 <div className="group text-center p-6 rounded-2xl transition-all duration-300 hover:bg-surface-tinted hover:shadow-sm">
-                  <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[var(--${item.color})]/10 text-2xl mb-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-[var(--${item.color})]/15`}>
+                  <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[var(--${item.color})]/10 text-2xl mb-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-[var(--${item.color})]/15`} aria-hidden="true">
                     {item.emoji}
                   </div>
                   <h3 className="font-heading font-bold text-lg mb-2">

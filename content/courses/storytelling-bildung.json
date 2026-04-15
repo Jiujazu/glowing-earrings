@@ -12,6 +12,8 @@
     "estimatedMinutes": 20,
     "difficulty": "beginner",
     "publishedAt": "2026-04-13",
+    "coverImage": "/courses/covers/storytelling-bildung.svg",
+    "relatedCourses": ["agentic-os-context-levels", "karpathy-llm-wiki"],
     "design": {
       "theme": "storytelling-warm",
       "colors": {
@@ -217,7 +219,7 @@
         {
           "id": "abfolge-svg",
           "type": "image",
-          "src": "/courses/storytelling-bildung/svg_abfolge-vs-verknüpfung.svg",
+          "src": "/courses/storytelling-bildung/svg_abfolge-vs-verknuepfung.svg",
           "alt": "Vergleich: Abfolge (einzelne Fakten) vs. Verknüpfung (verbundene Geschichte)"
         },
         {

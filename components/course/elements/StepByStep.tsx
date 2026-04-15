@@ -100,6 +100,7 @@ export default function StepByStep({ element }: { element: StepByStepElement }) 
               <button
                 type="button"
                 onClick={() => !isEditMode && setExpandedStep(isExpanded ? null : i)}
+                aria-expanded={isExpanded}
                 className={`flex items-center gap-4 w-full px-5 py-4 text-left transition-colors ${
                   isEditMode ? "cursor-default" : "hover:bg-[var(--course-text)]/3"
                 }`}

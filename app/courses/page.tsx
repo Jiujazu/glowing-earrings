@@ -24,7 +24,7 @@ export default function CoursesPage() {
         </p>
 
         {courses.length > 0 ? (
-          <Suspense>
+          <Suspense fallback={<div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-pulse"><div className="h-64 rounded-2xl bg-surface" /><div className="h-64 rounded-2xl bg-surface" /></div>}>
             <CourseFilters courses={courses} />
           </Suspense>
         ) : (

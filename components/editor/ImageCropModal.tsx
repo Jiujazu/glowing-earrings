@@ -16,7 +16,6 @@ interface CropArea {
 }
 
 export default function ImageCropModal({ src, onCrop, onCancel }: ImageCropModalProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [crop, setCrop] = useState<CropArea | null>(null);

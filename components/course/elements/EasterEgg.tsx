@@ -108,7 +108,7 @@ export default function EasterEgg({ element }: { element: EasterEggElement }) {
         onClick={reveal}
         role="button"
         tabIndex={0}
-        onKeyDown={(e) => e.key === "Enter" && reveal()}
+        onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && reveal()}
       >
         {revealed ? (
           <span className="animate-fade-in">{element.content}</span>
@@ -126,6 +126,10 @@ export default function EasterEgg({ element }: { element: EasterEggElement }) {
       <span
         className="group relative inline-block"
         onMouseEnter={reveal}
+        onClick={reveal}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && reveal()}
       >
         <span className="opacity-50 group-hover:opacity-100 transition-opacity">
           ✦

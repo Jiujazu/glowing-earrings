@@ -5,6 +5,7 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import type { ImageElement } from "@/lib/types";
 import { useEditMode } from "@/components/editor/EditModeProvider";
+import { useFocusTrap } from "@/lib/use-focus-trap";
 
 const EditableImage = dynamic(() => import("@/components/editor/EditableImage"), {
   ssr: false,
@@ -13,6 +14,7 @@ const EditableImage = dynamic(() => import("@/components/editor/EditableImage"),
 export default function ImageBlock({ element }: { element: ImageElement }) {
   const [isZoomed, setIsZoomed] = useState(false);
   const { isEditMode } = useEditMode();
+  const lightboxRef = useFocusTrap(isZoomed);
 
   useEffect(() => {
     if (!isZoomed) return;
@@ -54,6 +56,7 @@ export default function ImageBlock({ element }: { element: ImageElement }) {
       {/* Lightbox */}
       {isZoomed && (
         <div
+          ref={lightboxRef}
           className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 backdrop-blur-sm cursor-zoom-out p-4"
           onClick={() => setIsZoomed(false)}
           role="dialog"

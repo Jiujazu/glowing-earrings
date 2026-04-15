@@ -255,6 +255,15 @@ a {
   transform: none !important;
 }
 
+/* No-JS fallback — content visible without JavaScript */
+@media (scripting: none) {
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* Reduced motion — instant reveal, no animation */
 @media (prefers-reduced-motion: reduce) {
   .scroll-reveal {

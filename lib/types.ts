@@ -24,6 +24,7 @@ export interface CourseMeta {
   estimatedMinutes: number;
   difficulty: "beginner" | "intermediate" | "advanced";
   publishedAt: string; // ISO date
+  coverImage?: string; // Path to cover image for course cards
   draft?: boolean;
   relatedCourses?: string[]; // slugs
   design: CourseDesign;

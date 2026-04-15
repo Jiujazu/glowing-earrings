@@ -12,7 +12,12 @@ export default function CourseThemeProvider({
   design,
   children,
 }: CourseThemeProviderProps) {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof document !== "undefined") {
+      return document.documentElement.classList.contains("dark");
+    }
+    return true;
+  });
 
   useEffect(() => {
     // Read initial state from global dark mode

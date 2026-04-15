@@ -62,11 +62,7 @@ function renderElement(element: ModuleElement): React.ReactNode {
     case "step-by-step":
       return <StepByStep element={element} />;
     case "interactive":
-      return (
-        <div className="bg-[var(--course-surface)] rounded-xl p-5 text-center text-[var(--course-text-muted)]">
-          [Interaktives Element: {element.component}]
-        </div>
-      );
+      return null;
     default:
       return null;
   }

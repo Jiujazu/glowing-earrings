@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { CourseMeta } from "@/lib/types";
 import { formatDuration, getDifficultyLabel } from "@/lib/course-utils";
 import Badge from "@/components/ui/Badge";
@@ -6,14 +7,27 @@ import CourseCardProgress from "./CourseCardProgress";
 
 export default function CourseCard({ meta, totalModules }: { meta: CourseMeta; totalModules?: number }) {
   return (
-    <div className="relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-[var(--accent)]/10">
-      {/* Color bar top */}
-      <div
-        className="h-2"
-        style={{ backgroundColor: meta.design.colors.primary }}
-      />
+    <div className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-[var(--accent)]/10">
+      {/* Cover image or color bar */}
+      {meta.coverImage ? (
+        <Link href={`/courses/${meta.slug}`} className="block relative h-40 overflow-hidden">
+          <Image
+            src={meta.coverImage}
+            alt=""
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface)] via-transparent to-transparent opacity-60" />
+        </Link>
+      ) : (
+        <div
+          className="h-2"
+          style={{ backgroundColor: meta.design.colors.primary }}
+        />
+      )}
 
-      <div className="p-6 bg-[var(--surface)] border border-[var(--border)] border-t-0 rounded-b-2xl">
+      <div className={`p-6 bg-[var(--surface)] border border-[var(--border)] rounded-b-2xl ${meta.coverImage ? 'border-t-0' : 'border-t-0'}`}>
         <Link
           href={`/courses/${meta.slug}`}
           className="group block mb-4"
@@ -59,7 +73,7 @@ export default function CourseCard({ meta, totalModules }: { meta: CourseMeta; t
           </div>
           <Link
             href={`/courses/${meta.slug}`}
-            className="text-xs font-medium text-[var(--accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            className="text-xs font-medium text-[var(--accent)] sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300"
           >
             Kurs starten →
           </Link>

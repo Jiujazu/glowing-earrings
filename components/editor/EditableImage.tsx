@@ -160,7 +160,7 @@ export default function EditableImage({
       )}
 
       {/* Upload controls — always visible on mobile, hover on desktop */}
-      {(isHovered || true) && !isDragging && !isUploading && (
+      {!isDragging && !isUploading && (
         <div className={`absolute top-3 right-3 z-20 flex gap-2 ${isHovered ? "opacity-100" : "opacity-60 sm:opacity-0"} transition-opacity duration-200`}>
           <button
             onClick={() => fileInputRef.current?.click()}

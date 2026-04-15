@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { timingSafeEqual } from "crypto";
 
 /**
  * Validates editor access via EDITOR_SECRET Bearer token.
@@ -31,13 +32,27 @@ export async function validateEditorAuth(request: NextRequest): Promise<NextResp
       ? authHeader.slice(7)
       : null;
 
-    if (token && token === editorSecret) {
-      return null;
+    if (token) {
+      try {
+        const a = Buffer.from(token);
+        const b = Buffer.from(editorSecret);
+        if (a.length === b.length && timingSafeEqual(a, b)) {
+          return null;
+        }
+      } catch {
+        // length mismatch or encoding error — fall through to 401
+      }
     }
   }
 
-  // No EDITOR_SECRET configured — allow in dev mode
+  // No EDITOR_SECRET configured — allow in dev mode only
   if (!process.env.EDITOR_SECRET) {
+    if (process.env.NODE_ENV === "production") {
+      return NextResponse.json(
+        { success: false, message: "Editor ist nicht konfiguriert." },
+        { status: 403 }
+      );
+    }
     return null;
   }
 

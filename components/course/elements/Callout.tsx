@@ -43,7 +43,7 @@ export default function Callout({ element }: { element: CalloutElement }) {
       }}
     >
       <div className="flex items-start gap-3">
-        <span className="text-xl flex-shrink-0">{config.icon}</span>
+        <span className="text-xl flex-shrink-0" aria-hidden="true">{config.icon}</span>
         <div>
           {element.title && (
             isEditMode ? (

@@ -3,7 +3,7 @@ import Container from "@/components/ui/Container";
 import NewsletterCTA from "@/components/layout/NewsletterCTA";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "Über uns",
   description:
     "Über Glowing Earrings, Julian van Dieken und warum diese Plattform existiert.",
 };

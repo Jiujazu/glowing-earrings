@@ -145,8 +145,10 @@ export default function QuizCard({ element }: { element: QuizElement }) {
           }
 
           return (
-            <div
+            <button
+              type="button"
               key={i}
+              disabled={revealed || isEditMode}
               className={`
                 w-full text-left p-4 rounded-lg border-2 transition-all duration-200
                 ${!revealed && !isEditMode ? "cursor-pointer hover:border-[var(--course-primary)]" : "cursor-default"}
@@ -155,7 +157,7 @@ export default function QuizCard({ element }: { element: QuizElement }) {
                 ${isSelected && !isOptionCorrect ? "animate-wiggle" : ""}
               `}
               style={{ borderColor, backgroundColor: bgColor }}
-              onClick={() => !isEditMode && handleSelect(i)}
+              onClick={() => handleSelect(i)}
             >
               <span className="flex items-start gap-3">
                 <span className="flex-shrink-0 mt-0.5">
@@ -211,7 +213,7 @@ export default function QuizCard({ element }: { element: QuizElement }) {
                   </p>
                 )
               )}
-            </div>
+            </button>
           );
         })}
       </div>

@@ -2,27 +2,15 @@
 @plugin "@tailwindcss/typography";
 
 /* ============================================
-   GLOWING EARRINGS — Design System
-   Based on CME Corporate Identity + Pop-Akzente
+   GLOWING EARRINGS — Neo-Brutal Design System
+   CME Corporate Identity + Pop-Akzente
    ============================================ */
 
 /* Platform Design Tokens */
 :root {
-  /* CI Primary Colors */
+  /* CI Colors */
   --color-brand-lila: #5B2F9F;
-  --color-teal: #025671;
   --color-dark-purple: #261C53;
-
-  /* Pop Accent Colors */
-  --color-hot-pink: #E91E8C;
-  --color-electric-turquoise: #00C9A7;
-
-  /* CI Text & Surface Colors */
-  --color-text-dark: #333333;
-  --color-text-gray: #7F7F7F;
-  --color-hint-lila: #F5F0FC;
-  --color-bg: #FAFAFA;
-  --color-border-gray: #E8E8E8;
 
   /* Premium Easing */
   --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
@@ -31,26 +19,23 @@
   /* Neo-Brutal Tokens */
   --neo-border: #000000;
   --neo-shadow-color: #000000;
-  --shadow-neo-sm: 4px 4px 0px 0px var(--neo-shadow-color);
-  --shadow-neo-md: 8px 8px 0px 0px var(--neo-shadow-color);
-  --shadow-neo-lg: 12px 12px 0px 0px var(--neo-shadow-color);
 
   /* Semantic tokens */
-  --background: var(--color-bg);
+  --background: #FAFAFA;
   --foreground: #000000;
   --surface: #FFFFFF;
   --surface-elevated: #FFFFFF;
-  --surface-tinted: var(--color-hint-lila);
-  --border: var(--color-border-gray);
+  --surface-tinted: #F5F0FC;
+  --border: #E8E8E8;
   --text-primary: #000000;
   --text-secondary: #000000;
   --text-muted: #000000;
-  --accent: var(--color-hot-pink);
+  --accent: #E91E8C;
   --accent-hover: #C4187A;
-  --brand: var(--color-teal);
+  --brand: #025671;
   --brand-light: #0A7E9F;
-  --pop-pink: var(--color-hot-pink);
-  --pop-turquoise: var(--color-electric-turquoise);
+  --pop-pink: #E91E8C;
+  --pop-turquoise: #00C9A7;
 
   /* Course theme defaults (overridden per course) */
   --course-bg: var(--background);
@@ -173,7 +158,6 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading), system-ui, sans-serif;
 }
 
-/* Selection color — Brand Lila */
 ::selection {
   background-color: rgba(91, 47, 159, 0.2);
   color: var(--text-primary);
@@ -183,7 +167,6 @@ html.dark ::selection {
   background-color: rgba(123, 79, 191, 0.35);
 }
 
-/* Dark mode prose overrides for Impressum/Datenschutz */
 html.dark .prose {
   --tw-prose-body: var(--text-secondary);
   --tw-prose-headings: var(--text-primary);
@@ -194,40 +177,25 @@ html.dark .prose {
   --tw-prose-hr: var(--border);
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Focus styles — Brand Lila */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
-/* Links — Brand Lila, underlined (CI-Regel) */
 a {
   text-decoration-color: transparent;
 }
 
-/* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--surface);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted);
-}
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
 /* ============================================
    Scroll Reveal Animations
@@ -239,48 +207,23 @@ a {
   transition-timing-function: var(--ease-premium);
 }
 
-.scroll-reveal-up {
-  transform: translateY(24px);
-}
-
-.scroll-reveal-down {
-  transform: translateY(-24px);
-}
-
-.scroll-reveal-left {
-  transform: translateX(24px);
-}
-
-.scroll-reveal-right {
-  transform: translateX(-24px);
-}
-
-.scroll-reveal-fade {
-  transform: none;
-}
+.scroll-reveal-up { transform: translateY(24px); }
+.scroll-reveal-down { transform: translateY(-24px); }
+.scroll-reveal-left { transform: translateX(24px); }
+.scroll-reveal-right { transform: translateX(-24px); }
+.scroll-reveal-fade { transform: none; }
 
 .scroll-revealed {
   opacity: 1 !important;
   transform: none !important;
 }
 
-/* No-JS fallback — content visible without JavaScript */
 @media (scripting: none) {
-  .scroll-reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
+  .scroll-reveal { opacity: 1; transform: none; transition: none; }
 }
 
-/* Reduced motion — instant reveal, no animation */
 @media (prefers-reduced-motion: reduce) {
-  .scroll-reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
+  .scroll-reveal { opacity: 1; transform: none; transition: none; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -292,34 +235,19 @@ a {
 .press-feedback {
   transition: transform 100ms linear, box-shadow 100ms linear;
 }
-
 .press-feedback:active {
   transform: translate(3px, 3px);
   box-shadow: none !important;
 }
 
-/* Neo-Brutal background patterns */
-.neo-halftone {
-  background-image: radial-gradient(var(--neo-border) 1px, transparent 1px);
-  background-size: 20px 20px;
-  opacity: 0.04;
-}
-
-.neo-grid {
-  background-size: 40px 40px;
-  background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--neo-border) 8%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--neo-border) 8%, transparent) 1px, transparent 1px);
-}
-
-/* Neo-Brutal slow spin for decorative elements */
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.animate-spin-slow {
-  animation: spin-slow 10s linear infinite;
+/* Shape vibrate animation — triggered on hover */
+@keyframes neo-vibrate {
+  0%, 100% { transform: translate(var(--vx, 0), var(--vy, 0)) rotate(var(--vr, 0)); }
+  10% { transform: translate(calc(var(--vx, 0) + 3px), calc(var(--vy, 0) - 2px)) rotate(calc(var(--vr, 0) + 2deg)); }
+  20% { transform: translate(calc(var(--vx, 0) - 2px), calc(var(--vy, 0) + 3px)) rotate(calc(var(--vr, 0) - 3deg)); }
+  30% { transform: translate(calc(var(--vx, 0) + 2px), calc(var(--vy, 0) + 1px)) rotate(calc(var(--vr, 0) + 1deg)); }
+  40% { transform: translate(calc(var(--vx, 0) - 1px), calc(var(--vy, 0) - 2px)) rotate(calc(var(--vr, 0) - 2deg)); }
+  50% { transform: translate(calc(var(--vx, 0) + 1px), calc(var(--vy, 0) + 1px)) rotate(calc(var(--vr, 0) + 1deg)); }
 }
 
 /* ============================================
@@ -341,13 +269,11 @@ a {
               0 0 30px -5px color-mix(in srgb, var(--course-primary) 25%, transparent);
 }
 
-/* Glow fades out after initial reveal */
 .aha-glow.aha-settled {
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--course-primary) 20%, transparent),
               0 0 0 0 transparent;
   transition: box-shadow 1.5s var(--ease-premium);
 }
-
 
 /* ============================================
    Parallax
@@ -360,26 +286,15 @@ a {
   z-index: 0;
   pointer-events: none;
 }
-
-.parallax-bg > * {
-  will-change: transform;
-}
+.parallax-bg > * { will-change: transform; }
 
 /* ============================================
    View Transitions
    ============================================ */
 
-@view-transition {
-  navigation: auto;
-}
-
-::view-transition-old(root) {
-  animation: 200ms var(--ease-premium) both fade-out;
-}
-
-::view-transition-new(root) {
-  animation: 300ms var(--ease-premium) both fade-in;
-}
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: 200ms var(--ease-premium) both fade-out; }
+::view-transition-new(root) { animation: 300ms var(--ease-premium) both fade-in; }
 
 /* ============================================
    Quiz Confetti Canvas

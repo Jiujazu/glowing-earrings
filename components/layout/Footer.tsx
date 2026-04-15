@@ -13,7 +13,7 @@ export default function Footer() {
 
           <div className="flex gap-12">
             <div>
-              <h4 className="${LABEL} text-sm text-[var(--text-primary)] mb-3">
+              <h4 className={`${LABEL} text-sm text-[var(--text-primary)] mb-3`}>
                 Entdecken
               </h4>
               <nav className="flex flex-col gap-2">
@@ -39,7 +39,7 @@ export default function Footer() {
             </div>
 
             <div>
-              <h4 className="${LABEL} text-sm text-[var(--text-primary)] mb-3">
+              <h4 className={`${LABEL} text-sm text-[var(--text-primary)] mb-3`}>
                 Rechtliches
               </h4>
               <nav className="flex flex-col gap-2">

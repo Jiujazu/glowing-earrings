@@ -2,6 +2,13 @@
 
 import { useRef, useEffect, useCallback } from "react";
 
+interface Wave {
+  x: number;
+  y: number;
+  time: number;
+  intensity: number;
+}
+
 interface InteractiveGridProps {
   className?: string;
   spacing?: number;
@@ -20,9 +27,15 @@ export default function InteractiveGrid({
   const rafRef = useRef<number>(0);
   const lastDrawRef = useRef({ x: -1000, y: -1000 });
   const isActiveRef = useRef(false);
+  const wavesRef = useRef<Wave[]>([]);
 
   const getDisplaced = useCallback(
-    (gx: number, gy: number, mx: number, my: number) => {
+    (gx: number, gy: number, mx: number, my: number, now: number) => {
+      let dx = 0;
+      let dy = 0;
+      let factor = 0;
+
+      // Mouse displacement
       const ddx = gx - mx;
       const ddy = gy - my;
       const dist2 = ddx * ddx + ddy * ddy;
@@ -30,16 +43,39 @@ export default function InteractiveGrid({
 
       if (dist2 < r2 && dist2 > 0) {
         const dist = Math.sqrt(dist2);
-        const factor = 1 - dist / influenceRadius;
-        // Cubic easing for softer, more organic falloff
+        factor = 1 - dist / influenceRadius;
         const push = factor * factor * factor * maxDisplacement;
-        return {
-          x: gx + (ddx / dist) * push,
-          y: gy + (ddy / dist) * push,
-          factor,
-        };
+        dx += (ddx / dist) * push;
+        dy += (ddy / dist) * push;
       }
-      return { x: gx, y: gy, factor: 0 };
+
+      // Wave displacement
+      for (const wave of wavesRef.current) {
+        const wdx = gx - wave.x;
+        const wdy = gy - wave.y;
+        const wDist = Math.sqrt(wdx * wdx + wdy * wdy);
+        const elapsed = (now - wave.time) / 1000;
+        const waveSpeed = 400;
+        const waveRadius = elapsed * waveSpeed;
+        const waveWidth = 120;
+
+        // Is this point within the wave ring?
+        const distFromRing = Math.abs(wDist - waveRadius);
+        if (distFromRing < waveWidth) {
+          const ringFactor = 1 - distFromRing / waveWidth;
+          // Fade out over time
+          const fade = Math.max(0, 1 - elapsed * 1.2);
+          const amplitude = ringFactor * fade * wave.intensity * 8;
+
+          if (wDist > 0) {
+            dx += (wdx / wDist) * amplitude;
+            dy += (wdy / wDist) * amplitude;
+          }
+          factor = Math.max(factor, ringFactor * fade * wave.intensity * 0.5);
+        }
+      }
+
+      return { x: gx + dx, y: gy + dy, factor };
     },
     [influenceRadius, maxDisplacement]
   );
@@ -64,10 +100,18 @@ export default function InteractiveGrid({
 
     const mx = mouseRef.current.x;
     const my = mouseRef.current.y;
+    const now = performance.now();
 
-    const dx = mx - lastDrawRef.current.x;
-    const dy = my - lastDrawRef.current.y;
-    if (dx * dx + dy * dy < 2) return;
+    // Prune expired waves
+    wavesRef.current = wavesRef.current.filter(w => (now - w.time) < 2000);
+
+    // Skip redraw if nothing is happening
+    const hasWaves = wavesRef.current.length > 0;
+    if (!hasWaves) {
+      const ddx = mx - lastDrawRef.current.x;
+      const ddy = my - lastDrawRef.current.y;
+      if (ddx * ddx + ddy * ddy < 2) return;
+    }
     lastDrawRef.current = { x: mx, y: my };
 
     ctx.clearRect(0, 0, w, h);
@@ -83,99 +127,82 @@ export default function InteractiveGrid({
     for (let col = 0; col < cols; col++) {
       points[col] = [];
       for (let row = 0; row < rows; row++) {
-        points[col][row] = getDisplaced(col * spacing, row * spacing, mx, my);
+        points[col][row] = getDisplaced(col * spacing, row * spacing, mx, my, now);
       }
     }
 
-    // Draw grid lines — base opacity higher for visibility
+    // Draw base grid lines
     ctx.strokeStyle = borderColor;
     ctx.lineWidth = 0.5;
+    ctx.globalAlpha = 0.12;
 
-    // Horizontal lines
     for (let row = 0; row < rows; row++) {
       ctx.beginPath();
       for (let col = 0; col < cols; col++) {
         const p = points[col][row];
-        if (col === 0) {
-          ctx.moveTo(p.x, p.y);
-        } else {
-          ctx.lineTo(p.x, p.y);
-        }
+        if (col === 0) ctx.moveTo(p.x, p.y);
+        else ctx.lineTo(p.x, p.y);
       }
-      ctx.globalAlpha = 0.12;
       ctx.stroke();
     }
 
-    // Vertical lines
     for (let col = 0; col < cols; col++) {
       ctx.beginPath();
       for (let row = 0; row < rows; row++) {
         const p = points[col][row];
-        if (row === 0) {
-          ctx.moveTo(p.x, p.y);
-        } else {
-          ctx.lineTo(p.x, p.y);
-        }
+        if (row === 0) ctx.moveTo(p.x, p.y);
+        else ctx.lineTo(p.x, p.y);
       }
-      ctx.globalAlpha = 0.12;
       ctx.stroke();
     }
 
-    // Near-cursor: thicker lines for "glow" effect
-    if (mx > -500) {
-      ctx.lineWidth = 1.5;
-      const glowRadius = influenceRadius * 0.7;
-      const gr2 = glowRadius * glowRadius;
+    // Glow segments near cursor and waves
+    ctx.lineWidth = 1.5;
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols - 1; col++) {
+        const p1 = points[col][row];
+        const p2 = points[col + 1][row];
+        const avgFactor = (p1.factor + p2.factor) / 2;
+        if (avgFactor > 0.01) {
+          ctx.globalAlpha = avgFactor * 0.35;
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+        }
+      }
+    }
+    for (let col = 0; col < cols; col++) {
+      for (let row = 0; row < rows - 1; row++) {
+        const p1 = points[col][row];
+        const p2 = points[col][row + 1];
+        const avgFactor = (p1.factor + p2.factor) / 2;
+        if (avgFactor > 0.01) {
+          ctx.globalAlpha = avgFactor * 0.35;
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+        }
+      }
+    }
 
-      // Horizontal glow segments
+    // Intersection dots
+    ctx.fillStyle = borderColor;
+    for (let col = 0; col < cols; col++) {
       for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols - 1; col++) {
-          const p1 = points[col][row];
-          const p2 = points[col + 1][row];
-          const avgFactor = (p1.factor + p2.factor) / 2;
-          if (avgFactor > 0.01) {
-            ctx.globalAlpha = avgFactor * 0.35;
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      // Vertical glow segments
-      for (let col = 0; col < cols; col++) {
-        for (let row = 0; row < rows - 1; row++) {
-          const p1 = points[col][row];
-          const p2 = points[col][row + 1];
-          const avgFactor = (p1.factor + p2.factor) / 2;
-          if (avgFactor > 0.01) {
-            ctx.globalAlpha = avgFactor * 0.35;
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      // Intersection dots near cursor
-      ctx.fillStyle = borderColor;
-      for (let col = 0; col < cols; col++) {
-        for (let row = 0; row < rows; row++) {
-          const p = points[col][row];
-          if (p.factor > 0.05) {
-            ctx.globalAlpha = p.factor * 0.4;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, 1.2 + p.factor * 3, 0, Math.PI * 2);
-            ctx.fill();
-          }
+        const p = points[col][row];
+        if (p.factor > 0.05) {
+          ctx.globalAlpha = p.factor * 0.4;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 1.2 + p.factor * 3, 0, Math.PI * 2);
+          ctx.fill();
         }
       }
     }
 
     ctx.globalAlpha = 1;
-  }, [spacing, influenceRadius, getDisplaced]);
+  }, [spacing, getDisplaced]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -186,22 +213,19 @@ export default function InteractiveGrid({
 
     let running = true;
 
-    // Listen on document so mouse works even over text/buttons
     function onMouseMove(e: MouseEvent) {
       const rect = canvas!.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      // Only track if mouse is within or near the canvas bounds
       if (x >= -influenceRadius && x <= rect.width + influenceRadius &&
           y >= -influenceRadius && y <= rect.height + influenceRadius) {
         mouseRef.current = { x, y };
-
         if (!isActiveRef.current) {
           isActiveRef.current = true;
           loop();
         }
-      } else if (isActiveRef.current) {
+      } else if (isActiveRef.current && wavesRef.current.length === 0) {
         mouseRef.current = { x: -1000, y: -1000 };
         lastDrawRef.current = { x: -9999, y: -9999 };
         isActiveRef.current = false;
@@ -211,20 +235,42 @@ export default function InteractiveGrid({
     function onMouseLeave() {
       mouseRef.current = { x: -1000, y: -1000 };
       lastDrawRef.current = { x: -9999, y: -9999 };
-      isActiveRef.current = false;
+      if (wavesRef.current.length === 0) {
+        isActiveRef.current = false;
+      }
+    }
+
+    // Listen for wave events from shapes
+    function onWaveEvent(e: Event) {
+      const detail = (e as CustomEvent).detail;
+      wavesRef.current.push({
+        x: detail.x,
+        y: detail.y,
+        time: performance.now(),
+        intensity: Math.min(detail.intensity, 3),
+      });
+      if (!isActiveRef.current) {
+        isActiveRef.current = true;
+        loop();
+      }
     }
 
     function loop() {
       if (!running || !isActiveRef.current) return;
       draw();
-      rafRef.current = requestAnimationFrame(loop);
+
+      // Keep running if waves are active
+      if (wavesRef.current.length > 0 || mouseRef.current.x > -500) {
+        rafRef.current = requestAnimationFrame(loop);
+      } else {
+        isActiveRef.current = false;
+      }
     }
 
-    // Initial static draw
     draw();
-
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseleave", onMouseLeave);
+    document.addEventListener("grid-wave", onWaveEvent);
 
     const resizeObserver = new ResizeObserver(() => {
       lastDrawRef.current = { x: -9999, y: -9999 };
@@ -238,6 +284,7 @@ export default function InteractiveGrid({
       cancelAnimationFrame(rafRef.current);
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseleave", onMouseLeave);
+      document.removeEventListener("grid-wave", onWaveEvent);
       resizeObserver.disconnect();
     };
   }, [draw, influenceRadius]);

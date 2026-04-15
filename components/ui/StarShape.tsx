@@ -8,16 +8,18 @@ interface StarShapeProps {
 }
 
 export default function StarShape({ className = "" }: StarShapeProps) {
-  const elRef = useRef<HTMLDivElement>(null);
+  const outerRef = useRef<HTMLDivElement>(null);
+  const spinRef = useRef<HTMLDivElement>(null);
   const cooldownRef = useRef(false);
 
   const handleMouseEnter = useCallback(() => {
-    const el = elRef.current;
-    if (!el || cooldownRef.current) return;
+    const outer = outerRef.current;
+    const spin = spinRef.current;
+    if (!outer || cooldownRef.current) return;
 
     // Dispatch grid wave
-    const rect = el.getBoundingClientRect();
-    const section = el.closest("section");
+    const rect = outer.getBoundingClientRect();
+    const section = outer.closest("section");
     if (section) {
       const sectionRect = section.getBoundingClientRect();
       document.dispatchEvent(new CustomEvent("grid-wave", {
@@ -29,31 +31,45 @@ export default function StarShape({ className = "" }: StarShapeProps) {
       }));
     }
 
-    // Color fill + bouncy scale
-    el.style.transition = "transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.15s ease-out";
-    el.style.transform = "scale(1.4)";
-    el.style.color = "var(--pop-turquoise, #00C9A7)";
+    // Big bouncy scale with overshoot
+    outer.style.transition = "transform 0.5s cubic-bezier(0.34, 2.2, 0.64, 1), color 0.15s ease-out";
+    outer.style.transform = "scale(1.8)";
+    outer.style.color = "var(--pop-turquoise, #00C9A7)";
+
+    // Spin
+    if (spin) {
+      spin.style.transition = "rotate 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)";
+      spin.style.rotate = "360deg";
+    }
 
     cooldownRef.current = true;
     setTimeout(() => { cooldownRef.current = false; }, 400);
   }, []);
 
   const handleMouseLeave = useCallback(() => {
-    const el = elRef.current;
-    if (!el) return;
-    el.style.transition = "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease-out";
-    el.style.transform = "";
-    el.style.color = "";
+    const outer = outerRef.current;
+    const spin = spinRef.current;
+    if (!outer) return;
+    outer.style.transition = "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease-out";
+    outer.style.transform = "";
+    outer.style.color = "";
+
+    if (spin) {
+      spin.style.transition = "rotate 0.4s cubic-bezier(0.16, 1, 0.3, 1)";
+      spin.style.rotate = "0deg";
+    }
   }, []);
 
   return (
     <div
-      ref={elRef}
+      ref={outerRef}
       className={`cursor-default ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <Star className="w-8 h-8" strokeWidth={3} fill="currentColor" />
+      <div ref={spinRef}>
+        <Star className="w-8 h-8" strokeWidth={3} />
+      </div>
     </div>
   );
 }

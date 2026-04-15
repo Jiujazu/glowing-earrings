@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Image from "next/image";
 import { getAllCourses } from "@/lib/course-utils";
 import CourseFilters from "@/components/course/CourseFilters";
 import NewsletterCTA from "@/components/layout/NewsletterCTA";
@@ -33,50 +34,70 @@ export default function Home() {
         </WaveShape>
 
         <Container size="wide" className="relative">
-          <div className="max-w-4xl">
-            <ScrollReveal delay={0} duration={600}>
-              <div className={`inline-block px-4 py-2 bg-[var(--pop-turquoise)] border-4 border-[var(--neo-border)] text-black text-sm ${LABEL} mb-8 -rotate-2`}
-                style={{ boxShadow: '4px 4px 0px 0px var(--neo-shadow-color)' }}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Left: Hero image */}
+            <ScrollReveal delay={0} duration={700} direction="left">
+              <div
+                className="border-4 border-[var(--neo-border)] -rotate-2 overflow-hidden max-w-sm mx-auto md:max-w-none"
+                style={{ boxShadow: '8px 8px 0px 0px var(--neo-shadow-color)' }}
               >
-                The Creative AI Academy
+                <Image
+                  src="/hero-glowing-earrings.jpg"
+                  alt="A Girl with Glowing Earrings — KI-Kunstwerk"
+                  width={600}
+                  height={750}
+                  className="w-full h-auto"
+                  priority
+                />
               </div>
             </ScrollReveal>
 
-            <ScrollReveal delay={100} duration={600}>
-              <h1 className={`${HEADING_DISPLAY} text-[var(--text-primary)] leading-[0.9]`}>
-                <span className="block text-4xl sm:text-6xl lg:text-8xl">
-                  Lern KI
-                </span>
-                <span className="block text-4xl sm:text-6xl lg:text-8xl mt-2">
-                  <span className="inline-block bg-[var(--accent)] text-white px-4 py-1 border-4 border-[var(--neo-border)] rotate-1"
+            {/* Right: Text content */}
+            <div>
+              <ScrollReveal delay={100} duration={600}>
+                <div className={`inline-block px-4 py-2 bg-[var(--pop-turquoise)] border-4 border-[var(--neo-border)] text-black text-sm ${LABEL} mb-8 -rotate-2`}
+                  style={{ boxShadow: '4px 4px 0px 0px var(--neo-shadow-color)' }}
+                >
+                  The Creative AI Academy
+                </div>
+              </ScrollReveal>
+
+              <ScrollReveal delay={200} duration={600}>
+                <h1 className={`${HEADING_DISPLAY} text-[var(--text-primary)] leading-[0.9]`}>
+                  <span className="block text-4xl sm:text-5xl lg:text-7xl">
+                    Lern KI
+                  </span>
+                  <span className="block text-4xl sm:text-5xl lg:text-7xl mt-2">
+                    <span className="inline-block bg-[var(--accent)] text-white px-3 py-1 border-4 border-[var(--neo-border)] rotate-1"
+                      style={{ boxShadow: '6px 6px 0px 0px var(--neo-shadow-color)' }}
+                    >
+                      Spielerisch.
+                    </span>
+                  </span>
+                </h1>
+              </ScrollReveal>
+
+              <ScrollReveal delay={300} duration={600}>
+                <p className="text-base sm:text-lg text-[var(--text-primary)] max-w-md mt-6 mb-8 leading-relaxed font-medium">
+                  Kurse zu generativer KI von Julian van Dieken. Für Normalsterbliche, Enthusiasten und Voll-Profis. Kostenlos.
+                </p>
+              </ScrollReveal>
+
+              {courses.length > 0 && (
+                <ScrollReveal delay={400} duration={600}>
+                  <a
+                    href="#kurse"
+                    className="group inline-flex items-center gap-3 px-7 py-3.5 text-base font-black uppercase tracking-wide text-white bg-[var(--accent)] border-4 border-[var(--neo-border)] transition-all duration-100 hover:-translate-y-1 press-feedback"
                     style={{ boxShadow: '6px 6px 0px 0px var(--neo-shadow-color)' }}
                   >
-                    Spielerisch.
-                  </span>
-                </span>
-              </h1>
-            </ScrollReveal>
-
-            <ScrollReveal delay={200} duration={600}>
-              <p className="text-lg sm:text-xl text-[var(--text-primary)] max-w-lg mt-8 mb-10 leading-relaxed font-medium">
-                Kurse zu generativer KI von Julian van Dieken. Für Normalsterbliche, Enthusiasten und Voll-Profis. Kostenlos.
-              </p>
-            </ScrollReveal>
-
-            {courses.length > 0 && (
-              <ScrollReveal delay={300} duration={600}>
-                <a
-                  href="#kurse"
-                  className="group inline-flex items-center gap-3 px-8 py-4 text-lg font-black uppercase tracking-wide text-white bg-[var(--accent)] border-4 border-[var(--neo-border)] transition-all duration-100 hover:-translate-y-1 press-feedback"
-                  style={{ boxShadow: '6px 6px 0px 0px var(--neo-shadow-color)' }}
-                >
-                  Kurse entdecken
-                  <span className="inline-block transition-transform duration-100 group-hover:translate-y-0.5 text-xl">
-                    ↓
-                  </span>
-                </a>
-              </ScrollReveal>
-            )}
+                    Kurse entdecken
+                    <span className="inline-block transition-transform duration-100 group-hover:translate-y-0.5 text-xl">
+                      ↓
+                    </span>
+                  </a>
+                </ScrollReveal>
+              )}
+            </div>
           </div>
         </Container>
       </section>

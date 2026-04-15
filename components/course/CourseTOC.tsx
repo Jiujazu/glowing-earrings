@@ -36,7 +36,7 @@ export default function CourseTOC({ modules }: CourseTOCProps) {
                 <li key={mod.id}>
                   <button
                     onClick={() => scrollTo(mod.id)}
-                    className="flex items-center gap-3 w-full text-left py-2 px-2 -mx-2 transition-colors hover:bg-[var(--course-primary)]/8 group"
+                    className="flex items-center gap-3 w-full text-left py-3 px-2 -mx-2 transition-colors hover:bg-[var(--course-primary)]/8 group"
                   >
                     <span
                       className="flex items-center justify-center w-7 h-7 text-[11px] font-black font-heading flex-shrink-0 border-2 border-[var(--course-text)]/15 text-[var(--course-text-muted)] group-hover:border-[var(--course-primary)] group-hover:text-[var(--course-primary)] group-hover:bg-[var(--course-primary)]/10 transition-colors"

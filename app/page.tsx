@@ -44,10 +44,10 @@ export default function Home() {
 
             <ScrollReveal delay={100} duration={600}>
               <h1 className={`${HEADING_DISPLAY} text-[var(--text-primary)] leading-[0.9]`}>
-                <span className="block text-5xl sm:text-7xl lg:text-8xl">
+                <span className="block text-4xl sm:text-6xl lg:text-8xl">
                   Lern KI
                 </span>
-                <span className="block text-5xl sm:text-7xl lg:text-8xl mt-2">
+                <span className="block text-4xl sm:text-6xl lg:text-8xl mt-2">
                   <span className="inline-block bg-[var(--accent)] text-white px-4 py-1 border-4 border-[var(--neo-border)] rotate-1"
                     style={{ boxShadow: '6px 6px 0px 0px var(--neo-shadow-color)' }}
                   >

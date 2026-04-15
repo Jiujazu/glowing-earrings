@@ -117,7 +117,8 @@ export default function InteractiveGrid({
     ctx.clearRect(0, 0, w, h);
 
     const style = getComputedStyle(canvas);
-    const borderColor = style.getPropertyValue("--neo-border").trim() || "#000";
+    const isDark = document.documentElement.classList.contains("dark");
+    const borderColor = style.getPropertyValue("--neo-border").trim() || (isDark ? "#FFF" : "#000");
 
     const cols = Math.ceil(w / spacing) + 2;
     const rows = Math.ceil(h / spacing) + 2;

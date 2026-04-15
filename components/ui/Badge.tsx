@@ -14,13 +14,13 @@ const variantClasses: Record<BadgeVariant, string> = {
   accent:
     "bg-[var(--accent)] text-white border-2 border-[var(--neo-border)]",
   brand:
-    "bg-[var(--pop-turquoise)] text-black border-2 border-[var(--neo-border)]",
+    "bg-[var(--pop-turquoise)] text-[var(--foreground)] border-2 border-[var(--neo-border)]",
   muted:
     "bg-[var(--surface)] text-[var(--text-primary)] border-2 border-[var(--neo-border)]",
   pink:
     "bg-[var(--pop-pink)] text-white border-2 border-[var(--neo-border)]",
   turquoise:
-    "bg-[var(--pop-turquoise)] text-black border-2 border-[var(--neo-border)]",
+    "bg-[var(--pop-turquoise)] text-[var(--foreground)] border-2 border-[var(--neo-border)]",
   course:
     "text-[var(--course-text)] border border-[var(--course-text)]/20",
 };

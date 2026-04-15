@@ -37,7 +37,7 @@ export default function CourseCard({ meta, totalModules }: { meta: CourseMeta; t
         />
       )}
 
-      <div className="p-6">
+      <div className="p-4 sm:p-6">
         <Link
           href={`/courses/${meta.slug}`}
           className="group block mb-4"

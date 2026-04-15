@@ -65,7 +65,7 @@ export default function ThemeToggle() {
   if (!mounted) {
     return (
       <button
-        className="p-2 border-2 border-transparent"
+        className="p-2.5 border-2 border-transparent"
         aria-hidden="true"
       >
         <span className="block w-[18px] h-[18px]" />
@@ -76,7 +76,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 text-[var(--text-primary)] hover:text-[var(--accent)] hover:bg-[var(--surface-tinted)] border-2 border-transparent hover:border-[var(--neo-border)] transition-all duration-100"
+      className="p-2.5 text-[var(--text-primary)] hover:text-[var(--accent)] hover:bg-[var(--surface-tinted)] border-2 border-transparent hover:border-[var(--neo-border)] transition-all duration-100"
       aria-label={
         isDark
           ? "Zum hellen Modus wechseln"

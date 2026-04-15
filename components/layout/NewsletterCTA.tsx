@@ -74,10 +74,10 @@ export default function NewsletterCTA({
         style={{ boxShadow: '8px 8px 0px 0px var(--neo-shadow-color)' }}
       >
         <p className="text-4xl mb-2">🎉</p>
-        <p className="font-heading font-black text-xl text-black uppercase">
+        <p className="font-heading font-black text-xl text-[var(--text-primary)] uppercase">
           Willkommen an Bord!
         </p>
-        <p className="text-sm font-bold text-black/70 mt-1">
+        <p className="text-sm font-bold text-[var(--text-primary)]/70 mt-1">
           {message}
         </p>
       </div>

@@ -51,7 +51,7 @@ export default function MobileNav({ open, onClose, links }: MobileNavProps) {
               key={link.href}
               href={link.href}
               onClick={onClose}
-              className="text-lg font-bold uppercase tracking-wide text-[var(--text-primary)] border-4 border-[var(--neo-border)] px-4 py-3 hover:bg-[var(--pop-turquoise)] hover:text-black transition-all duration-100 press-feedback"
+              className="text-lg font-bold uppercase tracking-wide text-[var(--text-primary)] border-4 border-[var(--neo-border)] px-4 py-3 hover:bg-[var(--pop-turquoise)] hover:text-[var(--foreground)] transition-all duration-100 press-feedback"
               style={{ boxShadow: '4px 4px 0px 0px var(--neo-shadow-color)' }}
             >
               {link.label}

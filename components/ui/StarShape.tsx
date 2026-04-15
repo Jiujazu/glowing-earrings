@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useCallback } from "react";
-import { Star } from "lucide-react";
+import LogoIcon from "@/components/ui/LogoIcon";
 
 interface StarShapeProps {
   className?: string;
@@ -35,9 +35,9 @@ export default function StarShape({ className = "" }: StarShapeProps) {
     outer.style.transition = "transform 0.5s cubic-bezier(0.34, 2.2, 0.64, 1)";
     outer.style.transform = "scale(1.8)";
 
-    // Fill star interior (keep stroke as-is)
-    const paths = outer.querySelectorAll("svg polygon, svg path");
-    paths.forEach(p => (p as SVGElement).setAttribute("fill", "var(--pop-turquoise, #00C9A7)"));
+    // Fill pearl interior with turquoise (keep stroke as-is)
+    const pearl = outer.querySelector("svg path:nth-of-type(2)") as SVGElement | null;
+    if (pearl) pearl.setAttribute("fill", "var(--pop-turquoise, #00C9A7)");
 
     // Spin
     if (spin) {
@@ -56,9 +56,9 @@ export default function StarShape({ className = "" }: StarShapeProps) {
     outer.style.transition = "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)";
     outer.style.transform = "";
 
-    // Reset star interior fill
-    const paths = outer.querySelectorAll("svg polygon, svg path");
-    paths.forEach(p => (p as SVGElement).setAttribute("fill", "none"));
+    // Reset pearl fill
+    const pearl = outer.querySelector("svg path:nth-of-type(2)") as SVGElement | null;
+    if (pearl) pearl.setAttribute("fill", "none");
 
     if (spin) {
       spin.style.transition = "rotate 0.4s cubic-bezier(0.16, 1, 0.3, 1)";
@@ -74,7 +74,7 @@ export default function StarShape({ className = "" }: StarShapeProps) {
       onMouseLeave={handleMouseLeave}
     >
       <div ref={spinRef}>
-        <Star className="w-8 h-8" strokeWidth={3} />
+        <LogoIcon className="w-8 h-8" strokeWidth={3} />
       </div>
     </div>
   );

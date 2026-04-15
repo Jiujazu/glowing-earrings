@@ -92,7 +92,7 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
         {/* Synthesis */}
         <ScrollReveal>
           <h2
-            className="font-heading text-2xl sm:text-3xl font-bold mb-6"
+            className="font-heading text-2xl sm:text-3xl font-black mb-6 uppercase tracking-tight"
             style={{ fontFamily: "var(--course-heading-font, var(--font-heading))" }}
           >
             Das nimmst du mit
@@ -177,7 +177,7 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
           <ScrollReveal>
             <div className="mb-12">
               <h3
-                className="font-heading text-xl font-bold mb-4"
+                className="font-heading text-xl font-black mb-4 uppercase tracking-tight"
                 style={{ fontFamily: "var(--course-heading-font, var(--font-heading))" }}
               >
                 Weiter lernen

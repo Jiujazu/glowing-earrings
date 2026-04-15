@@ -30,34 +30,35 @@ export default function CourseParallax() {
   return (
     <div className="parallax-bg overflow-hidden" aria-hidden="true">
       <div ref={containerRef}>
+        {/* Geometric shapes instead of blurry circles */}
         <div
-          className="absolute rounded-full blur-[100px] opacity-20"
-          style={{
-            width: 400,
-            height: 400,
-            top: "10%",
-            left: "-10%",
-            background: "var(--course-primary)",
-          }}
-        />
-        <div
-          className="absolute rounded-full blur-[120px] opacity-15"
+          className="absolute opacity-[0.04] border-4 border-[var(--course-primary)]"
           style={{
             width: 300,
             height: 300,
-            top: "40%",
-            right: "-5%",
-            background: "var(--course-accent)",
+            top: "8%",
+            left: "-8%",
+            transform: "rotate(12deg)",
           }}
         />
         <div
-          className="absolute rounded-full blur-[80px] opacity-10"
+          className="absolute opacity-[0.04] border-4 border-[var(--course-accent)]"
+          style={{
+            width: 200,
+            height: 200,
+            top: "45%",
+            right: "-3%",
+            transform: "rotate(-8deg)",
+          }}
+        />
+        <div
+          className="absolute opacity-[0.03] border-4 border-[var(--course-primary)]"
           style={{
             width: 250,
             height: 250,
-            top: "70%",
-            left: "20%",
-            background: "var(--course-primary)",
+            top: "75%",
+            left: "15%",
+            transform: "rotate(6deg)",
           }}
         />
       </div>

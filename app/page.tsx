@@ -8,6 +8,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import InteractiveGrid from "@/components/ui/InteractiveGrid";
 import Parallax from "@/components/ui/Parallax";
 import WaveShape from "@/components/ui/WaveShape";
+import StarShape from "@/components/ui/StarShape";
 import { Star, Sparkles, Zap } from "lucide-react";
 import { HEADING, HEADING_DISPLAY, LABEL } from "@/lib/typography";
 
@@ -31,9 +32,7 @@ export default function Home() {
             <div className="w-full h-full bg-[var(--accent)] border-4 border-[var(--neo-border)]"
               style={{ boxShadow: '3px 3px 0px 0px var(--neo-shadow-color)' }} />
           </WaveShape>
-          <WaveShape className="absolute top-1/3 right-[18%] hidden lg:block pointer-events-auto">
-            <Star className="w-8 h-8 text-[var(--neo-border)]" strokeWidth={3} />
-          </WaveShape>
+          <StarShape className="absolute top-1/3 right-[18%] hidden lg:block pointer-events-auto" />
         </Parallax>
 
         {/* Content layers — image and text at different parallax speeds */}

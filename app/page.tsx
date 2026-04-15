@@ -5,6 +5,7 @@ import NewsletterCTA from "@/components/layout/NewsletterCTA";
 import Container from "@/components/ui/Container";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import InteractiveGrid from "@/components/ui/InteractiveGrid";
+import FloatingShape from "@/components/ui/FloatingShape";
 import { Star, Sparkles, Zap } from "lucide-react";
 
 export default function Home() {
@@ -17,13 +18,21 @@ export default function Home() {
         {/* Interactive grid — dots inflate around cursor */}
         <InteractiveGrid />
 
-        {/* Decorative floating shapes */}
-        <div className="absolute top-12 right-8 sm:right-16 w-16 h-16 bg-[var(--pop-turquoise)] border-4 border-[var(--neo-border)] rotate-12 hidden sm:block"
-          style={{ boxShadow: '4px 4px 0px 0px var(--neo-shadow-color)' }} />
-        <div className="absolute bottom-16 left-8 sm:left-12 w-12 h-12 bg-[var(--accent)] border-4 border-[var(--neo-border)] -rotate-6 hidden sm:block"
-          style={{ boxShadow: '3px 3px 0px 0px var(--neo-shadow-color)' }} />
-        <div className="absolute top-32 left-[15%] hidden lg:block">
-          <Star className="w-8 h-8 text-[var(--neo-border)] animate-spin-slow" strokeWidth={3} />
+        {/* Pushable floating shapes — react to cursor, bounce off edges */}
+        <div className="hidden sm:block">
+          <FloatingShape initialX={700} initialY={80} size={64}>
+            <div className="w-full h-full bg-[var(--pop-turquoise)] border-4 border-[var(--neo-border)]"
+              style={{ boxShadow: '4px 4px 0px 0px var(--neo-shadow-color)' }} />
+          </FloatingShape>
+          <FloatingShape initialX={80} initialY={320} size={48} pushForce={10}>
+            <div className="w-full h-full bg-[var(--accent)] border-4 border-[var(--neo-border)]"
+              style={{ boxShadow: '3px 3px 0px 0px var(--neo-shadow-color)' }} />
+          </FloatingShape>
+          <FloatingShape initialX={200} initialY={60} size={36} pushForce={12} className="hidden lg:block">
+            <div className="w-full h-full flex items-center justify-center">
+              <Star className="w-8 h-8 text-[var(--neo-border)]" strokeWidth={3} />
+            </div>
+          </FloatingShape>
         </div>
 
         <Container size="wide" className="relative">

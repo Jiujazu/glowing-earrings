@@ -120,12 +120,14 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
         {outro.takeaway && outro.takeaway.length > 0 && (
           <ScrollReveal>
             <div className="bg-[var(--course-surface)] p-5 mb-8 border-4 border-[var(--course-text)]/15">
-              <h3 className="font-heading font-bold text-lg mb-3">Checkliste</h3>
-              <ul className="space-y-2">
+              <h3 className="font-heading font-black text-lg mb-4 uppercase tracking-wide">Checkliste</h3>
+              <ul className="space-y-3">
                 {outro.takeaway.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-base">
-                    <span>{item.emoji}</span>
-                    <span>{item.text}</span>
+                  <li key={i} className="flex items-start gap-3 text-base">
+                    <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center border-2 border-[var(--course-text)]/20 bg-[var(--course-primary)]/10 text-sm">
+                      {item.emoji}
+                    </span>
+                    <span className="pt-1">{item.text}</span>
                   </li>
                 ))}
               </ul>

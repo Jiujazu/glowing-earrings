@@ -52,10 +52,12 @@ export default function SaveButton() {
 
       clearTimeout(timeout);
 
-      if (!response.ok && response.status >= 500) {
-        throw new Error(`Server error: ${response.status}`);
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error(`Server-Fehler (${response.status})`);
       }
-      const data = await response.json();
 
       if (data.success) {
         setSaveState("success");
@@ -71,11 +73,12 @@ export default function SaveButton() {
         setErrorMessage(data.message || "Speichern fehlgeschlagen.");
         toast?.showToast(data.message || "Speichern fehlgeschlagen", "error");
       }
-    } catch {
+    } catch (err) {
       setSaveState("error");
-      setErrorMessage("Netzwerkfehler. Bitte erneut versuchen.");
+      const msg = err instanceof Error ? err.message : "Netzwerkfehler";
+      setErrorMessage(`${msg}. Bitte erneut versuchen.`);
       if (!isAutosave) {
-        toast?.showToast("Netzwerkfehler", "error");
+        toast?.showToast(msg, "error");
       }
     }
   }, [courseSlug, pendingChanges, clearChanges, editorToken, toast]);

@@ -12,7 +12,9 @@ export async function validateEditorAuth(request: NextRequest): Promise<NextResp
     try {
       const originHost = new URL(origin).hostname;
       const siteHost = new URL(siteUrl).hostname;
-      if (originHost !== siteHost && !originHost.endsWith(`.${siteHost}`)) {
+      // Allow exact match, subdomains, and vercel.app deployments
+      const isVercel = originHost.endsWith(".vercel.app");
+      if (!isVercel && originHost !== siteHost && !originHost.endsWith(`.${siteHost}`)) {
         return NextResponse.json(
           { success: false, message: "Ungültiger Origin." },
           { status: 403 }

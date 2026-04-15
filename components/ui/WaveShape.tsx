@@ -11,6 +11,7 @@ export default function WaveShape({ children, className = "" }: WaveShapeProps) 
   const elRef = useRef<HTMLDivElement>(null);
   const lastMoveRef = useRef({ x: 0, y: 0, time: 0 });
   const cooldownRef = useRef(false);
+  const tiltRAF = useRef(0);
 
   const handleMouseEnter = useCallback((e: React.MouseEvent) => {
     const el = elRef.current;
@@ -40,34 +41,55 @@ export default function WaveShape({ children, className = "" }: WaveShapeProps) 
       }));
     }
 
-    // Vibrate the shape — intensity controls amplitude
-    const amp = Math.round(1 + intensity * 2);
-    el.style.animation = "none";
-    // Force reflow
-    void el.offsetHeight;
-    el.style.setProperty("--vx", `${(Math.random() - 0.5) * amp}px`);
-    el.style.setProperty("--vy", `${(Math.random() - 0.5) * amp}px`);
-    el.style.setProperty("--vr", `${(Math.random() - 0.5) * amp}deg`);
-    el.style.animation = `neo-vibrate ${0.2 + intensity * 0.15}s ease-out`;
+    // Scale + lift effect (shadow grows, shape scales up)
+    const scale = 1 + intensity * 0.06;
+    const shadowOffset = Math.round(4 + intensity * 4);
+    el.style.transition = "transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease-out";
+    el.style.transform = `scale(${scale})`;
+    el.style.filter = `drop-shadow(${shadowOffset}px ${shadowOffset}px 0px var(--neo-shadow-color, rgba(0,0,0,0.8)))`;
 
     // Cooldown to prevent spam
     cooldownRef.current = true;
     setTimeout(() => { cooldownRef.current = false; }, 400);
   }, []);
 
+  const handleMouseLeave = useCallback(() => {
+    const el = elRef.current;
+    if (!el) return;
+    cancelAnimationFrame(tiltRAF.current);
+    el.style.transition = "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease-out";
+    el.style.transform = "";
+    el.style.filter = "";
+  }, []);
+
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     lastMoveRef.current = { x: e.clientX, y: e.clientY, time: performance.now() };
+
+    const el = elRef.current;
+    if (!el) return;
+
+    // 3D magnetic tilt based on cursor position within element
+    const rect = el.getBoundingClientRect();
+    const cx = (e.clientX - rect.left) / rect.width - 0.5;  // -0.5 to 0.5
+    const cy = (e.clientY - rect.top) / rect.height - 0.5;
+
+    cancelAnimationFrame(tiltRAF.current);
+    tiltRAF.current = requestAnimationFrame(() => {
+      const rotateY = cx * 20;  // max ±10°
+      const rotateX = -cy * 20; // max ±10°
+      el.style.transition = "transform 0.1s ease-out";
+      el.style.transform = `perspective(200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.08)`;
+    });
   }, []);
 
   return (
     <div
       ref={elRef}
       className={`cursor-default ${className}`}
+      style={{ transformStyle: "preserve-3d" }}
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
-      onAnimationEnd={(e) => {
-        (e.currentTarget as HTMLDivElement).style.animation = "";
-      }}
+      onMouseLeave={handleMouseLeave}
     >
       {children}
     </div>

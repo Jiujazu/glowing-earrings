@@ -94,8 +94,9 @@ export default function ScrollToTop({ modules }: ScrollToTopProps) {
         title="Nach oben"
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-          <line x1="12" y1="19" x2="12" y2="5" />
-          <polyline points="5 12 12 5 19 12" />
+          <line x1="7" y1="4" x2="17" y2="4" />
+          <line x1="12" y1="20" x2="12" y2="8" />
+          <polyline points="7 13 12 8 17 13" />
         </svg>
       </button>
       <button
@@ -105,8 +106,9 @@ export default function ScrollToTop({ modules }: ScrollToTopProps) {
         title="Zum Ende"
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-          <line x1="12" y1="5" x2="12" y2="19" />
-          <polyline points="19 12 12 19 5 12" />
+          <line x1="7" y1="20" x2="17" y2="20" />
+          <line x1="12" y1="4" x2="12" y2="16" />
+          <polyline points="17 11 12 16 7 11" />
         </svg>
       </button>
     </div>

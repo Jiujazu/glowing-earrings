@@ -19,15 +19,16 @@ interface InteractiveGridProps {
 export default function InteractiveGrid({
   className = "",
   spacing = 40,
-  influenceRadius = 200,
+  influenceRadius = 300,
   maxDisplacement = 24,
 }: InteractiveGridProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const rafRef = useRef<number>(0);
-  const lastDrawRef = useRef({ x: -1000, y: -1000 });
+  const lastDrawRef = useRef({ x: -9999, y: -9999 });
   const isActiveRef = useRef(false);
   const wavesRef = useRef<Wave[]>([]);
+  const cachedRectRef = useRef<DOMRect | null>(null);
 
   const getDisplaced = useCallback(
     (gx: number, gy: number, mx: number, my: number, now: number) => {
@@ -215,7 +216,8 @@ export default function InteractiveGrid({
     let running = true;
 
     function onMouseMove(e: MouseEvent) {
-      const rect = canvas!.getBoundingClientRect();
+      const rect = cachedRectRef.current;
+      if (!rect) return;
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
@@ -268,12 +270,14 @@ export default function InteractiveGrid({
       }
     }
 
+    cachedRectRef.current = canvas.getBoundingClientRect();
     draw();
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseleave", onMouseLeave);
     document.addEventListener("grid-wave", onWaveEvent);
 
     const resizeObserver = new ResizeObserver(() => {
+      cachedRectRef.current = canvas.getBoundingClientRect();
       lastDrawRef.current = { x: -9999, y: -9999 };
       draw();
     });

@@ -106,15 +106,6 @@ export default function InteractiveGrid({
     // Prune expired waves
     wavesRef.current = wavesRef.current.filter(w => (now - w.time) < 2000);
 
-    // Skip redraw if nothing is happening
-    const hasWaves = wavesRef.current.length > 0;
-    if (!hasWaves) {
-      const ddx = mx - lastDrawRef.current.x;
-      const ddy = my - lastDrawRef.current.y;
-      if (ddx * ddx + ddy * ddy < 2) return;
-    }
-    lastDrawRef.current = { x: mx, y: my };
-
     ctx.clearRect(0, 0, w, h);
 
     const style = getComputedStyle(canvas);

@@ -1,36 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <rect width="800" height="400" fill="#FAFAFA"/>
+  <!-- Grid pattern -->
   <defs>
-    <linearGradient id="bg4" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#0F0E17"/>
-      <stop offset="100%" stop-color="#1A1926"/>
-    </linearGradient>
+    <pattern id="grid4" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <line x1="40" y1="0" x2="40" y2="40" stroke="#000" stroke-width="0.5" opacity="0.05"/>
+      <line x1="0" y1="40" x2="40" y2="40" stroke="#000" stroke-width="0.5" opacity="0.05"/>
+    </pattern>
   </defs>
-  <rect width="800" height="400" fill="url(#bg4)"/>
-  <!-- Story arc curve -->
-  <path d="M80 320 C150 310, 200 280, 280 200 C340 140, 380 80, 440 60 C500 40, 540 60, 560 100 C600 180, 640 240, 720 300"
-        stroke="#E8A838" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>
-  <!-- Arc milestones -->
-  <circle cx="140" cy="300" r="8" fill="#E8A838" opacity="0.5"/>
-  <circle cx="280" cy="200" r="8" fill="#E8A838" opacity="0.65"/>
-  <circle cx="440" cy="60" r="10" fill="#E8A838" opacity="0.9"/>
-  <circle cx="560" cy="100" r="8" fill="#E8A838" opacity="0.7"/>
-  <circle cx="700" cy="300" r="8" fill="#E8A838" opacity="0.5"/>
-  <!-- Milestone labels -->
-  <text x="140" y="335" font-family="system-ui" font-size="11" fill="#E8A838" text-anchor="middle" opacity="0.5">Hook</text>
-  <text x="280" y="225" font-family="system-ui" font-size="11" fill="#E8A838" text-anchor="middle" opacity="0.5">Build</text>
-  <text x="440" y="45" font-family="system-ui" font-size="12" fill="#E8A838" text-anchor="middle" opacity="0.7" font-weight="600">Climax</text>
-  <text x="560" y="85" font-family="system-ui" font-size="11" fill="#E8A838" text-anchor="middle" opacity="0.5">Twist</text>
-  <text x="700" y="335" font-family="system-ui" font-size="11" fill="#E8A838" text-anchor="middle" opacity="0.5">Payoff</text>
-  <!-- Decorative story elements -->
-  <rect x="90" y="340" width="100" height="2" rx="1" fill="#E8A838" opacity="0.15"/>
-  <rect x="350" y="340" width="120" height="2" rx="1" fill="#E8A838" opacity="0.15"/>
-  <rect x="620" y="340" width="90" height="2" rx="1" fill="#E8A838" opacity="0.15"/>
-  <!-- Connecting dotted verticals -->
-  <line x1="140" y1="308" x2="140" y2="340" stroke="#E8A838" stroke-width="1" stroke-dasharray="3,3" opacity="0.3"/>
-  <line x1="440" y1="70" x2="440" y2="340" stroke="#E8A838" stroke-width="1" stroke-dasharray="3,3" opacity="0.15"/>
-  <line x1="700" y1="308" x2="700" y2="340" stroke="#E8A838" stroke-width="1" stroke-dasharray="3,3" opacity="0.3"/>
-  <!-- Ambient glow at climax -->
-  <ellipse cx="440" cy="60" rx="120" ry="80" fill="#E8A838" opacity="0.06"/>
-  <!-- Subtle coral accent -->
-  <circle cx="440" cy="60" r="16" fill="none" stroke="#E07A5F" stroke-width="1.5" opacity="0.3"/>
+  <rect width="800" height="400" fill="url(#grid4)"/>
+  <!-- Border -->
+  <rect x="2" y="2" width="796" height="396" fill="none" stroke="#000" stroke-width="4"/>
+  <!-- Story arc — thick, angular path -->
+  <polyline points="80,310 180,280 280,200 380,100 440,55 500,80 560,140 640,220 720,300"
+        stroke="#000" stroke-width="5" fill="none" stroke-linejoin="miter"/>
+  <!-- Arc milestone squares -->
+  <rect x="70" y="300" width="20" height="20" fill="#E8A838" stroke="#000" stroke-width="3"/>
+  <rect x="270" y="190" width="20" height="20" fill="#E8A838" stroke="#000" stroke-width="3"/>
+  <rect x="430" y="45" width="24" height="24" fill="#FF6B6B" stroke="#000" stroke-width="4"/>
+  <rect x="550" y="130" width="20" height="20" fill="#E8A838" stroke="#000" stroke-width="3"/>
+  <rect x="710" y="290" width="20" height="20" fill="#E8A838" stroke="#000" stroke-width="3"/>
+  <!-- Milestone label stickers -->
+  <rect x="45" y="330" width="70" height="30" fill="#E8A838" stroke="#000" stroke-width="3"/>
+  <text x="80" y="351" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#000" text-anchor="middle">HOOK</text>
+  <rect x="245" y="220" width="70" height="30" fill="#E8A838" stroke="#000" stroke-width="3"/>
+  <text x="280" y="241" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#000" text-anchor="middle">BUILD</text>
+  <rect x="400" y="10" width="100" height="35" fill="#FF6B6B" stroke="#000" stroke-width="4" transform="rotate(-3 450 28)"/>
+  <text x="450" y="35" font-family="system-ui, sans-serif" font-size="18" font-weight="900" fill="#FFF" text-anchor="middle" transform="rotate(-3 450 35)">CLIMAX</text>
+  <rect x="525" y="160" width="70" height="30" fill="#E8A838" stroke="#000" stroke-width="3"/>
+  <text x="560" y="181" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#000" text-anchor="middle">TWIST</text>
+  <rect x="685" y="320" width="80" height="30" fill="#E8A838" stroke="#000" stroke-width="3"/>
+  <text x="725" y="341" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#000" text-anchor="middle">PAYOFF</text>
+  <!-- Decorative elements -->
+  <rect x="140" y="50" width="25" height="25" fill="#E91E8C" stroke="#000" stroke-width="3" transform="rotate(15 152 62)"/>
+  <polygon points="680,60 688,80 710,80 692,92 698,114 680,100 662,114 668,92 650,80 672,80" fill="#000" stroke="#000" stroke-width="2"/>
+  <!-- Vertical dotted guide lines — thick dashes -->
+  <line x1="80" y1="320" x2="80" y2="360" stroke="#000" stroke-width="2" stroke-dasharray="6,4"/>
+  <line x1="442" y1="69" x2="442" y2="360" stroke="#000" stroke-width="2" stroke-dasharray="6,4" opacity="0.2"/>
+  <line x1="720" y1="310" x2="720" y2="360" stroke="#000" stroke-width="2" stroke-dasharray="6,4"/>
 </svg>

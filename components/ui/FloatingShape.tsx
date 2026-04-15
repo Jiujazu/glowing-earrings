@@ -17,6 +17,9 @@ interface FloatingShapeProps {
   bounceDecay?: number;
 }
 
+/** Height of the sticky navigation bar */
+const NAV_HEIGHT = 64;
+
 export default function FloatingShape({
   children,
   className = "",
@@ -55,11 +58,35 @@ export default function FloatingShape({
       return Math.max(min, Math.min(max, val));
     }
 
+    /**
+     * Get the valid movement bounds in the parent's coordinate space.
+     * Top boundary respects the nav bar, sides respect the viewport,
+     * bottom respects the parent's height.
+     */
+    function getBounds() {
+      const parentRect = parent!.getBoundingClientRect();
+
+      // How much of the parent is hidden behind the nav?
+      const navOverlap = Math.max(0, NAV_HEIGHT - parentRect.top);
+
+      // Left/right: constrain to viewport edges relative to parent
+      const leftInParent = Math.max(0, -parentRect.left);
+      const rightInParent = Math.min(parentRect.width, window.innerWidth - parentRect.left);
+
+      return {
+        minX: leftInParent + half + 2,
+        maxX: rightInParent - half - 2,
+        minY: navOverlap + half + 2,
+        maxY: parentRect.height - half - 2,
+      };
+    }
+
     function initPosition() {
-      const rect = parent!.getBoundingClientRect();
+      const parentRect = parent!.getBoundingClientRect();
+      const bounds = getBounds();
       const s = stateRef.current;
-      s.x = clamp(startX * rect.width, half + 4, rect.width - half - 4);
-      s.y = clamp(startY * rect.height, half + 4, rect.height - half - 4);
+      s.x = clamp(startX * parentRect.width, bounds.minX, bounds.maxX);
+      s.y = clamp(startY * parentRect.height, bounds.minY, bounds.maxY);
       s.initialized = true;
       applyTransform();
     }
@@ -73,7 +100,6 @@ export default function FloatingShape({
       if (!runningRef.current) return;
 
       const s = stateRef.current;
-      const rect = parent!.getBoundingClientRect();
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
 
@@ -105,16 +131,13 @@ export default function FloatingShape({
       s.x += s.vx;
       s.y += s.vy;
 
-      // Bounce off edges
-      const minX = half + 2;
-      const maxX = rect.width - half - 2;
-      const minY = half + 2;
-      const maxY = rect.height - half - 2;
+      // Bounce off bounds (viewport-aware)
+      const bounds = getBounds();
 
-      if (s.x < minX) { s.x = minX; s.vx = Math.abs(s.vx) * bounceDecay; }
-      if (s.x > maxX) { s.x = maxX; s.vx = -Math.abs(s.vx) * bounceDecay; }
-      if (s.y < minY) { s.y = minY; s.vy = Math.abs(s.vy) * bounceDecay; }
-      if (s.y > maxY) { s.y = maxY; s.vy = -Math.abs(s.vy) * bounceDecay; }
+      if (s.x < bounds.minX) { s.x = bounds.minX; s.vx = Math.abs(s.vx) * bounceDecay; }
+      if (s.x > bounds.maxX) { s.x = bounds.maxX; s.vx = -Math.abs(s.vx) * bounceDecay; }
+      if (s.y < bounds.minY) { s.y = bounds.minY; s.vy = Math.abs(s.vy) * bounceDecay; }
+      if (s.y > bounds.maxY) { s.y = bounds.maxY; s.vy = -Math.abs(s.vy) * bounceDecay; }
 
       // Rotate gently based on velocity
       s.rot += s.vx * 0.15;
@@ -139,15 +162,14 @@ export default function FloatingShape({
     }
 
     function onMouseMove(e: MouseEvent) {
-      const rect = parent!.getBoundingClientRect();
+      const parentRect = parent!.getBoundingClientRect();
       mouseRef.current = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
+        x: e.clientX - parentRect.left,
+        y: e.clientY - parentRect.top,
       };
 
       if (!stateRef.current.initialized) return;
 
-      // Check if mouse is close enough to start physics
       const s = stateRef.current;
       const dx = s.x - mouseRef.current.x;
       const dy = s.y - mouseRef.current.y;
@@ -168,13 +190,13 @@ export default function FloatingShape({
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseleave", onMouseLeave);
 
-    // Reposition on resize
+    // On resize: clamp shapes into new bounds
     const resizeObserver = new ResizeObserver(() => {
       if (!stateRef.current.initialized) return;
-      const rect = parent!.getBoundingClientRect();
+      const bounds = getBounds();
       const s = stateRef.current;
-      s.x = clamp(s.x, half + 4, rect.width - half - 4);
-      s.y = clamp(s.y, half + 4, rect.height - half - 4);
+      s.x = clamp(s.x, bounds.minX, bounds.maxX);
+      s.y = clamp(s.y, bounds.minY, bounds.maxY);
       applyTransform();
     });
     resizeObserver.observe(parent);

@@ -16,6 +16,7 @@
     "estimatedMinutes": 18,
     "difficulty": "intermediate",
     "publishedAt": "2026-04-10",
+    "coverImage": "/courses/covers/karpathy-llm-wiki.svg",
     "relatedCourses": [
       "agentic-os-context-levels"
     ],
@@ -239,7 +240,7 @@
           "id": "bookkeeping-quote",
           "type": "callout",
           "variant": "quote",
-          "title": "Die Kernerkennntnis",
+          "title": "Die Kernerkenntnis",
           "text": "\"The tedious part of maintaining a knowledge base is not the reading or the thinking — it's the bookkeeping.\""
         },
         {

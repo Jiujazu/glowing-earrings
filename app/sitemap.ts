@@ -1,14 +1,14 @@
 import type { MetadataRoute } from "next";
-import { getAllCourseSlugs } from "@/lib/course-utils";
+import { getAllCourses } from "@/lib/course-utils";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl =
     process.env.NEXT_PUBLIC_SITE_URL || "https://glowing-earrings.vercel.app";
 
-  const courseSlugs = getAllCourseSlugs();
+  const publishedCourses = getAllCourses();
 
-  const courseUrls = courseSlugs.map((slug) => ({
-    url: `${baseUrl}/courses/${slug}`,
+  const courseUrls = publishedCourses.map((course) => ({
+    url: `${baseUrl}/courses/${course.meta.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.8,

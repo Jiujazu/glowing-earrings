@@ -23,9 +23,7 @@ export async function POST(request: NextRequest) {
     }
 
     const result = await subscribeToNewsletter(email, { firstName, source });
-    return NextResponse.json(result, {
-      status: result.success ? 200 : 500,
-    });
+    return NextResponse.json(result);
   } catch {
     return NextResponse.json(
       { success: false, message: "Da ist was schiefgelaufen. Versuch's nochmal?" },

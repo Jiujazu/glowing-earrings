@@ -70,16 +70,14 @@ export default function NewsletterCTA({
   if (status === "success") {
     return (
       <div
-        className={`
-          text-center p-6 rounded-2xl animate-fade-in
-          ${variant === "featured" ? "bg-[var(--brand)]/5 border border-[var(--brand)]/20" : ""}
-        `}
+        className="text-center p-6 border-4 border-[var(--neo-border)] bg-[var(--pop-turquoise)] animate-fade-in"
+        style={{ boxShadow: '8px 8px 0px 0px var(--neo-shadow-color)' }}
       >
-        <p className="text-2xl mb-2">🎉</p>
-        <p className="font-heading font-bold text-lg text-[var(--text-primary)]">
+        <p className="text-4xl mb-2">🎉</p>
+        <p className="font-heading font-black text-xl text-[var(--text-primary)] uppercase">
           Willkommen an Bord!
         </p>
-        <p className="text-sm text-[var(--text-secondary)] mt-1">
+        <p className="text-sm font-bold text-[var(--text-primary)]/70 mt-1">
           {message}
         </p>
       </div>
@@ -91,12 +89,13 @@ export default function NewsletterCTA({
   return (
     <div
       className={`
-        ${isFeatured ? "p-6 sm:p-8 rounded-2xl bg-[var(--surface)] border border-[var(--border)]" : ""}
+        ${isFeatured ? "p-6 sm:p-8 border-4 border-[var(--neo-border)] bg-[var(--surface)]" : ""}
       `}
+      style={isFeatured ? { boxShadow: '8px 8px 0px 0px var(--neo-shadow-color)' } : undefined}
     >
       <h3
         className={`
-          font-heading font-bold text-[var(--text-primary)]
+          font-heading font-black text-[var(--text-primary)] uppercase
           ${isFeatured ? "text-xl sm:text-2xl mb-2" : "text-lg mb-1"}
         `}
       >
@@ -104,7 +103,7 @@ export default function NewsletterCTA({
       </h3>
       <p
         className={`
-          text-[var(--text-secondary)]
+          text-[var(--text-primary)] font-medium
           ${isFeatured ? "text-base mb-6" : "text-sm mb-4"}
         `}
       >
@@ -134,18 +133,18 @@ export default function NewsletterCTA({
         </div>
 
         {/* DSGVO Consent */}
-        <label className="flex items-start gap-2 text-xs text-[var(--text-muted)] cursor-pointer">
+        <label className="flex items-start gap-2 text-xs text-[var(--text-primary)] cursor-pointer font-medium">
           <input
             type="checkbox"
             checked={consent}
             onChange={(e) => setConsent(e.target.checked)}
-            className="mt-0.5 rounded border-[var(--border)] accent-[var(--accent)]"
+            className="mt-0.5 border-2 border-[var(--neo-border)] accent-[var(--accent)]"
           />
           <span>
             Ich stimme der{" "}
             <a
               href="/datenschutz"
-              className="underline hover:text-[var(--text-secondary)]"
+              className="underline decoration-2 hover:text-[var(--accent)]"
               target="_blank"
             >
               Datenschutzerklärung
@@ -155,7 +154,7 @@ export default function NewsletterCTA({
         </label>
 
         {status === "error" && (
-          <p className="text-sm text-red-500 animate-fade-in">{message}</p>
+          <p className="text-sm font-bold text-red-500 animate-fade-in">{message}</p>
         )}
       </form>
     </div>

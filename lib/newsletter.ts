@@ -21,8 +21,8 @@ export async function subscribeToNewsletter(
     console.warn("NEWSLETTER_API_KEY not set — signup not sent");
     console.log(`[Newsletter Signup] ${email}`, options);
     return {
-      success: false,
-      message: "Der Newsletter ist noch nicht aktiv. Schau bald wieder vorbei!",
+      success: true,
+      message: "Danke für dein Interesse! Wir melden uns, sobald der Newsletter startet.",
     };
   }
 

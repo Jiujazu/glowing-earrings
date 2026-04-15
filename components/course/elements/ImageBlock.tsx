@@ -5,6 +5,7 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import type { ImageElement } from "@/lib/types";
 import { useEditMode } from "@/components/editor/EditModeProvider";
+import { useFocusTrap } from "@/lib/use-focus-trap";
 
 const EditableImage = dynamic(() => import("@/components/editor/EditableImage"), {
   ssr: false,
@@ -13,6 +14,7 @@ const EditableImage = dynamic(() => import("@/components/editor/EditableImage"),
 export default function ImageBlock({ element }: { element: ImageElement }) {
   const [isZoomed, setIsZoomed] = useState(false);
   const { isEditMode } = useEditMode();
+  const lightboxRef = useFocusTrap(isZoomed);
 
   useEffect(() => {
     if (!isZoomed) return;
@@ -31,7 +33,7 @@ export default function ImageBlock({ element }: { element: ImageElement }) {
           onClick={() => {
             if (!isEditMode) setIsZoomed(true);
           }}
-          className={`block w-full rounded-xl overflow-hidden transition-shadow duration-300 hover:shadow-lg hover:shadow-[var(--course-primary)]/10 ${
+          className={`block w-full overflow-hidden border-4 border-[var(--course-text)]/10 transition-all duration-200 hover:-translate-y-1 ${
             isEditMode ? "cursor-default" : "cursor-zoom-in"
           }`}
         >
@@ -54,7 +56,8 @@ export default function ImageBlock({ element }: { element: ImageElement }) {
       {/* Lightbox */}
       {isZoomed && (
         <div
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 backdrop-blur-sm cursor-zoom-out p-4"
+          ref={lightboxRef}
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 cursor-zoom-out p-4"
           onClick={() => setIsZoomed(false)}
           role="dialog"
           aria-modal="true"
@@ -65,7 +68,7 @@ export default function ImageBlock({ element }: { element: ImageElement }) {
             alt={element.alt}
             width={element.width ? element.width * 2 : 1600}
             height={element.height ? element.height * 2 : 900}
-            className="max-w-full max-h-[90vh] w-auto h-auto rounded-lg object-contain"
+            className="max-w-full max-h-[90vh] w-auto h-auto object-contain border-4 border-white"
             sizes="100vw"
           />
         </div>

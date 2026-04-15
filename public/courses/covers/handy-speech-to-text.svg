@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <rect width="800" height="400" fill="#FAFAFA"/>
+  <!-- Halftone pattern -->
+  <defs>
+    <pattern id="dots3" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="1.2" fill="#000" opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="400" fill="url(#dots3)"/>
+  <!-- Border -->
+  <!-- Audio waveform — sharp rectangular bars, no radius -->
+  <g transform="translate(60, 200)">
+    <rect x="0" y="-20" width="12" height="40" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="22" y="-38" width="12" height="76" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="44" y="-55" width="12" height="110" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="66" y="-42" width="12" height="84" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="88" y="-72" width="12" height="144" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="110" y="-50" width="12" height="100" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="132" y="-85" width="12" height="170" fill="#22C55E" stroke="#000" stroke-width="3"/>
+    <rect x="154" y="-48" width="12" height="96" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="176" y="-68" width="12" height="136" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="198" y="-32" width="12" height="64" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <!-- Center peak -->
+    <rect x="220" y="-95" width="14" height="190" fill="#FACC15" stroke="#000" stroke-width="3"/>
+    <rect x="244" y="-88" width="14" height="176" fill="#22C55E" stroke="#000" stroke-width="3"/>
+    <rect x="268" y="-100" width="14" height="200" fill="#FACC15" stroke="#000" stroke-width="3"/>
+    <rect x="292" y="-78" width="14" height="156" fill="#22C55E" stroke="#000" stroke-width="3"/>
+    <rect x="316" y="-90" width="14" height="180" fill="#FACC15" stroke="#000" stroke-width="3"/>
+    <!-- Right fade -->
+    <rect x="340" y="-62" width="12" height="124" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="362" y="-72" width="12" height="144" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="384" y="-48" width="12" height="96" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="406" y="-55" width="12" height="110" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="428" y="-38" width="12" height="76" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="450" y="-50" width="12" height="100" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="472" y="-30" width="12" height="60" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="494" y="-42" width="12" height="84" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="516" y="-25" width="12" height="50" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="538" y="-35" width="12" height="70" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="560" y="-18" width="12" height="36" fill="#22C55E" stroke="#000" stroke-width="2"/>
+    <rect x="582" y="-12" width="12" height="24" fill="#22C55E" stroke="#000" stroke-width="2"/>
+  </g>
+  <!-- Text cursor — thick bar -->
+  <rect x="680" y="90" width="6" height="180" fill="#000"/>
+  <!-- Text lines — sharp blocks -->
+  <rect x="700" y="110" width="60" height="10" fill="#000" opacity="0.8"/>
+  <rect x="700" y="135" width="80" height="10" fill="#000" opacity="0.6"/>
+  <rect x="700" y="160" width="55" height="10" fill="#000" opacity="0.8"/>
+  <rect x="700" y="185" width="75" height="10" fill="#000" opacity="0.6"/>
+  <rect x="700" y="210" width="45" height="10" fill="#000" opacity="0.4"/>
+  <rect x="700" y="235" width="65" height="10" fill="#000" opacity="0.5"/>
+  <!-- "STT" sticker -->
+  <rect x="620" y="310" width="110" height="50" fill="#E91E8C" stroke="#000" stroke-width="4" transform="rotate(3 675 335)"/>
+  <text x="675" y="343" font-family="system-ui, sans-serif" font-size="26" font-weight="900" fill="#FFF" text-anchor="middle" letter-spacing="3" transform="rotate(3 675 335)">STT</text>
+</svg>

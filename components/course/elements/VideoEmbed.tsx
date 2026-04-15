@@ -37,7 +37,7 @@ export default function VideoEmbed({ element }: { element: VideoElement }) {
   // Empty video placeholder
   if (!element.videoId) {
     const placeholder = (
-      <div className="rounded-xl overflow-hidden bg-[var(--course-surface)] aspect-video flex items-center justify-center">
+      <div className="overflow-hidden border-4 border-[var(--course-text)]/15 bg-[var(--course-surface)] aspect-video flex items-center justify-center">
         <div className="text-center text-[var(--course-text-muted)]">
           <svg className="w-12 h-12 mx-auto mb-2 opacity-30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
             <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18" />
@@ -65,7 +65,7 @@ export default function VideoEmbed({ element }: { element: VideoElement }) {
   }
 
   const videoContent = (
-    <div className="rounded-xl overflow-hidden bg-[var(--course-surface)]">
+    <div className="overflow-hidden border-4 border-[var(--course-text)]/15 bg-[var(--course-surface)]">
       {!isPlaying ? (
         <button
           type="button"
@@ -87,8 +87,9 @@ export default function VideoEmbed({ element }: { element: VideoElement }) {
 
           {/* Play overlay */}
           {!isEditMode && (
-            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 group-hover:bg-white group-hover:scale-110 transition-all duration-300 flex items-center justify-center shadow-lg">
+            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-100 flex items-center justify-center">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 border-4 border-[var(--neo-border)] bg-white group-hover:scale-110 transition-all duration-100 flex items-center justify-center"
+                style={{ boxShadow: '4px 4px 0px 0px var(--neo-shadow-color)' }}>
                 <svg className="w-7 h-7 sm:w-8 sm:h-8 text-[var(--course-primary)] ml-1" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M8 5v14l11-7z" />
                 </svg>

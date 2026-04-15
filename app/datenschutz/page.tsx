@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
+import { HEADING, PROSE_HEADINGS } from "@/lib/typography";
 
 export const metadata: Metadata = {
   title: "Datenschutzerklärung",
@@ -10,17 +11,19 @@ export default function DatenschutzPage() {
   return (
     <section className="py-12 sm:py-16">
       <Container size="narrow">
-        <h1 className="font-heading text-3xl font-bold text-text-primary mb-8">
+        <h1 className={`${HEADING} text-4xl text-[var(--text-primary)] mb-8`}>
           Datenschutzerklärung
         </h1>
-        <div className="prose prose-lg max-w-none text-text-primary prose-headings:font-heading prose-headings:text-text-primary prose-p:text-text-secondary">
+        <div className={`prose prose-lg max-w-none text-[var(--text-primary)] ${PROSE_HEADINGS} prose-headings:text-[var(--text-primary)] prose-p:text-[var(--text-primary)] prose-strong:text-[var(--text-primary)] prose-li:text-[var(--text-primary)]`}>
           <h2>1. Verantwortlicher</h2>
           <p>
             Julian van Dieken
             <br />
             Creative Media &amp; Education van Dieken
             <br />
-            Berlin, Deutschland
+            [Straße + Hausnummer]
+            <br />
+            [PLZ] Berlin
             <br />
             E-Mail: [E-Mail-Adresse einfügen]
           </p>
@@ -57,26 +60,30 @@ export default function DatenschutzPage() {
             <li>Quelle der Anmeldung (z.B. welche Kursseite)</li>
           </ul>
           <p>
-            Die Anmeldung erfolgt über ein <strong>Double-Opt-In-Verfahren</strong>:
-            Nach der Eingabe Ihrer E-Mail erhalten Sie eine Bestätigungsmail.
-            Erst nach Klick auf den Bestätigungslink wird Ihre Adresse in den
-            Verteiler aufgenommen.
-          </p>
-          <p>
             Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
+            Der Versand erfolgt erst nach ausdrücklicher Bestätigung.
           </p>
           <p>
             Sie können Ihre Einwilligung jederzeit widerrufen und den Newsletter
             über den Abmeldelink in jeder Ausgabe abbestellen.
           </p>
 
-          <h2>5. Cookies</h2>
+          <h2>5. Lokale Speicherung (localStorage)</h2>
           <p>
-            Diese Website verwendet in Phase 1 <strong>keine Cookies</strong> und
+            Diese Website speichert Ihren Lernfortschritt (besuchte Module,
+            abgeschlossene Quizzes, Scroll-Position) sowie Ihre Theme-Einstellung
+            (hell/dunkel) ausschließlich lokal in Ihrem Browser (localStorage).
+            Diese Daten werden <strong>nicht an unsere Server übertragen</strong> und
+            können jederzeit über die Browser-Einstellungen gelöscht werden.
+          </p>
+
+          <h2>6. Cookies &amp; Tracking</h2>
+          <p>
+            Diese Website verwendet <strong>keine Cookies</strong> und
             kein Tracking. Es werden keine Analytics-Tools eingesetzt.
           </p>
 
-          <h2>6. Ihre Rechte</h2>
+          <h2>7. Ihre Rechte</h2>
           <p>Sie haben das Recht auf:</p>
           <ul>
             <li>Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO)</li>
@@ -91,14 +98,14 @@ export default function DatenschutzPage() {
             E-Mail-Adresse.
           </p>
 
-          <h2>7. Beschwerderecht</h2>
+          <h2>8. Beschwerderecht</h2>
           <p>
             Sie haben das Recht, sich bei einer Aufsichtsbehörde zu beschweren.
             Die zuständige Aufsichtsbehörde ist die Berliner Beauftragte für
             Datenschutz und Informationsfreiheit.
           </p>
 
-          <p className="text-sm text-text-muted mt-8">
+          <p className="text-sm font-bold uppercase tracking-wide mt-8">
             Stand: April 2026
           </p>
         </div>

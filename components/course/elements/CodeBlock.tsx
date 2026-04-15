@@ -45,7 +45,7 @@ export default function CodeBlock({ element }: { element: CodeBlockElement }) {
   );
 
   return (
-    <div className="rounded-xl overflow-hidden bg-[var(--course-surface)] border border-[var(--course-text)]/10">
+    <div className="overflow-hidden bg-[var(--course-surface)] border-4 border-[var(--course-text)]/15">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-2.5 border-b border-[var(--course-text)]/10">
         <div className="flex items-center gap-2">
@@ -97,7 +97,7 @@ export default function CodeBlock({ element }: { element: CodeBlockElement }) {
         <button
           type="button"
           onClick={copyCode}
-          className="flex items-center gap-1.5 text-xs text-[var(--course-text-muted)] hover:text-[var(--course-text)] transition-colors px-2 py-1 rounded-md hover:bg-[var(--course-text)]/5"
+          className="flex items-center gap-1.5 text-xs font-bold uppercase text-[var(--course-text-muted)] hover:text-[var(--course-text)] transition-colors duration-100 px-2 py-1 hover:bg-[var(--course-text)]/5"
           aria-label="Code kopieren"
         >
           {copied ? (

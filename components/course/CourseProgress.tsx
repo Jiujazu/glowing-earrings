@@ -27,7 +27,7 @@ export default function CourseProgress() {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[80] h-1 pointer-events-none">
+    <div className="fixed top-0 left-0 right-0 z-[80] h-1.5 pointer-events-none" aria-hidden="true">
       <div
         ref={barRef}
         className="h-full bg-[var(--course-primary)] transition-[width] duration-150 ease-out"

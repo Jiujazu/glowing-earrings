@@ -62,11 +62,7 @@ function renderElement(element: ModuleElement): React.ReactNode {
     case "step-by-step":
       return <StepByStep element={element} />;
     case "interactive":
-      return (
-        <div className="bg-[var(--course-surface)] rounded-xl p-5 text-center text-[var(--course-text-muted)]">
-          [Interaktives Element: {element.component}]
-        </div>
-      );
+      return null;
     default:
       return null;
   }
@@ -252,7 +248,7 @@ export default function ModuleRenderer({ module, index, allModules }: { module: 
         {/* Transition to next module */}
         {module.transitionToNext && (
           <ScrollReveal delay={100}>
-            <div className="mt-8 pt-6 border-t border-[var(--course-text)]/10">
+            <div className="mt-8 pt-6 border-t-4 border-[var(--course-text)]/10">
               <p className="text-sm text-[var(--course-text-muted)] italic">
                 {module.transitionToNext}
               </p>

@@ -59,6 +59,9 @@ export default function RootLayout({
             __html: `(function(){try{var t=localStorage.getItem("ge-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme:dark)").matches)){document.documentElement.classList.add("dark")}}catch(e){}})()`,
           }}
         />
+        <noscript>
+          <style>{`.scroll-reveal { opacity: 1 !important; transform: none !important; }`}</style>
+        </noscript>
       </head>
       <body
         className={`${spaceGrotesk.variable} ${dmSans.variable} antialiased min-h-screen flex flex-col`}

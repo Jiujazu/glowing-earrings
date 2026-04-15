@@ -99,7 +99,7 @@ export default function QuizCard({ element }: { element: QuizElement }) {
 
   return (
     <div
-      className="rounded-xl p-5 sm:p-6 relative overflow-hidden"
+      className="p-5 sm:p-6 relative overflow-hidden border-4 border-[var(--course-text)]/15"
       style={{ backgroundColor: "var(--course-surface)" }}
     >
       {revealed && isCorrect && <QuizConfetti />}
@@ -145,17 +145,19 @@ export default function QuizCard({ element }: { element: QuizElement }) {
           }
 
           return (
-            <div
+            <button
+              type="button"
               key={i}
+              disabled={revealed || isEditMode}
               className={`
-                w-full text-left p-4 rounded-lg border-2 transition-all duration-200
+                w-full text-left p-4 border-4 transition-all duration-100
                 ${!revealed && !isEditMode ? "cursor-pointer hover:border-[var(--course-primary)]" : "cursor-default"}
                 ${revealed && !isOptionCorrect && !isSelected ? "opacity-50" : ""}
                 ${isSelected && isOptionCorrect ? "animate-celebrate" : ""}
                 ${isSelected && !isOptionCorrect ? "animate-wiggle" : ""}
               `}
               style={{ borderColor, backgroundColor: bgColor }}
-              onClick={() => !isEditMode && handleSelect(i)}
+              onClick={() => handleSelect(i)}
             >
               <span className="flex items-start gap-3">
                 <span className="flex-shrink-0 mt-0.5">
@@ -211,7 +213,7 @@ export default function QuizCard({ element }: { element: QuizElement }) {
                   </p>
                 )
               )}
-            </div>
+            </button>
           );
         })}
       </div>
@@ -238,7 +240,7 @@ export default function QuizCard({ element }: { element: QuizElement }) {
           {!isEditMode && (
             <button
               onClick={handleRetry}
-              className="mt-4 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border transition-all duration-200 text-[var(--course-primary)] border-[var(--course-primary)]/30 hover:bg-[var(--course-primary)]/10"
+              className="mt-4 inline-flex items-center gap-2 px-4 py-2 text-sm font-bold uppercase tracking-wide border-4 border-[var(--course-text)]/20 transition-all duration-100 text-[var(--course-primary)] hover:bg-[var(--course-primary)]/10 press-feedback"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="1 4 1 10 7 10" />

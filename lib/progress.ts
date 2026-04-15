@@ -20,6 +20,7 @@ function readAll(): ProgressMap {
 }
 
 function writeAll(data: ProgressMap) {
+  if (typeof window === "undefined") return;
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   } catch {

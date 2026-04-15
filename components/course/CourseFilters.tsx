@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import type { Course } from "@/lib/types";
 import { getDifficultyLabel } from "@/lib/course-utils";
 import CourseCard from "./CourseCard";
+import { LABEL } from "@/lib/typography";
 
 interface CourseFiltersProps {
   courses: Course[];
@@ -79,20 +80,21 @@ function FilterDropdown<T extends string>({
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-haspopup="listbox"
-        className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border transition-all duration-200 ${
+        className={`flex items-center gap-2 px-4 py-2 text-sm font-bold uppercase tracking-wide border-4 transition-all duration-100 press-feedback ${
           value
-            ? "text-[var(--accent)] bg-[var(--accent)]/10 border-[var(--accent)]/30"
-            : "text-[var(--text-primary)] bg-[var(--surface)] border-[var(--border)] hover:border-[var(--accent)]/40 hover:text-[var(--accent)]"
+            ? "text-white bg-[var(--accent)] border-[var(--neo-border)]"
+            : "text-[var(--text-primary)] bg-[var(--surface)] border-[var(--neo-border)] hover:bg-[var(--pop-turquoise)]"
         }`}
+        style={{ boxShadow: '3px 3px 0px 0px var(--neo-shadow-color)' }}
       >
         {icon}
         <span>{activeOption ? activeOption.label : label}</span>
         <svg
-          className={`w-3.5 h-3.5 transition-transform ${open ? "rotate-180" : ""} ${value ? "text-[var(--accent)]/60" : "text-[var(--text-muted)]"}`}
+          className={`w-3.5 h-3.5 transition-transform duration-100 ${open ? "rotate-180" : ""}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          strokeWidth={2.5}
+          strokeWidth={3}
         >
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
         </svg>
@@ -101,7 +103,8 @@ function FilterDropdown<T extends string>({
       {open && (
         <div
           role="listbox"
-          className="absolute left-0 top-full mt-1 min-w-[180px] bg-[var(--surface-elevated)] border border-[var(--border)] rounded-xl shadow-lg z-20 py-1 animate-fade-in"
+          className="absolute left-0 top-full mt-2 min-w-[180px] bg-[var(--surface)] border-4 border-[var(--neo-border)] z-20 py-1 animate-fade-in"
+          style={{ boxShadow: '6px 6px 0px 0px var(--neo-shadow-color)' }}
         >
           {options.map((option) => (
             <button
@@ -112,15 +115,15 @@ function FilterDropdown<T extends string>({
                 onChange(value === option.value ? null : option.value);
                 setOpen(false);
               }}
-              className={`w-full text-left px-4 py-2.5 text-sm transition-colors flex items-center justify-between gap-4 ${
+              className={`w-full text-left px-4 py-2.5 text-sm font-bold uppercase tracking-wide transition-all duration-100 flex items-center justify-between gap-4 ${
                 value === option.value
-                  ? "text-[var(--accent)] font-medium bg-[var(--surface-tinted)]"
-                  : "text-[var(--text-primary)] hover:bg-[var(--surface-tinted)]"
+                  ? "text-white bg-[var(--accent)]"
+                  : "text-[var(--text-primary)] hover:bg-[var(--pop-turquoise)]"
               }`}
             >
               <span>{option.label}</span>
               {option.hint && (
-                <span className="text-xs text-[var(--text-muted)]">
+                <span className="text-xs font-bold opacity-60">
                   {option.hint}
                 </span>
               )}
@@ -217,7 +220,7 @@ export default function CourseFilters({
       <div className="mb-8 space-y-4">
         {/* Themen-Tags */}
         <div>
-          <p className="text-xs font-medium text-[var(--text-muted)] uppercase tracking-wide mb-2">
+          <p className={`text-xs ${LABEL} text-[var(--text-primary)] mb-2`}>
             Themen
           </p>
           <div className="flex flex-wrap gap-2">
@@ -225,11 +228,12 @@ export default function CourseFilters({
               <button
                 key={tag}
                 onClick={() => toggleTag(tag)}
-                className={`px-4 py-2 text-sm font-medium rounded-xl border transition-all duration-200 ${
+                className={`px-4 py-2 text-sm font-bold uppercase tracking-wide border-4 border-[var(--neo-border)] transition-all duration-100 press-feedback ${
                   activeTags.has(tag)
-                    ? "bg-[var(--accent)] text-white border-[var(--accent)] shadow-sm"
-                    : "bg-[var(--surface)] text-[var(--text-primary)] border-[var(--border)] hover:border-[var(--accent)]/50 hover:text-[var(--accent)]"
+                    ? "bg-[var(--accent)] text-white"
+                    : "bg-[var(--surface)] text-[var(--text-primary)] hover:bg-[var(--pop-turquoise)]"
                 }`}
+                style={{ boxShadow: '3px 3px 0px 0px var(--neo-shadow-color)' }}
               >
                 {tag}
               </button>
@@ -237,12 +241,12 @@ export default function CourseFilters({
           </div>
         </div>
 
-        {/* Schwierigkeit + Dauer Dropdowns — visually distinct from tags */}
-        <div className="flex flex-wrap items-center gap-1">
+        {/* Schwierigkeit + Dauer Dropdowns */}
+        <div className="flex flex-wrap items-center gap-2">
           <FilterDropdown
             label="Schwierigkeit"
             icon={
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
               </svg>
             }
@@ -253,7 +257,7 @@ export default function CourseFilters({
           <FilterDropdown
             label="Dauer"
             icon={
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" />
                 <polyline points="12 6 12 12 16 14" />
               </svg>
@@ -266,15 +270,15 @@ export default function CourseFilters({
 
         {/* Active filter summary */}
         {hasFilters && (
-          <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
+          <div className="flex items-center gap-3 text-sm font-bold text-[var(--text-primary)]">
             <span>
               {filtered.length} {filtered.length === 1 ? "Kurs" : "Kurse"}
             </span>
             <button
               onClick={clearFilters}
-              className="text-[var(--accent)] hover:underline"
+              className="text-[var(--accent)] uppercase tracking-wide text-xs font-black hover:underline decoration-4"
             >
-              Filter zurücksetzen
+              Reset
             </button>
           </div>
         )}
@@ -283,7 +287,7 @@ export default function CourseFilters({
       {/* Course grid */}
       {showGrid &&
         (filtered.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {filtered.map((course) => (
               <CourseCard
                 key={course.meta.slug}
@@ -293,13 +297,15 @@ export default function CourseFilters({
             ))}
           </div>
         ) : (
-          <div className="text-center py-16">
-            <p className="text-lg text-[var(--text-secondary)] mb-3">
+          <div className="text-center py-16 border-4 border-[var(--neo-border)] bg-[var(--surface)]"
+            style={{ boxShadow: '8px 8px 0px 0px var(--neo-shadow-color)' }}
+          >
+            <p className="text-lg font-bold text-[var(--text-primary)] mb-3 uppercase">
               Keine Kurse für diese Filter.
             </p>
             <button
               onClick={clearFilters}
-              className="text-sm text-[var(--accent)] hover:underline"
+              className="text-sm font-black text-[var(--accent)] uppercase tracking-wide hover:underline decoration-4"
             >
               Alle Kurse anzeigen
             </button>

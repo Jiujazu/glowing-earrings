@@ -27,7 +27,7 @@ export default function Callout({ element }: { element: CalloutElement }) {
   const { isEditMode } = useEditMode();
 
   const textContent = (
-    <div className="text-base text-[var(--course-text)] leading-relaxed opacity-90 prose prose-sm max-w-none [&_p]:mb-2 [&_p:last-child]:mb-0 [&_a]:text-[var(--course-primary)] [&_strong]:text-[var(--course-text)] [&_ul]:mt-1 [&_li]:mb-0.5">
+    <div className="text-base text-[var(--course-text)] leading-relaxed prose prose-sm max-w-none [&_p]:mb-2 [&_p:last-child]:mb-0 [&_a]:text-[var(--course-primary)] [&_a]:decoration-2 [&_strong]:text-[var(--course-text)] [&_strong]:font-black [&_ul]:mt-1 [&_li]:mb-0.5">
       <ReactMarkdown remarkPlugins={[remarkGfm]}>
         {element.text}
       </ReactMarkdown>
@@ -36,24 +36,30 @@ export default function Callout({ element }: { element: CalloutElement }) {
 
   return (
     <div
-      className="border-l-4 rounded-r-xl p-5"
+      className="border-l-[6px] border-4 p-5"
       style={{
+        borderColor: "color-mix(in srgb, var(--course-text) 12%, transparent)",
         borderLeftColor: config.color,
-        backgroundColor: `color-mix(in srgb, ${config.color} 8%, var(--course-surface))`,
+        backgroundColor: "var(--course-surface)",
       }}
     >
       <div className="flex items-start gap-3">
-        <span className="text-xl flex-shrink-0">{config.icon}</span>
+        <span className="flex-shrink-0 w-9 h-9 flex items-center justify-center border-2 text-lg"
+          style={{ borderColor: "color-mix(in srgb, var(--course-text) 12%, transparent)" }}
+          aria-hidden="true"
+        >
+          {config.icon}
+        </span>
         <div>
           {element.title && (
             isEditMode ? (
               <EditableText elementId={element.id} content={element.title} fieldPath="title">
-                <p className="font-heading font-bold text-sm mb-1" style={{ color: config.color }}>
+                <p className="font-heading font-black text-sm mb-1 uppercase tracking-wide" style={{ color: config.color }}>
                   {element.title}
                 </p>
               </EditableText>
             ) : (
-              <p className="font-heading font-bold text-sm mb-1" style={{ color: config.color }}>
+              <p className="font-heading font-black text-sm mb-1 uppercase tracking-wide" style={{ color: config.color }}>
                 {element.title}
               </p>
             )

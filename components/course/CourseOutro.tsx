@@ -2,11 +2,13 @@
 
 import { useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import dynamic from "next/dynamic";
 import type { CourseOutro as CourseOutroType } from "@/lib/types";
 import { getCourseBySlug, formatDuration, getDifficultyLabel } from "@/lib/course-utils";
 import NewsletterCTA from "@/components/layout/NewsletterCTA";
 import Badge from "@/components/ui/Badge";
+import { HEADING, LABEL } from "@/lib/typography";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { useEditMode } from "@/components/editor/EditModeProvider";
 
@@ -91,7 +93,7 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
         {/* Synthesis */}
         <ScrollReveal>
           <h2
-            className="font-heading text-2xl sm:text-3xl font-bold mb-6"
+            className={`${HEADING} text-2xl sm:text-3xl mb-6`}
             style={{ fontFamily: "var(--course-heading-font, var(--font-heading))" }}
           >
             Das nimmst du mit
@@ -119,13 +121,15 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
         {/* Takeaway */}
         {outro.takeaway && outro.takeaway.length > 0 && (
           <ScrollReveal>
-            <div className="bg-[var(--course-surface)] rounded-xl p-5 mb-8">
-              <h3 className="font-heading font-bold text-lg mb-3">Checkliste</h3>
-              <ul className="space-y-2">
+            <div className="bg-[var(--course-surface)] p-5 mb-8 border-4 border-[var(--course-text)]/15">
+              <h3 className="font-heading font-black text-lg mb-4 uppercase tracking-wide">Checkliste</h3>
+              <ul className="space-y-3">
                 {outro.takeaway.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-base">
-                    <span>{item.emoji}</span>
-                    <span>{item.text}</span>
+                  <li key={i} className="flex items-start gap-3 text-base">
+                    <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center border-2 border-[var(--course-text)]/20 bg-[var(--course-primary)]/10 text-sm">
+                      {item.emoji}
+                    </span>
+                    <span className="pt-1">{item.text}</span>
                   </li>
                 ))}
               </ul>
@@ -136,7 +140,7 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
         {/* Next Step */}
         <ScrollReveal>
           <div
-            className="rounded-xl p-5 mb-8 border"
+            className="p-5 mb-8 border-4"
             style={{
               backgroundColor: "color-mix(in srgb, var(--course-primary) 5%, var(--course-surface))",
               borderColor: "color-mix(in srgb, var(--course-primary) 20%, transparent)",
@@ -174,7 +178,7 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
           <ScrollReveal>
             <div className="mb-12">
               <h3
-                className="font-heading text-xl font-bold mb-4"
+                className={`${HEADING} text-xl mb-4`}
                 style={{ fontFamily: "var(--course-heading-font, var(--font-heading))" }}
               >
                 Weiter lernen
@@ -184,17 +188,28 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
                   <Link
                     key={course!.meta.slug}
                     href={`/courses/${course!.meta.slug}`}
-                    className="group block rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                    className="group block overflow-hidden border-4 border-[var(--course-text)]/15 transition-all duration-200 hover:-translate-y-1"
                   >
+                    {course!.meta.coverImage ? (
+                      <div className="relative h-28 overflow-hidden border-b-4 border-[var(--course-text)]/10">
+                        <Image
+                          src={course!.meta.coverImage}
+                          alt=""
+                          fill
+                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, 400px"
+                        />
+                      </div>
+                    ) : (
+                      <div
+                        className="h-2 border-b-4 border-[var(--course-text)]/10"
+                        style={{ backgroundColor: course!.meta.design.colors.primary }}
+                      />
+                    )}
                     <div
-                      className="h-1.5"
-                      style={{ backgroundColor: course!.meta.design.colors.primary }}
-                    />
-                    <div
-                      className="p-4 border border-t-0 rounded-b-xl"
+                      className="p-4"
                       style={{
                         backgroundColor: "var(--course-surface)",
-                        borderColor: "color-mix(in srgb, var(--course-text) 10%, transparent)",
                       }}
                     >
                       <div className="flex gap-2 mb-2">

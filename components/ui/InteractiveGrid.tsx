@@ -16,10 +16,10 @@ interface BendPoint {
   strength: number;
 }
 
-interface Implosion {
+interface Charge {
   x: number;
   y: number;
-  time: number;
+  startTime: number;
 }
 
 const KONAMI = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
@@ -45,7 +45,7 @@ export default function InteractiveGrid({
   const isActiveRef = useRef(false);
   const wavesRef = useRef<Wave[]>([]);
   const bendsRef = useRef<BendPoint[]>([]);
-  const implosionsRef = useRef<Implosion[]>([]);
+  const chargeRef = useRef<Charge | null>(null);
   const cachedRectRef = useRef<DOMRect | null>(null);
   const isVisibleRef = useRef(true);
   const lastMouseRef = useRef({ x: 0, y: 0, time: 0 });
@@ -86,7 +86,8 @@ export default function InteractiveGrid({
         const distFromRing = Math.abs(wDist - waveRadius);
         if (distFromRing < waveWidth) {
           const ringFactor = 1 - distFromRing / waveWidth;
-          const fade = Math.max(0, 1 - elapsed * 1.2);
+          const fadeRate = Math.max(0.3, 1.2 - wave.intensity * 0.04);
+          const fade = Math.max(0, 1 - elapsed * fadeRate);
           const amplitude = ringFactor * fade * wave.intensity * 14;
 
           if (wDist > 0) {
@@ -116,27 +117,21 @@ export default function InteractiveGrid({
         }
       }
 
-      // Implosion displacement (gravity well — pulls inward, then snaps back)
-      for (const imp of implosionsRef.current) {
-        const idx = gx - imp.x;
-        const idy = gy - imp.y;
-        const iDist2 = idx * idx + idy * idy;
-        const impRadius = 160;
-        if (iDist2 < impRadius * impRadius && iDist2 > 0) {
-          const iDist = Math.sqrt(iDist2);
-          const elapsed = (now - imp.time) / 1000;
-          // Phase 1 (0-0.4s): suck inward. Phase 2 (0.4-1.2s): bounce outward and settle
-          let pull: number;
-          if (elapsed < 0.4) {
-            pull = -(elapsed / 0.4) * 35; // negative = inward
-          } else {
-            const t2 = elapsed - 0.4;
-            pull = 35 * Math.cos(t2 * 8) * Math.exp(-t2 * 4); // oscillate outward
-          }
-          const impFactor = (1 - iDist / impRadius);
-          dx += (idx / iDist) * impFactor * pull;
-          dy += (idy / iDist) * impFactor * pull;
-          factor = Math.max(factor, Math.abs(impFactor * pull) / 35 * 0.6);
+      // Charge pull (right-click held — sucks grid inward)
+      const charge = chargeRef.current;
+      if (charge) {
+        const cdx = gx - charge.x;
+        const cdy = gy - charge.y;
+        const cDist2 = cdx * cdx + cdy * cdy;
+        const chargeElapsed = Math.min((now - charge.startTime) / 1000, 2.5);
+        const chargeRadius = 120 + chargeElapsed * 80; // grows from 120 to 320
+        if (cDist2 < chargeRadius * chargeRadius && cDist2 > 0) {
+          const cDist = Math.sqrt(cDist2);
+          const chargePower = chargeElapsed / 2.5; // 0→1 over 2.5s
+          const pullStrength = (1 - cDist / chargeRadius) * chargePower * 40;
+          dx -= (cdx / cDist) * pullStrength; // negative = toward center
+          dy -= (cdy / cDist) * pullStrength;
+          factor = Math.max(factor, pullStrength / 40 * 0.6);
         }
       }
 
@@ -168,10 +163,8 @@ export default function InteractiveGrid({
     const now = performance.now();
 
     // Prune expired effects
-    wavesRef.current = wavesRef.current.filter(w => (now - w.time) < 2000);
+    wavesRef.current = wavesRef.current.filter(w => (now - w.time) < 4000);
     bendsRef.current = bendsRef.current.filter(b => (now - b.time) < 1500);
-    implosionsRef.current = implosionsRef.current.filter(imp => (now - imp.time) < 1500);
-
     // Screen shake
     const isShaking = now < shakeUntilRef.current;
     if (isShaking) {
@@ -295,37 +288,6 @@ export default function InteractiveGrid({
       }
     }
 
-    // Implosion visuals — pulsing ring at collapse point
-    for (const imp of implosionsRef.current) {
-      const elapsed = (now - imp.time) / 1000;
-      const fade = Math.max(0, 1 - elapsed / 1.5);
-      if (fade <= 0) continue;
-      // Ring contracts then expands
-      let ringRadius: number;
-      if (elapsed < 0.4) {
-        ringRadius = 80 * (1 - elapsed / 0.4); // contract to center
-      } else {
-        const t2 = elapsed - 0.4;
-        ringRadius = 30 * t2 * Math.exp(-t2 * 3) * 8; // expand outward
-      }
-      ctx.globalAlpha = fade * 0.5;
-      ctx.strokeStyle = isRainbow
-        ? RAINBOW_COLORS[Math.floor(elapsed * 10) % RAINBOW_COLORS.length]
-        : (isDark ? "#7B4FBF" : "#5B2F9F");
-      ctx.lineWidth = 2 + fade * 2;
-      ctx.beginPath();
-      ctx.arc(imp.x, imp.y, Math.max(1, ringRadius), 0, Math.PI * 2);
-      ctx.stroke();
-      // Inner dot
-      if (elapsed < 0.5) {
-        ctx.globalAlpha = fade * 0.7;
-        ctx.fillStyle = "#00C9A7";
-        ctx.beginPath();
-        ctx.arc(imp.x, imp.y, 3 * (1 - elapsed * 2), 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
     // Intersection dots
     ctx.fillStyle = borderColor;
     for (let col = 0; col < cols; col++) {
@@ -389,7 +351,7 @@ export default function InteractiveGrid({
           isActiveRef.current = true;
           loop();
         }
-      } else if (isActiveRef.current && wavesRef.current.length === 0 && bendsRef.current.length === 0 && implosionsRef.current.length === 0) {
+      } else if (isActiveRef.current && wavesRef.current.length === 0 && bendsRef.current.length === 0 && chargeRef.current === null) {
         mouseRef.current = { x: -1000, y: -1000 };
         lastDrawRef.current = { x: -9999, y: -9999 };
         draw();
@@ -401,7 +363,7 @@ export default function InteractiveGrid({
       mouseRef.current = { x: -1000, y: -1000 };
       lastDrawRef.current = { x: -9999, y: -9999 };
       draw();
-      if (wavesRef.current.length === 0 && bendsRef.current.length === 0 && implosionsRef.current.length === 0) {
+      if (wavesRef.current.length === 0 && bendsRef.current.length === 0 && chargeRef.current === null) {
         isActiveRef.current = false;
       }
     }
@@ -439,19 +401,44 @@ export default function InteractiveGrid({
       }
     }
 
-    // Right click → gravity well (implosion)
-    function onContextMenu(e: MouseEvent) {
+    // Right-click hold-to-charge: press pulls grid inward, release fires shockwave
+    function onMouseDown(e: MouseEvent) {
+      if (e.button !== 2) return; // right button only
       if (!isVisibleRef.current) return;
       const rect = cachedRectRef.current;
       if (!rect) return;
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       if (x < 0 || x > rect.width || y < 0 || y > rect.height) return;
-      e.preventDefault();
-      implosionsRef.current.push({ x, y, time: performance.now() });
+      chargeRef.current = { x, y, startTime: performance.now() };
       if (!isActiveRef.current) {
         isActiveRef.current = true;
         loop();
+      }
+    }
+
+    function onMouseUp(e: MouseEvent) {
+      if (e.button !== 2) return;
+      const charge = chargeRef.current;
+      if (!charge) return;
+      const holdDuration = Math.min((performance.now() - charge.startTime) / 1000, 2.5);
+      chargeRef.current = null;
+      // Fire shockwave proportional to hold time (0.5→3 at min, up to 2→15 at max)
+      const intensity = 2 + holdDuration * 5;
+      wavesRef.current.push({ x: charge.x, y: charge.y, time: performance.now(), intensity });
+      if (!isActiveRef.current) {
+        isActiveRef.current = true;
+        loop();
+      }
+    }
+
+    function onContextMenu(e: MouseEvent) {
+      const rect = cachedRectRef.current;
+      if (!rect) return;
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+        e.preventDefault();
       }
     }
 
@@ -470,15 +457,15 @@ export default function InteractiveGrid({
         const now = performance.now();
         const cx = rect.width / 2;
         const cy = rect.height / 2;
-        // Mega explosion: multiple shockwaves from center
-        wavesRef.current.push({ x: cx, y: cy, time: now, intensity: 12 });
-        wavesRef.current.push({ x: cx, y: cy, time: now + 150, intensity: 10 });
-        wavesRef.current.push({ x: cx, y: cy, time: now + 300, intensity: 8 });
+        // Mega explosion: massive shockwaves from center
+        wavesRef.current.push({ x: cx, y: cy, time: now, intensity: 25 });
+        wavesRef.current.push({ x: cx, y: cy, time: now + 200, intensity: 20 });
+        wavesRef.current.push({ x: cx, y: cy, time: now + 400, intensity: 15 });
         // Corner explosions
-        wavesRef.current.push({ x: 0, y: 0, time: now + 200, intensity: 6 });
-        wavesRef.current.push({ x: rect.width, y: 0, time: now + 250, intensity: 6 });
-        wavesRef.current.push({ x: 0, y: rect.height, time: now + 300, intensity: 6 });
-        wavesRef.current.push({ x: rect.width, y: rect.height, time: now + 350, intensity: 6 });
+        wavesRef.current.push({ x: 0, y: 0, time: now + 300, intensity: 12 });
+        wavesRef.current.push({ x: rect.width, y: 0, time: now + 350, intensity: 12 });
+        wavesRef.current.push({ x: 0, y: rect.height, time: now + 400, intensity: 12 });
+        wavesRef.current.push({ x: rect.width, y: rect.height, time: now + 450, intensity: 12 });
         // Screen shake
         shakeUntilRef.current = now + 1500;
         // Permanent rainbow
@@ -513,7 +500,7 @@ export default function InteractiveGrid({
       const now = performance.now();
       // Keep running if any effects are active
       if (wavesRef.current.length > 0 || mouseRef.current.x > -500 ||
-          bendsRef.current.length > 0 || implosionsRef.current.length > 0 ||
+          bendsRef.current.length > 0 || chargeRef.current !== null ||
           now < shakeUntilRef.current || rainbowActiveRef.current) {
         rafRef.current = requestAnimationFrame(loop);
       } else {
@@ -527,6 +514,8 @@ export default function InteractiveGrid({
     document.addEventListener("mouseleave", onMouseLeave);
     document.addEventListener("click", onClick);
     document.addEventListener("dblclick", onDblClick);
+    document.addEventListener("mousedown", onMouseDown);
+    document.addEventListener("mouseup", onMouseUp);
     document.addEventListener("contextmenu", onContextMenu);
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("grid-wave", onWaveEvent);
@@ -559,6 +548,8 @@ export default function InteractiveGrid({
       document.removeEventListener("mouseleave", onMouseLeave);
       document.removeEventListener("click", onClick);
       document.removeEventListener("dblclick", onDblClick);
+      document.removeEventListener("mousedown", onMouseDown);
+      document.removeEventListener("mouseup", onMouseUp);
       document.removeEventListener("contextmenu", onContextMenu);
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("grid-wave", onWaveEvent);

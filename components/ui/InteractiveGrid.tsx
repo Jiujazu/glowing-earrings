@@ -12,15 +12,15 @@ interface InteractiveGridProps {
 export default function InteractiveGrid({
   className = "",
   spacing = 40,
-  influenceRadius = 140,
-  maxDisplacement = 16,
+  influenceRadius = 200,
+  maxDisplacement = 24,
 }: InteractiveGridProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const rafRef = useRef<number>(0);
   const lastDrawRef = useRef({ x: -1000, y: -1000 });
+  const isActiveRef = useRef(false);
 
-  // Pre-compute displaced grid positions
   const getDisplaced = useCallback(
     (gx: number, gy: number, mx: number, my: number) => {
       const ddx = gx - mx;
@@ -31,13 +31,15 @@ export default function InteractiveGrid({
       if (dist2 < r2 && dist2 > 0) {
         const dist = Math.sqrt(dist2);
         const factor = 1 - dist / influenceRadius;
-        const push = factor * factor * maxDisplacement;
+        // Cubic easing for softer, more organic falloff
+        const push = factor * factor * factor * maxDisplacement;
         return {
           x: gx + (ddx / dist) * push,
           y: gy + (ddy / dist) * push,
+          factor,
         };
       }
-      return { x: gx, y: gy };
+      return { x: gx, y: gy, factor: 0 };
     },
     [influenceRadius, maxDisplacement]
   );
@@ -65,7 +67,7 @@ export default function InteractiveGrid({
 
     const dx = mx - lastDrawRef.current.x;
     const dy = my - lastDrawRef.current.y;
-    if (dx * dx + dy * dy < 4) return;
+    if (dx * dx + dy * dy < 2) return;
     lastDrawRef.current = { x: mx, y: my };
 
     ctx.clearRect(0, 0, w, h);
@@ -73,11 +75,11 @@ export default function InteractiveGrid({
     const style = getComputedStyle(canvas);
     const borderColor = style.getPropertyValue("--neo-border").trim() || "#000";
 
-    const cols = Math.ceil(w / spacing) + 1;
-    const rows = Math.ceil(h / spacing) + 1;
+    const cols = Math.ceil(w / spacing) + 2;
+    const rows = Math.ceil(h / spacing) + 2;
 
     // Build displaced grid
-    const points: { x: number; y: number }[][] = [];
+    const points: { x: number; y: number; factor: number }[][] = [];
     for (let col = 0; col < cols; col++) {
       points[col] = [];
       for (let row = 0; row < rows; row++) {
@@ -85,11 +87,11 @@ export default function InteractiveGrid({
       }
     }
 
+    // Draw grid lines — base opacity higher for visibility
     ctx.strokeStyle = borderColor;
     ctx.lineWidth = 0.5;
-    ctx.globalAlpha = 0.08;
 
-    // Draw horizontal lines
+    // Horizontal lines
     for (let row = 0; row < rows; row++) {
       ctx.beginPath();
       for (let col = 0; col < cols; col++) {
@@ -100,10 +102,11 @@ export default function InteractiveGrid({
           ctx.lineTo(p.x, p.y);
         }
       }
+      ctx.globalAlpha = 0.12;
       ctx.stroke();
     }
 
-    // Draw vertical lines
+    // Vertical lines
     for (let col = 0; col < cols; col++) {
       ctx.beginPath();
       for (let row = 0; row < rows; row++) {
@@ -114,25 +117,59 @@ export default function InteractiveGrid({
           ctx.lineTo(p.x, p.y);
         }
       }
+      ctx.globalAlpha = 0.12;
       ctx.stroke();
     }
 
-    // Draw intersection dots (subtle, bigger near cursor)
-    const r2 = influenceRadius * influenceRadius;
-    ctx.fillStyle = borderColor;
-    for (let col = 0; col < cols; col++) {
-      for (let row = 0; row < rows; row++) {
-        const p = points[col][row];
-        const ddx = col * spacing - mx;
-        const ddy = row * spacing - my;
-        const dist2 = ddx * ddx + ddy * ddy;
+    // Near-cursor: thicker lines for "glow" effect
+    if (mx > -500) {
+      ctx.lineWidth = 1.5;
+      const glowRadius = influenceRadius * 0.7;
+      const gr2 = glowRadius * glowRadius;
 
-        if (dist2 < r2) {
-          const factor = 1 - Math.sqrt(dist2) / influenceRadius;
-          ctx.globalAlpha = 0.06 + factor * 0.25;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, 1 + factor * 2.5, 0, Math.PI * 2);
-          ctx.fill();
+      // Horizontal glow segments
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols - 1; col++) {
+          const p1 = points[col][row];
+          const p2 = points[col + 1][row];
+          const avgFactor = (p1.factor + p2.factor) / 2;
+          if (avgFactor > 0.01) {
+            ctx.globalAlpha = avgFactor * 0.35;
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Vertical glow segments
+      for (let col = 0; col < cols; col++) {
+        for (let row = 0; row < rows - 1; row++) {
+          const p1 = points[col][row];
+          const p2 = points[col][row + 1];
+          const avgFactor = (p1.factor + p2.factor) / 2;
+          if (avgFactor > 0.01) {
+            ctx.globalAlpha = avgFactor * 0.35;
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Intersection dots near cursor
+      ctx.fillStyle = borderColor;
+      for (let col = 0; col < cols; col++) {
+        for (let row = 0; row < rows; row++) {
+          const p = points[col][row];
+          if (p.factor > 0.05) {
+            ctx.globalAlpha = p.factor * 0.4;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 1.2 + p.factor * 3, 0, Math.PI * 2);
+            ctx.fill();
+          }
         }
       }
     }
@@ -149,31 +186,45 @@ export default function InteractiveGrid({
 
     let running = true;
 
+    // Listen on document so mouse works even over text/buttons
     function onMouseMove(e: MouseEvent) {
       const rect = canvas!.getBoundingClientRect();
-      mouseRef.current = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      };
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Only track if mouse is within or near the canvas bounds
+      if (x >= -influenceRadius && x <= rect.width + influenceRadius &&
+          y >= -influenceRadius && y <= rect.height + influenceRadius) {
+        mouseRef.current = { x, y };
+
+        if (!isActiveRef.current) {
+          isActiveRef.current = true;
+          loop();
+        }
+      } else if (isActiveRef.current) {
+        mouseRef.current = { x: -1000, y: -1000 };
+        lastDrawRef.current = { x: -9999, y: -9999 };
+        isActiveRef.current = false;
+      }
     }
 
     function onMouseLeave() {
       mouseRef.current = { x: -1000, y: -1000 };
       lastDrawRef.current = { x: -9999, y: -9999 };
+      isActiveRef.current = false;
     }
 
     function loop() {
-      if (!running) return;
+      if (!running || !isActiveRef.current) return;
       draw();
       rafRef.current = requestAnimationFrame(loop);
     }
 
+    // Initial static draw
     draw();
-    canvas.addEventListener("mouseenter", () => {
-      if (running) loop();
-    });
-    canvas.addEventListener("mousemove", onMouseMove);
-    canvas.addEventListener("mouseleave", onMouseLeave);
+
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseleave", onMouseLeave);
 
     const resizeObserver = new ResizeObserver(() => {
       lastDrawRef.current = { x: -9999, y: -9999 };
@@ -183,17 +234,18 @@ export default function InteractiveGrid({
 
     return () => {
       running = false;
+      isActiveRef.current = false;
       cancelAnimationFrame(rafRef.current);
-      canvas.removeEventListener("mousemove", onMouseMove);
-      canvas.removeEventListener("mouseleave", onMouseLeave);
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseleave", onMouseLeave);
       resizeObserver.disconnect();
     };
-  }, [draw]);
+  }, [draw, influenceRadius]);
 
   return (
     <canvas
       ref={canvasRef}
-      className={`absolute inset-0 w-full h-full pointer-events-auto ${className}`}
+      className={`absolute inset-0 w-full h-full pointer-events-none ${className}`}
       style={{ zIndex: 0 }}
       aria-hidden="true"
     />

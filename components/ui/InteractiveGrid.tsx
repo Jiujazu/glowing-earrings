@@ -238,6 +238,21 @@ export default function InteractiveGrid({
       }
     }
 
+    // Click anywhere on the grid → gentle wave
+    function onClick(e: MouseEvent) {
+      if (!isVisibleRef.current) return;
+      const rect = cachedRectRef.current;
+      if (!rect) return;
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      if (x < 0 || x > rect.width || y < 0 || y > rect.height) return;
+      wavesRef.current.push({ x, y, time: performance.now(), intensity: 1.2 });
+      if (!isActiveRef.current) {
+        isActiveRef.current = true;
+        loop();
+      }
+    }
+
     // Listen for wave events from shapes
     function onWaveEvent(e: Event) {
       if (!isVisibleRef.current) return;
@@ -270,6 +285,7 @@ export default function InteractiveGrid({
     draw();
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseleave", onMouseLeave);
+    document.addEventListener("click", onClick);
     document.addEventListener("grid-wave", onWaveEvent);
 
     const resizeObserver = new ResizeObserver(() => {
@@ -298,6 +314,7 @@ export default function InteractiveGrid({
       cancelAnimationFrame(rafRef.current);
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseleave", onMouseLeave);
+      document.removeEventListener("click", onClick);
       document.removeEventListener("grid-wave", onWaveEvent);
       resizeObserver.disconnect();
       intersectionObserver.disconnect();

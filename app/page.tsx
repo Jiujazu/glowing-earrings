@@ -20,16 +20,16 @@ export default function Home() {
         {/* Interactive grid — dots inflate around cursor */}
         <InteractiveGrid />
 
-        {/* Decorative shapes — vibrate on hover, send waves through grid */}
-        <WaveShape className="absolute top-12 right-8 sm:right-16 w-16 h-16 hidden sm:block rotate-12">
+        {/* Decorative shapes — spin on hover, send waves through grid */}
+        <WaveShape className="absolute top-12 right-8 sm:right-16 w-16 h-16 hidden sm:block rotate-12 z-10">
           <div className="w-full h-full bg-[var(--pop-turquoise)] border-4 border-[var(--neo-border)]"
             style={{ boxShadow: '4px 4px 0px 0px var(--neo-shadow-color)' }} />
         </WaveShape>
-        <WaveShape className="absolute bottom-16 left-8 sm:left-12 w-12 h-12 hidden sm:block -rotate-6">
+        <WaveShape className="absolute bottom-16 left-8 sm:left-12 w-12 h-12 hidden sm:block -rotate-6 z-10">
           <div className="w-full h-full bg-[var(--accent)] border-4 border-[var(--neo-border)]"
             style={{ boxShadow: '3px 3px 0px 0px var(--neo-shadow-color)' }} />
         </WaveShape>
-        <WaveShape className="absolute top-32 left-[15%] hidden lg:block">
+        <WaveShape className="absolute bottom-20 right-[18%] hidden lg:block z-10">
           <Star className="w-8 h-8 text-[var(--neo-border)]" strokeWidth={3} />
         </WaveShape>
 

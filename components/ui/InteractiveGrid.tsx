@@ -29,6 +29,7 @@ export default function InteractiveGrid({
   const isActiveRef = useRef(false);
   const wavesRef = useRef<Wave[]>([]);
   const cachedRectRef = useRef<DOMRect | null>(null);
+  const isVisibleRef = useRef(true);
 
   const getDisplaced = useCallback(
     (gx: number, gy: number, mx: number, my: number, now: number) => {
@@ -207,6 +208,7 @@ export default function InteractiveGrid({
     let running = true;
 
     function onMouseMove(e: MouseEvent) {
+      if (!isVisibleRef.current) return;
       const rect = cachedRectRef.current;
       if (!rect) return;
       const x = e.clientX - rect.left;
@@ -238,6 +240,7 @@ export default function InteractiveGrid({
 
     // Listen for wave events from shapes
     function onWaveEvent(e: Event) {
+      if (!isVisibleRef.current) return;
       const detail = (e as CustomEvent).detail;
       wavesRef.current.push({
         x: detail.x,
@@ -252,7 +255,7 @@ export default function InteractiveGrid({
     }
 
     function loop() {
-      if (!running || !isActiveRef.current) return;
+      if (!running || !isActiveRef.current || !isVisibleRef.current) return;
       draw();
 
       // Keep running if waves are active
@@ -276,6 +279,19 @@ export default function InteractiveGrid({
     });
     resizeObserver.observe(canvas);
 
+    // Pause animation when canvas is off-screen
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+        if (!entry.isIntersecting) {
+          cancelAnimationFrame(rafRef.current);
+          isActiveRef.current = false;
+        }
+      },
+      { threshold: 0 }
+    );
+    intersectionObserver.observe(canvas);
+
     return () => {
       running = false;
       isActiveRef.current = false;
@@ -284,6 +300,7 @@ export default function InteractiveGrid({
       document.removeEventListener("mouseleave", onMouseLeave);
       document.removeEventListener("grid-wave", onWaveEvent);
       resizeObserver.disconnect();
+      intersectionObserver.disconnect();
     };
   }, [draw, influenceRadius]);
 

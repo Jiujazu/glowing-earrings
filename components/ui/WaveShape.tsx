@@ -9,12 +9,14 @@ interface WaveShapeProps {
 
 export default function WaveShape({ children, className = "" }: WaveShapeProps) {
   const elRef = useRef<HTMLDivElement>(null);
+  const spinRef = useRef<HTMLDivElement>(null);
   const lastMoveRef = useRef({ x: 0, y: 0, time: 0 });
   const cooldownRef = useRef(false);
   const tiltRAF = useRef(0);
 
   const handleMouseEnter = useCallback((e: React.MouseEvent) => {
     const el = elRef.current;
+    const spin = spinRef.current;
     if (!el || cooldownRef.current) return;
 
     // Calculate mouse speed from last move
@@ -48,6 +50,12 @@ export default function WaveShape({ children, className = "" }: WaveShapeProps) 
     el.style.transform = `scale(${scale})`;
     el.style.filter = `drop-shadow(${shadowOffset}px ${shadowOffset}px 0px var(--neo-shadow-color, rgba(0,0,0,0.8)))`;
 
+    // Spin the inner element 360°
+    if (spin) {
+      spin.style.transition = "rotate 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)";
+      spin.style.rotate = "360deg";
+    }
+
     // Cooldown to prevent spam
     cooldownRef.current = true;
     setTimeout(() => { cooldownRef.current = false; }, 400);
@@ -55,11 +63,18 @@ export default function WaveShape({ children, className = "" }: WaveShapeProps) 
 
   const handleMouseLeave = useCallback(() => {
     const el = elRef.current;
+    const spin = spinRef.current;
     if (!el) return;
     cancelAnimationFrame(tiltRAF.current);
     el.style.transition = "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease-out";
     el.style.transform = "";
     el.style.filter = "";
+
+    // Spin back to 0°
+    if (spin) {
+      spin.style.transition = "rotate 0.4s cubic-bezier(0.16, 1, 0.3, 1)";
+      spin.style.rotate = "0deg";
+    }
   }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
@@ -91,7 +106,9 @@ export default function WaveShape({ children, className = "" }: WaveShapeProps) 
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {children}
+      <div ref={spinRef}>
+        {children}
+      </div>
     </div>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import dynamic from "next/dynamic";
 import type { CourseOutro as CourseOutroType } from "@/lib/types";
 import { getCourseBySlug, formatDuration, getDifficultyLabel } from "@/lib/course-utils";
@@ -188,15 +189,26 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
                     href={`/courses/${course!.meta.slug}`}
                     className="group block overflow-hidden border-4 border-[var(--course-text)]/15 transition-all duration-200 hover:-translate-y-1"
                   >
+                    {course!.meta.coverImage ? (
+                      <div className="relative h-28 overflow-hidden border-b-4 border-[var(--course-text)]/10">
+                        <Image
+                          src={course!.meta.coverImage}
+                          alt=""
+                          fill
+                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, 400px"
+                        />
+                      </div>
+                    ) : (
+                      <div
+                        className="h-2 border-b-4 border-[var(--course-text)]/10"
+                        style={{ backgroundColor: course!.meta.design.colors.primary }}
+                      />
+                    )}
                     <div
-                      className="h-1.5"
-                      style={{ backgroundColor: course!.meta.design.colors.primary }}
-                    />
-                    <div
-                      className="p-4 border-t-4 border-[var(--course-text)]/10"
+                      className="p-4"
                       style={{
                         backgroundColor: "var(--course-surface)",
-                        borderColor: "color-mix(in srgb, var(--course-text) 10%, transparent)",
                       }}
                     >
                       <div className="flex gap-2 mb-2">

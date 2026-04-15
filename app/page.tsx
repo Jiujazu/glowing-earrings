@@ -31,7 +31,7 @@ export default function Home() {
             <div className="w-full h-full bg-[var(--accent)] border-4 border-[var(--neo-border)]"
               style={{ boxShadow: '3px 3px 0px 0px var(--neo-shadow-color)' }} />
           </WaveShape>
-          <WaveShape className="absolute bottom-20 right-[18%] hidden lg:block pointer-events-auto">
+          <WaveShape className="absolute top-1/3 right-[18%] hidden lg:block pointer-events-auto">
             <Star className="w-8 h-8 text-[var(--neo-border)]" strokeWidth={3} />
           </WaveShape>
         </Parallax>

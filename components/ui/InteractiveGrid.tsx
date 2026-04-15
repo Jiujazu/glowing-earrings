@@ -136,7 +136,7 @@ export default function InteractiveGrid({
     // Draw base grid lines
     ctx.strokeStyle = borderColor;
     ctx.lineWidth = 0.5;
-    ctx.globalAlpha = 0.12;
+    ctx.globalAlpha = 0.15;
 
     for (let row = 0; row < rows; row++) {
       ctx.beginPath();
@@ -231,6 +231,7 @@ export default function InteractiveGrid({
       } else if (isActiveRef.current && wavesRef.current.length === 0) {
         mouseRef.current = { x: -1000, y: -1000 };
         lastDrawRef.current = { x: -9999, y: -9999 };
+        draw(); // restore base grid
         isActiveRef.current = false;
       }
     }
@@ -238,6 +239,7 @@ export default function InteractiveGrid({
     function onMouseLeave() {
       mouseRef.current = { x: -1000, y: -1000 };
       lastDrawRef.current = { x: -9999, y: -9999 };
+      draw(); // restore base grid
       if (wavesRef.current.length === 0) {
         isActiveRef.current = false;
       }

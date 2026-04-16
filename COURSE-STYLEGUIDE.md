@@ -213,6 +213,66 @@ Farbsprache nach Kategorie:
 - `surface` muss sich vom `background` abheben, aber subtil
 - Pop-Farben (Pink, Türkis) als Akzente erlaubt und erwünscht
 
+### 4.4 SVG-Grafiken: Neo-brutaler Editorial-Stil
+
+Alle Kurs-Grafiken (Cover + In-Course-Visualisierungen) folgen einem einheitlichen visuellen Stil:
+
+**Grundaufbau:**
+- **Hintergrund:** `#FAFAFA` (heller Seitenhintergrund)
+- **Subtiles Grid-Pattern:** Dünne Linien (`stroke-width: 0.5`, `opacity: 0.05-0.06`), 40px Raster
+- **Dicke schwarze Outlines:** `stroke="#000"`, `stroke-width: 3-4` auf allen Hauptformen
+- **Scharfe geometrische Formen:** Kein `border-radius`, keine Rundungen
+
+**Sticker-Labels:**
+- Leicht rotiert (`transform="rotate(-2 ...)"` bis `rotate(2 ...)"`)
+- `font-weight: 900`, `letter-spacing: 2-4`
+- Gefüllt mit Kurs-Primary-Farbe oder Akzentfarbe
+- Weißer Text auf farbigem Hintergrund
+
+**Dekorative Elemente (Pflicht, 2-3 pro SVG):**
+- Rotierte Pink-Quadrate (`#E91E8C`, `stroke="#000"`, `stroke-width: 3`)
+- Kleine schwarze Sterne (5-Punkt-Polygone)
+- Kleine rotierte farbige Quadrate (Kurs-Primary oder Accent)
+
+**Kursfarben als Fills:** Hauptformen nutzen die `primary`- und `accent`-Farbe des Kurses, nie generische Farben.
+
+**Pfeile:** Tip-Punkt hat den höheren x-Wert für rechts-zeigende Pfeile: `points="245,150 218,135 218,165"` (Tip x=245 > Base x=218).
+
+**Dateikonvention:**
+- Cover: `public/courses/[slug]/cover.svg`
+- In-Course-Grafiken: `public/courses/[slug]/svg_[beschreibung].svg`
+- `[beschreibung]` ist kebab-case, beschreibt den Inhalt (z.B. `svg_problem-visualisierung.svg`, `svg_aber-deshalb-regel.svg`)
+
+**Wann eine SVG-Visualisierung sinnvoll ist:**
+- **Ja:** Übersichten (Stufenmodelle, Hierarchien), Vergleiche (Vorher/Nachher, Pro/Contra), Architekturen (Systemdiagramme, Beziehungen)
+- **Nein:** Reine Text-Wiederholung, Dekoration ohne Informationswert, Konzepte die im Fließtext klarer sind
+
+### 4.5 Quelldateien (source.md)
+
+Jeder Kurs hat eine `source.md` im Ordner `content/courses/[slug]/`. Template:
+
+```markdown
+# Quelle: [Titel]
+
+- **Typ:** [YouTube Video / Artikel / GitHub Gist / Website / ...]
+- **URL:** [Link zum Original]
+- **Autor:** [Name]
+
+## [Transkript / Originaltext / Inhalt]
+
+[Volltext oder Verweis auf separate Datei im selben Ordner]
+```
+
+Bei umfangreichen Transkripten kann der Inhalt auch als separate `.txt`-Datei im selben Ordner liegen, referenziert aus der `source.md`.
+
+### 4.6 Transkript-Verifizierung
+
+Vor dem Finalisieren eines Kurses: **Kursinhalte gegen das Original-Transkript prüfen.** Insbesondere:
+- Bildunterschriften stimmen mit dem, was das Bild tatsächlich zeigt
+- Zitate und Zahlen sind korrekt übernommen
+- Keine Verwechslung von Szenen oder Beispielen
+- Reihenfolge der Themen entspricht dem Original (sofern nicht bewusst umstrukturiert)
+
 ---
 
 ## 5. Tonfall
@@ -311,6 +371,13 @@ Jeder Kurs muss diese Punkte erfüllen, bevor er gepusht wird:
 - [ ] Design passt zum Thema
 - [ ] Schwierigkeitsgrad korrekt eingestuft
 - [ ] Tags sind konsistent mit bestehenden Kursen
+- [ ] Cover-SVG im neo-brutalen Editorial-Stil vorhanden (`public/courses/[slug]/cover.svg`)
+- [ ] SVG-Visualisierungen wo sinnvoll (Übersichten, Vergleiche, Architekturen) — nicht erzwingen
+
+### Quelldateien
+- [ ] `source.md` mit Metadata-Header (Typ, URL, Autor) vorhanden
+- [ ] Transkript/Originaltext in `source.md` oder als referenzierte `.txt`-Datei hinterlegt
+- [ ] Kursinhalte gegen Original-Transkript verifiziert (Captions, Zitate, Zahlen)
 
 ---
 
@@ -327,7 +394,7 @@ Jeder Kurs muss diese Punkte erfüllen, bevor er gepusht wird:
 
 ## 9. Referenz
 
-- **Referenz-Kurse:** `/content/courses/karpathy-llm-wiki.ts` (ai-tech), `/content/courses/agentic-os-context-levels.ts` (ai-workflows)
+- **Referenz-Kurse:** `/content/courses/karpathy-llm-wiki/course.json` (ai-tech), `/content/courses/agentic-os-context-levels/course.json` (ai-workflows)
 - **TypeScript-Typen:** `/lib/types.ts`
 - **Datenstruktur-Doku:** `CLAUDE.md`
 - **CI-Farben:** Brand Lila `#5B2F9F`, Teal `#025671`, Dark Purple `#261C53`, Hot Pink `#E91E8C`, Electric Türkis `#00C9A7`
@@ -367,3 +434,22 @@ Jeder Kurs muss diese Punkte erfüllen, bevor er gepusht wird:
 - Kurze Kurse (3-4 Module) funktionieren für fokussierte Tool-Vorstellungen
 - Prose-first bewährt — Workflows als Fließtext statt als Callout-Kette
 - Tool-Titel brauchen erklärendes Subheading ("Die beste Lösung zum Diktieren...")
+
+### Kurs 4: Storytelling in der Bildung (2026-04-14)
+
+**Quelle:** Julian van Dieken, YouTube Video — Beginner
+**Theme:** Dark, Storytelling (Amber + Warm)
+
+- **Neo-brutaler Editorial SVG-Stil etabliert:** Alle In-Course-Grafiken auf den neuen Stil umgestellt (helle BG, Grid-Pattern, dicke Outlines, Sticker-Labels). Vorher waren es generische dunkle Diagramme — jetzt visuell konsistent mit den Cover-SVGs.
+- **SVG-Pfeil-Richtung:** Polygon-Punkte für rechts-zeigende Pfeile: Tip-x > Base-x. Häufiger Fehler beim Erstellen.
+- **Ergänzung externer Frameworks:** Die "Aber-Deshalb-Regel" (South Park / Trey Parker & Matt Stone) als thematisch passende Ergänzung eingefügt — Bereicherung durch externe Quellen, die zum Kursthema passen, ist erlaubt und sinnvoll.
+- **Bildunterschriften gegen Transkript prüfen:** Caption zeigte falschen Kontext (Plastikkiste statt Gruppenszene). Transkript-Verifizierung als Pflicht-Schritt etabliert.
+- **Namenskonvention:** `svg_[beschreibung].svg` für In-Course-Grafiken bewährt.
+
+### Kurs 2 Update: Visualisierungen (2026-04-16)
+
+**Änderung:** 3 SVG-Visualisierungen zum Agentic OS Kurs hinzugefügt
+
+- **Übersichts-SVGs** (aufsteigende Balken, Stufenmodelle) helfen Lesern, die Kursstruktur früh zu erfassen — am besten direkt nach der Einleitung platzieren
+- **Vergleichs-SVGs** (Pro/Contra, Vorher/Nachher) machen Differenzierungen zwischen Konzepten greifbar — direkt nach der textuellen Einführung des Vergleichs platzieren
+- **Architektur-SVGs** (zentrale Knoten, Verbindungen) machen abstrakte Systemkonzepte konkret — nach der Konzepteinführung, vor den Details

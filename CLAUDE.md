@@ -23,7 +23,7 @@ Eine kostenlose, interaktive Lernplattform für generative KI. Kuratiert von Jul
 Julian liefert einen Link oder Inhalt: Tweet, Artikel, Video, Gist, Paper.
 
 ### 2. Kurs generieren
-Eine TypeScript-Datei erstellen, die dem `Course`-Interface entspricht (siehe Datenstruktur unten). Dabei:
+Eine JSON-Datei erstellen, die dem `Course`-Interface entspricht (siehe Datenstruktur unten). Dabei:
 
 - **Kursname und Subtitle** — griffig, neugierig machend, deutsch
 - **Modulstruktur** — 3-6 Module, logisch aufbauend, je 2-5 Minuten
@@ -260,8 +260,10 @@ lib/
 
 ## Referenz-Kurse
 
-- `/content/courses/karpathy-llm-wiki/course.json` — Erster Kurs, technisch (ai-tech), Dark Theme (Lila/Teal)
-- `/content/courses/agentic-os-context-levels/course.json` — Zweiter Kurs, Workflow (ai-workflows), Dark Theme (Amber/Blau)
+- `/content/courses/karpathy-llm-wiki/course.json` — Kurs 1, technisch (ai-tech), Dark Theme (Lila/Teal)
+- `/content/courses/agentic-os-context-levels/course.json` — Kurs 2, Workflow (ai-workflows), Dark Theme (Amber/Blau)
+- `/content/courses/handy-speech-to-text/course.json` — Kurs 3, Tool (ai-workflows), Dark Theme (Grün/Gelb)
+- `/content/courses/storytelling-bildung/course.json` — Kurs 4, Kreativität (ai-creativity), Dark Theme (Amber/Warm)
 
 Der jeweils letzte Kurs dient als primäre Referenz für Struktur, Tonfall und Element-Einsatz.
 

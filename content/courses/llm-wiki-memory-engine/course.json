@@ -1,0 +1,444 @@
+{
+  "meta": {
+    "slug": "llm-wiki-memory-engine",
+    "title": "Das lebende Wiki",
+    "subheading": "Die Karpathy Methode — Teil 2",
+    "subtitle": "Dein Wiki aus Teil 1 funktioniert — aber was passiert ab 200 Seiten? Memory Lifecycle, Knowledge Graph und Automation machen es zum selbstpflegenden System.",
+    "sourceUrl": "https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2",
+    "sourceAuthor": "rohitg00",
+    "sourceType": "gist",
+    "category": "ai-tech",
+    "tags": ["Wissensmanagement", "Knowledge Graph", "Agents"],
+    "estimatedMinutes": 22,
+    "difficulty": "advanced",
+    "publishedAt": "2026-04-16",
+    "coverImage": "/courses/llm-wiki-memory-engine/cover.svg",
+    "relatedCourses": ["karpathy-llm-wiki"],
+    "design": {
+      "theme": "living-knowledge",
+      "colors": {
+        "background": "#0B0A1A",
+        "surface": "#1C1735",
+        "primary": "#8B5CF6",
+        "accent": "#14B8A6",
+        "text": "#EDE4F8",
+        "textMuted": "#9B8EC0"
+      },
+      "lightColors": {
+        "background": "#F8F7FC",
+        "surface": "#FFFFFF",
+        "primary": "#7C3AED",
+        "accent": "#0D9488",
+        "text": "#2E1065",
+        "textMuted": "#6B7280"
+      }
+    }
+  },
+  "intro": {
+    "hook": "Dein Wiki funktioniert. Du hast Quellen, Markdown-Seiten, einen Index. Aber ab 200 Seiten wird es langsam, Widersprüche schleichen sich ein, und alte Fakten wiegen genauso schwer wie neue. Das Original-Konzept hat kein Immunsystem — und keine Idee von Zeit.",
+    "sourceContext": "Dieser Kurs basiert auf dem Gist von rohitg00, der Karpathys LLM-Wiki-Konzept mit Erfahrungen aus dem Bau von agentmemory erweitert — einer produktionsreifen Memory Engine für KI-Agenten. Wo Karpathy die Theorie liefert, liefert rohitg00 die Praxis: Confidence Scoring, Knowledge Graphs, Event-Hooks und Multi-Agent-Kollaboration."
+  },
+  "modules": [
+    {
+      "id": "memory-lifecycle",
+      "title": "Wissen, das altert",
+      "estimatedMinutes": 4,
+      "elements": [
+        {
+          "id": "ml-recap",
+          "type": "content",
+          "text": "Kurzer Rückblick: Im ersten Kurs hast du die **3-Schichten-Architektur** kennengelernt — Raw Sources, Wiki, Schema. Dazu drei Operationen: Ingest, Query, Lint.\n\nDas funktioniert. Aber es gibt ein fundamentales Problem: **Alle Seiten im Wiki sind gleichwertig.** Ein Fakt von gestern wiegt genauso schwer wie einer von vor zwei Jahren. Eine Behauptung aus einer einzigen Quelle steht neben einer, die fünf Quellen bestätigen."
+        },
+        {
+          "id": "ml-confidence",
+          "type": "key-concept",
+          "title": "Confidence Scoring",
+          "description": "Jeder Fakt im Wiki bekommt einen Score basierend auf drei Faktoren: Anzahl der bestätigenden Quellen, Aktualität der Information und vorhandene Widersprüche. Beispiel: \"Project X uses Redis\" — bestätigt von 3 Quellen, Score 0.85. Der Score ist keine binäre Wahrheit, sondern ein Spektrum."
+        },
+        {
+          "id": "ml-supersession",
+          "type": "content",
+          "text": "### Supersession — Versionskontrolle für Wissen\n\nWenn neue Information eine alte ersetzt, passiert das nicht stillschweigend. Die neue Info wird **explizit verlinkt** mit der alten, mit Zeitstempel versehen. Die alte Version wird als `stale` markiert, bleibt aber erhalten.\n\nDenk an Git: Du überschreibst keinen alten Commit — du erstellst einen neuen, der den alten ersetzt. **Version Control for Knowledge.**"
+        },
+        {
+          "id": "ml-ebbinghaus",
+          "type": "callout",
+          "variant": "fun-fact",
+          "title": "Vergessen als Feature",
+          "text": "Hermann Ebbinghaus zeigte 1885: Wir vergessen **~70% neuer Informationen innerhalb von 24 Stunden**. Die Retention sinkt exponentiell — aber jede Wiederholung setzt die Kurve zurück.\n\nagentmemory nutzt genau dieses Prinzip: **Retention Decay als bewusstes Feature.** Nicht alles soll gleich lang leben. Architektur-Entscheidungen verfallen langsam, transiente Bugs verfallen schnell. Das Wiki vergisst aktiv — und das ist gut so."
+        },
+        {
+          "id": "ml-tiers",
+          "type": "content",
+          "text": "### Die 4 Consolidation Tiers\n\nWissen steigt im System auf, wenn es sich bewährt:\n\n- **Working Memory** — frische Beobachtungen, noch unverarbeitet\n- **Episodic Memory** — konkrete Ereignisse und Erfahrungen, zeitgebunden\n- **Semantic Memory** — abstrahierte Fakten und Zusammenhänge, zeitlos\n- **Procedural Memory** — eingeübte Abläufe und Regeln, quasi-automatisch\n\nDas System **promoted Information nach oben**, wenn sich Evidenz akkumuliert. Ein einzelner Bug-Report bleibt in Working Memory. Wenn drei verschiedene Quellen das gleiche Pattern beschreiben, steigt es zu Semantic Memory auf."
+        },
+        {
+          "id": "ml-quiz",
+          "type": "quiz",
+          "question": "Ein Fakt in deinem Wiki wurde von 3 Quellen bestätigt, ist 8 Monate alt und wurde nie abgerufen. Was sollte das System tun?",
+          "options": [
+            {
+              "text": "Sofort löschen — 8 Monate ohne Abruf ist zu lang",
+              "correct": false,
+              "feedback": "Alter allein ist kein Löschgrund. 3 bestätigende Quellen sind ein starkes Signal."
+            },
+            {
+              "text": "Confidence Score senken wegen Retention Decay, aber behalten",
+              "correct": true,
+              "feedback": "Genau. Der Score sinkt durch Decay, aber 3 Quellen halten ihn über dem Lösch-Threshold. Bei der nächsten Abfrage wird die Kurve zurückgesetzt."
+            },
+            {
+              "text": "Score auf Maximum setzen — 3 Quellen sind eindeutig",
+              "correct": false,
+              "feedback": "Die Quellenanzahl ist nur ein Faktor. Aktualität und Abrufhäufigkeit spielen ebenfalls rein."
+            },
+            {
+              "text": "In Working Memory zurückstufen zur Überprüfung",
+              "correct": false,
+              "feedback": "Consolidation Tiers gehen normalerweise nach oben, nicht zurück. Ein Fakt mit 3 Quellen gehört in Semantic Memory."
+            }
+          ],
+          "explanation": "Confidence Scoring kombiniert mehrere Signale. Retention Decay senkt den Score über Zeit, aber bestätigende Quellen stabilisieren ihn. Das System vergisst aktiv — aber nicht blindlings."
+        },
+        {
+          "id": "ml-fc-datum",
+          "type": "flashcard",
+          "front": "Warum reicht ein simples Datum nicht statt Confidence Score?",
+          "back": "Ein Datum sagt dir nur, wann etwas geschrieben wurde — nicht, wie gut es belegt ist. Ein Fakt von gestern aus einer einzigen fragwürdigen Quelle ist weniger vertrauenswürdig als ein 2 Jahre alter Fakt, den 5 Quellen bestätigen. Confidence Scoring kombiniert Aktualität, Quellenanzahl und Widersprüche zu einem Gesamtbild."
+        }
+      ],
+      "transitionToNext": "Dein Wiki hat jetzt ein Gedächtnis mit Verfallsdatum. Aber wie findet es überhaupt die richtigen Seiten, wenn der Index nicht mehr reicht?"
+    },
+    {
+      "id": "knowledge-graph",
+      "title": "Der Knowledge Graph",
+      "estimatedMinutes": 5,
+      "elements": [
+        {
+          "id": "kg-limit",
+          "type": "content",
+          "text": "Im Original-Konzept navigiert das LLM über die `index.md` — einen nach Kategorien sortierten Katalog aller Wiki-Seiten. Das funktioniert bis etwa **200 Seiten**.\n\nDanach wird der Index zu lang, die Kategorien zu flach, und das LLM übersieht Verbindungen. Die Lösung ist nicht ein größerer Index — sondern eine **andere Datenstruktur**."
+        },
+        {
+          "id": "kg-context",
+          "type": "context-box",
+          "term": "Knowledge Graph",
+          "explanation": "Ein Netzwerk aus Knoten (Entities wie Personen, Tools, Konzepte) und typisierten Kanten (Beziehungen wie \"nutzt\", \"widerspricht\", \"verursacht\"). Anders als ein flacher Index bildet ein Graph semantische Beziehungen ab — nicht nur \"was existiert\", sondern \"wie hängt es zusammen\"."
+        },
+        {
+          "id": "kg-entities",
+          "type": "content",
+          "text": "### Entity-Extraktion\n\nBei jeder Ingestion extrahiert das System automatisch Entities aus dem neuen Material:\n\n- **People** — Personen, Autoren, Experten\n- **Projects** — Softwareprojekte, Initiativen\n- **Libraries** — Tools, Frameworks, Pakete\n- **Concepts** — abstrakte Ideen, Muster, Prinzipien\n- **Files** — konkrete Dateien, Configs, Schemas\n- **Decisions** — getroffene Entscheidungen mit Kontext\n\nJede Entity hat **Typ, Attribute und Beziehungen**. Und genau die Beziehungen machen den Unterschied."
+        },
+        {
+          "id": "kg-relationships",
+          "type": "content",
+          "text": "### 6 typisierte Beziehungen\n\nJede Kante im Graph hat einen **semantischen Typ**, Confidence-Wert und Quellenangabe:\n\n- **uses** — \"Projekt X nutzt Redis\"\n- **depends-on** — \"Feature Y hängt von API Z ab\"\n- **contradicts** — \"Paper A widerspricht Behauptung B\"\n- **caused** — \"Deployment X verursachte Incident Y\"\n- **fixed** — \"Commit Z behob Bug Q\"\n- **supersedes** — \"Neues Modell ersetzt altes\"\n\nDer Typ bestimmt, was das System mit der Beziehung anfangen kann. `contradicts` triggert Lint-Checks. `supersedes` aktualisiert Confidence Scores. `depends-on` warnt bei Breaking Changes."
+        },
+        {
+          "id": "kg-example",
+          "type": "callout",
+          "variant": "example",
+          "title": "Konkretes Beispiel: Artikel \"Claude 4 + Tool Use\"",
+          "text": "Du fütterst einen Artikel über Claude 4 und Tool Use ein. Das System extrahiert:\n\n1. **Claude 4** --uses--> **Tool Use API**\n2. **Claude 4** --supersedes--> **Claude 3.5** (für bestimmte Tasks)\n3. **Tool Use API** --depends-on--> **JSON Schema**\n4. **Artikel** --contradicts--> **ältere Benchmark-Seite** (neue Zahlen)\n5. **Claude 4** --caused--> **Update der Best-Practices-Seite**\n\n5 Kanten aus einem Artikel. Jede mit Confidence-Wert und Quelle."
+        },
+        {
+          "id": "kg-traversal",
+          "type": "content",
+          "text": "### Graph Traversal statt linearer Suche\n\nMit einem Knowledge Graph beantwortest du Fragen, die ein flacher Index nie beantworten könnte:\n\n*\"Was ist der Impact, wenn wir Redis upgraden?\"*\n\nDer Graph traversiert: Redis → depends-on → alle abhängigen Projekte → deren Dependencies → potentielle Konflikte. **Navigation über Bedeutung statt über Wörter.**\n\nWichtig: **Der Graph ersetzt die Wiki-Seiten nicht — er ergänzt sie.** Seiten sind zum Lesen da. Der Graph ist zum Navigieren und Entdecken da."
+        },
+        {
+          "id": "kg-fc-typed",
+          "type": "flashcard",
+          "front": "Warum ist eine typisierte Kante wie \"--contradicts-->\" nützlicher als ein einfacher Link?",
+          "back": "Ein einfacher Link sagt nur \"diese zwei Seiten hängen zusammen\". Eine typisierte Kante sagt WIE sie zusammenhängen. \"contradicts\" triggert automatisch Lint-Checks und Widerspruchs-Auflösung. \"depends-on\" warnt bei Breaking Changes. Der Typ macht die Beziehung maschinell nutzbar."
+        },
+        {
+          "id": "kg-quiz",
+          "type": "quiz",
+          "question": "Welche Datenstruktur kann die Frage \"Welche Annahmen in meinem Wiki sind veraltet?\" am besten beantworten?",
+          "options": [
+            {
+              "text": "Ein alphabetisch sortierter Index",
+              "correct": false,
+              "feedback": "Ein Index listet Seiten auf, kennt aber keine Beziehungen zwischen ihnen."
+            },
+            {
+              "text": "Ein Knowledge Graph mit typisierten Kanten und Confidence Scores",
+              "correct": true,
+              "feedback": "Genau. Der Graph kann \"supersedes\"- und \"contradicts\"-Kanten traversieren und mit Confidence Scores abgleichen — so findet er veraltete Annahmen systematisch."
+            },
+            {
+              "text": "Eine Volltextsuche über alle Wiki-Seiten",
+              "correct": false,
+              "feedback": "Volltextsuche findet Wörter, aber keine semantischen Beziehungen wie \"veraltet durch\"."
+            },
+            {
+              "text": "Ein chronologisches Log aller Änderungen",
+              "correct": false,
+              "feedback": "Ein Log zeigt was sich geändert hat, aber nicht welche bestehenden Annahmen dadurch in Frage gestellt werden."
+            }
+          ],
+          "explanation": "Knowledge Graphs mit typisierten Kanten können Fragen über Beziehungen beantworten: Was widerspricht was? Was wurde ersetzt? Was hängt wovon ab? Das sind genau die Fragen, die ein wachsendes Wiki konsistent halten."
+        },
+        {
+          "id": "kg-fc-ingestion",
+          "type": "flashcard",
+          "front": "Wie ändert sich der Ingestion-Prozess mit einem Knowledge Graph im Vergleich zum Original?",
+          "back": "Im Original erstellt Ingest Zusammenfassungen und aktualisiert den Index. Mit Graph kommt dazu: Entity-Extraktion (Personen, Tools, Konzepte), Beziehungs-Erkennung (uses, contradicts, depends-on...) und Graph-Update. Jede neue Quelle stärkt nicht nur einzelne Seiten, sondern das gesamte Beziehungsnetz."
+        }
+      ],
+      "transitionToNext": "Der Graph zeigt dir, wie Wissen zusammenhängt. Aber wie findest du die richtige Nadel im Heuhaufen, wenn der Heuhaufen 500 Seiten hat?"
+    },
+    {
+      "id": "hybrid-search",
+      "title": "Suche jenseits der index.md",
+      "estimatedMinutes": 4,
+      "elements": [
+        {
+          "id": "hs-signals",
+          "type": "step-by-step",
+          "title": "Drei Suchsignale",
+          "steps": [
+            {
+              "label": "BM25 — exakte Keyword-Suche",
+              "content": "Klassisches Information Retrieval: Keyword Matching mit **Stemming** (\"upgrading\" findet \"upgrade\") und **Synonym Expansion** (\"DB\" findet \"Datenbank\"). Schnell, präzise bei exakten Begriffen — aber blind für Bedeutung."
+            },
+            {
+              "label": "Vector Search — semantische Ähnlichkeit",
+              "content": "Text wird in hochdimensionale Vektoren umgewandelt (Embeddings). Findet **bedeutungsähnliche** Inhalte, auch wenn kein einziges Wort übereinstimmt. \"Wie skaliert man Datenbanken?\" findet Seiten über Sharding, Replikation, Connection Pooling."
+            },
+            {
+              "label": "Graph Traversal — strukturelle Navigation",
+              "content": "Entity-aware Relationship Walking: Startet bei einer Entity und folgt typisierten Kanten. Findet Zusammenhänge, die weder Keywords noch Embeddings erfassen — weil sie auf **explizit modellierten Beziehungen** basieren."
+            }
+          ]
+        },
+        {
+          "id": "hs-rrf",
+          "type": "content",
+          "text": "### Reciprocal Rank Fusion\n\nDrei Suchsignale produzieren drei Ergebnislisten. Wie verschmilzt man die?\n\n**Reciprocal Rank Fusion (RRF)** berechnet für jedes Ergebnis:\n\n`score = sum(1 / (k + rank))`\n\nMit `k = 60` als typischem Wert. Jedes Ergebnis bekommt einen Score basierend auf seiner Position in **jeder** Liste. Ein Dokument, das in allen drei Listen auftaucht, gewinnt — auch wenn es nirgendwo auf Platz 1 steht.\n\nDie `index.md` bleibt als **menschenlesbarer Katalog** erhalten — aber ab ~100 Seiten ist sie nicht mehr die primäre Suchschnittstelle."
+        },
+        {
+          "id": "hs-stat",
+          "type": "callout",
+          "variant": "stat",
+          "title": "Erfahrung aus agentmemory",
+          "text": "Die Kombination aus BM25, Vector Search und Graph Traversal schlägt jede Einzelmethode — konsistent, über verschiedene Dokumenttypen und Fragestellungen hinweg. Keine der drei Methoden allein erreicht die Qualität der Fusion."
+        },
+        {
+          "id": "hs-fc-fusion",
+          "type": "flashcard",
+          "front": "BM25 findet 3 Ergebnisse, Vector Search 5, Graph Traversal 2 — wie werden sie kombiniert?",
+          "back": "Reciprocal Rank Fusion: Jedes Ergebnis bekommt einen Score basierend auf seinem Rang in jeder Liste (score = 1/(k+rank)). Die Scores werden summiert. Ein Dokument, das in allen drei Listen vorkommt, steigt nach oben — selbst wenn es in keiner Liste ganz vorne stand. Der Fusions-Score ist robuster als jeder Einzelscore."
+        },
+        {
+          "id": "hs-quiz",
+          "type": "quiz",
+          "question": "Warum reicht Vector Search allein nicht für ein Wiki mit 500 Seiten?",
+          "options": [
+            {
+              "text": "Vector Search ist zu langsam für 500 Seiten",
+              "correct": false,
+              "feedback": "Performance ist bei 500 Seiten kein Problem. Die Einschränkung ist konzeptuell, nicht technisch."
+            },
+            {
+              "text": "Embeddings erfassen keine exakten Begriffe und keine expliziten Beziehungen zwischen Entities",
+              "correct": true,
+              "feedback": "Genau. Vector Search findet semantisch Ähnliches, übersieht aber exakte Matches (dafür BM25) und modellierte Beziehungen wie \"contradicts\" oder \"depends-on\" (dafür Graph Traversal)."
+            },
+            {
+              "text": "Vector Search funktioniert nur mit englischen Texten",
+              "correct": false,
+              "feedback": "Moderne Embedding-Modelle sind multilingual. Die Sprache ist nicht das Problem."
+            },
+            {
+              "text": "Embeddings veralten schnell und müssen ständig neu berechnet werden",
+              "correct": false,
+              "feedback": "Embeddings sind stabil. Das Problem ist, was sie nicht erfassen können: exakte Begriffe und strukturelle Beziehungen."
+            }
+          ],
+          "explanation": "Jede Suchmethode hat blinde Flecken. BM25 findet exakte Begriffe, aber keine Bedeutung. Vector Search findet Bedeutung, aber keine Struktur. Graph Traversal findet Struktur, aber braucht einen Startpunkt. Nur die Kombination deckt alle Dimensionen ab."
+        }
+      ],
+      "transitionToNext": "Du hast jetzt Lifecycle, Graph und Suche. Aber all das manuell betreiben? Karpathys Original setzt auf manuelle Operationen. Das skaliert nicht."
+    },
+    {
+      "id": "automation-quality",
+      "title": "Das selbstpflegende Wiki",
+      "estimatedMinutes": 5,
+      "elements": [
+        {
+          "id": "aq-problem",
+          "type": "content",
+          "text": "Im Original-Konzept sind Ingest, Query und Lint **manuelle Operationen**. Du sagst dem LLM: \"Nimm diese Quelle auf.\" Oder: \"Prüfe das Wiki auf Widersprüche.\"\n\nDas funktioniert — solange du daran denkst. In der Praxis vergisst man Lint-Durchläufe, Sessions werden nicht destilliert, neue Quellen liegen herum. Die Lösung: **Event-Driven Architecture.**"
+        },
+        {
+          "id": "aq-hooks",
+          "type": "content",
+          "text": "### 6 Event-Hooks\n\nStatt manueller Operationen reagiert das System automatisch auf Ereignisse:\n\n- **on-new-source** — Auto-Ingest, Entity-Extraktion, Graph-Updates\n- **on-session-start** — Relevanten Kontext laden\n- **on-session-end** — Beobachtungen komprimieren und destillieren\n- **on-query** — Quality Scoring: nur wenn `quality score > threshold`, geht die Antwort als neue Seite ins Wiki\n- **on-memory-write** — Validieren, Querverweise prüfen\n- **on-schedule** — Regelmäßiges Lint, Consolidation, Retention Decay\n\nDie Richtung bleibt beim Menschen. Das Bookkeeping wird automatisiert."
+        },
+        {
+          "id": "aq-crystallization",
+          "type": "callout",
+          "variant": "tip",
+          "title": "Crystallization — Sessions werden zu Wissen",
+          "text": "Der `on-session-end` Hook ist besonders mächtig: Er destilliert jede Arbeitssession in ein **strukturiertes Digest** — Frage, Findings, beteiligte Dateien/Entities, Lessons Learned.\n\n**Explorations sind eine Quelle, genau wie Artikel.** Statt dass deine Recherche im Chat-Verlauf verschwindet, wird sie automatisch zum Teil des Wikis."
+        },
+        {
+          "id": "aq-fc-hooks",
+          "type": "flashcard",
+          "front": "Was ändert sich bei Lint mit Event-Hooks verglichen mit dem manuellen Original?",
+          "back": "Im Original musst du Lint aktiv anstoßen — und vergisst es meistens. Mit on-schedule läuft Lint automatisch nach Zeitplan. Mit on-memory-write wird jeder neue Eintrag sofort gegen bestehende Seiten geprüft. Widersprüche werden entdeckt, bevor sie sich akkumulieren."
+        },
+        {
+          "id": "aq-selfhealing",
+          "type": "content",
+          "text": "### Self-Healing und Quality Scoring\n\nDas Wiki repariert sich selbst:\n\n- **Content Scoring** — Jeder LLM-generierte Inhalt wird bewertet: gut strukturiert? Quellen zitiert? Konsistent mit dem Rest? Ein **zweiter Durchlauf mit anderem Prompt** validiert die Qualität. Unter einem Threshold → Markierung für manuelles Review.\n- **Orphan Pages** — Seiten ohne eingehende Links werden identifiziert und entweder verlinkt oder als Kandidaten für Archivierung markiert\n- **Stale Claims** — Behauptungen mit abgelaufenem Confidence Score werden automatisch geflaggt\n- **Broken Cross-References** — Defekte Verlinkungen werden repariert\n\n### Contradiction Resolution\n\nWenn sich zwei Fakten widersprechen, entscheiden drei Kriterien:\n\n- **Source Recency** — neuere Quelle bevorzugt\n- **Source Authority** — vertrauenswürdigere Quelle bevorzugt\n- **Supporting Observations** — mehr bestätigende Quellen bevorzugt\n\nBei Gleichstand: Human Override. Das System schlägt vor, der Mensch entscheidet."
+        },
+        {
+          "id": "aq-codeblock",
+          "type": "code-block",
+          "language": "yaml",
+          "filename": "wiki-hooks.yml",
+          "code": "hooks:\n  on-new-source:\n    - extract_entities\n    - update_graph\n    - ingest_to_wiki\n    - update_index\n\n  on-session-end:\n    - crystallize_session\n    - promote_findings\n\n  on-query:\n    - search_hybrid          # BM25 + Vector + Graph\n    - score_response\n    - file_if_quality > 0.8  # nur gute Antworten ins Wiki\n\n  on-schedule:\n    - lint_contradictions     # wöchentlich\n    - decay_retention         # täglich\n    - consolidate_tiers       # monatlich\n    - clean_orphans           # wöchentlich",
+          "highlightLines": [10, 11, 15, 18, 19, 20, 21]
+        },
+        {
+          "id": "aq-easter",
+          "type": "easter-egg",
+          "trigger": "idle",
+          "content": "Fun Fact: Dein Hippocampus konsolidiert im Tiefschlaf — er sortiert Tageserlebnisse in Langzeitgedächtnis um. Der on-schedule Hook macht genau das Gleiche: nachts aufräumen, konsolidieren, vergessen. Dein Wiki schläft auch."
+        },
+        {
+          "id": "aq-reflection",
+          "type": "reflection",
+          "prompt": "Schau dir die 6 Event-Hooks an: on-new-source, on-session-start, on-session-end, on-query, on-memory-write, on-schedule. Welcher würde in deinem Workflow den größten Unterschied machen — und warum?",
+          "placeholder": "Z.B. on-session-end, weil meine Recherche-Sessions nie dokumentiert werden..."
+        }
+      ],
+      "transitionToNext": "Dein Wiki pflegt sich jetzt selbst. Aber was passiert, wenn mehrere Leute — oder mehrere Agents — gleichzeitig daran arbeiten?"
+    },
+    {
+      "id": "collaboration-governance",
+      "title": "Das Team-Wiki",
+      "estimatedMinutes": 4,
+      "elements": [
+        {
+          "id": "cg-multiagent",
+          "type": "content",
+          "text": "Bisher war das Wiki ein Solo-Projekt: ein Mensch, ein Agent, ein Wissensraum. Aber in der Praxis arbeiten **mehrere Agents** parallel — und möglicherweise auch mehrere Menschen.\n\n### Mesh Sync\n\nMehrere Agents schreiben gleichzeitig ins Wiki. Konflikte werden über **Last-Write-Wins** mit Timestamp-basierter Resolution gelöst. Bei echten inhaltlichen Konflikten: **manuelles Override** durch den Menschen.\n\n### Shared vs. Private Scoping\n\nNicht alles gehört in den gemeinsamen Raum. Jeder Agent und jeder Mensch hat einen **privaten Scope** — persönliche Notizen, halbfertige Gedanken, sensible Informationen. Private Einträge können gezielt in den Shared Scope **promoted** werden, wenn sie ausgereift sind."
+        },
+        {
+          "id": "cg-privacy",
+          "type": "callout",
+          "variant": "warning",
+          "title": "Privacy by Design",
+          "text": "Drei Schutzmechanismen, die von Anfang an eingebaut sein müssen:\n\n- **Ingest-Filter** — API Keys, Tokens, Passwörter, personenbezogene Daten werden automatisch beim Import gefiltert\n- **Scope-Labels** — Jeder Eintrag ist klar als private oder shared markiert\n- **Audit Trails** — Jede Operation wird geloggt: Zeitstempel, was wurde geändert, warum. Kein Eintrag verschwindet spurlos."
+        },
+        {
+          "id": "cg-schema",
+          "type": "content",
+          "text": "### Schema als Produkt\n\nDie `CLAUDE.md` (oder `AGENTS.md`) ist das **wichtigste File** im gesamten System. Sie definiert:\n\n- **Entity-Typen** — welche Arten von Knoten existieren\n- **Beziehungstypen** — welche Kanten erlaubt sind\n- **Ingest-Regeln** — wann wird erstellt vs. aktualisiert\n- **Quality Standards** — ab welchem Score ist ein Eintrag gut genug\n- **Widerspruchs-Regeln** — wie werden Konflikte aufgelöst\n- **Consolidation Schedule** — wann wird aufgeräumt\n- **Private vs. Shared** — was gehört wohin\n\nDie erste Version ist rau. Nach ein paar Dutzend Quellen wird sie gut. Und sie ist **transferierbar** — ein Schema, das für ein Themengebiet funktioniert, ist ein Startpunkt für das nächste."
+        },
+        {
+          "id": "cg-fc-schema",
+          "type": "flashcard",
+          "front": "Warum ist CLAUDE.md wichtiger als jede einzelne Wiki-Seite?",
+          "back": "Weil CLAUDE.md das Metawissen enthält: Wie soll das Wiki arbeiten? Welche Regeln gelten? Ohne Schema produziert das LLM inkonsistente Ergebnisse. Eine einzelne Wiki-Seite ist ein Fakt — das Schema ist das Betriebssystem, das alle Fakten steuert."
+        },
+        {
+          "id": "cg-work",
+          "type": "content",
+          "text": "### Work Coordination und Bulk Operations\n\n**Work Coordination** verhindert Doppelarbeit: Wer arbeitet gerade woran? Was ist blockiert? Was ist fertig? In Multi-Agent-Setups ist das essentiell — sonst ingestieren zwei Agents dieselbe Quelle parallel.\n\n### Output Formats\n\nDas Wiki liefert nicht nur Markdown. Je nach Frage und Zielgruppe produziert es:\n\n- **Comparison Tables** — Gegenüberstellungen\n- **Timelines** — chronologische Abläufe\n- **Dependency Graphs** — Abhängigkeitsdiagramme\n- **Slide Decks** — Präsentationen\n- **JSON/CSV Exports** — strukturierte Daten\n- **Team Briefs** — Zusammenfassungen für Stakeholder\n\n**Bulk Operations** — Massenlöschung, Export, Duplikat-Zusammenführung — sind auditierbar und reversibel."
+        },
+        {
+          "id": "cg-spectrum",
+          "type": "step-by-step",
+          "title": "Implementation Spectrum — 6 Stufen",
+          "steps": [
+            {
+              "label": "Stufe 1: Minimal Viable Wiki",
+              "content": "Quellen + Wiki + `index.md` + Schema. Das Original-Konzept aus Teil 1. Funktioniert, hat aber kein Gedächtnis für Zeit."
+            },
+            {
+              "label": "Stufe 2: + Lifecycle",
+              "content": "Confidence Scoring, Supersession, Retention Decay. Dein Wiki lernt, was wichtig ist und was veraltet."
+            },
+            {
+              "label": "Stufe 3: + Struktur",
+              "content": "Entity-Extraktion, typisierte Beziehungen, Knowledge Graph. Navigation über Bedeutung statt Wörter."
+            },
+            {
+              "label": "Stufe 4: + Automation",
+              "content": "Event-Hooks, Auto-Ingest, Auto-Lint, Context Injection. Das Wiki pflegt sich selbst."
+            },
+            {
+              "label": "Stufe 5: + Scale",
+              "content": "Hybrid Search (BM25 + Vector + Graph), Consolidation Tiers, Quality Scoring. Funktioniert auch mit 1000 Seiten."
+            },
+            {
+              "label": "Stufe 6: + Collaboration",
+              "content": "Mesh Sync, Shared/Private Scoping, Work Coordination. Vom Solo-Wiki zum Team-System."
+            }
+          ]
+        },
+        {
+          "id": "cg-start",
+          "type": "callout",
+          "variant": "tip",
+          "title": "Starte mit dem Schema",
+          "text": "Egal bei welcher Stufe du einsteigst: **Die ersten 30 Minuten gehören dem Schema.** Definiere Entity-Typen, Beziehungstypen und Widerspruchs-Regeln. Ein gutes Schema macht alles andere einfacher. Ein fehlendes Schema macht alles andere chaotisch."
+        },
+        {
+          "id": "cg-quiz",
+          "type": "quiz",
+          "question": "Du hast 150 Wiki-Seiten und arbeitest allein. Welches v2-Feature solltest du als Erstes implementieren?",
+          "options": [
+            {
+              "text": "Mesh Sync für Multi-Agent-Collaboration",
+              "correct": false,
+              "feedback": "Mesh Sync löst ein Problem, das du allein nicht hast. Collaboration ist Stufe 6."
+            },
+            {
+              "text": "Confidence Scoring + Retention Decay",
+              "correct": true,
+              "feedback": "Genau. Bei 150 Seiten brauchst du ein Gefühl dafür, welche Fakten noch aktuell sind. Lifecycle ist der größte Hebel vor Graph und Automation."
+            },
+            {
+              "text": "Hybrid Search mit Reciprocal Rank Fusion",
+              "correct": false,
+              "feedback": "Bei 150 Seiten reicht die index.md noch als primäre Navigation. Hybrid Search wird ab ~200-500 Seiten wichtig."
+            },
+            {
+              "text": "Alle 6 Event-Hooks gleichzeitig",
+              "correct": false,
+              "feedback": "Alles auf einmal ist ein Rezept für Frustration. Das Implementation Spectrum existiert, weil inkrementelles Vorgehen funktioniert."
+            }
+          ],
+          "explanation": "Das Implementation Spectrum ist bewusst gestuft: \"Pick your entry point based on needs.\" Bei 150 Seiten und Solo-Betrieb ist Lifecycle (Stufe 2) der beste nächste Schritt — es löst das drängendste Problem ohne unnötige Komplexität."
+        }
+      ]
+    }
+  ],
+  "outro": {
+    "synthesis": [
+      "Memory Lifecycle gibt deinem Wiki ein Zeitgefühl: Confidence Scoring, Supersession und Retention Decay unterscheiden frisches von veraltetem Wissen.",
+      "Der Knowledge Graph navigiert über Bedeutung statt Wörter — mit 6 typisierten Beziehungen (uses, depends-on, contradicts, caused, fixed, supersedes).",
+      "Hybrid Search kombiniert BM25, Vector Search und Graph Traversal per Reciprocal Rank Fusion — jede Methode deckt die blinden Flecken der anderen ab.",
+      "Event-Hooks automatisieren das Bookkeeping: 6 Trigger machen aus manuellen Operationen ein selbstpflegendes System mit Crystallization und Self-Healing.",
+      "Das Schema ist der Multiplikator: Entity-Typen, Beziehungsregeln, Quality Standards — ein gutes Schema ist transferierbar und wird mit jeder Quelle besser."
+    ],
+    "nextStep": "Ergänze deine CLAUDE.md um drei Dinge: Entity-Typen (welche Knoten soll dein Wiki kennen), Beziehungstypen (welche Kanten sind erlaubt) und Widerspruchs-Regeln (was passiert bei Konflikten). Das dauert 30 Minuten und ist der größte Einzelhebel.",
+    "takeaway": [
+      { "emoji": "\u23f3", "text": "Confidence + Retention: Wissen altert — und das ist ein Feature" },
+      { "emoji": "\ud83d\udd78\ufe0f", "text": "Knowledge Graph: Navigiere Bedeutung, nicht Keywords" },
+      { "emoji": "\ud83d\udd0d", "text": "Hybrid Search: BM25 + Vector + Graph > jede Einzelmethode" },
+      { "emoji": "\u2699\ufe0f", "text": "Event-Hooks: Bookkeeping automatisieren, Richtung behalten" },
+      { "emoji": "\ud83d\udd04", "text": "Self-Healing: Widersprüche, Orphans und Stale Claims auto-repariert" },
+      { "emoji": "\ud83d\udcdc", "text": "Schema als Produkt: CLAUDE.md ist das Betriebssystem deines Wikis" }
+    ],
+    "sourceUrl": "https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2",
+    "newsletterCTA": "Jede Woche ein Konzept wie dieses — von Knowledge Graphs bis Agent-Workflows. Kostenlos, kuratiert, direkt anwendbar."
+  }
+}

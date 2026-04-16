@@ -472,3 +472,14 @@ Jeder Kurs muss diese Punkte erfüllen, bevor er gepusht wird:
 - **Übersichts-SVGs** (aufsteigende Balken, Stufenmodelle) helfen Lesern, die Kursstruktur früh zu erfassen — am besten direkt nach der Einleitung platzieren
 - **Vergleichs-SVGs** (Pro/Contra, Vorher/Nachher) machen Differenzierungen zwischen Konzepten greifbar — direkt nach der textuellen Einführung des Vergleichs platzieren
 - **Architektur-SVGs** (zentrale Knoten, Verbindungen) machen abstrakte Systemkonzepte konkret — nach der Konzepteinführung, vor den Details
+
+### Kurs 5: Das lebende Wiki (2026-04-16)
+
+**Quelle:** rohitg00, GitHub Gist (agentmemory) — Advanced
+**Theme:** Dark, Living-Knowledge (Purple/Teal, leicht variiert zum Vorgänger)
+
+- **Sequel-Kurs funktioniert:** Direkte Anknüpfung an Kurs 1 (Karpathy Methode) über Hook und Recap. "Teil 2" im Subheading macht die Zugehörigkeit sofort klar. relatedCourses gegenseitig gesetzt.
+- **Gap-Analyse als Pflicht bei kuratierten Quellen:** Systematisches Mapping jedes Gist-Abschnitts auf Kurs-Elemente VOR dem Schreiben. 12 Lücken identifiziert und eingearbeitet. Besonders bei bereits komprimierten Quellen unverzichtbar.
+- **code-block mit highlightLines bewährt:** YAML-Beispiel (wiki-hooks.yml) mit hervorgehobenen Schlüsselzeilen macht abstrakte Konzepte (Event-Hooks) sofort greifbar.
+- **step-by-step für Stufenmodelle:** Implementation Spectrum (6 Stufen) als Akkordeon funktioniert besser als Fließtext — Leser können direkt zur relevanten Stufe springen.
+- **Timeout-Warnung bewährt sich:** Kurs in 3 Teilen geschrieben (Meta+Intro+M1-2, M3-4, M5+Outro). Kein einziger Timeout. Regel als prominente Warnung in CLAUDE.md und COURSE-STYLEGUIDE.md verankert.

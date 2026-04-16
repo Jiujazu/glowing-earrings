@@ -18,7 +18,8 @@
     "publishedAt": "2026-04-10",
     "coverImage": "/courses/karpathy-llm-wiki/cover.svg",
     "relatedCourses": [
-      "agentic-os-context-levels"
+      "agentic-os-context-levels",
+      "llm-wiki-memory-engine"
     ],
     "design": {
       "theme": "knowledge-graph",

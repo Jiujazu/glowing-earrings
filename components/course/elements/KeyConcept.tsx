@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import type { KeyConceptElement } from "@/lib/types";
 import { useEditMode } from "@/components/editor/EditModeProvider";
+import IconBox from "@/components/ui/IconBox";
+import { getIconForEmoji } from "@/lib/icon-map";
 
 const EditableText = dynamic(() => import("@/components/editor/EditableText"), {
   ssr: false,
@@ -61,7 +63,7 @@ export default function KeyConcept({ element }: { element: KeyConceptElement }) 
     >
       <div className="flex items-start gap-3">
         {element.icon && (
-          <span className="text-2xl flex-shrink-0">{element.icon}</span>
+          <IconBox icon={getIconForEmoji(element.icon)} color="var(--course-primary)" size="md" />
         )}
         <div>
           {isEditMode ? (

@@ -8,6 +8,8 @@ import type { CourseOutro as CourseOutroType } from "@/lib/types";
 import { getCourseBySlug, formatDuration, getDifficultyLabel } from "@/lib/course-utils";
 import NewsletterCTA from "@/components/layout/NewsletterCTA";
 import Badge from "@/components/ui/Badge";
+import IconBox from "@/components/ui/IconBox";
+import { getIconForEmoji } from "@/lib/icon-map";
 import { HEADING, LABEL } from "@/lib/typography";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { useEditMode } from "@/components/editor/EditModeProvider";
@@ -126,9 +128,7 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
               <ul className="space-y-3">
                 {outro.takeaway.map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-base">
-                    <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center border-2 border-[var(--course-text)]/20 bg-[var(--course-primary)]/10 text-sm">
-                      {item.emoji}
-                    </span>
+                    <IconBox icon={getIconForEmoji(item.emoji)} color="var(--course-primary)" size="sm" />
                     <span className="pt-1">{item.text}</span>
                   </li>
                 ))}

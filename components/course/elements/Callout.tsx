@@ -5,6 +5,9 @@ import remarkGfm from "remark-gfm";
 import dynamic from "next/dynamic";
 import type { CalloutElement } from "@/lib/types";
 import { useEditMode } from "@/components/editor/EditModeProvider";
+import IconBox from "@/components/ui/IconBox";
+import { Quote, BarChart3, Lightbulb, AlertTriangle, Sparkles, Dices } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 const EditableText = dynamic(() => import("@/components/editor/EditableText"), {
   ssr: false,
@@ -12,14 +15,14 @@ const EditableText = dynamic(() => import("@/components/editor/EditableText"), {
 
 const variantConfig: Record<
   CalloutElement["variant"],
-  { icon: string; color: string }
+  { icon: LucideIcon; color: string }
 > = {
-  quote: { icon: "\u201C", color: "var(--course-primary)" },
-  stat: { icon: "\u{1F4CA}", color: "var(--course-accent)" },
-  example: { icon: "\u{1F4A1}", color: "#E6A817" },
-  warning: { icon: "\u26A0\uFE0F", color: "#E05252" },
-  tip: { icon: "\u2728", color: "#22C55E" },
-  "fun-fact": { icon: "\u{1F3B2}", color: "#A855F7" },
+  quote: { icon: Quote, color: "var(--course-primary)" },
+  stat: { icon: BarChart3, color: "var(--course-accent)" },
+  example: { icon: Lightbulb, color: "#E6A817" },
+  warning: { icon: AlertTriangle, color: "#E05252" },
+  tip: { icon: Sparkles, color: "#22C55E" },
+  "fun-fact": { icon: Dices, color: "#A855F7" },
 };
 
 export default function Callout({ element }: { element: CalloutElement }) {
@@ -44,12 +47,7 @@ export default function Callout({ element }: { element: CalloutElement }) {
       }}
     >
       <div className="flex items-start gap-3">
-        <span className="flex-shrink-0 w-9 h-9 flex items-center justify-center border-2 text-lg"
-          style={{ borderColor: "color-mix(in srgb, var(--course-text) 12%, transparent)" }}
-          aria-hidden="true"
-        >
-          {config.icon}
-        </span>
+        <IconBox icon={config.icon} color={config.color} size="md" />
         <div>
           {element.title && (
             isEditMode ? (

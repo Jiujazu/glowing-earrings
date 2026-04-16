@@ -1,0 +1,43 @@
+{
+  "name": "glowing-earrings",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tiptap/pm": "^3.22.3",
+    "@tiptap/react": "^3.22.3",
+    "@tiptap/starter-kit": "^3.22.3",
+    "@types/dompurify": "^3.0.5",
+    "@types/turndown": "^5.0.6",
+    "dompurify": "^3.4.0",
+    "lucide-react": "^1.8.0",
+    "marked": "^18.0.0",
+    "next": "15.5.15",
+    "octokit": "^5.0.5",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "turndown": "^7.2.4"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.15",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

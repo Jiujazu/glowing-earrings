@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340">
+  <rect width="800" height="340" fill="#FAFAFA"/>
+  <!-- Halftone dots pattern -->
+  <defs>
+    <pattern id="dots-avv" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="1.2" fill="#000" opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="340" fill="url(#dots-avv)"/>
+  <!-- Left side: ABFOLGE — separate blocks -->
+  <!-- Title sticker -->
+  <rect x="115" y="15" width="140" height="32" fill="#000" stroke="#000" stroke-width="3" opacity="0.7"/>
+  <text x="185" y="38" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#FFF" text-anchor="middle" letter-spacing="3">ABFOLGE</text>
+  <!-- Three separate blocks -->
+  <rect x="70" y="70" width="80" height="80" fill="#FFF" stroke="#000" stroke-width="4"/>
+  <text x="110" y="118" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#000" text-anchor="middle">INFO 1</text>
+  <rect x="185" y="70" width="80" height="80" fill="#FFF" stroke="#000" stroke-width="4"/>
+  <text x="225" y="118" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#000" text-anchor="middle">INFO 2</text>
+  <rect x="300" y="70" width="80" height="80" fill="#FFF" stroke="#000" stroke-width="4"/>
+  <text x="340" y="118" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#000" text-anchor="middle">INFO 3</text>
+  <!-- Gaps visible — no connections -->
+  <!-- Subtitle -->
+  <text x="225" y="190" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#000" text-anchor="middle" opacity="0.5">Einzelne Fakten, unverbunden</text>
+  <!-- Divider line -->
+  <line x1="420" y1="20" x2="420" y2="320" stroke="#000" stroke-width="2" stroke-dasharray="8,6" opacity="0.2"/>
+  <!-- Big arrow in divider -->
+  <polygon points="405,165 420,145 435,165" fill="#E8A838" stroke="#000" stroke-width="3"/>
+  <polygon points="405,175 420,195 435,175" fill="#E8A838" stroke="#000" stroke-width="3"/>
+  <!-- Right side: VERKNUEPFUNG — connected/overlapping blocks -->
+  <!-- Title sticker — tilted -->
+  <rect x="485" y="12" width="220" height="35" fill="#E8A838" stroke="#000" stroke-width="4" transform="rotate(2 595 30)"/>
+  <text x="595" y="37" font-family="system-ui, sans-serif" font-size="15" font-weight="900" fill="#000" text-anchor="middle" letter-spacing="3" transform="rotate(2 595 37)">GESCHICHTE</text>
+  <!-- Three overlapping blocks with connections -->
+  <rect x="470" y="70" width="90" height="80" fill="#E8A838" stroke="#000" stroke-width="4"/>
+  <!-- Connection bar 1-2 -->
+  <rect x="545" y="95" width="30" height="30" fill="#FF6B6B" stroke="#000" stroke-width="3"/>
+  <rect x="560" y="70" width="90" height="80" fill="#E8A838" stroke="#000" stroke-width="4"/>
+  <!-- Connection bar 2-3 -->
+  <rect x="635" y="95" width="30" height="30" fill="#FF6B6B" stroke="#000" stroke-width="3"/>
+  <rect x="650" y="70" width="90" height="80" fill="#E8A838" stroke="#000" stroke-width="4"/>
+  <!-- Connection lines between blocks -->
+  <line x1="560" y1="110" x2="560" y2="110" stroke="#000" stroke-width="3"/>
+  <!-- Subtitle -->
+  <text x="625" y="190" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#000" text-anchor="middle" opacity="0.5">Emotional verknuepft, im Kontext</text>
+  <!-- Bottom punchline sticker -->
+  <rect x="220" y="280" width="360" height="40" fill="#FF6B6B" stroke="#000" stroke-width="4" transform="rotate(-1 400 300)"/>
+  <text x="400" y="307" font-family="system-ui, sans-serif" font-size="16" font-weight="900" fill="#FFF" text-anchor="middle" transform="rotate(-1 400 307)">GLEICHE FAKTEN. ANDERES ERLEBNIS.</text>
+  <!-- Decorative tilted square top-left -->
+  <rect x="18" y="15" width="20" height="20" fill="#E91E8C" stroke="#000" stroke-width="3" transform="rotate(12 28 25)"/>
+  <!-- Decorative star bottom-right -->
+  <polygon points="770,300 776,314 792,314 780,322 784,336 770,328 756,336 760,322 748,314 764,314" fill="#000"/>
+  <!-- Decorative square bottom-left -->
+  <rect x="15" y="305" width="16" height="16" fill="#E8A838" stroke="#000" stroke-width="2" transform="rotate(-8 23 313)"/>
+</svg>

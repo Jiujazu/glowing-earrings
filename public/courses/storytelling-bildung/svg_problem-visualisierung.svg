@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300">
+  <rect width="800" height="300" fill="#FAFAFA"/>
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid-prob" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <line x1="40" y1="0" x2="40" y2="40" stroke="#000" stroke-width="0.5" opacity="0.05"/>
+      <line x1="0" y1="40" x2="40" y2="40" stroke="#000" stroke-width="0.5" opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="300" fill="url(#grid-prob)"/>
+  <!-- Person — sharp square head + body block -->
+  <rect x="80" y="70" width="50" height="50" fill="#E8A838" stroke="#000" stroke-width="4"/>
+  <rect x="70" y="130" width="70" height="80" fill="#E8A838" stroke="#000" stroke-width="4"/>
+  <!-- Person label sticker -->
+  <rect x="60" y="225" width="100" height="35" fill="#E8A838" stroke="#000" stroke-width="3"/>
+  <text x="110" y="249" font-family="system-ui, sans-serif" font-size="16" font-weight="900" fill="#000" text-anchor="middle">PERSON</text>
+  <!-- Arrow 1 (right-pointing) -->
+  <line x1="180" y1="150" x2="230" y2="150" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="245,150 218,135 218,165" fill="#000"/>
+  <!-- Lightbulb / Idea — circle + base -->
+  <circle cx="350" cy="115" r="45" fill="#FACC15" stroke="#000" stroke-width="4"/>
+  <rect x="333" y="162" width="34" height="18" fill="#FACC15" stroke="#000" stroke-width="3"/>
+  <!-- Rays -->
+  <line x1="350" y1="55" x2="350" y2="40" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+  <line x1="395" y1="75" x2="408" y2="62" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+  <line x1="305" y1="75" x2="292" y2="62" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+  <line x1="405" y1="115" x2="420" y2="115" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+  <line x1="295" y1="115" x2="280" y2="115" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+  <!-- Idea label sticker -->
+  <rect x="305" y="225" width="90" height="35" fill="#FACC15" stroke="#000" stroke-width="3"/>
+  <text x="350" y="249" font-family="system-ui, sans-serif" font-size="16" font-weight="900" fill="#000" text-anchor="middle">IDEE</text>
+  <!-- Arrow 2 (right-pointing) -->
+  <line x1="445" y1="150" x2="495" y2="150" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="510,150 483,135 483,165" fill="#000"/>
+  <!-- Fact list — sharp rectangle with lines -->
+  <rect x="560" y="60" width="170" height="160" fill="#FFF" stroke="#000" stroke-width="4"/>
+  <!-- Bullet lines -->
+  <rect x="585" y="90" width="8" height="8" fill="#FF6B6B" stroke="#000" stroke-width="2"/>
+  <rect x="605" y="90" width="100" height="8" fill="#000" opacity="0.7"/>
+  <rect x="585" y="115" width="8" height="8" fill="#FF6B6B" stroke="#000" stroke-width="2"/>
+  <rect x="605" y="115" width="85" height="8" fill="#000" opacity="0.5"/>
+  <rect x="585" y="140" width="8" height="8" fill="#FF6B6B" stroke="#000" stroke-width="2"/>
+  <rect x="605" y="140" width="95" height="8" fill="#000" opacity="0.6"/>
+  <rect x="585" y="165" width="8" height="8" fill="#FF6B6B" stroke="#000" stroke-width="2"/>
+  <rect x="605" y="165" width="70" height="8" fill="#000" opacity="0.4"/>
+  <rect x="585" y="190" width="8" height="8" fill="#FF6B6B" stroke="#000" stroke-width="2"/>
+  <rect x="605" y="190" width="80" height="8" fill="#000" opacity="0.3"/>
+  <!-- Faktenliste label sticker — slightly tilted -->
+  <rect x="570" y="225" width="165" height="35" fill="#FF6B6B" stroke="#000" stroke-width="3" transform="rotate(2 652 242)"/>
+  <text x="652" y="249" font-family="system-ui, sans-serif" font-size="16" font-weight="900" fill="#FFF" text-anchor="middle" transform="rotate(2 652 249)">FAKTENLISTE</text>
+  <!-- Decorative tilted square -->
+  <rect x="20" y="20" width="22" height="22" fill="#E91E8C" stroke="#000" stroke-width="3" transform="rotate(15 31 31)"/>
+  <!-- Decorative star -->
+  <polygon points="760,40 766,56 784,56 770,66 775,82 760,72 745,82 750,66 736,56 754,56" fill="#000"/>
+</svg>

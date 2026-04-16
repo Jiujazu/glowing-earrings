@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <rect width="800" height="400" fill="#FAFAFA"/>
+  <!-- Halftone pattern -->
+  <defs>
+    <pattern id="dots" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="1.2" fill="#000" opacity="0.06"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="400" fill="url(#dots)"/>
+  <!-- Border -->
+  <!-- Knowledge graph nodes — sharp squares -->
+  <rect x="120" y="100" width="70" height="70" fill="#7B4FBF" stroke="#000" stroke-width="4"/>
+  <rect x="320" y="60" width="55" height="55" fill="#00C9A7" stroke="#000" stroke-width="4"/>
+  <rect x="480" y="120" width="80" height="80" fill="#7B4FBF" stroke="#000" stroke-width="4"/>
+  <rect x="640" y="80" width="50" height="50" fill="#00C9A7" stroke="#000" stroke-width="4"/>
+  <rect x="240" y="240" width="65" height="65" fill="#E91E8C" stroke="#000" stroke-width="4"/>
+  <rect x="450" y="260" width="55" height="55" fill="#00C9A7" stroke="#000" stroke-width="4"/>
+  <rect x="620" y="230" width="60" height="60" fill="#7B4FBF" stroke="#000" stroke-width="4"/>
+  <rect x="80" y="270" width="45" height="45" fill="#E91E8C" stroke="#000" stroke-width="4"/>
+  <!-- Connections — thick black lines -->
+  <line x1="190" y1="135" x2="320" y2="88" stroke="#000" stroke-width="3"/>
+  <line x1="375" y1="88" x2="480" y2="155" stroke="#000" stroke-width="3"/>
+  <line x1="560" y1="155" x2="640" y2="105" stroke="#000" stroke-width="3"/>
+  <line x1="155" y1="170" x2="272" y2="240" stroke="#000" stroke-width="3"/>
+  <line x1="305" y1="272" x2="450" y2="285" stroke="#000" stroke-width="3"/>
+  <line x1="505" y1="280" x2="620" y2="260" stroke="#000" stroke-width="3"/>
+  <line x1="520" y1="200" x2="477" y2="260" stroke="#000" stroke-width="3"/>
+  <line x1="125" y1="292" x2="155" y2="170" stroke="#000" stroke-width="3"/>
+  <!-- "LLM" label sticker -->
+  <rect x="340" y="170" width="120" height="50" fill="#E91E8C" stroke="#000" stroke-width="4" transform="rotate(-3 400 195)"/>
+  <text x="400" y="202" font-family="system-ui, sans-serif" font-size="28" font-weight="900" fill="#FFF" text-anchor="middle" transform="rotate(-3 400 195)">LLM</text>
+  <!-- Decorative star -->
+  <polygon points="720,320 728,340 750,340 732,352 738,374 720,360 702,374 708,352 690,340 712,340" fill="#000" stroke="#000" stroke-width="2"/>
+</svg>

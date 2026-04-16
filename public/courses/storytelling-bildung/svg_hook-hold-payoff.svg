@@ -19,9 +19,9 @@
   <rect x="85" y="185" width="130" height="40" fill="#E8A838" stroke="#000" stroke-width="4"/>
   <text x="150" y="212" font-family="system-ui, sans-serif" font-size="22" font-weight="900" fill="#000" text-anchor="middle">HOOK</text>
   <text x="150" y="245" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#000" text-anchor="middle" opacity="0.6">Einfangen</text>
-  <!-- Arrow 1 -->
-  <polygon points="270,155 300,140 300,170" fill="#000"/>
-  <line x1="255" y1="155" x2="300" y2="155" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+  <!-- Arrow 1 (right-pointing) -->
+  <line x1="255" y1="155" x2="288" y2="155" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="298,155 272,142 272,168" fill="#000"/>
   <!-- Hold card -->
   <rect x="300" y="65" width="200" height="190" fill="#FFF" stroke="#000" stroke-width="4"/>
   <!-- Hand/grip icon -->
@@ -33,9 +33,9 @@
   <rect x="335" y="185" width="130" height="40" fill="#E8A838" stroke="#000" stroke-width="4"/>
   <text x="400" y="212" font-family="system-ui, sans-serif" font-size="22" font-weight="900" fill="#000" text-anchor="middle">HOLD</text>
   <text x="400" y="245" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#000" text-anchor="middle" opacity="0.6">Dranbleiben</text>
-  <!-- Arrow 2 -->
-  <polygon points="520,155 550,140 550,170" fill="#000"/>
-  <line x1="505" y1="155" x2="550" y2="155" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+  <!-- Arrow 2 (right-pointing) -->
+  <line x1="505" y1="155" x2="538" y2="155" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="548,155 522,142 522,168" fill="#000"/>
   <!-- Payoff card -->
   <rect x="550" y="65" width="200" height="190" fill="#FFF" stroke="#000" stroke-width="4"/>
   <!-- Star/reward icon -->

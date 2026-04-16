@@ -9,7 +9,7 @@
     "sourceType": "video",
     "category": "ai-creativity",
     "tags": ["Storytelling", "Education", "Skills"],
-    "estimatedMinutes": 20,
+    "estimatedMinutes": 22,
     "difficulty": "beginner",
     "publishedAt": "2026-04-13",
     "coverImage": "/courses/covers/storytelling-bildung.svg",
@@ -191,7 +191,7 @@
       "id": "nutzerzentriert",
       "title": "Denke vom Publikum her",
       "icon": "\uD83E\uDDED",
-      "estimatedMinutes": 4,
+      "estimatedMinutes": 6,
       "elements": [
         {
           "id": "nutzer-intro",
@@ -228,6 +228,37 @@
           "variant": "example",
           "title": "Abfolge vs. Geschichte",
           "text": "**Abfolge:** Ein Junge. Ein Fußballplatz. Fans. Jubel. Ein Ball.\n\n**Geschichte:** Der kleine Junge war auf dem Weg zum Tor, unsicher ob er es mit seinen kleinen Beinen erreichen würde. Je näher er dem Tor kam, desto stärker feuerten die Zuschauer ihn an.\n\nGleiche Fakten. Komplett anderes Erlebnis."
+        },
+        {
+          "id": "aber-deshalb-intro",
+          "type": "content",
+          "text": "Es gibt eine geniale Faustregel, die genau diesen Unterschied auf den Punkt bringt. Sie kommt von **Trey Parker und Matt Stone** — den Machern von South Park.\n\nBeim Schreiben jeder Episode stehen sie vor einem riesigen Whiteboard und plotten die Beats ihrer Geschichte. Und dann gilt eine eiserne Regel:"
+        },
+        {
+          "id": "aber-deshalb-concept",
+          "type": "key-concept",
+          "title": "Die Aber-Deshalb-Regel",
+          "description": "Wenn zwischen zwei Szenen deiner Geschichte \"und dann\" steht, hast du ein Problem. Ersetze es durch \"aber\" (Wendung, Komplikation) oder \"deshalb\" (logische Folge). Das zwingt dich, Szenen kausal zu verknüpfen statt sie nur aneinanderzureihen.",
+          "icon": "\uD83D\uDCA1"
+        },
+        {
+          "id": "aber-deshalb-svg",
+          "type": "image",
+          "src": "/courses/storytelling-bildung/svg_aber-deshalb-regel.svg",
+          "alt": "Die Aber-Deshalb-Regel: 'Und dann' durchgestrichen, ersetzt durch 'Aber' und 'Deshalb' zwischen Szenen"
+        },
+        {
+          "id": "aber-deshalb-example",
+          "type": "callout",
+          "variant": "example",
+          "title": "Fußball-Geschichte: Vorher / Nachher",
+          "text": "**Mit \"und dann\":** Ein Junge geht zum Fußballplatz. Und dann sieht er das Tor. Und dann kickt er den Ball. Und dann jubeln alle.\n\n**Mit \"aber/deshalb\":** Ein kleiner Junge steht auf dem Fußballplatz. **Aber** der Ball ist fast so groß wie er. **Deshalb** gibt er alles. **Aber** er stolpert. **Deshalb** feuern die Zuschauer ihn an. **Deshalb** steht er wieder auf — und trifft.\n\nGleiche Fakten. Aber durch \"aber\" und \"deshalb\" entsteht eine Geschichte mit Spannung, Rückschlägen und einem Payoff."
+        },
+        {
+          "id": "fc-aber-deshalb",
+          "type": "flashcard",
+          "front": "Warum ist \"und dann\" ein Warnsignal beim Geschichtenerzählen?",
+          "back": "\"Und dann\" bedeutet, dass deine Szenen nur aufeinanderfolgen, aber nicht kausal verbunden sind. Ersetze es durch \"aber\" (Wendung) oder \"deshalb\" (logische Folge). Das erzeugt automatisch Spannung und Verknüpfung — bei einer 30-Sekunden-Story genauso wie bei einer ganzen Serie."
         },
         {
           "id": "emotion-warning",

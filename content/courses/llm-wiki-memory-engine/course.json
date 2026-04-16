@@ -234,6 +234,14 @@
           "text": "### Reciprocal Rank Fusion\n\nDrei Suchsignale produzieren drei Ergebnislisten. Wie verschmilzt man die?\n\n**Reciprocal Rank Fusion (RRF)** berechnet für jedes Ergebnis:\n\n`score = sum(1 / (k + rank))`\n\nMit `k = 60` als typischem Wert. Jedes Ergebnis bekommt einen Score basierend auf seiner Position in **jeder** Liste. Ein Dokument, das in allen drei Listen auftaucht, gewinnt — auch wenn es nirgendwo auf Platz 1 steht.\n\nDie `index.md` bleibt als **menschenlesbarer Katalog** erhalten — aber ab ~100 Seiten ist sie nicht mehr die primäre Suchschnittstelle."
         },
         {
+          "id": "hs-img-fusion",
+          "type": "image",
+          "src": "/courses/llm-wiki-memory-engine/svg_hybrid-search-fusion.svg",
+          "alt": "Hybrid Search Fusion: BM25-, Vector- und Graph-Ergebnislisten werden per Reciprocal Rank Fusion zu einem kombinierten Ranking verschmolzen",
+          "caption": "Drei Suchsignale, ein Ranking — Doc A taucht in allen drei Listen auf und gewinnt die Fusion.",
+          "fullWidth": true
+        },
+        {
           "id": "hs-stat",
           "type": "callout",
           "variant": "stat",
@@ -291,6 +299,14 @@
           "id": "aq-hooks",
           "type": "content",
           "text": "### 6 Event-Hooks\n\nStatt manueller Operationen reagiert das System automatisch auf Ereignisse:\n\n- **on-new-source** — Auto-Ingest, Entity-Extraktion, Graph-Updates\n- **on-session-start** — Relevanten Kontext laden\n- **on-session-end** — Beobachtungen komprimieren und destillieren\n- **on-query** — Quality Scoring: nur wenn `quality score > threshold`, geht die Antwort als neue Seite ins Wiki\n- **on-memory-write** — Validieren, Querverweise prüfen\n- **on-schedule** — Regelmäßiges Lint, Consolidation, Retention Decay\n\nDie Richtung bleibt beim Menschen. Das Bookkeeping wird automatisiert."
+        },
+        {
+          "id": "aq-img-hooks",
+          "type": "image",
+          "src": "/courses/llm-wiki-memory-engine/svg_event-hooks.svg",
+          "alt": "Event-Hooks Diagramm: Zentraler Wiki-Knoten mit 6 eingehenden Hooks — on-new-source, on-session-start, on-session-end, on-query, on-memory-write, on-schedule",
+          "caption": "6 Hooks machen das Wiki event-driven — der Mensch gibt die Richtung vor, das System erledigt das Bookkeeping.",
+          "fullWidth": true
         },
         {
           "id": "aq-crystallization",

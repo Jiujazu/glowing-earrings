@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <rect width="800" height="400" fill="#FAFAFA"/>
+  <defs>
+    <pattern id="grid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#000" stroke-width="0.5" opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="400" fill="url(#grid)"/>
+
+  <!-- Central WIKI node -->
+  <rect x="310" y="140" width="180" height="120" fill="#8B5CF6" stroke="#000" stroke-width="4"/>
+  <text x="400" y="195" font-family="system-ui, sans-serif" font-size="22" font-weight="900" fill="#FFF" text-anchor="middle">WIKI</text>
+  <text x="400" y="218" font-family="system-ui, sans-serif" font-size="11" fill="#FFF" text-anchor="middle" opacity="0.7">self-healing</text>
+  <text x="400" y="234" font-family="system-ui, sans-serif" font-size="11" fill="#FFF" text-anchor="middle" opacity="0.7">knowledge base</text>
+
+  <!-- Hook 1: on-new-source (top left) -->
+  <rect x="50" y="30" width="150" height="40" fill="#14B8A6" stroke="#000" stroke-width="3"/>
+  <text x="125" y="55" font-family="monospace" font-size="11" font-weight="700" fill="#FFF" text-anchor="middle">on-new-source</text>
+  <line x1="200" y1="55" x2="305" y2="155" stroke="#000" stroke-width="2"/>
+  <polygon points="310,158 298,148 302,163" fill="#000"/>
+
+  <!-- Hook 2: on-session-start (top center) -->
+  <rect x="325" y="30" width="150" height="40" fill="#14B8A6" stroke="#000" stroke-width="3"/>
+  <text x="400" y="55" font-family="monospace" font-size="11" font-weight="700" fill="#FFF" text-anchor="middle">on-session-start</text>
+  <line x1="400" y1="70" x2="400" y2="135" stroke="#000" stroke-width="2"/>
+  <polygon points="400,140 394,128 406,128" fill="#000"/>
+
+  <!-- Hook 3: on-session-end (top right) -->
+  <rect x="580" y="30" width="150" height="40" fill="#E91E8C" stroke="#000" stroke-width="3"/>
+  <text x="655" y="55" font-family="monospace" font-size="11" font-weight="700" fill="#FFF" text-anchor="middle">on-session-end</text>
+  <line x1="590" y1="55" x2="495" y2="155" stroke="#000" stroke-width="2"/>
+  <polygon points="490,158 498,148 494,163" fill="#000"/>
+
+  <!-- Hook 4: on-query (bottom left) -->
+  <rect x="40" y="300" width="140" height="40" fill="#14B8A6" stroke="#000" stroke-width="3"/>
+  <text x="110" y="325" font-family="monospace" font-size="11" font-weight="700" fill="#FFF" text-anchor="middle">on-query</text>
+  <line x1="185" y1="315" x2="305" y2="245" stroke="#000" stroke-width="2"/>
+  <polygon points="310,242 298,238 300,253" fill="#000"/>
+
+  <!-- Hook 5: on-memory-write (bottom center) -->
+  <rect x="290" y="320" width="160" height="40" fill="#14B8A6" stroke="#000" stroke-width="3"/>
+  <text x="370" y="345" font-family="monospace" font-size="11" font-weight="700" fill="#FFF" text-anchor="middle">on-memory-write</text>
+  <line x1="370" y1="320" x2="385" y2="265" stroke="#000" stroke-width="2"/>
+  <polygon points="386,260 379,272 393,270" fill="#000"/>
+
+  <!-- Hook 6: on-schedule (bottom right) -->
+  <rect x="560" y="300" width="150" height="40" fill="#E91E8C" stroke="#000" stroke-width="3"/>
+  <text x="635" y="325" font-family="monospace" font-size="11" font-weight="700" fill="#FFF" text-anchor="middle">on-schedule</text>
+  <line x1="565" y1="315" x2="495" y2="245" stroke="#000" stroke-width="2"/>
+  <polygon points="490,242 496,256 488,250" fill="#000"/>
+
+  <!-- Action labels on key hooks -->
+  <text x="80" y="88" font-family="system-ui, sans-serif" font-size="9" fill="#000" opacity="0.6">auto-ingest, graph update</text>
+  <text x="610" y="88" font-family="system-ui, sans-serif" font-size="9" fill="#000" opacity="0.6">crystallize session</text>
+  <text x="50" y="290" font-family="system-ui, sans-serif" font-size="9" fill="#000" opacity="0.6">score > threshold?</text>
+  <text x="580" y="290" font-family="system-ui, sans-serif" font-size="9" fill="#000" opacity="0.6">lint, decay, consolidate</text>
+
+  <!-- "EVENT-DRIVEN" sticker -->
+  <rect x="600" y="155" width="155" height="38" fill="#8B5CF6" stroke="#000" stroke-width="3" transform="rotate(3 677 174)"/>
+  <text x="677" y="180" font-family="system-ui, sans-serif" font-size="13" font-weight="900" fill="#FFF" text-anchor="middle" letter-spacing="2" transform="rotate(3 677 174)">EVENT-DRIVEN</text>
+
+  <!-- Decorative elements -->
+  <polygon points="760,380 764,390 775,390 767,396 770,407 760,400 750,407 753,396 745,390 756,390" fill="#000"/>
+  <rect x="18" y="180" width="18" height="18" fill="#E91E8C" stroke="#000" stroke-width="3" transform="rotate(20 27 189)"/>
+  <rect x="760" y="80" width="15" height="15" fill="#14B8A6" stroke="#000" stroke-width="3" transform="rotate(-10 767 87)"/>
+</svg>

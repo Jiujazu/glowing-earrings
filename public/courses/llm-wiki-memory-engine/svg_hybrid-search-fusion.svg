@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <rect width="800" height="400" fill="#FAFAFA"/>
+  <defs>
+    <pattern id="grid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#000" stroke-width="0.5" opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="400" fill="url(#grid)"/>
+
+  <!-- Three source columns -->
+  <!-- BM25 -->
+  <rect x="50" y="50" width="170" height="45" fill="#14B8A6" stroke="#000" stroke-width="4"/>
+  <text x="135" y="78" font-family="system-ui, sans-serif" font-size="15" font-weight="900" fill="#FFF" text-anchor="middle">BM25</text>
+  <rect x="60" y="110" width="150" height="28" fill="#FFF" stroke="#000" stroke-width="2"/>
+  <text x="135" y="129" font-family="monospace" font-size="11" fill="#000" text-anchor="middle">#1 Doc A</text>
+  <rect x="60" y="145" width="150" height="28" fill="#FFF" stroke="#000" stroke-width="2"/>
+  <text x="135" y="164" font-family="monospace" font-size="11" fill="#000" text-anchor="middle">#2 Doc C</text>
+  <rect x="60" y="180" width="150" height="28" fill="#FFF" stroke="#000" stroke-width="2"/>
+  <text x="135" y="199" font-family="monospace" font-size="11" fill="#000" text-anchor="middle">#3 Doc E</text>
+
+  <!-- Vector Search -->
+  <rect x="280" y="50" width="170" height="45" fill="#8B5CF6" stroke="#000" stroke-width="4"/>
+  <text x="365" y="78" font-family="system-ui, sans-serif" font-size="15" font-weight="900" fill="#FFF" text-anchor="middle">VECTOR</text>
+  <rect x="290" y="110" width="150" height="28" fill="#FFF" stroke="#000" stroke-width="2"/>
+  <text x="365" y="129" font-family="monospace" font-size="11" fill="#000" text-anchor="middle">#1 Doc B</text>
+  <rect x="290" y="145" width="150" height="28" fill="#FFF" stroke="#000" stroke-width="2"/>
+  <text x="365" y="164" font-family="monospace" font-size="11" fill="#000" text-anchor="middle">#2 Doc A</text>
+  <rect x="290" y="180" width="150" height="28" fill="#FFF" stroke="#000" stroke-width="2"/>
+  <text x="365" y="199" font-family="monospace" font-size="11" fill="#000" text-anchor="middle">#3 Doc D</text>
+
+  <!-- Graph Traversal -->
+  <rect x="510" y="50" width="170" height="45" fill="#8B5CF6" stroke="#000" stroke-width="4"/>
+  <text x="595" y="78" font-family="system-ui, sans-serif" font-size="15" font-weight="900" fill="#FFF" text-anchor="middle">GRAPH</text>
+  <rect x="520" y="110" width="150" height="28" fill="#FFF" stroke="#000" stroke-width="2"/>
+  <text x="595" y="129" font-family="monospace" font-size="11" fill="#000" text-anchor="middle">#1 Doc A</text>
+  <rect x="520" y="145" width="150" height="28" fill="#FFF" stroke="#000" stroke-width="2"/>
+  <text x="595" y="164" font-family="monospace" font-size="11" fill="#000" text-anchor="middle">#2 Doc F</text>
+
+  <!-- Converging arrows to fusion box -->
+  <line x1="135" y1="215" x2="320" y2="278" stroke="#000" stroke-width="3"/>
+  <polygon points="325,280 312,273 314,288" fill="#000"/>
+  <line x1="365" y1="215" x2="365" y2="273" stroke="#000" stroke-width="3"/>
+  <polygon points="365,278 358,266 372,266" fill="#000"/>
+  <line x1="595" y1="180" x2="420" y2="278" stroke="#000" stroke-width="3"/>
+  <polygon points="415,280 418,265 430,275" fill="#000"/>
+
+  <!-- RRF Fusion box -->
+  <rect x="280" y="280" width="170" height="50" fill="#E91E8C" stroke="#000" stroke-width="4"/>
+  <text x="365" y="302" font-family="system-ui, sans-serif" font-size="12" font-weight="900" fill="#FFF" text-anchor="middle">RECIPROCAL RANK</text>
+  <text x="365" y="320" font-family="system-ui, sans-serif" font-size="12" font-weight="900" fill="#FFF" text-anchor="middle">FUSION</text>
+
+  <!-- Result arrow -->
+  <line x1="365" y1="330" x2="365" y2="355" stroke="#000" stroke-width="3"/>
+  <polygon points="365,360 358,348 372,348" fill="#000"/>
+
+  <!-- Result list -->
+  <rect x="290" y="362" width="150" height="28" fill="#14B8A6" stroke="#000" stroke-width="3"/>
+  <text x="365" y="381" font-family="monospace" font-size="12" font-weight="700" fill="#FFF" text-anchor="middle">#1 Doc A (3x)</text>
+
+  <!-- Formula label -->
+  <rect x="500" y="290" width="210" height="35" fill="#FFF" stroke="#8B5CF6" stroke-width="2"/>
+  <text x="605" y="313" font-family="monospace" font-size="12" font-weight="700" fill="#8B5CF6" text-anchor="middle">1/(60+rank) per list</text>
+
+  <!-- Highlight: Doc A appears in all 3 -->
+  <rect x="60" y="110" width="150" height="28" fill="#14B8A6" stroke="#000" stroke-width="2" opacity="0.2"/>
+  <rect x="290" y="145" width="150" height="28" fill="#14B8A6" stroke="#000" stroke-width="2" opacity="0.2"/>
+  <rect x="520" y="110" width="150" height="28" fill="#14B8A6" stroke="#000" stroke-width="2" opacity="0.2"/>
+
+  <!-- Decorative elements -->
+  <rect x="720" y="60" width="20" height="20" fill="#E91E8C" stroke="#000" stroke-width="3" transform="rotate(12 730 70)"/>
+  <polygon points="740,370 745,382 756,382 748,389 751,400 740,393 729,400 732,389 724,382 735,382" fill="#000"/>
+  <rect x="20" y="310" width="16" height="16" fill="#8B5CF6" stroke="#000" stroke-width="3" transform="rotate(-15 28 318)"/>
+</svg>

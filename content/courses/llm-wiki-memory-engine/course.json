@@ -73,6 +73,13 @@
           "text": "### Die 4 Consolidation Tiers\n\nWissen steigt im System auf, wenn es sich bewährt:\n\n- **Working Memory** — frische Beobachtungen, noch unverarbeitet\n- **Episodic Memory** — konkrete Ereignisse und Erfahrungen, zeitgebunden\n- **Semantic Memory** — abstrahierte Fakten und Zusammenhänge, zeitlos\n- **Procedural Memory** — eingeübte Abläufe und Regeln, quasi-automatisch\n\nDas System **promoted Information nach oben**, wenn sich Evidenz akkumuliert. Ein einzelner Bug-Report bleibt in Working Memory. Wenn drei verschiedene Quellen das gleiche Pattern beschreiben, steigt es zu Semantic Memory auf."
         },
         {
+          "id": "ml-tiers-svg",
+          "type": "image",
+          "src": "/courses/llm-wiki-memory-engine/svg_consolidation-tiers.svg",
+          "alt": "4 Consolidation Tiers: Working, Episodic, Semantic, Procedural — aufsteigende Balken",
+          "caption": "Wissen steigt auf, wenn sich Evidenz akkumuliert."
+        },
+        {
           "id": "ml-quiz",
           "type": "quiz",
           "question": "Ein Fakt in deinem Wiki wurde von 3 Quellen bestätigt, ist 8 Monate alt und wurde nie abgerufen. Was sollte das System tun?",
@@ -141,6 +148,13 @@
           "variant": "example",
           "title": "Konkretes Beispiel: Artikel \"Claude 4 + Tool Use\"",
           "text": "Du fütterst einen Artikel über Claude 4 und Tool Use ein. Das System extrahiert:\n\n1. **Claude 4** --uses--> **Tool Use API**\n2. **Claude 4** --supersedes--> **Claude 3.5** (für bestimmte Tasks)\n3. **Tool Use API** --depends-on--> **JSON Schema**\n4. **Artikel** --contradicts--> **ältere Benchmark-Seite** (neue Zahlen)\n5. **Claude 4** --caused--> **Update der Best-Practices-Seite**\n\n5 Kanten aus einem Artikel. Jede mit Confidence-Wert und Quelle."
+        },
+        {
+          "id": "kg-graph-svg",
+          "type": "image",
+          "src": "/courses/llm-wiki-memory-engine/svg_knowledge-graph.svg",
+          "alt": "Knowledge Graph: 6 Entity-Knoten mit typisierten Kanten (uses, supersedes, depends-on, caused, contradicts)",
+          "caption": "Ein Artikel, 5 typisierte Kanten. Jede Beziehung ist maschinell nutzbar."
         },
         {
           "id": "kg-traversal",
@@ -351,6 +365,13 @@
           "id": "cg-work",
           "type": "content",
           "text": "### Work Coordination und Bulk Operations\n\n**Work Coordination** verhindert Doppelarbeit: Wer arbeitet gerade woran? Was ist blockiert? Was ist fertig? In Multi-Agent-Setups ist das essentiell — sonst ingestieren zwei Agents dieselbe Quelle parallel.\n\n### Output Formats\n\nDas Wiki liefert nicht nur Markdown. Je nach Frage und Zielgruppe produziert es:\n\n- **Comparison Tables** — Gegenüberstellungen\n- **Timelines** — chronologische Abläufe\n- **Dependency Graphs** — Abhängigkeitsdiagramme\n- **Slide Decks** — Präsentationen\n- **JSON/CSV Exports** — strukturierte Daten\n- **Team Briefs** — Zusammenfassungen für Stakeholder\n\n**Bulk Operations** — Massenlöschung, Export, Duplikat-Zusammenführung — sind auditierbar und reversibel."
+        },
+        {
+          "id": "cg-spectrum-svg",
+          "type": "image",
+          "src": "/courses/llm-wiki-memory-engine/svg_implementation-spectrum.svg",
+          "alt": "Implementation Spectrum: 6 aufsteigende Stufen von Minimal bis Collaboration",
+          "caption": "Pick your entry point. Jede Stufe baut auf der vorherigen auf."
         },
         {
           "id": "cg-spectrum",

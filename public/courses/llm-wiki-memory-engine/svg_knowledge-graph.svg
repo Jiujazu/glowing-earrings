@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <rect width="800" height="400" fill="#FAFAFA"/>
+  <!-- Subtle grid -->
+  <defs>
+    <pattern id="grid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#000" stroke-width="0.5" opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="400" fill="url(#grid)"/>
+
+  <!-- Entity nodes -->
+  <!-- Claude 4 (center) -->
+  <rect x="310" y="130" width="130" height="55" fill="#8B5CF6" stroke="#000" stroke-width="4"/>
+  <text x="375" y="155" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#FFF" text-anchor="middle">Claude 4</text>
+  <text x="375" y="173" font-family="system-ui, sans-serif" font-size="10" fill="#FFF" text-anchor="middle" opacity="0.7">concept</text>
+
+  <!-- Tool Use API (right) -->
+  <rect x="570" y="55" width="130" height="55" fill="#14B8A6" stroke="#000" stroke-width="4"/>
+  <text x="635" y="80" font-family="system-ui, sans-serif" font-size="13" font-weight="900" fill="#FFF" text-anchor="middle">Tool Use API</text>
+  <text x="635" y="98" font-family="system-ui, sans-serif" font-size="10" fill="#FFF" text-anchor="middle" opacity="0.7">library</text>
+
+  <!-- Claude 3.5 (bottom right) -->
+  <rect x="570" y="230" width="130" height="55" fill="#9B8EC0" stroke="#000" stroke-width="3"/>
+  <text x="635" y="255" font-family="system-ui, sans-serif" font-size="13" font-weight="900" fill="#FFF" text-anchor="middle">Claude 3.5</text>
+  <text x="635" y="273" font-family="system-ui, sans-serif" font-size="10" fill="#FFF" text-anchor="middle" opacity="0.7">concept</text>
+
+  <!-- JSON Schema (top right) -->
+  <rect x="600" y="150" width="110" height="45" fill="#14B8A6" stroke="#000" stroke-width="3"/>
+  <text x="655" y="178" font-family="monospace" font-size="12" font-weight="700" fill="#FFF" text-anchor="middle">JSON Schema</text>
+
+  <!-- Benchmark Page (bottom left) -->
+  <rect x="80" y="260" width="140" height="50" fill="#9B8EC0" stroke="#000" stroke-width="3"/>
+  <text x="150" y="283" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFF" text-anchor="middle">Benchmark-Seite</text>
+  <text x="150" y="300" font-family="system-ui, sans-serif" font-size="10" fill="#FFF" text-anchor="middle" opacity="0.7">file</text>
+
+  <!-- Best Practices (left) -->
+  <rect x="80" y="110" width="140" height="50" fill="#8B5CF6" stroke="#000" stroke-width="4"/>
+  <text x="150" y="133" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFF" text-anchor="middle">Best Practices</text>
+  <text x="150" y="150" font-family="system-ui, sans-serif" font-size="10" fill="#FFF" text-anchor="middle" opacity="0.7">file</text>
+
+  <!-- Typed edges with labels -->
+  <!-- Claude 4 --uses--> Tool Use API -->
+  <line x1="440" y1="145" x2="565" y2="85" stroke="#000" stroke-width="3"/>
+  <polygon points="570,83 558,78 560,93" fill="#000"/>
+  <rect x="470" y="98" width="55" height="20" fill="#FAFAFA" stroke="#8B5CF6" stroke-width="2"/>
+  <text x="497" y="113" font-family="monospace" font-size="10" font-weight="700" fill="#8B5CF6" text-anchor="middle">uses</text>
+
+  <!-- Claude 4 --supersedes--> Claude 3.5 -->
+  <line x1="430" y1="185" x2="565" y2="248" stroke="#000" stroke-width="3"/>
+  <polygon points="570,250 558,242 560,258" fill="#000"/>
+  <rect x="460" y="210" width="85" height="20" fill="#FAFAFA" stroke="#E91E8C" stroke-width="2"/>
+  <text x="502" y="225" font-family="monospace" font-size="10" font-weight="700" fill="#E91E8C" text-anchor="middle">supersedes</text>
+
+  <!-- Tool Use API --depends-on--> JSON Schema -->
+  <line x1="635" y1="110" x2="650" y2="145" stroke="#000" stroke-width="2"/>
+  <polygon points="651,150 644,138 658,140" fill="#000"/>
+  <text x="663" y="133" font-family="monospace" font-size="9" font-weight="700" fill="#14B8A6">depends-on</text>
+
+  <!-- Claude 4 --caused--> Best Practices update -->
+  <line x1="310" y1="155" x2="225" y2="140" stroke="#000" stroke-width="3"/>
+  <polygon points="220,139 232,133 230,148" fill="#000"/>
+  <rect x="230" y="128" width="65" height="20" fill="#FAFAFA" stroke="#14B8A6" stroke-width="2"/>
+  <text x="262" y="143" font-family="monospace" font-size="10" font-weight="700" fill="#14B8A6" text-anchor="middle">caused</text>
+
+  <!-- Article --contradicts--> Benchmark -->
+  <line x1="330" y1="185" x2="195" y2="260" stroke="#000" stroke-width="3" stroke-dasharray="8,4"/>
+  <polygon points="192,263 200,248 208,262" fill="#E91E8C"/>
+  <rect x="215" y="215" width="90" height="20" fill="#FAFAFA" stroke="#E91E8C" stroke-width="2"/>
+  <text x="260" y="230" font-family="monospace" font-size="10" font-weight="700" fill="#E91E8C" text-anchor="middle">contradicts</text>
+
+  <!-- Source article label sticker -->
+  <rect x="270" y="30" width="160" height="40" fill="#E91E8C" stroke="#000" stroke-width="3" transform="rotate(-2 350 50)"/>
+  <text x="350" y="57" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#FFF" text-anchor="middle" letter-spacing="1" transform="rotate(-2 350 50)">1 ARTIKEL</text>
+
+  <!-- Arrow from sticker to center node -->
+  <line x1="365" y1="72" x2="375" y2="125" stroke="#000" stroke-width="2" stroke-dasharray="6,4"/>
+  <polygon points="375,130 369,118 381,118" fill="#000"/>
+
+  <!-- "5 KANTEN" label sticker -->
+  <rect x="85" y="340" width="130" height="38" fill="#8B5CF6" stroke="#000" stroke-width="3" transform="rotate(2 150 359)"/>
+  <text x="150" y="365" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#FFF" text-anchor="middle" letter-spacing="1" transform="rotate(2 150 359)">5 KANTEN</text>
+
+  <!-- Decorative elements -->
+  <rect x="740" y="320" width="22" height="22" fill="#E91E8C" stroke="#000" stroke-width="3" transform="rotate(12 751 331)"/>
+  <polygon points="50,50 55,63 68,63 58,71 61,84 50,76 39,84 42,71 32,63 45,63" fill="#000"/>
+  <rect x="720" y="170" width="18" height="18" fill="#14B8A6" stroke="#000" stroke-width="3" transform="rotate(-8 729 179)"/>
+</svg>

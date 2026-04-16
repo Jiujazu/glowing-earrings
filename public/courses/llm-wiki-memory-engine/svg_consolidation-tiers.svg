@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <rect width="800" height="400" fill="#FAFAFA"/>
+  <!-- Subtle grid -->
+  <defs>
+    <pattern id="grid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#000" stroke-width="0.5" opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="400" fill="url(#grid)"/>
+
+  <!-- 4 ascending blocks — left to right, bottom to top -->
+  <!-- Tier 1: Working Memory -->
+  <rect x="80" y="280" width="140" height="80" fill="#14B8A6" stroke="#000" stroke-width="4"/>
+  <text x="150" y="315" font-family="system-ui, sans-serif" font-size="13" font-weight="900" fill="#FFF" text-anchor="middle">WORKING</text>
+  <text x="150" y="335" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFF" text-anchor="middle" opacity="0.8">frisch, unverarbeitet</text>
+
+  <!-- Tier 2: Episodic Memory -->
+  <rect x="260" y="210" width="140" height="150" fill="#8B5CF6" stroke="#000" stroke-width="4"/>
+  <text x="330" y="275" font-family="system-ui, sans-serif" font-size="13" font-weight="900" fill="#FFF" text-anchor="middle">EPISODIC</text>
+  <text x="330" y="295" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFF" text-anchor="middle" opacity="0.8">Erfahrungen,</text>
+  <text x="330" y="312" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFF" text-anchor="middle" opacity="0.8">zeitgebunden</text>
+
+  <!-- Tier 3: Semantic Memory -->
+  <rect x="440" y="140" width="140" height="220" fill="#8B5CF6" stroke="#000" stroke-width="4"/>
+  <text x="510" y="240" font-family="system-ui, sans-serif" font-size="13" font-weight="900" fill="#FFF" text-anchor="middle">SEMANTIC</text>
+  <text x="510" y="260" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFF" text-anchor="middle" opacity="0.8">Fakten, zeitlos</text>
+
+  <!-- Tier 4: Procedural Memory -->
+  <rect x="620" y="60" width="140" height="300" fill="#E91E8C" stroke="#000" stroke-width="4"/>
+  <text x="690" y="200" font-family="system-ui, sans-serif" font-size="13" font-weight="900" fill="#FFF" text-anchor="middle">PROCEDURAL</text>
+  <text x="690" y="220" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFF" text-anchor="middle" opacity="0.8">Regeln,</text>
+  <text x="690" y="237" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFF" text-anchor="middle" opacity="0.8">automatisch</text>
+
+  <!-- Ascending arrows between tiers -->
+  <line x1="220" y1="300" x2="255" y2="280" stroke="#000" stroke-width="3"/>
+  <polygon points="260,278 248,275 252,290" fill="#000"/>
+  <line x1="400" y1="260" x2="435" y2="240" stroke="#000" stroke-width="3"/>
+  <polygon points="440,238 428,235 432,250" fill="#000"/>
+  <line x1="580" y1="220" x2="615" y2="190" stroke="#000" stroke-width="3"/>
+  <polygon points="620,188 608,185 612,200" fill="#000"/>
+
+  <!-- "EVIDENCE" label sticker -->
+  <rect x="280" y="25" width="160" height="40" fill="#14B8A6" stroke="#000" stroke-width="3" transform="rotate(-2 360 45)"/>
+  <text x="360" y="52" font-family="system-ui, sans-serif" font-size="16" font-weight="900" fill="#FFF" text-anchor="middle" letter-spacing="2" transform="rotate(-2 360 45)">EVIDENCE</text>
+
+  <!-- Arrow from sticker downward -->
+  <line x1="360" y1="70" x2="360" y2="120" stroke="#000" stroke-width="2" stroke-dasharray="6,4"/>
+  <polygon points="360,125 354,113 366,113" fill="#000"/>
+
+  <!-- Decorative elements -->
+  <rect x="30" y="140" width="20" height="20" fill="#E91E8C" stroke="#000" stroke-width="3" transform="rotate(15 40 150)"/>
+  <polygon points="760,360 765,373 778,373 768,381 771,394 760,386 749,394 752,381 742,373 755,373" fill="#000"/>
+</svg>

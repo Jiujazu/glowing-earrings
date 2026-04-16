@@ -23,7 +23,7 @@ Eine kostenlose, interaktive Lernplattform für generative KI. Kuratiert von Jul
 
 ### Phasen (Kurzübersicht — Details in STYLEGUIDE §1)
 1. Quelle identifizieren (Tweet / Artikel / Video / Gist / Paper)
-2. **Gap-Analyse** bei kuratierten Quellen (Pflicht, siehe STYLEGUIDE §11)
+2. **Gap-Analyse** bei kuratierten Quellen (Pflicht, siehe STYLEGUIDE §11) — als `gap-analysis.md` im Kurs-Ordner ablegen
 3. Lernziele pro Modul definieren
 4. Modul-Schnitt & Element-Wahl
 5. **Kurs IN TEILEN schreiben** (Pflicht): Write für Meta+Intro+M1-2, Edit für je 2 weitere Module, Edit für Outro. Niemals in einem Schritt — führt zu Timeout.

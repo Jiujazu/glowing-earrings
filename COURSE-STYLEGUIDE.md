@@ -103,7 +103,7 @@ Jeder Content-Block braucht mindestens 2 verschiedene optische Gewichtungen. Ein
 - **Humor: subtil & clever.** Der Ton ist der eines klugen Gesprächspartners, nicht eines Comedians.
 
 ### 3.2 Quelltreue
-- Inhalte stammen **ausschließlich** aus dem Ausgangsmaterial
+- Inhalte stammen **primär** aus dem Ausgangsmaterial. Externe Ergänzungen sind nur unter den Kriterien in §3.4 erlaubt.
 - Konkrete Zahlen, Tool-Namen, Statistiken, Beispiele **müssen** erhalten bleiben
 - Kurzes Material = kurzer Kurs. Ein Tweet wird kein 6-Modul-Kurs
 - Anekdoten und Metaphern aus dem Original beibehalten — sie sind der emotionale Anker
@@ -115,9 +115,16 @@ Jeder Content-Block braucht mindestens 2 verschiedene optische Gewichtungen. Ein
 - Visuell klar als Hintergrundwissen markieren: `context-box`-Elemente, nie als regulären Content tarnen
 
 ### 3.4 Externe Framework-Ergänzungen
-- Zusätzliche Konzepte aus fremden Quellen (z.B. "Aber-Deshalb-Regel" von Trey Parker) sind **erlaubt und sinnvoll**, wenn sie thematisch zum Kurs passen
-- Quelle immer transparent nennen (Autor, Herkunft)
-- Nicht den Hauptinhalt überlagern — als Ergänzung, nicht als Kern
+
+Zusätzliche Konzepte aus fremden Quellen (z.B. "Aber-Deshalb-Regel" von Trey Parker) sind erlaubt, aber nur unter **allen fünf** folgenden Kriterien:
+
+1. **Implizit-explizit oder etabliertes Framework:** Das externe Konzept muss entweder eine implizite Annahme des Originals explizit machen, oder ein voll entwickeltes, öffentlich bekanntes Framework sein. **Keine eigenen Mini-Theorien, keine erfundenen "Regeln".**
+2. **Visuelle Trennung:** Ergänzungen müssen als `context-box` dargestellt werden — nie als regulärer Content. Die Lesende muss sofort erkennen: *Das ist nicht aus dem Original.*
+3. **Transparente Attribution:** Autor **und** Herkunft (Medium, Institution) werden explizit genannt. Kein "bekanntes Prinzip" ohne Quelle.
+4. **Max 1 pro Kurs.** Bei mehr wird der Kurs zur Sekundärliteratur und verliert den Bezug zur Hauptquelle.
+5. **Im Zweifel weglassen.** Wenn das Original auch ohne das Framework auskommt, braucht es das Framework nicht. Der Test: *Macht die Ergänzung das Kursthema konkret besser verständlich — oder wirkt sie nur schlau?*
+
+Nicht-Einhaltung = Anti-Pattern §12.8.
 
 ### 3.5 Easter Eggs
 - **Mindestens 1 pro Kurs**, idealerweise 2-3
@@ -411,7 +418,7 @@ Jeder Kurs muss diese Punkte erfüllen, bevor er gepusht wird:
 ### Inhalt
 - [ ] Kurs hat Drei-Ebenen-Titel (title + subheading + subtitle)
 - [ ] Intro beantwortet Wer/Warum/Was und enthält Quellenlink
-- [ ] Gap-Analyse durchgeführt (siehe §11) — alle Quellen-Abschnitte sind abgebildet
+- [ ] Bei kuratierten Quellen: `gap-analysis.md` in `content/courses/[slug]/` angelegt (siehe §11.3)
 - [ ] ALLE Inhalte aus dem Ausgangsmaterial sind abgebildet (nichts weggelassen)
 - [ ] Konkrete Zahlen, Tool-Namen und spezifische Beispiele sind erhalten
 - [ ] Keine Inhalte erfunden (keine Halluzinationen)
@@ -455,9 +462,19 @@ Jeder Kurs muss diese Punkte erfüllen, bevor er gepusht wird:
 - [ ] Transkript/Originaltext in `source.md` oder als referenzierte `.txt`-Datei hinterlegt
 - [ ] Kursinhalte gegen Original-Transkript verifiziert (Captions, Zitate, Zahlen)
 
+### Anti-Pattern-Check (nur `hot`-Status aus §12)
+- [ ] §12.1 — Kurs in Teilen geschrieben (Write + Edit), nicht in einem Rutsch
+- [ ] §12.2 — Alle SVG-Pfeile: Tip-x > Base-x für rechts-zeigend
+- [ ] §12.3 — Jede Bildunterschrift gegen Transkript/Originalbild geprüft
+- [ ] §12.4 — Bei kuratierten Quellen: Gap-Analyse durchgeführt und abgelegt
+- [ ] §12.5 — Tags sind spezifisch (ein Wort, keine generischen Phrasen)
+- [ ] §12.6 — Keine drei Boxen hintereinander in einem Modul
+- [ ] §12.7 — Keine Emojis außer in Takeaway-Checklisten und Easter Eggs
+- [ ] §12.8 — Externe Frameworks (falls vorhanden) erfüllen alle 5 Kriterien aus §3.4
+
 ### Post-Flight
 - [ ] Neuer Eintrag in `COURSE-LEARNINGS.md` angelegt (Template beachten)
-- [ ] Bei Kursnummer 4/7/10/…: Verdichtungs-Ritual durchgeführt
+- [ ] Bei Kursnummer 4/7/10/…: Verdichtungs-Ritual durchgeführt (inkl. Anti-Pattern-Status-Review)
 
 ---
 
@@ -486,58 +503,152 @@ Jeder Kurs muss diese Punkte erfüllen, bevor er gepusht wird:
 3. **Lücken-Liste dokumentieren** — bevor das Schreiben beginnt
 4. **Arbeit abgeschlossen, wenn jeder Quellen-Abschnitt gemappt ist**
 
-### 11.2 Mapping-Tabelle (Beispiel)
-
-| Quellen-Abschnitt | Kurs-Modul | Element-Typ | Status |
-|---|---|---|---|
-| "Ingest-Phase" | Modul 2 | Key-Concept + Quiz | ✅ abgedeckt |
-| "Linting-Edge-Cases" | — | — | ❌ Lücke → Modul 3 Flashcard |
-| "Metadaten-Struktur" | Modul 4 | Callout (Tip) | ✅ abgedeckt |
-
-### 11.3 Wann NICHT nötig
+### 11.2 Wann NICHT nötig
 - **Kurze Quellen** (Tweet, kurzer Artikel < 500 Wörter) — dort ist das Risiko des Übersehens gering
 - **Lockere Quellen** (Vortrag/Video) — dort steuert die Struktur des Originals meist den Kurs
+
+### 11.3 Speicher-Ort: `gap-analysis.md`
+
+Die Gap-Analyse wird als `gap-analysis.md` im Kurs-Ordner abgelegt:
+
+```
+/content/courses/[slug]/
+  course.json
+  source.md
+  gap-analysis.md      ← hier
+```
+
+Die Datei bleibt als Audit-Trail erhalten und ist auf der Plattform nicht sichtbar. Sie dokumentiert, dass jeder Quellen-Abschnitt geprüft wurde — und macht spätere Kurs-Überarbeitungen leichter.
+
+### 11.4 Template für `gap-analysis.md`
+
+```markdown
+# Gap-Analyse: [Kurstitel]
+
+- **Quelle:** [URL]
+- **Abgleich-Datum:** YYYY-MM-DD
+- **Kurs-Slug:** [slug]
+
+## Mapping-Tabelle
+
+| Quellen-Abschnitt | Kurs-Modul | Element-Typ | Status | Notiz |
+|---|---|---|---|---|
+| "Ingest-Phase" | Modul 2 | Key-Concept + Quiz | ✅ abgedeckt | — |
+| "Linting-Edge-Cases" | — | — | ❌ Lücke | → Modul 3 Flashcard |
+| "Metadaten-Struktur" | Modul 4 | Callout (Tip) | ✅ abgedeckt | — |
+
+## Identifizierte Lücken (vor Einarbeitung)
+
+- Lücke 1: ...
+- Lücke 2: ...
+
+## Einarbeitung
+
+- Lücke 1 → Modul X, Element Y
+- Lücke 2 → ...
+```
 
 ---
 
 ## §12 Anti-Patterns
 
-> Konkrete Fehler aus vergangenen Kursen. Handlungsleitend formuliert.
+> Konkrete Fehler aus vergangenen Kursen. Jeder Eintrag hat einen **Lifecycle-Status** — nur `hot`-Patterns müssen aktiv geprüft werden (siehe Qualitäts-Checkliste §9).
+
+### Lifecycle-Regeln
+
+| Status | Bedeutung | Auswirkung |
+|---|---|---|
+| `hot` | Tritt in den letzten 3 Kursen auf oder präventiv aus aktueller Regel | Pflicht-Check in §9 Qualitäts-Checkliste |
+| `dormant` | 3+ Kurse nicht aufgetreten | Bleibt sichtbar, nicht mehr in Checkliste |
+| `archived` | 5+ Kurse nicht aufgetreten | Wandert in §12 Archiv — nur noch historische Referenz |
+
+**Statuswechsel** passiert manuell im Verdichtungs-Ritual (alle 3 Kurse). Ein erneutes Auftreten setzt Status sofort zurück auf `hot`.
 
 ### 12.1 JSON in einem Schritt schreiben
+
+**Seen in:** Kurs 2
+**Last seen:** Kurs 2 (2026-04-12)
+**Status:** hot
+
 **Was passiert:** Kurs-JSON wird in einem einzigen `Write`-Aufruf erstellt.
-**Warum schlecht:** Timeout-Fehler, gesamter Fortschritt geht verloren (siehe Kurs 2, Kurs 5).
+**Warum schlecht:** Timeout-Fehler, gesamter Fortschritt geht verloren.
 **Stattdessen:** Immer in 2-Modul-Blöcken via Write + Edit. Siehe Warnung oben und §1.6.
 
 ### 12.2 SVG-Pfeile falsch herum
+
+**Seen in:** Kurs 4
+**Last seen:** Kurs 4 (2026-04-14)
+**Status:** hot
+
 **Was passiert:** Polygon-Punkte werden in der Reihenfolge Tip → Base eingetragen.
-**Warum schlecht:** Pfeil zeigt in die falsche Richtung (siehe Kurs 4).
+**Warum schlecht:** Pfeil zeigt in die falsche Richtung.
 **Stattdessen:** Für rechts-zeigende Pfeile muss der Tip-Punkt den höheren x-Wert haben. Beispiel: `points="245,150 218,135 218,165"` (Tip x=245 > Base x=218).
 
 ### 12.3 Bildunterschrift ohne Transkript-Check
+
+**Seen in:** Kurs 4
+**Last seen:** Kurs 4 (2026-04-14)
+**Status:** hot
+
 **Was passiert:** Caption wird aus dem Gedächtnis geschrieben, stimmt nicht mit dem tatsächlichen Bild-Inhalt überein.
-**Warum schlecht:** Lernende werden verwirrt, Glaubwürdigkeit des Kurses leidet (siehe Kurs 4 — Plastikkiste statt Gruppenszene).
+**Warum schlecht:** Lernende werden verwirrt, Glaubwürdigkeit des Kurses leidet (Kurs 4: Plastikkiste statt Gruppenszene).
 **Stattdessen:** Vor Finalisierung jede Bildunterschrift gegen Transkript/Originalbild prüfen. Siehe §6.7.
 
 ### 12.4 Fehlende Gap-Analyse bei kuratierten Quellen
+
+**Seen in:** Kurs 5
+**Last seen:** Kurs 5 (2026-04-16)
+**Status:** hot
+
 **Was passiert:** Kurs wird direkt nach erstem Lesen der Quelle geschrieben.
-**Warum schlecht:** Inhalte werden übersehen, besonders bei komprimierten Quellen (siehe Kurs 5 — 12 Lücken).
+**Warum schlecht:** Inhalte werden übersehen, besonders bei komprimierten Quellen (Kurs 5: 12 Lücken).
 **Stattdessen:** Vor dem Schreiben jeden Quellen-Abschnitt auf Kurs-Elemente mappen. Siehe §11.
 
 ### 12.5 Generische Tag-Phrasen
+
+**Seen in:** präventiv
+**Last seen:** —
+**Status:** hot
+
 **Was passiert:** Tags wie "Productivity", "AI" oder "KI-Technologie & Tools".
 **Warum schlecht:** User wissen nicht, was sie erwartet — das Filtern verliert seinen Zweck.
 **Stattdessen:** Ein Wort pro Tag, spezifisch. "Skills", "RAG", "Obsidian", "Claude". Siehe §8.2.
 
 ### 12.6 Drei Boxen hintereinander
+
+**Seen in:** präventiv
+**Last seen:** —
+**Status:** hot
+
 **Was passiert:** Modul besteht hauptsächlich aus Callouts, Key-Concepts, Context-Boxen.
 **Warum schlecht:** Fließtext fehlt, der Rhythmus ist kaputt, Mobile wirkt wie ein Karussell.
 **Stattdessen:** Fließtext ist die Basis. Boxen nur für echte Zitate, Warnungen, überraschende Fakten. Siehe §2.3.
 
 ### 12.7 Emoji-Inflation
+
+**Seen in:** präventiv
+**Last seen:** —
+**Status:** hot
+
 **Was passiert:** Modul-Titel, Key-Concept-Icons, Fließtext-Dekoration mit Emojis.
 **Warum schlecht:** Wirkt unprofessionell, lenkt ab, gegen den Stil der Plattform.
 **Stattdessen:** Emojis nur in Takeaway-Checklisten und Easter Eggs. Im Zweifel weglassen. Siehe §3.1.
+
+### 12.8 Erfundene Framework-Ergänzungen
+
+**Seen in:** präventiv
+**Last seen:** —
+**Status:** hot
+
+**Was passiert:** Claude verkauft eigene Mini-Theorien oder konstruierte Prinzipien als "bekanntes Framework" — oder ergänzt Frameworks ohne klare Kriterien-Prüfung.
+**Warum schlecht:** Der Kurs verliert Quelltreue. Lernende glauben, sie lernen etablierte Konzepte, dabei sind es Erfindungen der Kurs-Erstellung.
+**Stattdessen:** §3.4 strikt prüfen — alle 5 Kriterien müssen erfüllt sein. Im Zweifel weglassen. Quelle muss ein echtes, öffentlich auffindbares Framework sein (mit Autor + Institution).
+
+---
+
+### §12 Archiv
+
+*Leer.* Anti-Patterns, die 5+ Kurse lang nicht aufgetreten sind, wandern hierher als historische Referenz.
 
 ---
 

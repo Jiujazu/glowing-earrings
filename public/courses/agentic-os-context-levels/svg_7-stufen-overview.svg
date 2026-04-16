@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420">
+  <rect width="800" height="420" fill="#FAFAFA"/>
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid-7s" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <line x1="40" y1="0" x2="40" y2="40" stroke="#000" stroke-width="0.5" opacity="0.05"/>
+      <line x1="0" y1="40" x2="40" y2="40" stroke="#000" stroke-width="0.5" opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="420" fill="url(#grid-7s)"/>
+
+  <!-- Title sticker -->
+  <rect x="215" y="12" width="370" height="44" fill="#3B82F6" stroke="#000" stroke-width="4" transform="rotate(-1.5 400 34)"/>
+  <text x="400" y="42" font-family="system-ui, sans-serif" font-size="18" font-weight="900" fill="#FFF" text-anchor="middle" letter-spacing="2" transform="rotate(-1.5 400 42)">7 STUFEN VON KONTEXT</text>
+
+  <!-- Ascending bars with labels -->
+  <!-- Level 1 -->
+  <rect x="50" y="325" width="80" height="55" fill="#F59E0B" stroke="#000" stroke-width="3" opacity="0.35"/>
+  <text x="90" y="360" font-family="system-ui, sans-serif" font-size="22" font-weight="900" fill="#000" text-anchor="middle">1</text>
+  <text x="90" y="396" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#000" text-anchor="middle">COPY-</text>
+  <text x="90" y="408" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#000" text-anchor="middle">PASTE</text>
+
+  <!-- Level 2 -->
+  <rect x="148" y="280" width="80" height="100" fill="#F59E0B" stroke="#000" stroke-width="3" opacity="0.45"/>
+  <text x="188" y="340" font-family="system-ui, sans-serif" font-size="22" font-weight="900" fill="#000" text-anchor="middle">2</text>
+  <text x="188" y="396" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#000" text-anchor="middle">CHAT-</text>
+  <text x="188" y="408" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#000" text-anchor="middle">PROJEKTE</text>
+
+  <!-- Level 3 -->
+  <rect x="246" y="235" width="80" height="145" fill="#F59E0B" stroke="#000" stroke-width="3" opacity="0.55"/>
+  <text x="286" y="315" font-family="system-ui, sans-serif" font-size="22" font-weight="900" fill="#000" text-anchor="middle">3</text>
+  <text x="286" y="396" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#000" text-anchor="middle">SKILLS</text>
+
+  <!-- Level 4 -->
+  <rect x="344" y="190" width="80" height="190" fill="#F59E0B" stroke="#000" stroke-width="3" opacity="0.65"/>
+  <text x="384" y="295" font-family="system-ui, sans-serif" font-size="22" font-weight="900" fill="#000" text-anchor="middle">4</text>
+  <text x="384" y="396" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#000" text-anchor="middle">FILE</text>
+  <text x="384" y="408" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#000" text-anchor="middle">ACCESS</text>
+
+  <!-- Level 5 -->
+  <rect x="442" y="145" width="80" height="235" fill="#F59E0B" stroke="#000" stroke-width="3" opacity="0.75"/>
+  <text x="482" y="275" font-family="system-ui, sans-serif" font-size="22" font-weight="900" fill="#000" text-anchor="middle">5</text>
+  <text x="482" y="396" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#000" text-anchor="middle">PROJEKTE</text>
+
+  <!-- Level 6 -->
+  <rect x="540" y="100" width="80" height="280" fill="#F59E0B" stroke="#000" stroke-width="3" opacity="0.88"/>
+  <text x="580" y="255" font-family="system-ui, sans-serif" font-size="22" font-weight="900" fill="#000" text-anchor="middle">6</text>
+  <text x="580" y="396" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#000" text-anchor="middle">SECOND</text>
+  <text x="580" y="408" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#000" text-anchor="middle">BRAIN</text>
+
+  <!-- Level 7 -->
+  <rect x="638" y="65" width="80" height="315" fill="#F59E0B" stroke="#000" stroke-width="4"/>
+  <text x="678" y="235" font-family="system-ui, sans-serif" font-size="22" font-weight="900" fill="#000" text-anchor="middle">7</text>
+  <text x="678" y="396" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#000" text-anchor="middle">BUSINESS</text>
+  <text x="678" y="408" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#000" text-anchor="middle">OS</text>
+
+  <!-- Diagonal arrows between levels -->
+  <polygon points="137,317 144,305 148,318" fill="#000"/>
+  <polygon points="235,272 242,260 246,273" fill="#000"/>
+  <polygon points="333,227 340,215 344,228" fill="#000"/>
+  <polygon points="431,182 438,170 442,183" fill="#000"/>
+  <polygon points="529,137 536,125 540,138" fill="#000"/>
+  <polygon points="627,92 634,80 638,93" fill="#000"/>
+
+  <!-- Left annotation: "GENERISCH" with arrow pointing low -->
+  <rect x="20" y="75" width="15" height="290" fill="none" stroke="#000" stroke-width="2" stroke-dasharray="4,4" opacity="0.2"/>
+  <text x="14" y="230" font-family="system-ui, sans-serif" font-size="11" font-weight="900" fill="#A1A1AA" text-anchor="middle" transform="rotate(-90 14 230)" letter-spacing="3">KONTEXT-TIEFE</text>
+
+  <!-- Decorative elements -->
+  <rect x="748" y="15" width="22" height="22" fill="#E91E8C" stroke="#000" stroke-width="3" transform="rotate(15 759 26)"/>
+  <polygon points="32,410 36,399 40,410 29,403 43,403" fill="#000" transform="scale(0.9) translate(8,2)"/>
+  <rect x="740" y="390" width="14" height="14" fill="#3B82F6" stroke="#000" stroke-width="2" transform="rotate(-10 747 397)"/>
+</svg>

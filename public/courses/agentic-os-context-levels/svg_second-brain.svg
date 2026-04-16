@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420">
+  <rect width="800" height="420" fill="#FAFAFA"/>
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid-sb" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <line x1="40" y1="0" x2="40" y2="40" stroke="#000" stroke-width="0.5" opacity="0.05"/>
+      <line x1="0" y1="40" x2="40" y2="40" stroke="#000" stroke-width="0.5" opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="420" fill="url(#grid-sb)"/>
+
+  <!-- === CENTER: Second Brain node === -->
+  <rect x="290" y="155" width="220" height="110" fill="#F59E0B" stroke="#000" stroke-width="4"/>
+  <text x="400" y="200" font-family="system-ui, sans-serif" font-size="18" font-weight="900" fill="#000" text-anchor="middle">SECOND</text>
+  <text x="400" y="225" font-family="system-ui, sans-serif" font-size="18" font-weight="900" fill="#000" text-anchor="middle">BRAIN</text>
+  <!-- Small folder icon -->
+  <rect x="375" y="233" width="50" height="5" fill="#000" opacity="0.3"/>
+
+  <!-- === Connecting lines from center to outer nodes === -->
+  <!-- To Skills (top-left) -->
+  <line x1="310" y1="155" x2="175" y2="75" stroke="#000" stroke-width="2.5"/>
+  <!-- To Projekte (top-right) -->
+  <line x1="490" y1="155" x2="625" y2="75" stroke="#000" stroke-width="2.5"/>
+  <!-- To ICP (left) -->
+  <line x1="290" y1="210" x2="140" y2="210" stroke="#000" stroke-width="2.5"/>
+  <!-- To Analytics (right) -->
+  <line x1="510" y1="210" x2="660" y2="210" stroke="#000" stroke-width="2.5"/>
+  <!-- To Meetings (bottom-left) -->
+  <line x1="310" y1="265" x2="175" y2="345" stroke="#000" stroke-width="2.5"/>
+  <!-- To Strategie (bottom-right) -->
+  <line x1="490" y1="265" x2="625" y2="345" stroke="#000" stroke-width="2.5"/>
+
+  <!-- === Outer nodes === -->
+  <!-- Skills (top-left) -->
+  <rect x="70" y="40" width="130" height="55" fill="#FFF" stroke="#000" stroke-width="3"/>
+  <text x="135" y="73" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#000" text-anchor="middle">SKILLS</text>
+  <!-- Reference arrow indicator -->
+  <text x="135" y="55" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#A1A1AA" text-anchor="middle">referenziert →</text>
+
+  <!-- Projekte (top-right) -->
+  <rect x="600" y="40" width="130" height="55" fill="#FFF" stroke="#000" stroke-width="3"/>
+  <text x="665" y="73" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#000" text-anchor="middle">PROJEKTE</text>
+  <text x="665" y="55" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#A1A1AA" text-anchor="middle">← referenziert</text>
+
+  <!-- ICP (left) -->
+  <rect x="30" y="185" width="110" height="50" fill="#FFF" stroke="#000" stroke-width="3"/>
+  <text x="85" y="215" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#000" text-anchor="middle">ICP</text>
+
+  <!-- Analytics (right) -->
+  <rect x="660" y="185" width="110" height="50" fill="#FFF" stroke="#000" stroke-width="3"/>
+  <text x="715" y="215" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#000" text-anchor="middle">ANALYTICS</text>
+
+  <!-- Meetings (bottom-left) -->
+  <rect x="70" y="325" width="130" height="55" fill="#FFF" stroke="#000" stroke-width="3"/>
+  <text x="135" y="358" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#000" text-anchor="middle">MEETINGS</text>
+
+  <!-- Strategie (bottom-right) -->
+  <rect x="600" y="325" width="130" height="55" fill="#FFF" stroke="#000" stroke-width="3"/>
+  <text x="665" y="358" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#000" text-anchor="middle">STRATEGIE</text>
+
+  <!-- === "SINGLE SOURCE OF TRUTH" sticker === -->
+  <rect x="235" y="290" width="330" height="40" fill="#3B82F6" stroke="#000" stroke-width="4" transform="rotate(-1.5 400 310)"/>
+  <text x="400" y="316" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#FFF" text-anchor="middle" letter-spacing="2" transform="rotate(-1.5 400 316)">SINGLE SOURCE OF TRUTH</text>
+
+  <!-- === "VORHER" chaos indicator (small, top area) === -->
+  <!-- Small crossed-out duplicate icons -->
+  <rect x="295" y="365" width="85" height="32" fill="#FFF" stroke="#000" stroke-width="2" opacity="0.5"/>
+  <text x="337" y="386" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#A1A1AA" text-anchor="middle">icp.md</text>
+  <line x1="295" y1="381" x2="380" y2="381" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
+
+  <rect x="395" y="365" width="85" height="32" fill="#FFF" stroke="#000" stroke-width="2" opacity="0.5"/>
+  <text x="437" y="386" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#A1A1AA" text-anchor="middle">icp.md</text>
+  <line x1="395" y1="381" x2="480" y2="381" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
+
+  <rect x="495" y="365" width="85" height="32" fill="#FFF" stroke="#000" stroke-width="2" opacity="0.5"/>
+  <text x="537" y="386" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#A1A1AA" text-anchor="middle">icp.md</text>
+  <line x1="495" y1="381" x2="580" y2="381" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- "KEINE DUPLIKATE" label next to strikethrough files -->
+  <text x="222" y="386" font-family="system-ui, sans-serif" font-size="10" font-weight="900" fill="#FF6B6B" text-anchor="end">KEINE</text>
+  <text x="222" y="398" font-family="system-ui, sans-serif" font-size="10" font-weight="900" fill="#FF6B6B" text-anchor="end">DUPLIKATE</text>
+
+  <!-- Decorative elements -->
+  <rect x="18" y="15" width="20" height="20" fill="#E91E8C" stroke="#000" stroke-width="3" transform="rotate(12 28 25)"/>
+  <polygon points="775,400 780,388 785,400 773,393 787,393" fill="#000"/>
+  <rect x="755" y="15" width="16" height="16" fill="#F59E0B" stroke="#000" stroke-width="2" transform="rotate(-10 763 23)"/>
+</svg>

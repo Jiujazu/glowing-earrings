@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <rect width="800" height="400" fill="#FAFAFA"/>
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid-svc" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <line x1="40" y1="0" x2="40" y2="40" stroke="#000" stroke-width="0.5" opacity="0.05"/>
+      <line x1="0" y1="40" x2="40" y2="40" stroke="#000" stroke-width="0.5" opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="400" fill="url(#grid-svc)"/>
+
+  <!-- Divider line center -->
+  <line x1="400" y1="55" x2="400" y2="370" stroke="#000" stroke-width="2" stroke-dasharray="6,5" opacity="0.15"/>
+
+  <!-- LEFT: Chat-Projekte -->
+  <rect x="60" y="18" width="250" height="42" fill="#A1A1AA" stroke="#000" stroke-width="4" transform="rotate(-1 185 39)"/>
+  <text x="185" y="46" font-family="system-ui, sans-serif" font-size="16" font-weight="900" fill="#FFF" text-anchor="middle" transform="rotate(-1 185 46)">CHAT-PROJEKTE</text>
+
+  <!-- Chat-Projekte feature rows -->
+  <!-- Row 1 -->
+  <rect x="50" y="80" width="300" height="52" fill="#FFF" stroke="#000" stroke-width="3"/>
+  <text x="68" y="111" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#000">Isolierte Fenster</text>
+  <rect x="296" y="92" width="36" height="28" fill="#FF6B6B" stroke="#000" stroke-width="2"/>
+  <text x="314" y="112" font-family="system-ui, sans-serif" font-size="18" font-weight="900" fill="#FFF" text-anchor="middle">✗</text>
+
+  <!-- Row 2 -->
+  <rect x="50" y="140" width="300" height="52" fill="#FFF" stroke="#000" stroke-width="3"/>
+  <text x="68" y="171" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#000">Kein Schreibzugriff</text>
+  <rect x="296" y="152" width="36" height="28" fill="#FF6B6B" stroke="#000" stroke-width="2"/>
+  <text x="314" y="172" font-family="system-ui, sans-serif" font-size="18" font-weight="900" fill="#FFF" text-anchor="middle">✗</text>
+
+  <!-- Row 3 -->
+  <rect x="50" y="200" width="300" height="52" fill="#FFF" stroke="#000" stroke-width="3"/>
+  <text x="68" y="231" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#000">Task-spezifisch</text>
+  <rect x="296" y="212" width="36" height="28" fill="#FF6B6B" stroke="#000" stroke-width="2"/>
+  <text x="314" y="232" font-family="system-ui, sans-serif" font-size="18" font-weight="900" fill="#FFF" text-anchor="middle">✗</text>
+
+  <!-- Row 4 -->
+  <rect x="50" y="260" width="300" height="52" fill="#FFF" stroke="#000" stroke-width="3"/>
+  <text x="68" y="291" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#000">Schwer zu testen</text>
+  <rect x="296" y="272" width="36" height="28" fill="#FF6B6B" stroke="#000" stroke-width="2"/>
+  <text x="314" y="292" font-family="system-ui, sans-serif" font-size="18" font-weight="900" fill="#FFF" text-anchor="middle">✗</text>
+
+  <!-- RIGHT: Skills -->
+  <rect x="490" y="18" width="250" height="42" fill="#F59E0B" stroke="#000" stroke-width="4" transform="rotate(1 615 39)"/>
+  <text x="615" y="46" font-family="system-ui, sans-serif" font-size="16" font-weight="900" fill="#000" text-anchor="middle" transform="rotate(1 615 46)">SKILLS</text>
+
+  <!-- Skills feature rows -->
+  <!-- Row 1 -->
+  <rect x="450" y="80" width="300" height="52" fill="#FFF" stroke="#000" stroke-width="3"/>
+  <text x="468" y="111" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#000">Überall aufrufbar</text>
+  <rect x="696" y="92" width="36" height="28" fill="#22C55E" stroke="#000" stroke-width="2"/>
+  <text x="714" y="112" font-family="system-ui, sans-serif" font-size="18" font-weight="900" fill="#FFF" text-anchor="middle">✓</text>
+
+  <!-- Row 2 -->
+  <rect x="450" y="140" width="300" height="52" fill="#FFF" stroke="#000" stroke-width="3"/>
+  <text x="468" y="171" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#000">Teilbar (Zip / Org-Skills)</text>
+  <rect x="696" y="152" width="36" height="28" fill="#22C55E" stroke="#000" stroke-width="2"/>
+  <text x="714" y="172" font-family="system-ui, sans-serif" font-size="18" font-weight="900" fill="#FFF" text-anchor="middle">✓</text>
+
+  <!-- Row 3 -->
+  <rect x="450" y="200" width="300" height="52" fill="#FFF" stroke="#000" stroke-width="3"/>
+  <text x="468" y="231" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#000">Testbar (Evals)</text>
+  <rect x="696" y="212" width="36" height="28" fill="#22C55E" stroke="#000" stroke-width="2"/>
+  <text x="714" y="232" font-family="system-ui, sans-serif" font-size="18" font-weight="900" fill="#FFF" text-anchor="middle">✓</text>
+
+  <!-- Row 4 -->
+  <rect x="450" y="260" width="300" height="52" fill="#FFF" stroke="#000" stroke-width="3"/>
+  <text x="468" y="291" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#000">Automatisierbar (Scheduled)</text>
+  <rect x="696" y="272" width="36" height="28" fill="#22C55E" stroke="#000" stroke-width="2"/>
+  <text x="714" y="292" font-family="system-ui, sans-serif" font-size="18" font-weight="900" fill="#FFF" text-anchor="middle">✓</text>
+
+  <!-- Arrow from left to right -->
+  <line x1="355" y1="345" x2="430" y2="345" stroke="#000" stroke-width="3"/>
+  <polygon points="445,345 430,336 430,354" fill="#000"/>
+
+  <!-- Bottom sticker -->
+  <rect x="245" y="352" width="310" height="38" fill="#3B82F6" stroke="#000" stroke-width="3" transform="rotate(1 400 371)"/>
+  <text x="400" y="377" font-family="system-ui, sans-serif" font-size="13" font-weight="900" fill="#FFF" text-anchor="middle" letter-spacing="1" transform="rotate(1 400 377)">GLEICHE IDEE. MEHR POWER.</text>
+
+  <!-- Decorative elements -->
+  <rect x="18" y="370" width="18" height="18" fill="#E91E8C" stroke="#000" stroke-width="3" transform="rotate(12 27 379)"/>
+  <polygon points="775,18 779,8 783,18 773,12 785,12" fill="#000"/>
+  <rect x="760" y="380" width="14" height="14" fill="#F59E0B" stroke="#000" stroke-width="2" transform="rotate(-8 767 387)"/>
+</svg>

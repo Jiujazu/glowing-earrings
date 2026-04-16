@@ -56,6 +56,13 @@
           "text": "AI Agents, Claude Code, Co-work, Codex — sie alle können Workflows automatisieren, Code schreiben und ganze Business-Prozesse eigenständig abarbeiten. Aber egal wie gut die Modelle werden: **Ohne Kontext bleibt jeder Output generisch.**\n\nDie Entwicklungen bei MCPs, Connectors, Browser Use, Skills und Sub-Agents machen Agents immer fähiger. Aber damit all das tatsächlich nützlich wird, brauchen sie eines: **massiv viel Kontext über dich, deine Arbeit und deine Ziele.**"
         },
         {
+          "id": "m1-overview-svg",
+          "type": "image",
+          "src": "/courses/agentic-os-context-levels/svg_7-stufen-overview.svg",
+          "alt": "Die 7 Stufen von Kontext: Von Copy-Paste über Skills und File Access bis zum Business OS — als aufsteigende Balken visualisiert",
+          "caption": "Deine Reise: Von manuellem Copy-Paste bis zum geteilten Business OS."
+        },
+        {
           "id": "m1-key-concept-1",
           "type": "key-concept",
           "title": "Context Infrastructure",
@@ -123,6 +130,13 @@
           "id": "m2-content-1",
           "type": "content",
           "text": "Skills sind vergleichbar mit Chat-Projekten — aber ohne deren Limitierungen. Ein Skill besteht aus einer `skill.md` (die Anleitung, vergleichbar mit dem System-Prompt) und einem Ordner mit Kontext-Dateien.\n\nDer entscheidende Unterschied: **Skills können in jedem Chat, jederzeit aufgerufen werden.** Du bist nicht mehr an isolierte Projekt-Fenster gebunden."
+        },
+        {
+          "id": "m2-comparison-svg",
+          "type": "image",
+          "src": "/courses/agentic-os-context-levels/svg_skills-vs-chat.svg",
+          "alt": "Vergleich: Chat-Projekte haben 4 Limitierungen (isoliert, kein Schreibzugriff, task-spezifisch, schwer testbar) — Skills lösen alle vier",
+          "caption": "Chat-Projekte vs. Skills — gleiche Grundidee, aber Skills können mehr."
         },
         {
           "id": "m2-context-box",
@@ -313,6 +327,13 @@
           "id": "m5-content-1",
           "type": "content",
           "text": "Wenn du Level 4-5 intensiv nutzt, wächst dein Kontext über mehrere Projekte und Skills hinweg. Irgendwann hast du das gleiche ICP-Dokument in drei verschiedenen Projekten und fünf Skills — und wenn sich etwas ändert, musst du es überall einzeln aktualisieren.\n\nDie Lösung: **Alles in einen einzigen, zentralen Ordner packen.** Das ist dein Second Brain — ein Ort mit deinem gesamten Business-Kontext: Strategie, ICP, Prozesse, Meeting-Notizen, Analytics.\n\nJeder Chat, jeder Skill und jedes Projekt referenziert diesen einen Ordner. Ein Update → überall aktuell."
+        },
+        {
+          "id": "m5-architecture-svg",
+          "type": "image",
+          "src": "/courses/agentic-os-context-levels/svg_second-brain.svg",
+          "alt": "Second Brain Architektur: Ein zentraler Ordner, von dem Skills, Projekte, ICP, Analytics, Meetings und Strategie referenziert werden — keine Duplikate",
+          "caption": "Ein Ordner. Alles referenziert. Keine Duplikate."
         },
         {
           "id": "m5-callout-warning",

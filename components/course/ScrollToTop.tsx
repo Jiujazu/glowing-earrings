@@ -57,7 +57,7 @@ export default function ScrollToTop({ modules }: ScrollToTopProps) {
   const hasNext = modules && activeIndex < (modules?.length ?? 0) - 1;
 
   const btnClass =
-    "w-10 h-10 bg-[var(--course-surface)] border-[3px] border-[var(--course-text)]/40 text-[var(--course-text-muted)] hover:text-[var(--course-text)] hover:border-[var(--course-primary)] transition-all duration-100 flex items-center justify-center press-feedback";
+    "w-10 h-10 bg-[var(--course-surface)] border-[3px] border-[var(--course-text)]/80 text-[var(--course-text-muted)] hover:text-[var(--course-text)] hover:border-[var(--course-primary)] transition-all duration-100 flex items-center justify-center press-feedback";
 
   return (
     <div

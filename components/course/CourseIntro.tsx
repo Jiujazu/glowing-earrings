@@ -57,7 +57,7 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
       {/* Cover Image as Hero Banner */}
       {meta.coverImage && (
         <ScrollReveal delay={0} duration={600}>
-          <div className="max-w-3xl mx-auto mb-10 mt-8 sm:mt-12 overflow-hidden border-4 border-[var(--course-text)]/40">
+          <div className="max-w-3xl mx-auto mb-10 mt-8 sm:mt-12 overflow-hidden border-4 border-[var(--course-text)]/80">
             <Image
               src={meta.coverImage}
               alt={meta.title}
@@ -121,7 +121,7 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
         {/* Source Context */}
         <ScrollReveal delay={250}>
           <div
-            className="p-5 border-4 border-[var(--course-text)]/40"
+            className="p-5 border-4 border-[var(--course-text)]/80"
             style={{ backgroundColor: "var(--course-surface)" }}
           >
             <p className={`text-xs ${LABEL} text-[var(--course-text-muted)] mb-2`}>Quelle</p>

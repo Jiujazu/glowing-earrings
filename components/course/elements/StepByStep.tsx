@@ -69,7 +69,7 @@ export default function StepByStep({ element }: { element: StepByStepElement }) 
   const steps = isEditMode ? localSteps : element.steps;
 
   return (
-    <div className="overflow-hidden bg-[var(--course-surface)] border-4 border-[var(--course-text)]/40" style={{ boxShadow: "4px 4px 0px 0px color-mix(in srgb, var(--course-text) 25%, transparent)" }}>
+    <div className="overflow-hidden bg-[var(--course-surface)] border-4 border-[var(--course-text)]/80" style={{ boxShadow: "4px 4px 0px 0px color-mix(in srgb, var(--course-text) 50%, transparent)" }}>
       {element.title && (
         <div className="px-5 pt-5 pb-2">
           {isEditMode ? (
@@ -105,7 +105,7 @@ export default function StepByStep({ element }: { element: StepByStepElement }) 
                   isEditMode ? "cursor-default" : "hover:bg-[var(--course-text)]/3"
                 }`}
               >
-                <span className="flex items-center justify-center w-8 h-8 border-[3px] border-[var(--course-text)]/40 bg-[var(--course-primary)]/20 text-[var(--course-primary)] text-sm font-black font-heading flex-shrink-0">
+                <span className="flex items-center justify-center w-8 h-8 border-[3px] border-[var(--course-text)]/80 bg-[var(--course-primary)]/20 text-[var(--course-primary)] text-sm font-black font-heading flex-shrink-0">
                   {i + 1}
                 </span>
                 <span className="flex-1 font-medium text-[var(--course-text)] text-sm sm:text-base">
@@ -150,7 +150,7 @@ export default function StepByStep({ element }: { element: StepByStepElement }) 
                     </div>
                   )}
                   {step.image && (
-                    <div className="mt-3 overflow-hidden border-4 border-[var(--course-text)]/30">
+                    <div className="mt-3 overflow-hidden border-4 border-[var(--course-text)]/60">
                       <Image
                         src={step.image}
                         alt={`Schritt ${i + 1}: ${step.label}`}

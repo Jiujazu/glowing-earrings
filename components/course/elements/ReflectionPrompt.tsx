@@ -24,7 +24,7 @@ export default function ReflectionPrompt({
   );
 
   return (
-    <div className="bg-[var(--course-surface)] p-6 border-4 border-dashed border-[var(--course-primary)]/60" style={{ boxShadow: "4px 4px 0px 0px color-mix(in srgb, var(--course-text) 20%, transparent)" }}>
+    <div className="bg-[var(--course-surface)] p-6 border-4 border-dashed border-[var(--course-primary)]/80" style={{ boxShadow: "4px 4px 0px 0px color-mix(in srgb, var(--course-text) 50%, transparent)" }}>
       <div className="flex items-start gap-3">
         <IconBox icon={MessageCircleQuestion} color="var(--course-primary)" size="md" />
         <div>

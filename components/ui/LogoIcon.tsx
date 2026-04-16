@@ -30,16 +30,16 @@ export default function LogoIcon({ className = "w-6 h-6", strokeWidth = 2.5 }: L
         fill="none"
       />
 
-      {/* Glow sparkle — bold 4-pointed star at Vermeer highlight position */}
+      {/* Glow sparkle — big 4-pointed star at Vermeer highlight position */}
       <path
-        d="M8 7
-           L9.2 10.5
-           L13 12
-           L9.2 13.5
-           L8 17
-           L6.8 13.5
-           L3 12
-           L6.8 10.5
+        d="M8 2
+           L10 10
+           L16 12
+           L10 14
+           L8 22
+           L6 14
+           L0 12
+           L6 10
            Z"
         fill="currentColor"
         stroke="none"

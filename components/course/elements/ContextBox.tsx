@@ -27,8 +27,9 @@ export default function ContextBox({ element }: { element: ContextBoxElement }) 
     <div
       className="p-5 border-4"
       style={{
-        backgroundColor: "color-mix(in srgb, var(--course-accent) 5%, var(--course-surface))",
-        borderColor: "color-mix(in srgb, var(--course-text) 10%, transparent)",
+        backgroundColor: "color-mix(in srgb, var(--course-accent) 10%, var(--course-surface))",
+        borderColor: "color-mix(in srgb, var(--course-text) 40%, transparent)",
+        boxShadow: "4px 4px 0px 0px color-mix(in srgb, var(--course-text) 20%, transparent)",
       }}
     >
       <p className="text-xs font-bold text-[var(--course-text-muted)] uppercase tracking-wider mb-2">

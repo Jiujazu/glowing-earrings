@@ -24,10 +24,11 @@ export default function CourseTOC({ modules }: CourseTOCProps) {
       <div className="max-w-3xl mx-auto">
         <ScrollReveal delay={300}>
           <div
-            className="p-5 sm:p-6 border-4 border-[var(--course-text)]/20"
+            className="p-5 sm:p-6 border-4 border-[var(--course-text)]/40"
             style={{
               backgroundColor:
-                "color-mix(in srgb, var(--course-primary) 6%, var(--course-surface))",
+                "color-mix(in srgb, var(--course-primary) 10%, var(--course-surface))",
+              boxShadow: "4px 4px 0px 0px color-mix(in srgb, var(--course-text) 25%, transparent)",
             }}
           >
             <p className={`text-xs ${LABEL} text-[var(--course-text-muted)] mb-4`}>
@@ -44,7 +45,7 @@ export default function CourseTOC({ modules }: CourseTOCProps) {
                       <IconBox icon={getIconForEmoji(mod.icon)} color="var(--course-primary)" size="sm" />
                     ) : (
                       <span
-                        className="flex items-center justify-center w-7 h-7 text-[11px] font-black font-heading flex-shrink-0 border-2 border-[var(--course-text)]/15 text-[var(--course-text-muted)] group-hover:border-[var(--course-primary)] group-hover:text-[var(--course-primary)] group-hover:bg-[var(--course-primary)]/10 transition-colors"
+                        className="flex items-center justify-center w-7 h-7 text-[11px] font-black font-heading flex-shrink-0 border-2 border-[var(--course-text)]/35 text-[var(--course-text-muted)] group-hover:border-[var(--course-primary)] group-hover:text-[var(--course-primary)] group-hover:bg-[var(--course-primary)]/10 transition-colors"
                       >
                         {i + 1}
                       </span>

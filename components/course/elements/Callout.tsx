@@ -41,9 +41,10 @@ export default function Callout({ element }: { element: CalloutElement }) {
     <div
       className="border-l-[6px] border-4 p-5"
       style={{
-        borderColor: "color-mix(in srgb, var(--course-text) 12%, transparent)",
+        borderColor: "color-mix(in srgb, var(--course-text) 40%, transparent)",
         borderLeftColor: config.color,
         backgroundColor: "var(--course-surface)",
+        boxShadow: "4px 4px 0px 0px color-mix(in srgb, var(--course-text) 25%, transparent)",
       }}
     >
       <div className="flex items-start gap-3">

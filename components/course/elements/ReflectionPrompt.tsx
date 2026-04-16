@@ -3,6 +3,8 @@
 import dynamic from "next/dynamic";
 import type { ReflectionElement } from "@/lib/types";
 import { useEditMode } from "@/components/editor/EditModeProvider";
+import IconBox from "@/components/ui/IconBox";
+import { MessageCircleQuestion } from "lucide-react";
 
 const EditableText = dynamic(() => import("@/components/editor/EditableText"), {
   ssr: false,
@@ -22,9 +24,9 @@ export default function ReflectionPrompt({
   );
 
   return (
-    <div className="bg-[var(--course-surface)] p-6 border-4 border-dashed border-[var(--course-primary)]/30">
+    <div className="bg-[var(--course-surface)] p-6 border-4 border-dashed border-[var(--course-primary)]/60" style={{ boxShadow: "4px 4px 0px 0px color-mix(in srgb, var(--course-text) 20%, transparent)" }}>
       <div className="flex items-start gap-3">
-        <span className="text-2xl flex-shrink-0">🤔</span>
+        <IconBox icon={MessageCircleQuestion} color="var(--course-primary)" size="md" />
         <div>
           <p className="text-xs font-medium text-[var(--course-text-muted)] uppercase tracking-wider mb-2">
             Kurz nachgedacht

@@ -47,7 +47,7 @@ export default function KeyConcept({ element }: { element: KeyConceptElement }) 
   );
 
   const descContent = (
-    <p className="text-base text-[var(--course-text)] leading-relaxed opacity-85">
+    <p className="text-base text-[var(--course-text)] leading-relaxed">
       {element.description}
     </p>
   );
@@ -57,8 +57,9 @@ export default function KeyConcept({ element }: { element: KeyConceptElement }) 
       ref={ref}
       className="aha-glow p-5 border-4"
       style={{
-        backgroundColor: "color-mix(in srgb, var(--course-primary) 6%, var(--course-surface))",
-        borderColor: "color-mix(in srgb, var(--course-primary) 20%, transparent)",
+        backgroundColor: "color-mix(in srgb, var(--course-primary) 12%, var(--course-surface))",
+        borderColor: "color-mix(in srgb, var(--course-primary) 50%, transparent)",
+        boxShadow: "4px 4px 0px 0px color-mix(in srgb, var(--course-primary) 25%, transparent)",
       }}
     >
       <div className="flex items-start gap-3">

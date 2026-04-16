@@ -6,6 +6,8 @@ import type { QuizElement, QuizOption } from "@/lib/types";
 import QuizConfetti from "./QuizConfetti";
 import { useProgressTracker } from "../CourseProgressTracker";
 import { useEditMode } from "@/components/editor/EditModeProvider";
+import IconBox from "@/components/ui/IconBox";
+import { Lightbulb, Target } from "lucide-react";
 
 const EditableText = dynamic(() => import("@/components/editor/EditableText"), {
   ssr: false,
@@ -99,8 +101,8 @@ export default function QuizCard({ element }: { element: QuizElement }) {
 
   return (
     <div
-      className="p-5 sm:p-6 relative overflow-hidden border-4 border-[var(--course-text)]/15"
-      style={{ backgroundColor: "var(--course-surface)" }}
+      className="p-5 sm:p-6 relative overflow-hidden border-4 border-[var(--course-text)]/40"
+      style={{ backgroundColor: "var(--course-surface)", boxShadow: "4px 4px 0px 0px color-mix(in srgb, var(--course-text) 25%, transparent)" }}
     >
       {revealed && isCorrect && <QuizConfetti />}
 
@@ -124,7 +126,7 @@ export default function QuizCard({ element }: { element: QuizElement }) {
           const isSelected = selected === i;
           const isOptionCorrect = option.correct;
 
-          let borderColor = "color-mix(in srgb, var(--course-text) 15%, transparent)";
+          let borderColor = "color-mix(in srgb, var(--course-text) 35%, transparent)";
           let bgColor = "transparent";
 
           if (revealed) {
@@ -135,7 +137,7 @@ export default function QuizCard({ element }: { element: QuizElement }) {
               borderColor = "#E55B5B";
               bgColor = "color-mix(in srgb, #E55B5B 10%, var(--course-surface))";
             } else {
-              borderColor = "color-mix(in srgb, var(--course-text) 8%, transparent)";
+              borderColor = "color-mix(in srgb, var(--course-text) 20%, transparent)";
             }
           }
 
@@ -222,10 +224,10 @@ export default function QuizCard({ element }: { element: QuizElement }) {
       {(revealed || isEditMode) && (
         <div
           className="mt-4 pt-4 animate-fade-in"
-          style={{ borderTop: "1px solid color-mix(in srgb, var(--course-text) 10%, transparent)" }}
+          style={{ borderTop: "2px solid color-mix(in srgb, var(--course-text) 30%, transparent)" }}
         >
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-lg">{isEditMode ? "💡" : isCorrect ? "🎯" : "💡"}</span>
+            <IconBox icon={isEditMode ? Lightbulb : isCorrect ? Target : Lightbulb} color={isCorrect ? "#22C55E" : "var(--course-primary)"} size="sm" />
             <span className="font-heading font-bold text-sm text-[var(--course-text)]">
               {isEditMode ? "Erklärung" : isCorrect ? "Richtig!" : "Nicht ganz — aber gut zu wissen:"}
             </span>
@@ -240,7 +242,7 @@ export default function QuizCard({ element }: { element: QuizElement }) {
           {!isEditMode && (
             <button
               onClick={handleRetry}
-              className="mt-4 inline-flex items-center gap-2 px-4 py-2 text-sm font-bold uppercase tracking-wide border-4 border-[var(--course-text)]/20 transition-all duration-100 text-[var(--course-primary)] hover:bg-[var(--course-primary)]/10 press-feedback"
+              className="mt-4 inline-flex items-center gap-2 px-4 py-2 text-sm font-bold uppercase tracking-wide border-4 border-[var(--course-text)]/40 transition-all duration-100 text-[var(--course-primary)] hover:bg-[var(--course-primary)]/10 press-feedback"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="1 4 1 10 7 10" />

@@ -47,7 +47,7 @@ export default function ChapterBanner({
   return (
     <div
       ref={ref}
-      className="sticky top-16 z-[55] py-5 sm:py-6 px-4 border-b-4 border-[var(--course-text)]/15"
+      className="sticky top-16 z-[55] py-5 sm:py-6 px-4 border-b-4 border-[var(--course-text)]/40"
       style={{
         backgroundColor: "color-mix(in srgb, var(--course-primary) 10%, var(--course-bg))",
       }}
@@ -60,7 +60,7 @@ export default function ChapterBanner({
           className="flex items-center gap-4 w-full text-left group"
         >
           <span
-            className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 border-3 border-[var(--course-text)]/30 font-heading font-black text-sm sm:text-base text-white flex-shrink-0"
+            className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 border-[3px] border-[var(--course-text)]/50 font-heading font-black text-sm sm:text-base text-white flex-shrink-0"
             style={{ backgroundColor: "var(--course-primary)" }}
           >
             {currentIndex + 1}
@@ -90,8 +90,8 @@ export default function ChapterBanner({
 
         {isOpen && (
           <ol
-            className="absolute left-0 right-0 top-full mt-1 flex flex-col gap-1 px-4 py-3 border-4 border-[var(--course-text)]/20 z-50 animate-fade-in"
-            style={{ backgroundColor: "var(--course-bg)", boxShadow: '8px 8px 0px 0px color-mix(in srgb, var(--course-text) 15%, transparent)' }}
+            className="absolute left-0 right-0 top-full mt-1 flex flex-col gap-1 px-4 py-3 border-4 border-[var(--course-text)]/40 z-50 animate-fade-in"
+            style={{ backgroundColor: "var(--course-bg)", boxShadow: '6px 6px 0px 0px color-mix(in srgb, var(--course-text) 30%, transparent)' }}
           >
             {modules.map((mod, i) => {
               const isCurrent = i === currentIndex;
@@ -117,7 +117,7 @@ export default function ChapterBanner({
                       className={`text-xs font-black font-heading w-6 h-6 flex items-center justify-center flex-shrink-0 ${
                         isCurrent
                           ? "text-white"
-                          : "text-[var(--course-text-muted)] border-2 border-[var(--course-text)]/20"
+                          : "text-[var(--course-text-muted)] border-2 border-[var(--course-text)]/35"
                       }`}
                       style={
                         isCurrent

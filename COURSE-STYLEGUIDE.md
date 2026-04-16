@@ -4,6 +4,20 @@
 
 ---
 
+## !! WARNUNG: Kurse IMMER in Teilen erstellen !!
+
+> **Kurs-JSON-Dateien NIEMALS in einem einzigen Schritt schreiben.** Bei Nichteinhaltung kommt es zu Timeout-Fehlern und der gesamte Fortschritt geht verloren.
+
+**Vorgehen (Pflicht für JEDEN Kurs, egal wie klein):**
+
+1. **Teil 1 — Write:** Meta + Intro + Module 1-2 → neue Datei erstellen
+2. **Teil 2-n — Edit:** Je 2 weitere Module ans bestehende JSON anhängen
+3. **Letzter Teil — Edit:** Letzte Module + Outro anhängen + `]` und `}` schließen
+
+Zwischen jedem Teil kurz prüfen, dass das JSON valide ist. Wer das ignoriert, verliert seine Arbeit durch Timeouts.
+
+---
+
 ## 1. Mobile-First Content-Design
 
 > Die wichtigste Regel. Alle Inhalte werden primär auf Smartphones gelesen. Jeder Kurs muss perfekt auf einem 6-Zoll-Display funktionieren.

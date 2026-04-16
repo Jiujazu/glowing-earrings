@@ -14,10 +14,12 @@ Eine kostenlose, interaktive Lernplattform für generative KI. Kuratiert von Jul
 
 ## Kurs-Erstellungs-Workflow
 
+> **WARNUNG:** Kurs-JSON-Dateien NIEMALS in einem einzigen Schritt schreiben — das führt zu Timeout-Fehlern und Datenverlust. Siehe Schritt 0.3 und COURSE-STYLEGUIDE.md.
+
 ### 0. Pre-Flight (PFLICHT vor jeder Kurs-Erstellung)
-1. **Lies `COURSE-STYLEGUIDE.md`** — komplett, insbesondere Mobile-First (Abschnitt 1) und Qualitäts-Checkliste (Abschnitt 7)
+1. **Lies `COURSE-STYLEGUIDE.md`** — komplett, insbesondere die Warnung ganz oben, Mobile-First (Abschnitt 1) und Qualitäts-Checkliste (Abschnitt 7)
 2. **Lies den letzten fertigen Kurs** als Referenz für Struktur, Tonfall und Element-Einsatz
-3. **Kurse IMMER in Teilen schreiben (Pflicht)** — Die JSON ist zu groß für einen Write-Aufruf. Erst Meta + Intro + Module 1-2 (Write), dann je 2 Module per Edit anhängen, zuletzt Outro. Gilt für ALLE Kurse, nicht nur große.
+3. **Kurse IMMER in Teilen schreiben (Pflicht)** — Teil 1: Meta + Intro + Module 1-2 (Write). Teil 2-n: Je 2 Module (Edit). Letzter Teil: Outro (Edit). Gilt für ALLE Kurse. Bei Nichteinhaltung → Timeout-Fehler.
 
 ### 1. Quelle identifizieren
 Julian liefert einen Link oder Inhalt: Tweet, Artikel, Video, Gist, Paper.

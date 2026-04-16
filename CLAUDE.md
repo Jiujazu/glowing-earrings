@@ -14,41 +14,28 @@ Eine kostenlose, interaktive Lernplattform für generative KI. Kuratiert von Jul
 
 ## Kurs-Erstellungs-Workflow
 
-> **WARNUNG:** Kurs-JSON-Dateien NIEMALS in einem einzigen Schritt schreiben — das führt zu Timeout-Fehlern und Datenverlust. Siehe Schritt 0.3 und COURSE-STYLEGUIDE.md.
+> **Alle Details zu Regeln, Element-Einsatz und Schreibprozess stehen in `COURSE-STYLEGUIDE.md`. Diese Datei ist der Router.**
 
-### 0. Pre-Flight (PFLICHT vor jeder Kurs-Erstellung)
-1. **Lies `COURSE-STYLEGUIDE.md`** — komplett, insbesondere die Warnung ganz oben, Mobile-First (Abschnitt 1) und Qualitäts-Checkliste (Abschnitt 7)
-2. **Lies den letzten fertigen Kurs** als Referenz für Struktur, Tonfall und Element-Einsatz
-3. **Kurse IMMER in Teilen schreiben (Pflicht)** — Teil 1: Meta + Intro + Module 1-2 (Write). Teil 2-n: Je 2 Module (Edit). Letzter Teil: Outro (Edit). Gilt für ALLE Kurse. Bei Nichteinhaltung → Timeout-Fehler.
+### Pre-Flight (vor jeder Kurs-Erstellung)
+1. **Lies `COURSE-STYLEGUIDE.md` komplett** — insbesondere die Timeout-Warnung ganz oben, §1 Autoren-Prozess und §9 Qualitäts-Checkliste
+2. **Lies den letzten fertigen Kurs** als Referenz für Struktur, Tonfall, Element-Einsatz
+3. **Verdichtungs-Check:** Wenn Kursnummer N ≥ 4 und `(N-1) % 3 == 0` (also Kurs 4, 7, 10, 13…), die letzten 3 Einträge in `COURSE-LEARNINGS.md` lesen und Julian Promotion-Kandidaten vorschlagen (siehe Lern-System unten)
 
-### 1. Quelle identifizieren
-Julian liefert einen Link oder Inhalt: Tweet, Artikel, Video, Gist, Paper.
+### Phasen (Kurzübersicht — Details in STYLEGUIDE §1)
+1. Quelle identifizieren (Tweet / Artikel / Video / Gist / Paper)
+2. **Gap-Analyse** bei kuratierten Quellen (Pflicht, siehe STYLEGUIDE §11)
+3. Lernziele pro Modul definieren
+4. Modul-Schnitt & Element-Wahl
+5. **Kurs IN TEILEN schreiben** (Pflicht): Write für Meta+Intro+M1-2, Edit für je 2 weitere Module, Edit für Outro. Niemals in einem Schritt — führt zu Timeout.
+6. Datei speichern unter `/content/courses/[slug]/course.json`, Assets unter `/public/courses/[slug]/`, in `/content/courses/index.ts` registrieren
+7. Commit & Push — Vercel deployed automatisch
 
-### 2. Kurs generieren
-Eine JSON-Datei erstellen, die dem `Course`-Interface entspricht (siehe Datenstruktur unten). Dabei:
-
-- **Kursname und Subtitle** — griffig, neugierig machend, deutsch
-- **Modulstruktur** — 3-6 Module, logisch aufbauend, je 2-5 Minuten
-- **Design-Theme** — eigene Farben und Stimmung pro Kurs (dunkel/hell, Farbpalette passend zum Thema)
-- **Interaktive Elemente** — mindestens 2 Quizzes, 3 Flashcards, 1 Reflexionsfrage pro Kurs
-- **Easter Egg** — mindestens 1 verstecktes Element
-- **Kurs-Outro** — 3-5 Kernerkenntnisse, konkreter nächster Schritt, Newsletter-CTA
-
-### 3. Datei speichern
-Als `/content/courses/[slug]/course.json` — der Slug ist URL-safe, englisch, kebab-case. Originalquellen als `source.md` im selben Ordner ablegen. Visuelle Assets (Cover, Grafiken) unter `/public/courses/[slug]/`. Neue Kurse müssen in `/content/courses/index.ts` importiert und zum Array hinzugefügt werden.
-
-### 4. Commit & Push
-`git add`, `git commit`, `git push origin main` — Vercel deployed automatisch.
-
-### 5. Manuelle Anpassungen
+### Manuelle Anpassungen
 Julian kann Kurse direkt auf der Live-Seite editieren via Custom Inline Editor (`?edit=TOKEN`). Änderungen werden via GitHub API committed. Siehe `EDITOR-PLAN.md` für Details.
 
-### 6. Prüfen
-Auf der Live-URL den Kurs durchspielen, Feedback einarbeiten.
-
-### 7. Post-Flight (PFLICHT nach jeder Kurs-Erstellung)
-1. **`COURSE-STYLEGUIDE.md` Kurs-Historie updaten** — 3-5 Erkenntnisse als neuen Kurs-Eintrag in Abschnitt 10
-2. **Regeln prüfen** — Wenn ein neues Pattern sich bewährt, als permanente Regel in den passenden Abschnitt aufnehmen
+### Post-Flight (nach jeder Kurs-Erstellung)
+1. **Auf der Live-URL** den Kurs durchspielen, Feedback einarbeiten
+2. **Neuen Eintrag in `COURSE-LEARNINGS.md`** nach Template (siehe dort) — nur Memo, keine Regel-Prüfung nötig
 
 ---
 
@@ -271,7 +258,25 @@ Der jeweils letzte Kurs dient als primäre Referenz für Struktur, Tonfall und E
 
 ## Lern-System
 
-Das Lern-System sorgt dafür, dass jeder neue Kurs besser wird als der vorherige:
+Das Lern-System sorgt dafür, dass jeder neue Kurs besser wird als der vorherige — über eine **3-Stage-Pipeline**:
 
-1. **`CLAUDE.md`** (diese Datei) — **Router.** Wird automatisch geladen. Definiert den Workflow inkl. Pre-Flight und Post-Flight Pflichten.
-2. **`COURSE-STYLEGUIDE.md`** — **Alle Regeln + Kurs-Historie.** Didaktische Prinzipien, Mobile-First-Regeln, Qualitäts-Checkliste, technische Regeln und die wachsende Kurs-Historie. **Immer komplett lesen vor Kurs-Erstellung.**
+### Die drei Dokumente
+1. **`CLAUDE.md`** (diese Datei) — **Router.** Wird automatisch geladen. Workflow-Übersicht, Pre-Flight, Post-Flight. Details stehen in STYLEGUIDE.
+2. **`COURSE-STYLEGUIDE.md`** — **Regelwerk.** Didaktik, Mobile-First, Qualitäts-Checkliste, Gap-Analyse, Anti-Patterns. **Immer komplett lesen vor Kurs-Erstellung.**
+3. **`COURSE-LEARNINGS.md`** — **Raw Log.** Wachsende Historie mit 5-Felder-Template pro Kurs. Nicht pflichtlesen — wird beim Verdichtungs-Ritual konsultiert.
+
+### Die drei Stages
+
+**Stage 1 — Capture (Post-Flight, nach jedem Kurs):**
+Neuen Eintrag in `COURSE-LEARNINGS.md`. Template: *Was war neu / funktioniert / Fehler / Hypothese / Status*. Low-friction, keine Bewertung.
+
+**Stage 2 — Verdichten (Pre-Flight, vor Kurs 4, 7, 10…):**
+Claude liest die letzten 3 Einträge und stellt drei Fragen:
+- Welches Pattern taucht in ≥2 Kursen auf? → Promotion-Kandidat
+- Welcher Fehler wurde wiederholt? → Anti-Pattern-Kandidat
+- Was war Einzelfall? → bleibt im Log
+
+Julian entscheidet per `AskUserQuestion`, was promoviert wird.
+
+**Stage 3 — Promotion (in STYLEGUIDE):**
+Bestätigte Patterns werden als Regel in der passenden Sektion ergänzt. Wiederholte Fehler wandern in `STYLEGUIDE §12 Anti-Patterns`. Der LEARNINGS-Eintrag wird mit `→ promoted to STYLEGUIDE §X.Y` markiert (nicht gelöscht — Genese bleibt nachvollziehbar).

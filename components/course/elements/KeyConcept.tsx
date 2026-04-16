@@ -58,8 +58,8 @@ export default function KeyConcept({ element }: { element: KeyConceptElement }) 
       className="aha-glow p-5 border-4"
       style={{
         backgroundColor: "color-mix(in srgb, var(--course-primary) 12%, var(--course-surface))",
-        borderColor: "color-mix(in srgb, var(--course-primary) 80%, transparent)",
-        boxShadow: "4px 4px 0px 0px color-mix(in srgb, var(--course-primary) 50%, transparent)",
+        borderColor: "var(--course-border)",
+        boxShadow: "var(--course-shadow)",
       }}
     >
       <div className="flex items-start gap-3">

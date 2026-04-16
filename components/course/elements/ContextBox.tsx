@@ -28,8 +28,8 @@ export default function ContextBox({ element }: { element: ContextBoxElement }) 
       className="p-5 border-4"
       style={{
         backgroundColor: "color-mix(in srgb, var(--course-accent) 10%, var(--course-surface))",
-        borderColor: "color-mix(in srgb, var(--course-text) 80%, transparent)",
-        boxShadow: "4px 4px 0px 0px color-mix(in srgb, var(--course-text) 50%, transparent)",
+        borderColor: "var(--course-border)",
+        boxShadow: "var(--course-shadow)",
       }}
     >
       <p className="text-xs font-bold text-[var(--course-text-muted)] uppercase tracking-wider mb-2">

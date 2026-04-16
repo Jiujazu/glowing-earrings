@@ -45,9 +45,9 @@ export default function CodeBlock({ element }: { element: CodeBlockElement }) {
   );
 
   return (
-    <div className="overflow-hidden bg-[var(--course-surface)] border-4 border-[var(--course-text)]/80" style={{ boxShadow: "4px 4px 0px 0px color-mix(in srgb, var(--course-text) 50%, transparent)" }}>
+    <div className="overflow-hidden bg-[var(--course-surface)] border-4 border-[var(--course-border)]" style={{ boxShadow: "var(--course-shadow)" }}>
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-2.5 border-b-2 border-[var(--course-text)]/25">
+      <div className="flex items-center justify-between px-4 py-2.5 border-b-2 border-[var(--course-border-muted)]">
         <div className="flex items-center gap-2">
           <div className="flex gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-[var(--course-text)]/15" />

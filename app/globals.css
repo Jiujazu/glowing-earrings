@@ -19,6 +19,9 @@
   /* Neo-Brutal Tokens */
   --neo-border: #000000;
   --neo-shadow-color: #000000;
+  --neo-shadow: 4px 4px 0px 0px var(--neo-shadow-color);
+  --neo-shadow-lg: 6px 6px 0px 0px var(--neo-shadow-color);
+  --neo-shadow-xl: 8px 8px 0px 0px var(--neo-shadow-color);
 
   /* Semantic tokens */
   --background: #FAFAFA;
@@ -46,6 +49,13 @@
   --course-text-muted: var(--text-secondary);
   --course-heading-font: var(--font-heading);
   --course-body-font: var(--font-body);
+
+  /* Course neo-brutal tokens — derived from course-text for consistent contrast */
+  --course-border: color-mix(in srgb, var(--course-text) 80%, transparent);
+  --course-border-muted: color-mix(in srgb, var(--course-text) 50%, transparent);
+  --course-shadow-color: color-mix(in srgb, var(--course-text) 50%, transparent);
+  --course-shadow: 4px 4px 0px 0px var(--course-shadow-color);
+  --course-shadow-lg: 6px 6px 0px 0px var(--course-shadow-color);
 }
 
 /* ============================================

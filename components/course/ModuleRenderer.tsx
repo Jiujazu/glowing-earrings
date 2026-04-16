@@ -248,7 +248,7 @@ export default function ModuleRenderer({ module, index, allModules }: { module: 
         {/* Transition to next module */}
         {module.transitionToNext && (
           <ScrollReveal delay={100}>
-            <div className="mt-8 pt-6 border-t-4 border-[var(--course-text)]/60">
+            <div className="mt-8 pt-6 border-t-4 border-[var(--course-border-muted)]">
               <p className="text-sm text-[var(--course-text-muted)] italic">
                 {module.transitionToNext}
               </p>

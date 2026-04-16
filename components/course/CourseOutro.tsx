@@ -123,7 +123,7 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
         {/* Takeaway */}
         {outro.takeaway && outro.takeaway.length > 0 && (
           <ScrollReveal>
-            <div className="bg-[var(--course-surface)] p-5 mb-8 border-4 border-[var(--course-text)]/80" style={{ boxShadow: "4px 4px 0px 0px color-mix(in srgb, var(--course-text) 50%, transparent)" }}>
+            <div className="bg-[var(--course-surface)] p-5 mb-8 border-4 border-[var(--course-border)]" style={{ boxShadow: "var(--course-shadow)" }}>
               <h3 className="font-heading font-black text-lg mb-4 uppercase tracking-wide">Checkliste</h3>
               <ul className="space-y-3">
                 {outro.takeaway.map((item, i) => (
@@ -143,8 +143,8 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
             className="p-5 mb-8 border-4"
             style={{
               backgroundColor: "color-mix(in srgb, var(--course-primary) 10%, var(--course-surface))",
-              borderColor: "color-mix(in srgb, var(--course-primary) 80%, transparent)",
-              boxShadow: "4px 4px 0px 0px color-mix(in srgb, var(--course-primary) 50%, transparent)",
+              borderColor: "var(--course-border)",
+              boxShadow: "var(--course-shadow)",
             }}
           >
             <p className="text-sm font-medium text-[var(--course-primary)] mb-1 uppercase tracking-wide">
@@ -189,7 +189,7 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
                   <Link
                     key={course!.meta.slug}
                     href={`/courses/${course!.meta.slug}`}
-                    className="group block overflow-hidden border-4 border-[var(--course-text)]/80 transition-all duration-200 hover:-translate-y-1"
+                    className="group block overflow-hidden border-4 border-[var(--course-border)] transition-all duration-200 hover:-translate-y-1"
                   >
                     {course!.meta.coverImage ? (
                       <div className="relative h-28 overflow-hidden border-b-4 border-[var(--course-text)]/10">

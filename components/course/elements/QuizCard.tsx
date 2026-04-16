@@ -101,8 +101,8 @@ export default function QuizCard({ element }: { element: QuizElement }) {
 
   return (
     <div
-      className="p-5 sm:p-6 relative overflow-hidden border-4 border-[var(--course-text)]/80"
-      style={{ backgroundColor: "var(--course-surface)", boxShadow: "4px 4px 0px 0px color-mix(in srgb, var(--course-text) 50%, transparent)" }}
+      className="p-5 sm:p-6 relative overflow-hidden border-4 border-[var(--course-border)]"
+      style={{ backgroundColor: "var(--course-surface)", boxShadow: "var(--course-shadow)" }}
     >
       {revealed && isCorrect && <QuizConfetti />}
 
@@ -126,7 +126,7 @@ export default function QuizCard({ element }: { element: QuizElement }) {
           const isSelected = selected === i;
           const isOptionCorrect = option.correct;
 
-          let borderColor = "color-mix(in srgb, var(--course-text) 60%, transparent)";
+          let borderColor = "var(--course-border-muted)";
           let bgColor = "transparent";
 
           if (revealed) {
@@ -137,7 +137,7 @@ export default function QuizCard({ element }: { element: QuizElement }) {
               borderColor = "#E55B5B";
               bgColor = "color-mix(in srgb, #E55B5B 10%, var(--course-surface))";
             } else {
-              borderColor = "color-mix(in srgb, var(--course-text) 40%, transparent)";
+              borderColor = "var(--course-border-muted)";
             }
           }
 
@@ -224,7 +224,7 @@ export default function QuizCard({ element }: { element: QuizElement }) {
       {(revealed || isEditMode) && (
         <div
           className="mt-4 pt-4 animate-fade-in"
-          style={{ borderTop: "2px solid color-mix(in srgb, var(--course-text) 60%, transparent)" }}
+          style={{ borderTop: "2px solid var(--course-border-muted)" }}
         >
           <div className="flex items-center gap-2 mb-2">
             <IconBox icon={isEditMode ? Lightbulb : isCorrect ? Target : Lightbulb} color={isCorrect ? "#22C55E" : "var(--course-primary)"} size="sm" />
@@ -242,7 +242,7 @@ export default function QuizCard({ element }: { element: QuizElement }) {
           {!isEditMode && (
             <button
               onClick={handleRetry}
-              className="mt-4 inline-flex items-center gap-2 px-4 py-2 text-sm font-bold uppercase tracking-wide border-4 border-[var(--course-text)]/80 transition-all duration-100 text-[var(--course-primary)] hover:bg-[var(--course-primary)]/10 press-feedback"
+              className="mt-4 inline-flex items-center gap-2 px-4 py-2 text-sm font-bold uppercase tracking-wide border-4 border-[var(--course-border)] transition-all duration-100 text-[var(--course-primary)] hover:bg-[var(--course-primary)]/10 press-feedback"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="1 4 1 10 7 10" />

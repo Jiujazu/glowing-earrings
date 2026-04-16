@@ -461,6 +461,13 @@
           "caption": "Renate Schmitz: Plastikkiste, Kamera, Flipchart. Mehr braucht es nicht."
         },
         {
+          "id": "renate-lowtech",
+          "type": "image",
+          "src": "/courses/storytelling-bildung/15_lowtech-praesentation.png",
+          "alt": "Renates Low-Tech-Setup: Plastikkiste als Stativ, Flipchart als Hintergrund",
+          "caption": "So sieht das Setup aus. Kein Studio, kein Budget — nur Mut und eine Plastikkiste."
+        },
+        {
           "id": "renate-quote",
           "type": "callout",
           "variant": "quote",

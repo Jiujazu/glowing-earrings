@@ -16,7 +16,7 @@
     "estimatedMinutes": 18,
     "difficulty": "intermediate",
     "publishedAt": "2026-04-10",
-    "coverImage": "/courses/covers/karpathy-llm-wiki.svg",
+    "coverImage": "/courses/karpathy-llm-wiki/cover.svg",
     "relatedCourses": [
       "agentic-os-context-levels"
     ],

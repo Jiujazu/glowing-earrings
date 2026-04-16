@@ -12,7 +12,7 @@
     "estimatedMinutes": 22,
     "difficulty": "beginner",
     "publishedAt": "2026-04-13",
-    "coverImage": "/courses/covers/storytelling-bildung.svg",
+    "coverImage": "/courses/storytelling-bildung/cover.svg",
     "relatedCourses": ["agentic-os-context-levels", "karpathy-llm-wiki"],
     "design": {
       "theme": "storytelling-warm",

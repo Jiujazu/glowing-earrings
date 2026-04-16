@@ -16,7 +16,7 @@
     "estimatedMinutes": 10,
     "difficulty": "beginner",
     "publishedAt": "2026-04-12",
-    "coverImage": "/courses/covers/handy-speech-to-text.svg",
+    "coverImage": "/courses/handy-speech-to-text/cover.svg",
     "relatedCourses": [
       "agentic-os-context-levels"
     ],

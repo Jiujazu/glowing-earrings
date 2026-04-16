@@ -1,9 +1,9 @@
 import type { Course } from "@/lib/types";
 
-import karpathyLlmWiki from "./karpathy-llm-wiki.json";
-import agenticOsContextLevels from "./agentic-os-context-levels.json";
-import handySpeechToText from "./handy-speech-to-text.json";
-import storytellingBildung from "./storytelling-bildung.json";
+import karpathyLlmWiki from "./karpathy-llm-wiki/course.json";
+import agenticOsContextLevels from "./agentic-os-context-levels/course.json";
+import handySpeechToText from "./handy-speech-to-text/course.json";
+import storytellingBildung from "./storytelling-bildung/course.json";
 
 export const courses: Course[] = [
   karpathyLlmWiki as Course,

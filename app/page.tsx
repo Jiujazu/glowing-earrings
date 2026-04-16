@@ -39,7 +39,7 @@ export default function Home() {
         <Container size="wide" className="relative">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left: Hero image — heavy, drifts slower */}
-            <Parallax speed={0.2}>
+            <Parallax speed={0.2} mobileSpeed={0.05}>
             <ScrollReveal delay={0} duration={700} direction="left">
               <div
                 className="border-4 border-[var(--neo-border)] -rotate-2 overflow-hidden max-w-sm mx-auto md:max-w-none"
@@ -58,7 +58,7 @@ export default function Home() {
             </Parallax>
 
             {/* Right: Text content — lighter, drifts faster */}
-            <Parallax speed={0.45}>
+            <Parallax speed={0.45} mobileSpeed={0.08}>
             <div>
               <ScrollReveal delay={100} duration={600}>
                 <div className={`inline-block px-4 py-2 bg-[var(--pop-turquoise)] border-4 border-[var(--neo-border)] text-black text-sm ${LABEL} mb-8 -rotate-2`}

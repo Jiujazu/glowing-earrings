@@ -17,7 +17,7 @@ Eine kostenlose, interaktive Lernplattform für generative KI. Kuratiert von Jul
 ### 0. Pre-Flight (PFLICHT vor jeder Kurs-Erstellung)
 1. **Lies `COURSE-STYLEGUIDE.md`** — komplett, insbesondere Mobile-First (Abschnitt 1) und Qualitäts-Checkliste (Abschnitt 7)
 2. **Lies den letzten fertigen Kurs** als Referenz für Struktur, Tonfall und Element-Einsatz
-3. **Große Kurse in Blöcken schreiben** — erst Meta + Intro + Module 1-2 (Write), dann je 2 Module per Edit anhängen
+3. **Kurse IMMER in Teilen schreiben (Pflicht)** — Die JSON ist zu groß für einen Write-Aufruf. Erst Meta + Intro + Module 1-2 (Write), dann je 2 Module per Edit anhängen, zuletzt Outro. Gilt für ALLE Kurse, nicht nur große.
 
 ### 1. Quelle identifizieren
 Julian liefert einen Link oder Inhalt: Tweet, Artikel, Video, Gist, Paper.

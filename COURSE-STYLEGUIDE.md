@@ -386,7 +386,12 @@ Jeder Kurs muss diese Punkte erfüllen, bevor er gepusht wird:
 - **Alle Text-rendernden Komponenten brauchen ReactMarkdown.** Callout, Flashcard, jede Komponente die User-Text anzeigt — sonst rohe `**Sternchen**`.
 - **`opengraph-image.tsx` braucht Default Export**, kein GET-Handler. Kein Edge Runtime mit Kurs-Imports.
 - **Kein `onClick` in Server Components** — Event-Handler erzwingen Client Components.
-- **Große Kurse in 2-Modul-Blöcken schreiben.** Erst Meta + Intro + Module 1-2 (Write), dann je 2 Module per Edit anhängen. Verhindert Stream-Timeouts.
+- **Kurse IMMER in Teilen erstellen (Pflicht).** Die JSON-Dateien sind zu groß für einen einzelnen Write-Aufruf — es kommt sonst zu Timeout-Fehlern. Vorgehen:
+  1. **Teil 1:** Meta + Intro + Module 1-2 → `Write` (neue Datei)
+  2. **Teil 2-n:** Je 2 Module → `Edit` (an bestehendes JSON anhängen)
+  3. **Letzter Teil:** Letzte Module + Outro → `Edit`
+  - Zwischen den Teilen immer kurz validieren, dass das JSON noch gültig ist.
+  - **Gilt für ALLE Kurse**, nicht nur große. Auch ein 3-Modul-Kurs wird in mindestens 2 Teilen geschrieben.
 - **sourceType-Badge nicht im UI zeigen** — nur interne Metadaten.
 - **Quell-Anonymisierung:** Wenn ein Autor nicht genannt werden soll, alle Bezüge ersetzen, `sourceAuthor` neutral halten, Promotion entfernen. Quell-URL bleibt.
 

@@ -318,46 +318,13 @@ a {
 }
 
 /* ============================================
-   Hero Image Spotlight — Shockwaves & X-Ray
+   Hero Image Spotlight — X-Ray
    ============================================ */
-
-@property --ring-r {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
-}
 
 @property --xray-r {
   syntax: "<length>";
   inherits: false;
   initial-value: 1600px;
-}
-
-.hero-shockwave {
-  --ring-r: 0px;
-  animation-name: hero-shockwave;
-  animation-timing-function: cubic-bezier(0.2, 0.6, 0.3, 1);
-  animation-fill-mode: forwards;
-  -webkit-mask-image: radial-gradient(
-    circle at var(--ring-ox) var(--ring-oy),
-    transparent calc(var(--ring-r) - 30px),
-    black calc(var(--ring-r) - 5px),
-    black var(--ring-r),
-    transparent calc(var(--ring-r) + 15px)
-  );
-  mask-image: radial-gradient(
-    circle at var(--ring-ox) var(--ring-oy),
-    transparent calc(var(--ring-r) - 30px),
-    black calc(var(--ring-r) - 5px),
-    black var(--ring-r),
-    transparent calc(var(--ring-r) + 15px)
-  );
-}
-
-@keyframes hero-shockwave {
-  0%   { --ring-r: 0px;             opacity: 1; }
-  60%  {                             opacity: 0.9; }
-  100% { --ring-r: var(--ring-max); opacity: 0; }
 }
 
 .hero-xray-charging {
@@ -390,7 +357,6 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-shockwave,
   .hero-xray-charging,
   .hero-xray-releasing { display: none; }
 }

@@ -1,8 +1,8 @@
 {
   "meta": {
     "slug": "llm-wiki-memory-engine",
-    "title": "Das lebende Wiki",
-    "subheading": "Die Karpathy Methode — Teil 2",
+    "title": "Die Karpathy Methode — Teil 2",
+    "subheading": "Das lebende Wiki",
     "subtitle": "Dein Wiki aus Teil 1 funktioniert — aber was passiert ab 200 Seiten? Memory Lifecycle, Knowledge Graph und Automation machen es zum selbstpflegenden System.",
     "sourceUrl": "https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2",
     "sourceAuthor": "rohitg00",

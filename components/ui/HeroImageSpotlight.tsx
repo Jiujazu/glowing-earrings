@@ -1,34 +1,28 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useId, useRef, type ReactNode } from "react";
 
 interface HeroImageSpotlightProps {
   children: ReactNode;
+  /** Image path — needed for the edge-detect overlay layer. */
+  imageSrc: string;
   className?: string;
 }
 
-// Fine paper grain, ~1.3 KB base64. Tiles seamlessly via SVG fractalNoise.
-const PAPER_GRAIN_SVG =
-  "data:image/svg+xml;utf8," +
-  encodeURIComponent(
-    `<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'>
-      <filter id='n'>
-        <feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/>
-        <feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.95  0 0 0 0 0.95  0 0 0 0.6 0'/>
-      </filter>
-      <rect width='100%' height='100%' filter='url(#n)'/>
-    </svg>`
-  );
-
-export default function HeroImageSpotlight({ children, className = "" }: HeroImageSpotlightProps) {
+export default function HeroImageSpotlight({
+  children,
+  imageSrc,
+  className = "",
+}: HeroImageSpotlightProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
   const pendingRef = useRef<{ x: number; y: number } | null>(null);
+  const rawId = useId();
+  const filterId = `neon-edges-${rawId.replace(/:/g, "_")}`;
 
   useEffect(() => {
     const el = wrapperRef.current;
     if (!el) return;
-
     if (typeof window === "undefined") return;
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -78,35 +72,82 @@ export default function HeroImageSpotlight({ children, className = "" }: HeroIma
           "--mx": "50%",
           "--my": "50%",
           "--spotlight-opacity": "0",
-          "--paper-grain": `url("${PAPER_GRAIN_SVG}")`,
         } as React.CSSProperties
       }
     >
       {children}
+
+      <svg
+        aria-hidden="true"
+        width="0"
+        height="0"
+        style={{ position: "absolute", width: 0, height: 0, pointerEvents: "none" }}
+      >
+        <defs>
+          <filter id={filterId} x="0%" y="0%" width="100%" height="100%">
+            <feColorMatrix
+              type="matrix"
+              values="0.3 0.59 0.11 0 0
+                      0.3 0.59 0.11 0 0
+                      0.3 0.59 0.11 0 0
+                      0   0    0    1 0"
+              result="gray"
+            />
+            <feConvolveMatrix
+              in="gray"
+              order="3"
+              preserveAlpha="true"
+              kernelMatrix="-1 -1 -1
+                            -1  8 -1
+                            -1 -1 -1"
+              result="edges"
+            />
+            <feColorMatrix
+              in="edges"
+              type="matrix"
+              values="0 0 0 0 0.75
+                      0 0 0 0 0.97
+                      0 0 0 0 1.0
+                      2.5 2.5 2.5 0 -0.15"
+              result="neon"
+            />
+            <feGaussianBlur in="neon" stdDeviation="6" result="halo" />
+            <feGaussianBlur in="neon" stdDeviation="1.2" result="core" />
+            <feMerge>
+              <feMergeNode in="halo" />
+              <feMergeNode in="halo" />
+              <feMergeNode in="core" />
+              <feMergeNode in="neon" />
+            </feMerge>
+          </filter>
+        </defs>
+      </svg>
+
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 transition-opacity duration-300 ease-out"
         style={{
           opacity: "var(--spotlight-opacity)",
-          background:
-            "radial-gradient(circle 220px at var(--mx) var(--my), rgba(255,255,255,0.55), rgba(255,255,255,0.15) 35%, transparent 65%)",
-          mixBlendMode: "soft-light",
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 transition-opacity duration-300 ease-out"
-        style={{
-          opacity: "calc(var(--spotlight-opacity) * 0.7)",
-          backgroundImage: "var(--paper-grain)",
-          backgroundSize: "220px 220px",
           WebkitMaskImage:
-            "radial-gradient(circle 260px at var(--mx) var(--my), rgba(0,0,0,1), rgba(0,0,0,0.3) 50%, transparent 75%)",
+            "radial-gradient(circle 200px at var(--mx) var(--my), rgba(0,0,0,1), rgba(0,0,0,0.6) 45%, transparent 78%)",
           maskImage:
-            "radial-gradient(circle 260px at var(--mx) var(--my), rgba(0,0,0,1), rgba(0,0,0,0.3) 50%, transparent 75%)",
-          mixBlendMode: "overlay",
+            "radial-gradient(circle 200px at var(--mx) var(--my), rgba(0,0,0,1), rgba(0,0,0,0.6) 45%, transparent 78%)",
+          mixBlendMode: "screen",
         }}
-      />
+      >
+        <img
+          src={imageSrc}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          className="block w-full h-full"
+          style={{
+            filter: `url(#${filterId})`,
+            objectFit: "cover",
+          }}
+        />
+      </div>
     </div>
   );
 }

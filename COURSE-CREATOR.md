@@ -1,6 +1,8 @@
-# Glowing Earrings — Kurs-Design-Guide
+# Glowing Earrings — Course Creator
 
-> Zentrale Referenz für alle Kurs-Regeln und Qualitätsstandards. Wird bei Bedarf aktualisiert, wenn Learnings aus `COURSE-LEARNINGS.md` in Regeln überführt werden. Vor jeder Kurs-Erstellung komplett lesen.
+> Regelwerk für die Kurs-Erstellung. Single Source of Truth für Didaktik, Struktur, Design, Qualitäts-Checkliste, Gap-Analyse, Anti-Patterns und Audit-Protokoll. Wird aktualisiert, wenn Learnings aus `COURSE-LEARNINGS.md` in Regeln überführt werden. Vor jeder Kurs-Erstellung komplett lesen.
+>
+> **Zwei Rollen, eine Datei:** Dieses Dokument wird sowohl beim **Bauen** eines Kurses (Pre-Flight + Produktion) als auch beim **Prüfen** (Audit, siehe §14) genutzt. Das garantiert, dass Creator-Regeln und Audit-Kriterien nicht auseinanderdriften können.
 
 ---
 
@@ -606,8 +608,8 @@ Die Datei bleibt als Audit-Trail erhalten und ist auf der Plattform nicht sichtb
 
 ### 12.5 Generische Tag-Phrasen
 
-**Seen in:** präventiv
-**Last seen:** —
+**Seen in:** Kurs 1 (Refactor)
+**Last seen:** Kurs 1 Refactor (2026-04-17)
 **Status:** hot
 
 **Was passiert:** Tags wie "Productivity", "AI" oder "KI-Technologie & Tools".
@@ -616,8 +618,8 @@ Die Datei bleibt als Audit-Trail erhalten und ist auf der Plattform nicht sichtb
 
 ### 12.6 Drei Boxen hintereinander
 
-**Seen in:** präventiv
-**Last seen:** —
+**Seen in:** Kurs 1 (Refactor)
+**Last seen:** Kurs 1 Refactor (2026-04-17)
 **Status:** hot
 
 **Was passiert:** Modul besteht hauptsächlich aus Callouts, Key-Concepts, Context-Boxen.
@@ -626,8 +628,8 @@ Die Datei bleibt als Audit-Trail erhalten und ist auf der Plattform nicht sichtb
 
 ### 12.7 Emoji-Inflation
 
-**Seen in:** präventiv
-**Last seen:** —
+**Seen in:** Kurs 1 (Refactor)
+**Last seen:** Kurs 1 Refactor (2026-04-17)
 **Status:** hot
 
 **Was passiert:** Modul-Titel, Key-Concept-Icons, Fließtext-Dekoration mit Emojis.
@@ -636,8 +638,8 @@ Die Datei bleibt als Audit-Trail erhalten und ist auf der Plattform nicht sichtb
 
 ### 12.8 Erfundene Framework-Ergänzungen
 
-**Seen in:** präventiv
-**Last seen:** —
+**Seen in:** Kurs 4 (Storytelling), Kurs 1 (Refactor: "Output Compounding")
+**Last seen:** Kurs 1 Refactor (2026-04-17)
 **Status:** hot
 
 **Was passiert:** Claude verkauft eigene Mini-Theorien oder konstruierte Prinzipien als "bekanntes Framework" — oder ergänzt Frameworks ohne klare Kriterien-Prüfung.
@@ -659,3 +661,162 @@ Die Datei bleibt als Audit-Trail erhalten und ist auf der Plattform nicht sichtb
 - **TypeScript-Typen:** `/lib/types.ts`
 - **Datenstruktur-Doku:** `CLAUDE.md`
 - **CI-Farben:** Brand Lila `#5B2F9F`, Teal `#025671`, Dark Purple `#261C53`, Hot Pink `#E91E8C`, Electric Türkis `#00C9A7`
+
+---
+
+## §14 Audit-Protokoll
+
+> **Rolle:** Das Audit ist die **nachträgliche Qualitätsprüfung** eines fertigen Kurses gegen die Regeln dieses Dokuments. Im Unterschied zu:
+> - **Gap-Analyse (§11)** — *vor* der Kurs-Erstellung: prüft, ob die Quelle vollständig gemappt wurde.
+> - **Qualitäts-Checkliste (§9)** — *während* der Kurs-Erstellung: Selbstprüfung durch den Autor.
+> - **Verdichtungs-Ritual (§12 / COURSE-LEARNINGS)** — *zwischen* Kursen: Learnings werden zu Regeln.
+>
+> Das Audit kommt **Tage oder Wochen nach Kurs-Veröffentlichung** und ist der unabhängige Regel-Check. Es wird manuell per Slash-Command `/kurs-audit [slug]` ausgelöst.
+
+> ⚠️ **Drift-Warnung für Creator-Pflege:** Die Prüfliste in §14.2 referenziert §-Nummern aus §1–§13. Bei **jeder** strukturellen Änderung an diesen Sektionen (Umnummerierung, Regel-Entfernung, neuer Prüfbarer Check) muss §14.2 synchron aktualisiert werden. Sonst prüft der Audit gegen veraltete Regeln. Faustregel: Wer §1–§13 anfasst, scrollt danach zu §14.2 und gleicht ab.
+
+### 14.1 Wann auditen?
+
+- **Regulär:** Nach signifikanten Creator-Updates (z.B. neue §-Regel) auf Bestandskurse anwenden.
+- **Ad hoc:** Bei Zweifeln an einem Kurs ("Fühlt sich irgendwas nicht richtig an?").
+- **Refactor-Trigger:** Vor geplantem Retrofit — das Audit liefert die Liste der Nachbesserungen.
+
+Nicht-Ziel: Routine-Audit nach jedem Kurs. Dafür ist die Qualitäts-Checkliste (§9) da.
+
+### 14.2 Prüfliste
+
+Der Audit geht diese Kategorien durch. Jeder Check zitiert die Creator-Regel-Nummer (Rückverweis — SSoT bleibt eindeutig).
+
+**Struktur**
+- §4.1 Intro vorhanden mit Wer/Warum/Was + Quellenlink?
+- §4.2 Modul-Anzahl und -Länge im Rahmen?
+- §4.7 Outro mit Synthese + konkretem nächsten Schritt + Takeaway?
+- §5.4 `relatedCourses` gegenseitig gesetzt?
+
+**Inhalt**
+- §3.1 Tonfall snack-sized, keine graue Wand?
+- §3.2 Inhalte primär aus der Quelle, keine Halluzinationen?
+- §3.3 Scaffolding: Fachbegriffe in Context-Boxen erklärt?
+- §3.4 Externe Frameworks (nur wenn verwendet) — alle 5 Kriterien erfüllt? (Max 1 pro Kurs, etabliertes Framework, visuell getrennt, Attribution, im Zweifel weggelassen)
+
+**Elemente**
+- §4.3 Mindestens 2 Quizzes mit plausiblen Distraktoren + erklärendem Feedback?
+- §4.4 Mindestens 3 Flashcards mit "Warum"-Fragen?
+- §4.5 Mindestens 1 Reflexionsfrage mit Praxisbezug?
+- §3.5 Mindestens 1 Easter Egg?
+- §4.2 Element-Reihenfolge variiert zwischen Modulen?
+- §6.4 SVGs im neo-brutalen Editorial-Stil?
+- §6.5 SVG-Triage: SVGs sinnvoll platziert, nicht erzwungen?
+
+**Meta**
+- §8.1 Schwierigkeitsgrad korrekt?
+- §8.2 Tags spezifisch, ein Wort, keine Phrasen?
+- §8.3 Zeitschätzung realistisch?
+- §8.4 Drei-Ebenen-Titel (title + subheading + subtitle)?
+
+**Mobile & Design**
+- §2.1 Kein Absatz länger als 3 Sätze?
+- §2.2 Min. 2 optische Gewichtungen pro Block?
+- §2.3 Keine drei Boxen hintereinander?
+- §6.1 Kurs-Theme hat Charakter, nicht generisch?
+- §6.3 WCAG-AA-Kontrast eingehalten?
+
+**Technik (§10)**
+- §10 ReactMarkdown für alle Text-rendernden Komponenten (kein rohes `**Sternchen**`)?
+- §10 `opengraph-image.tsx` mit Default Export, kein Edge Runtime mit Kurs-Imports?
+- §10 Keine `onClick`-Handler in Server Components?
+- §10 `sourceType`-Badge nicht im UI sichtbar?
+- §10 Quell-Anonymisierung sauber (falls Autor nicht genannt)?
+- §10 Mobile-Nav Z-Index: Header `z-[70]`, MobileNav `z-[100]`?
+
+**Artefakte**
+- §11.3 Bei kuratierten Quellen: `gap-analysis.md` vorhanden im Kurs-Ordner?
+- §6.6 `source.md` mit Metadata-Header + Transkript vorhanden?
+
+**Anti-Patterns (nur `hot`-Status aus §12)**
+- Alle aktuell auf `hot` stehenden Einträge einzeln prüfen — Stelle im Kurs nennen, falls verletzt.
+
+### 14.3 Audit-Prozess (für Slash-Command `/kurs-audit [slug]`)
+
+1. Slug einlesen, `content/courses/[slug]/course.json` + begleitende `source.md`/`gap-analysis.md` öffnen.
+2. Prüfliste aus §14.2 abarbeiten. Pro Punkt Status vergeben:
+   - ✅ erfüllt
+   - ⚠️ Warnung (kosmetisch, nicht blockend)
+   - ❌ kritisch (Regel-Verletzung, sollte nachgebessert werden)
+   - `n/a` nicht anwendbar
+3. Findings als neue Sektion an `/content/courses/[slug]/audit-log.md` anhängen (append-only, Template §14.5).
+4. **Feedback-Loop zu LEARNINGS.** Für jedes Finding mit Status ❌ oder ⚠️ prüfen, ob es **systemisch** wirkt (nicht nur Einzelfall dieses Kurses: ähnliche Verletzung wäre auch in anderen Kursen denkbar, Regel ist prüfbar, aber bisher nicht in §12 als Anti-Pattern geführt). Claude fragt Julian per `AskUserQuestion` **pro systemischem Finding einzeln**, ob es als neuer Eintrag in `COURSE-LEARNINGS.md` festgehalten werden soll (mit `source: audit [slug] YYYY-MM-DD`). Anschließend greift der normale Sofort-Promotion-Check (siehe CLAUDE.md Post-Flight Schritt 3). Einzelfälle bleiben nur im `audit-log.md`.
+5. Im Chat nur Kurz-Summary ausgeben — siehe §14.4.
+
+### 14.4 Chat-Summary-Format
+
+Nach einem Audit gibt Claude im Chat nur eine Kurzfassung:
+
+> **Audit für `[slug]` abgeschlossen.**
+> - Findings: **X total** (Y kritisch ❌, Z Warnungen ⚠️)
+> - Status: bestanden / Nachbesserung nötig
+> - Kritisch: [Stichwort 1], [Stichwort 2]
+> - Systemisch (→ LEARNINGS-Rückfrage): [Stichwort, falls vorhanden]
+> - Details: `/content/courses/[slug]/audit-log.md` (neue Sektion von heute)
+
+Keine Detail-Tabellen im Chat — die liegen in der Datei. Das hält den Chat lesbar und den Audit-Trail dauerhaft verfügbar.
+
+### 14.5 Template für `audit-log.md` (append-only)
+
+Pro Kurs existiert **eine** Datei `/content/courses/[slug]/audit-log.md`. Bei jedem Audit wird eine neue Sektion **unten angehängt** — nie überschrieben. Die neueste Sektion steht ganz unten; ältere bleiben als Trail erhalten.
+
+**Datei-Kopf (nur beim ersten Audit anlegen):**
+
+```markdown
+# Audit-Log: [Kurstitel]
+
+> Append-only Audit-Trail für Kurs `[slug]`. Jeder Audit-Lauf wird als neue Sektion unten angehängt. Alte Sektionen bleiben unverändert — der Verlauf ist Teil des Lern-Systems.
+```
+
+**Pro Audit-Lauf angehängte Sektion:**
+
+```markdown
+---
+
+## Audit YYYY-MM-DD
+
+- **Creator-Version:** git SHA von COURSE-CREATOR.md zum Audit-Zeitpunkt
+- **Auditor:** Claude
+- **Anlass:** [regulär nach Creator-Update | ad hoc | Refactor-Trigger | Re-Audit nach Nachbesserung]
+
+### Zusammenfassung
+
+- **Findings:** X total (Y kritisch ❌, Z Warnungen ⚠️)
+- **Status:** bestanden / Nachbesserung nötig
+- **Vergleich zu letztem Audit:** [entfällt beim Erst-Audit | "2 kritische gefixt, 1 neue Warnung"]
+
+### Regel-Check
+
+| Kategorie | Regel (Creator §) | Status | Stelle im Kurs | Notiz |
+|---|---|---|---|---|
+| Struktur | §4.1 Intro | ✅ | — | — |
+| Inhalt | §3.2 Quelltreue | ✅ | — | — |
+| Inhalt | §3.4 Externes Framework | n/a | — | kein Framework verwendet |
+| Meta | §8.2 Tags | ⚠️ | meta.tags | "Productivity" zu generisch |
+| Artefakte | §11.3 Gap-Analyse | ❌ | — | gap-analysis.md fehlt |
+| Anti-Patterns | §12.7 Emoji-Inflation | ⚠️ | Modul 3 Content-Block | 2 Emojis im Fließtext |
+
+### Empfohlene Nachbesserungen
+
+1. **[Kritisch]** gap-analysis.md rückwirkend anlegen (§11.3).
+2. **[Warnung]** `meta.tags` "Productivity" ersetzen durch spezifischere Tags (§8.2).
+3. **[Warnung]** Modul 3 Content-Block: Emojis aus Fließtext entfernen (§12.7).
+
+### Systemische Findings (an LEARNINGS gemeldet?)
+
+- **§11.3 Gap-Analyse fehlt** → Julian: ja, LEARNINGS-Eintrag angelegt (`audit karpathy-llm-wiki 2026-04-17`).
+- **§12.7 Emoji-Inflation** → Julian: nein, Einzelfall (bereits als Anti-Pattern in §12 geführt).
+
+### Nicht gefixt / bewusst offen gelassen
+
+- …
+```
+
+### 14.6 Re-Audit
+
+Bei einem Re-Audit (nach Nachbesserung oder nach Creator-Update) wird **keine** Datei überschrieben. Stattdessen kommt eine neue `## Audit YYYY-MM-DD`-Sektion **unten** in `audit-log.md` dazu. Der Anlass-Vermerk („Re-Audit nach Nachbesserung") und die Zeile „Vergleich zu letztem Audit" machen den Fortschritt explizit. Git zeigt den Diff — aber die lesbare Zeitlinie steht in der Datei selbst.

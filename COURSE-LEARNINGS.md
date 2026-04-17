@@ -1,24 +1,36 @@
 # Glowing Earrings — Kurs-Learnings
 
-> Raw Log. Nach jedem Kurs ein Eintrag. Wird alle 3 Kurse verdichtet — bewährte Patterns wandern als Regel in `COURSE-STYLEGUIDE.md`, wiederholte Fehler in `§12 Anti-Patterns`. Historische Einträge bleiben erhalten — sie dokumentieren die Genese der Regeln.
+> Raw Log. Nach jedem Kurs ein Eintrag. Patterns wandern als Regel in `COURSE-CREATOR.md`, wiederholte Fehler in `CREATOR §12 Anti-Patterns`. Historische Einträge bleiben erhalten — sie dokumentieren die Genese der Regeln.
+>
+> **Kein Pre-Flight-Pflichtdokument:** Bei einer regulären Kurs-Erstellung muss dieses File nicht gelesen werden. Konsultiert wird es nur beim 3-Kurs-Ritual oder direkt nach dem Post-Flight zur Sofort-Promotion.
 
 ---
 
-## Das 3-Stage-Lern-System
+## Das Lern-System
 
-### Stage 1 — Capture (Post-Flight, nach jedem Kurs)
-Neuen Eintrag in diesem Dokument anlegen. Template unten. Status `raw`. Keine Bewertung, ob es eine Regel werden soll — nur Memo.
+Das Lern-System hat **zwei Rückfluss-Pfade** vom Raw Log in die Regeln (`COURSE-CREATOR.md`): einen schnellen und einen langsamen. Details zum Workflow und zu den Rollen aller Dokumente siehe `CLAUDE.md` → Lern-System.
 
-### Stage 2 — Verdichten (Pre-Flight, vor Kurs 4, 7, 10, 13 …)
-Immer wenn `(Kursnummer - 1) % 3 == 0` und Kursnummer ≥ 4: Claude liest die letzten 3 Einträge mit Status `raw` oder `proven` und stellt drei Fragen:
+### Pfad 1 — Sofort-Promotion (Post-Flight, nach jedem Kurs)
+
+Claude prüft den frischen Eintrag mit drei Fragen (siehe `CLAUDE.md` Post-Flight Schritt 3):
+- **Wiederholungsrisiko:** Würde der Fehler ohne Regel wieder passieren?
+- **Universalität:** Gilt das für alle zukünftigen Kurse, nicht nur für diese Quelle?
+- **Prüfbarkeit:** Kann man die Regel im Audit (§14) später auditieren?
+
+Wenn alle drei mit ja → Kandidat per `AskUserQuestion` an Julian, sofortige Promotion möglich. Rückfluss-Latenz: 0 Kurse. Promovierte Einträge bekommen Status `promoted → CREATOR §X.Y`.
+
+### Pfad 2 — Verdichtungs-Ritual (Pre-Flight, vor Kurs 4, 7, 10, 13 …)
+
+Immer wenn `(Kursnummer - 1) % 3 == 0` und Kursnummer ≥ 4: Claude liest nur Einträge mit Status `raw` oder `proven` (promovierte werden übersprungen — Rauschen raus) und stellt drei Fragen:
 - Welches Pattern taucht in ≥2 Kursen auf? → Promotion-Kandidat (Status `proven`)
 - Welcher Fehler wurde wiederholt? → Anti-Pattern-Kandidat
 - Was war Einzelfall? → bleibt `raw`, keine Promotion
 
-Claude legt Julian die Kandidaten per `AskUserQuestion` vor. Julian entscheidet.
+Julian entscheidet per `AskUserQuestion`. Das Ritual ist der **Zweitfilter** für alles, was im Post-Flight nicht klar genug für Sofort-Promotion war.
 
-### Stage 3 — Promotion (in STYLEGUIDE)
-Bestätigte Patterns werden als Regel in der passenden STYLEGUIDE-Sektion ergänzt. Wiederholte Fehler kommen in `§12 Anti-Patterns`. Der LEARNINGS-Eintrag wird mit `→ promoted to STYLEGUIDE §X.Y` markiert. In der STYLEGUIDE-Regel optional Backlink `(Quelle: LEARNINGS Kurs N)`.
+### Promotion (Schreib-Akt)
+
+Bestätigte Patterns werden als Regel in der passenden `CREATOR`-Sektion ergänzt. Wiederholte Fehler kommen in `CREATOR §12 Anti-Patterns` (mit Lifecycle-Status `hot`/`dormant`/`archived`). Der LEARNINGS-Eintrag wird mit `→ promoted → CREATOR §X.Y` markiert. In der CREATOR-Regel optional Backlink `(Quelle: LEARNINGS Kurs N)`.
 
 ---
 
@@ -34,7 +46,8 @@ Bestätigte Patterns werden als Regel in der passenden STYLEGUIDE-Sektion ergän
 - **Was hat funktioniert:** Patterns, Entscheidungen, Elemente die gut liefen
 - **Was war ein Fehler:** Konkrete Probleme, Bugs, didaktische Missgriffe
 - **Hypothese für nächste Kurse:** Was könnte als Regel taugen?
-- **Status:** raw | proven | promoted → STYLEGUIDE §X.Y
+- **Sofort-Promotion-Kandidat?** ja (→ Kandidat X für CREATOR §Y) | nein
+- **Status:** raw | proven | promoted → CREATOR §X.Y
 ```
 
 ---
@@ -55,7 +68,7 @@ Bestätigte Patterns werden als Regel in der passenden STYLEGUIDE-Sektion ergän
   - Callout-Varianten brauchten eigene Farben (behoben)
   - Mobile-Nav Z-Index-Konflikte: Header z-[70], MobileNav z-[100]
 - **Hypothese für nächste Kurse:** Flashcard-Design als "Warum"-Fragen sollte Regel werden.
-- **Status:** promoted → STYLEGUIDE §4.4 (Flashcard-Design)
+- **Status:** promoted → CREATOR §4.4 (Flashcard-Design)
 
 ### Kurs 2: Die 7 Stufen von Claude (2026-04-12)
 
@@ -70,7 +83,7 @@ Bestätigte Patterns werden als Regel in der passenden STYLEGUIDE-Sektion ergän
   - Quell-Attribution ohne Autor: "Community-Tutorial" zu generisch — besser inhaltliche Beschreibung
   - Stream-Timeouts bei großen Dateien
 - **Hypothese für nächste Kurse:** 2-Modul-Blöcke als Pflicht für alle Kurse. Timeout-Regel muss prominent sein.
-- **Status:** promoted → STYLEGUIDE Timeout-Warnung + §10 (Technische Regeln)
+- **Status:** promoted → CREATOR Timeout-Warnung + §10 (Technische Regeln)
 
 ### Kurs 3: Handy App (2026-04-12)
 
@@ -84,7 +97,7 @@ Bestätigte Patterns werden als Regel in der passenden STYLEGUIDE-Sektion ergän
   - Tool-Titel mit erklärendem Subheading ("Die beste Lösung zum Diktieren...")
 - **Was war ein Fehler:** —
 - **Hypothese für nächste Kurse:** Tool-Kurse brauchen explizites Subheading, das sagt was das Tool ist.
-- **Status:** promoted → STYLEGUIDE §8.4 (Drei-Ebenen-Titel)
+- **Status:** promoted → CREATOR §8.4 (Drei-Ebenen-Titel)
 
 ### Kurs 4: Storytelling in der Bildung (2026-04-14)
 
@@ -100,7 +113,7 @@ Bestätigte Patterns werden als Regel in der passenden STYLEGUIDE-Sektion ergän
   - SVG-Pfeil-Richtung: Polygon-Punkte für rechts-zeigende Pfeile müssen Tip-x > Base-x haben
   - Bildunterschrift zeigte falschen Kontext (Plastikkiste statt Gruppenszene) — Transkript-Verifizierung fehlte
 - **Hypothese für nächste Kurse:** Transkript-Verifizierung als Pflicht-Schritt. Neo-brutaler SVG-Stil als Standard.
-- **Status:** promoted → STYLEGUIDE §6.4 (SVG-Stil) + §6.7 (Transkript-Verifizierung) + §9 (Qualitäts-Checkliste)
+- **Status:** promoted → CREATOR §6.4 (SVG-Stil) + §6.7 (Transkript-Verifizierung) + §9 (Qualitäts-Checkliste)
 
 ### Kurs 2 Update: Visualisierungen (2026-04-16)
 
@@ -113,7 +126,7 @@ Bestätigte Patterns werden als Regel in der passenden STYLEGUIDE-Sektion ergän
   - Architektur-SVGs (zentrale Knoten, Verbindungen) nach Konzepteinführung, vor Details
 - **Was war ein Fehler:** —
 - **Hypothese für nächste Kurse:** SVG-Typen und ihre Platzierung als Regel kodifizieren.
-- **Status:** promoted → STYLEGUIDE §6.5 (SVG-Triage)
+- **Status:** promoted → CREATOR §6.5 (SVG-Triage)
 
 ### Kurs 5: Das lebende Wiki (2026-04-16)
 
@@ -129,7 +142,7 @@ Bestätigte Patterns werden als Regel in der passenden STYLEGUIDE-Sektion ergän
   - Kurs in 3 Teilen geschrieben: kein Timeout
 - **Was war ein Fehler:** —
 - **Hypothese für nächste Kurse:** Gap-Analyse bei kuratierten Quellen als Pflicht-Schritt. Sequel-Muster (Hook + Recap + `relatedCourses`) wiederverwendbar.
-- **Status:** promoted → STYLEGUIDE §11 (Gap-Analyse)
+- **Status:** promoted → CREATOR §11 (Gap-Analyse)
 
 ### Kurs 1 Update: Karpathy-Review (2026-04-17)
 
@@ -152,4 +165,5 @@ Bestätigte Patterns werden als Regel in der passenden STYLEGUIDE-Sektion ergän
   - Modul 2: 4 Content-Blöcke hintereinander (arch-intro → layer 1–3) ohne interaktiven Break
   - Modul 3: 3 Content-Blöcke hintereinander (ops-ingest → query → lint) ohne Break
   - Bewusste Entscheidung: Umbau würde die klare thematische Dreiteilung zerstören. Markierung als Diskussion für künftiges Verdichtungs-Ritual.
+- **Sofort-Promotion-Kandidat?** nein — "Output Compounding" bereits von §12.8 abgedeckt, `source.md`-Gate bereits in §9 Qualitäts-Checkliste. Grenzfall "Sekundäre Quellen als eigene Kategorie" Julian vorgelegt: Einzelfall, Ritual entscheidet später.
 - **Status:** raw

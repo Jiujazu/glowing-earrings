@@ -50,9 +50,9 @@
   <line x1="520" y1="200" x2="477" y2="260" stroke="#000" stroke-width="3"/>
   <line x1="125" y1="292" x2="155" y2="170" stroke="#000" stroke-width="3"/>
 
-  <!-- "v2" sticker — replaces "LLM" from part 1, same rotation & position -->
-  <rect x="340" y="170" width="120" height="50" fill="#E91E8C" stroke="#000" stroke-width="4" transform="rotate(-3 400 195)"/>
-  <text x="400" y="205" font-family="system-ui, sans-serif" font-size="28" font-weight="900" fill="#FFF" text-anchor="middle" letter-spacing="2" transform="rotate(-3 400 195)">v2</text>
+  <!-- "LLM V2" sticker — evolves the "LLM" sticker from part 1 -->
+  <rect x="305" y="170" width="190" height="50" fill="#E91E8C" stroke="#000" stroke-width="4" transform="rotate(-3 400 195)"/>
+  <text x="400" y="205" font-family="system-ui, sans-serif" font-size="26" font-weight="900" fill="#FFF" text-anchor="middle" letter-spacing="2" transform="rotate(-3 400 195)">LLM V2</text>
 
   <!-- Decorative star — kept from part 1 -->
   <polygon points="720,320 728,340 750,340 732,352 738,374 720,360 702,374 708,352 690,340 712,340" fill="#000" stroke="#000" stroke-width="2"/>

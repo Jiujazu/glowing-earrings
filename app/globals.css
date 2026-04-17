@@ -316,3 +316,81 @@ a {
   pointer-events: none;
   z-index: 10;
 }
+
+/* ============================================
+   Hero Image Spotlight — Shockwaves & X-Ray
+   ============================================ */
+
+@property --ring-r {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --xray-r {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 1600px;
+}
+
+.hero-shockwave {
+  --ring-r: 0px;
+  animation-name: hero-shockwave;
+  animation-timing-function: cubic-bezier(0.2, 0.6, 0.3, 1);
+  animation-fill-mode: forwards;
+  -webkit-mask-image: radial-gradient(
+    circle at var(--ring-ox) var(--ring-oy),
+    transparent calc(var(--ring-r) - 30px),
+    black calc(var(--ring-r) - 5px),
+    black var(--ring-r),
+    transparent calc(var(--ring-r) + 15px)
+  );
+  mask-image: radial-gradient(
+    circle at var(--ring-ox) var(--ring-oy),
+    transparent calc(var(--ring-r) - 30px),
+    black calc(var(--ring-r) - 5px),
+    black var(--ring-r),
+    transparent calc(var(--ring-r) + 15px)
+  );
+}
+
+@keyframes hero-shockwave {
+  0%   { --ring-r: 0px;             opacity: 1; }
+  60%  {                             opacity: 0.9; }
+  100% { --ring-r: var(--ring-max); opacity: 0; }
+}
+
+.hero-xray-charging {
+  animation: hero-xray-charge 500ms cubic-bezier(0.3, 0.7, 0.3, 1) forwards;
+}
+
+.hero-xray-releasing {
+  --xray-r: 1600px;
+  animation: hero-xray-release 600ms cubic-bezier(0.5, 0, 0.7, 1) forwards;
+  -webkit-mask-image: radial-gradient(
+    circle at var(--xray-ox) var(--xray-oy),
+    black calc(var(--xray-r) - 30px),
+    transparent var(--xray-r)
+  );
+  mask-image: radial-gradient(
+    circle at var(--xray-ox) var(--xray-oy),
+    black calc(var(--xray-r) - 30px),
+    transparent var(--xray-r)
+  );
+}
+
+@keyframes hero-xray-charge {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes hero-xray-release {
+  0%   { --xray-r: 1600px; opacity: 1; }
+  100% { --xray-r: 0px;    opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-shockwave,
+  .hero-xray-charging,
+  .hero-xray-releasing { display: none; }
+}

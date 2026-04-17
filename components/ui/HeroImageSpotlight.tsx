@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, type ReactNode } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 
 interface HeroImageSpotlightProps {
   children: ReactNode;
@@ -8,6 +8,19 @@ interface HeroImageSpotlightProps {
   imageSrc: string;
   className?: string;
 }
+
+interface Wave {
+  id: number;
+  x: number;
+  y: number;
+  maxRadius: number;
+  duration: number;
+}
+
+type XRayState =
+  | { phase: "idle" }
+  | { phase: "charging" }
+  | { phase: "releasing"; x: number; y: number };
 
 export default function HeroImageSpotlight({
   children,
@@ -19,6 +32,13 @@ export default function HeroImageSpotlight({
   const pendingRef = useRef<{ x: number; y: number } | null>(null);
   const rawId = useId();
   const filterId = `neon-edges-${rawId.replace(/:/g, "_")}`;
+
+  const [waves, setWaves] = useState<Wave[]>([]);
+  const nextWaveIdRef = useRef(0);
+  const [xray, setXray] = useState<XRayState>({ phase: "idle" });
+  const xrayActiveRef = useRef(false);
+  const xrayReleaseTimerRef = useRef<number | null>(null);
+  const lastPointerRef = useRef({ x: 50, y: 50 });
 
   useEffect(() => {
     const el = wrapperRef.current;
@@ -40,6 +60,7 @@ export default function HeroImageSpotlight({
       const x = ((e.clientX - rect.left) / rect.width) * 100;
       const y = ((e.clientY - rect.top) / rect.height) * 100;
       pendingRef.current = { x, y };
+      lastPointerRef.current = { x, y };
       if (!rafRef.current) rafRef.current = requestAnimationFrame(flush);
     }
 
@@ -63,6 +84,88 @@ export default function HeroImageSpotlight({
     };
   }, []);
 
+  useEffect(() => {
+    return () => {
+      if (xrayReleaseTimerRef.current) {
+        window.clearTimeout(xrayReleaseTimerRef.current);
+      }
+    };
+  }, []);
+
+  function prefersReducedMotion() {
+    return (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    );
+  }
+
+  function getLocalCoords(e: React.MouseEvent) {
+    const rect = wrapperRef.current!.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    return { x, y };
+  }
+
+  function spawnWave(x: number, y: number, maxRadius: number, duration: number) {
+    const id = nextWaveIdRef.current++;
+    setWaves((prev) => [...prev, { id, x, y, maxRadius, duration }]);
+    window.setTimeout(() => {
+      setWaves((prev) => prev.filter((w) => w.id !== id));
+    }, duration + 50);
+  }
+
+  function handleClick(e: React.MouseEvent) {
+    if (prefersReducedMotion()) return;
+    const { x, y } = getLocalCoords(e);
+    spawnWave(x, y, 340, 700);
+  }
+
+  function handleDoubleClick(e: React.MouseEvent) {
+    if (prefersReducedMotion()) return;
+    const { x, y } = getLocalCoords(e);
+    spawnWave(x, y, 480, 900);
+    window.setTimeout(() => spawnWave(x, y, 520, 950), 100);
+    window.setTimeout(() => spawnWave(x, y, 460, 900), 200);
+  }
+
+  function handleMouseDown(e: React.MouseEvent) {
+    if (e.button !== 2) return;
+    if (prefersReducedMotion()) return;
+    if (xrayReleaseTimerRef.current) {
+      window.clearTimeout(xrayReleaseTimerRef.current);
+      xrayReleaseTimerRef.current = null;
+    }
+    xrayActiveRef.current = true;
+    setXray({ phase: "charging" });
+  }
+
+  function endXray(x: number, y: number) {
+    if (!xrayActiveRef.current) return;
+    xrayActiveRef.current = false;
+    setXray({ phase: "releasing", x, y });
+    xrayReleaseTimerRef.current = window.setTimeout(() => {
+      setXray({ phase: "idle" });
+      xrayReleaseTimerRef.current = null;
+    }, 650);
+  }
+
+  function handleMouseUp(e: React.MouseEvent) {
+    if (e.button !== 2) return;
+    const { x, y } = getLocalCoords(e);
+    endXray(x, y);
+  }
+
+  function handleMouseLeave() {
+    if (xrayActiveRef.current) {
+      const { x, y } = lastPointerRef.current;
+      endXray(x, y);
+    }
+  }
+
+  function handleContextMenu(e: React.MouseEvent) {
+    e.preventDefault();
+  }
+
   return (
     <div
       ref={wrapperRef}
@@ -74,6 +177,12 @@ export default function HeroImageSpotlight({
           "--spotlight-opacity": "0",
         } as React.CSSProperties
       }
+      onClick={handleClick}
+      onDoubleClick={handleDoubleClick}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseLeave}
+      onContextMenu={handleContextMenu}
     >
       {children}
 
@@ -148,6 +257,65 @@ export default function HeroImageSpotlight({
           }}
         />
       </div>
+
+      {waves.map((w) => (
+        <div
+          key={w.id}
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 hero-shockwave"
+          style={
+            {
+              "--ring-ox": `${w.x}%`,
+              "--ring-oy": `${w.y}%`,
+              "--ring-max": `${w.maxRadius}px`,
+              animationDuration: `${w.duration}ms`,
+              mixBlendMode: "screen",
+            } as React.CSSProperties
+          }
+        >
+          <img
+            src={imageSrc}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            className="block w-full h-full"
+            style={{
+              filter: `url(#${filterId})`,
+              objectFit: "cover",
+            }}
+          />
+        </div>
+      ))}
+
+      {xray.phase !== "idle" && (
+        <div
+          aria-hidden="true"
+          className={`pointer-events-none absolute inset-0 ${
+            xray.phase === "charging" ? "hero-xray-charging" : "hero-xray-releasing"
+          }`}
+          style={
+            {
+              "--xray-ox": xray.phase === "releasing" ? `${xray.x}%` : "50%",
+              "--xray-oy": xray.phase === "releasing" ? `${xray.y}%` : "50%",
+              mixBlendMode: "screen",
+            } as React.CSSProperties
+          }
+        >
+          <img
+            src={imageSrc}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            className="block w-full h-full"
+            style={{
+              filter: `url(#${filterId})`,
+              objectFit: "cover",
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }

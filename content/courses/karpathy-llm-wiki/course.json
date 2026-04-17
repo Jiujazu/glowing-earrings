@@ -9,11 +9,11 @@
     "sourceType": "gist",
     "category": "ai-tech",
     "tags": [
-      "Wissensmanagement",
+      "Wiki",
       "RAG",
       "Obsidian"
     ],
-    "estimatedMinutes": 18,
+    "estimatedMinutes": 23,
     "difficulty": "intermediate",
     "publishedAt": "2026-04-10",
     "coverImage": "/courses/karpathy-llm-wiki/cover.svg",
@@ -53,12 +53,17 @@
     {
       "id": "problem",
       "title": "Das Problem mit deinem Wissen",
-      "estimatedMinutes": 3,
+      "estimatedMinutes": 5,
       "elements": [
         {
           "id": "problem-intro",
           "type": "content",
-          "text": "Stell dir vor, du hast letzte Woche einen brillanten Artikel über die Zukunft von AI Agents gelesen. Jetzt fragt dich jemand danach.\n\nDu weißt, dass du ihn gelesen hast. Du weißt ungefähr, worum es ging. Aber du findest ihn nicht mehr — und selbst wenn, müsstest du ihn nochmal lesen, um die wichtigen Punkte zusammenzufassen.\n\nDas ist der Normalzustand für die meisten von uns. Wissen geht rein, aber es **akkumuliert** nicht.\n\nEs bleibt fragmentiert in Browser-Tabs, Notion-Seiten, Lesezeichen-Ordnern."
+          "text": "Stell dir vor, du hast letzte Woche einen brillanten Artikel über die Zukunft von AI Agents gelesen. Jetzt fragt dich jemand danach.\n\nDu weißt, dass du ihn gelesen hast. Du weißt ungefähr, worum es ging. Aber du findest ihn nicht mehr — und selbst wenn, müsstest du ihn nochmal lesen, um die wichtigen Punkte zusammenzufassen.\n\n### Der Normalzustand\n\nFür die meisten von uns geht Wissen rein, aber es **akkumuliert** nicht. Es bleibt fragmentiert:\n\n- Browser-Tabs, die nie wieder besucht werden\n- Notion-Seiten in vergessenen Workspaces\n- Lesezeichen-Ordner ohne System\n- Podcast-Notizen in einer dritten App"
+        },
+        {
+          "id": "patel-bridge",
+          "type": "content",
+          "text": "### Ein Jahr verlorene Notizen\n\n**Jeel Patel, CEO eines SaaS-Startups**, hat das Problem ein Jahr lang aus erster Hand erlebt. Er baute sich einen Obsidian-Vault, probierte ein KI-Interface, sprach einfach zu ihm und warf Notizen rein.\n\nDas Resultat:\n\n- Hunderte Dateien in Ordnern, die er nie wieder öffnete\n- Meeting-Notizen, die einfach verschwanden\n- Strategie-Dokumente, die sich gegenseitig widersprachen\n\nSein Fazit: *\"The bookkeeping is the bottleneck — not the thinking.\"* Nicht das Denken scheitert — sondern die Pflege.\n\n### Die Wende\n\nDann stieß Patel auf Karpathys Methode. Er baute seinen Vault um: zwei Ordner, eine Disziplin. `Daily Notes/` für unstrukturierte Einwürfe, `Wiki/` pflegt das LLM.\n\nEin einziger Satz in einer Daily Note — *\"intercom support — kann invoice email template angepasst werden? ja, aber KB-Artikel nötig\"* — genügte. Das LLM legte eine Kunden-Seite an, aktualisierte die Projekt-Seite, markierte den fehlenden KB-Artikel als Action Item, loggte alles.\n\n**Aus hunderten verstreuten Dateien wurden 27 vernetzte Seiten, mit denen er tatsächlich arbeitet.** Jede neue Notiz macht das System klüger.\n\n*— Jeel Patel, CEO FieldCamp, auf LinkedIn*"
         },
         {
           "id": "rag-problem",
@@ -72,6 +77,11 @@
           "variant": "quote",
           "title": "Karpathy über Standard-RAG",
           "text": "\"The LLM is rediscovering knowledge from scratch on every question. There's no accumulation.\""
+        },
+        {
+          "id": "use-cases",
+          "type": "content",
+          "text": "### Für wen lohnt sich das?\n\nKarpathy nennt fünf Kontexte, in denen ein LLM Wiki einen echten Unterschied macht:\n\n- **Persönlich:** Ziele, Gesundheit, Selbstbeobachtung — Journal-Einträge und Podcast-Notizen zu einem strukturierten Selbstbild verdichten\n- **Research:** Wochenlange Recherche zu einem Thema — Papers, Artikel, Reports mit wachsender These\n- **Bücher lesen:** Kapitel für Kapitel einfiltern, Personen- und Themenseiten aufbauen — wie ein [Tolkien Gateway](https://tolkiengateway.net/wiki/Main_Page) für dein aktuelles Buch\n- **Team/Business:** Slack-Threads, Meeting-Transkripte, Kundengespräche — ein internes Wiki, das sich selbst pflegt\n- **Competitive Analysis, Due Diligence, Reiseplanung, Hobby-Rabbit-Holes** — überall, wo Wissen sonst zerfasert"
         },
         {
           "id": "quiz-rag",
@@ -168,7 +178,7 @@
         {
           "id": "ops-query",
           "type": "content",
-          "text": "### Query — Fragen stellen\n\nDas LLM durchsucht relevante Wiki-Seiten, liest sie und synthetisiert eine Antwort mit Zitaten.\n\nDer Clou: Wertvolle Antworten können als neue Wiki-Seiten gespeichert werden. Karpathy nennt das **Output Compounding** — statt dass deine Recherche im Chat-Verlauf verschwindet, wird das Ergebnis Teil des Wikis. Jede gute Frage macht das Wiki besser."
+          "text": "### Query — Fragen stellen\n\nDas LLM durchsucht relevante Wiki-Seiten, liest sie und synthetisiert eine Antwort mit Zitaten.\n\nDer Clou liegt laut Karpathy im Rückfluss: Wertvolle Antworten — eine Vergleichstabelle, eine Analyse, eine neu entdeckte Verbindung — sollten nicht im Chat-Verlauf verschwinden, sondern als eigene Wiki-Seite gespeichert werden. So **compounden** deine Recherchen genauso wie die eingelesenen Quellen. Jede gute Frage macht das Wiki besser."
         },
         {
           "id": "ops-lint",
@@ -185,7 +195,7 @@
           "id": "flashcard-ops-2",
           "type": "flashcard",
           "front": "Warum ist es wichtig, Query-Ergebnisse als Wiki-Seiten zu speichern statt sie im Chat zu lassen?",
-          "back": "Ohne Speicherung ist jede Recherche Einmalarbeit — du stellst die gleiche Frage nächsten Monat nochmal. Mit Output Compounding wird jede gute Frage zu permanentem Wissen, das bei zukünftigen Queries mitgefunden wird."
+          "back": "Ohne Speicherung ist jede Recherche Einmalarbeit — du stellst die gleiche Frage nächsten Monat nochmal. Wenn du die Antwort zurück ins Wiki filest, wird jede gute Frage zu permanentem Wissen, das bei zukünftigen Queries mitgefunden wird."
         },
         {
           "id": "flashcard-ops-3",
@@ -229,7 +239,7 @@
     },
     {
       "id": "philosophy",
-      "title": "Warum KI der perfekte Wiki-Pfleger ist",
+      "title": "Warum KI das Wiki pflegt",
       "estimatedMinutes": 3,
       "elements": [
         {
@@ -285,7 +295,43 @@
           "content": "🕰️ Fun Fact: Vannevar Bush hat den Memex 1945 im Artikel \"As We May Think\" beschrieben — 44 Jahre bevor Tim Berners-Lee das World Wide Web erfand."
         }
       ],
-      "transitionToNext": "Du hast jetzt das komplette Konzept — von der Architektur bis zur Philosophie dahinter. Zeit, es in die Praxis zu bringen."
+      "transitionToNext": "Konzept, Architektur, Operationen, Philosophie — fehlen noch die Werkzeuge. Ein paar Handgriffe machen den Alltag spürbar flüssiger."
+    },
+    {
+      "id": "tools",
+      "title": "Praktische Werkzeuge",
+      "estimatedMinutes": 3,
+      "elements": [
+        {
+          "id": "tools-intro",
+          "type": "content",
+          "text": "Das Wiki braucht streng genommen **keine** zusätzlichen Tools — Markdown-Dateien und ein LLM reichen. Aber ein paar Werkzeuge aus Karpathys eigenem Setup machen den Alltag spürbar flüssiger."
+        },
+        {
+          "id": "tools-input",
+          "type": "content",
+          "text": "### Rein ins Wiki\n\n**Obsidian Web Clipper.** Browser-Extension, die Web-Artikel mit einem Klick als sauberes Markdown in deinen Raw-Sources-Ordner legt. Kein Kopieren, kein Formatierungschaos.\n\n**Bilder lokal ziehen.** In Obsidian unter *Settings → Files and links* den Attachment-Ordner auf z.B. `raw/assets/` setzen, dann in *Settings → Hotkeys* den Befehl \"Download attachments for current file\" auf `Ctrl+Shift+D` legen. Ein Tastendruck nach dem Clip — alle Bilder liegen lokal.\n\nWichtig, weil ein LLM später nicht mehr an Bilder hinter abgelaufenen URLs kommt."
+        },
+        {
+          "id": "tools-flashcard",
+          "type": "flashcard",
+          "front": "Warum ist es sinnvoll, Bilder aus geclippten Artikeln lokal zu speichern?",
+          "back": "Weil URLs verrotten. Wenn das LLM Wochen später auf einen Artikel zugreift, sind externe Bilder oft weg. Lokal gespeichert bleiben sie verfügbar — und das LLM kann sie bei Bedarf direkt ansehen, nicht nur den Text."
+        },
+        {
+          "id": "tools-output",
+          "type": "content",
+          "text": "### Raus aus dem Wiki\n\n**Graph view.** Obsidians eingebaute Visualisierung zeigt, welche Seiten Hubs sind, was verbunden ist, wo Waisen herumliegen. Der schnellste Weg, die Form deines Wikis zu verstehen.\n\n**Marp.** Plugin, das Markdown in Foliendecks verwandelt. Wenn du das Wiki fragst, dir zu einem Thema einen Vortrag zu bauen, kommt direkt ein fertiges Deck raus.\n\n**Dataview.** Plugin, das Abfragen über YAML-Frontmatter laufen lässt. Wenn das LLM Seiten mit Tags und Datumsangaben versieht, generiert Dataview daraus dynamische Tabellen — etwa *\"alle Quellen zum Thema X, sortiert nach Datum\"*."
+        },
+        {
+          "id": "tools-warning",
+          "type": "callout",
+          "variant": "tip",
+          "title": "Alle Tools sind optional",
+          "text": "Karpathys eigene Schlussbemerkung im Gist: Jedes Werkzeug hier ist modular. Fang mit zwei Ordnern und einer `CLAUDE.md` an. Füg Tools hinzu, wenn du ihren Schmerz spürst — nicht vorher."
+        }
+      ],
+      "transitionToNext": "Du hast jetzt alles, was du brauchst. Zeit für deinen ersten Ordner."
     }
   ],
   "outro": {
@@ -293,7 +339,7 @@
       "Das LLM Wiki ersetzt fragmentiertes RAG durch eine persistente, wachsende Wissensstruktur aus einfachen Markdown-Dateien.",
       "Drei Schichten (Raw Sources → Wiki → Schema) und drei Operationen (Ingest → Query → Lint) bilden das gesamte System.",
       "Die KI übernimmt die Pflege-Arbeit — Querverweise, Aktualisierungen, Konsistenzprüfungen — an der Menschen scheitern.",
-      "Output Compounding: Jede gute Frage und jede Recherche wird zu permanentem Wissen statt zu verschwindendem Chat-Verlauf.",
+      "Rückfluss ins Wiki: Jede gute Frage und jede Recherche wird zu permanentem Wissen statt zu verschwindendem Chat-Verlauf.",
       "Das Konzept verwirklicht Vannevar Bushs 80 Jahre alte Vision eines persönlichen Wissensspeichers mit assoziativen Verknüpfungen."
     ],
     "nextStep": "Erstelle einen leeren Ordner, schreib eine CLAUDE.md mit der Anweisung \"Du pflegst ein Wiki in diesem Ordner. Bei jeder neuen Quelle: Zusammenfassung erstellen, Index aktualisieren, verwandte Seiten verlinken.\" — und füttere die erste Quelle rein.",

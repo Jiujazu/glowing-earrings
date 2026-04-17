@@ -130,3 +130,26 @@ Bestätigte Patterns werden als Regel in der passenden STYLEGUIDE-Sektion ergän
 - **Was war ein Fehler:** —
 - **Hypothese für nächste Kurse:** Gap-Analyse bei kuratierten Quellen als Pflicht-Schritt. Sequel-Muster (Hook + Recap + `relatedCourses`) wiederverwendbar.
 - **Status:** promoted → STYLEGUIDE §11 (Gap-Analyse)
+
+### Kurs 1 Update: Karpathy-Review (2026-04-17)
+
+**Änderung:** Nachträglicher §9-Review des ersten Kurses (entstand vor Gap-Analyse- und Quelltreue-Regeln). Retrofit auf aktuellen Standard.
+
+- **Was war neu:** Erste nachträgliche Gap-Analyse für einen bereits live gestellten Kurs. Erste Einbindung einer sekundären Quelle (LinkedIn-Erfahrungsbericht) als narrativer Bridge-Block.
+- **Was hat funktioniert:**
+  - Gap-Analyse auf fertigen Kurs angewendet: 3 substantielle Lücken (5 Use Cases, Tips & Tricks, Query-Output-Formate) und 1 Quelltreue-Problem (erfundener Begriff "Output Compounding" Karpathy zugeschrieben) identifiziert
+  - Patel-LinkedIn-Post als Bridge-Block in Modul 1: macht den abstrakten Benefit sofort konkret und menschlich, ohne Karpathys Autorität zu verwässern
+  - Use Cases als Liste mit externem Markdown-Link (Tolkien Gateway) — funktioniert über ReactMarkdown
+  - Tool-Tipps als eigenes kurzes Modul statt verteilt: bleibt optional, ohne andere Module aufzublähen
+- **Was war ein Fehler:**
+  - Quelltreue-Problem "Output Compounding": Ein Begriff wurde Karpathy zugeschrieben, den er im Gist nie verwendet. Trotz ähnlicher Idee ("explorations compound") eine klare §12.8-Verletzung. Bei nachträglichem Review zum ersten Mal aufgefallen — nicht bei Erst-Erstellung.
+  - Leere `source.md` (nur Platzhalter-Kommentar) als Altlast: ohne Transkript keine Verifizierung möglich. Sollte bei jedem Kurs am Ende der Erstellung geprüft werden.
+- **Hypothese für nächste Kurse:**
+  - Bei nachträglichen Reviews die gleiche Gap-Analyse-Disziplin anwenden wie bei Erst-Erstellung.
+  - Sekundäre Quellen (Erfahrungsberichte) können sinnvoll sein, solange sie klar attribuiert werden und die Primärquelle nicht verdrängen — eine neue Kategorie zwischen "Primärquelle" und "externem Framework".
+  - `source.md`-Füllung als explizite Gate im Post-Flight: ohne Transkript kein Merge.
+- **Nicht gefixt (pre-existing §3.1-Verletzungen):**
+  - Modul 2: 4 Content-Blöcke hintereinander (arch-intro → layer 1–3) ohne interaktiven Break
+  - Modul 3: 3 Content-Blöcke hintereinander (ops-ingest → query → lint) ohne Break
+  - Bewusste Entscheidung: Umbau würde die klare thematische Dreiteilung zerstören. Markierung als Diskussion für künftiges Verdichtungs-Ritual.
+- **Status:** raw

@@ -14,16 +14,16 @@ Eine kostenlose, interaktive Lernplattform für generative KI. Kuratiert von Jul
 
 ## Kurs-Erstellungs-Workflow
 
-> **Alle Details zu Regeln, Element-Einsatz und Schreibprozess stehen in `COURSE-STYLEGUIDE.md`. Diese Datei ist der Router.**
+> **Alle Details zu Regeln, Element-Einsatz und Schreibprozess stehen in `COURSE-CREATOR.md`. Diese Datei ist der Router.**
 
 ### Pre-Flight (vor jeder Kurs-Erstellung)
-1. **Lies `COURSE-STYLEGUIDE.md` komplett** — insbesondere die Timeout-Warnung ganz oben, §1 Autoren-Prozess und §9 Qualitäts-Checkliste
+1. **Lies `COURSE-CREATOR.md` komplett** — insbesondere die Timeout-Warnung ganz oben, §1 Autoren-Prozess und §9 Qualitäts-Checkliste
 2. **Lies den letzten fertigen Kurs** als Referenz für Struktur, Tonfall, Element-Einsatz
-3. **Verdichtungs-Check:** Wenn Kursnummer N ≥ 4 und `(N-1) % 3 == 0` (also Kurs 4, 7, 10, 13…), die letzten 3 Einträge in `COURSE-LEARNINGS.md` lesen und Julian Promotion-Kandidaten vorschlagen (siehe Lern-System unten)
+3. **Verdichtungs-Check:** Wenn Kursnummer N ≥ 4 und `(N-1) % 3 == 0` (also Kurs 4, 7, 10, 13…), die letzten 3 Einträge in `COURSE-LEARNINGS.md` lesen und Julian Promotion-Kandidaten vorschlagen (siehe Lern-System unten). **Ansonsten ist `COURSE-LEARNINGS.md` kein Pre-Flight-Pflichtdokument.**
 
-### Phasen (Kurzübersicht — Details in STYLEGUIDE §1)
+### Phasen (Kurzübersicht — Details in CREATOR §1)
 1. Quelle identifizieren (Tweet / Artikel / Video / Gist / Paper)
-2. **Gap-Analyse** bei kuratierten Quellen (Pflicht, siehe STYLEGUIDE §11) — als `gap-analysis.md` im Kurs-Ordner ablegen
+2. **Gap-Analyse** bei kuratierten Quellen (Pflicht, siehe CREATOR §11) — als `gap-analysis.md` im Kurs-Ordner ablegen
 3. Lernziele pro Modul definieren
 4. Modul-Schnitt & Element-Wahl
 5. **Kurs IN TEILEN schreiben** (Pflicht): Write für Meta+Intro+M1-2, Edit für je 2 weitere Module, Edit für Outro. Niemals in einem Schritt — führt zu Timeout.
@@ -35,7 +35,16 @@ Julian kann Kurse direkt auf der Live-Seite editieren via Custom Inline Editor (
 
 ### Post-Flight (nach jeder Kurs-Erstellung)
 1. **Auf der Live-URL** den Kurs durchspielen, Feedback einarbeiten
-2. **Neuen Eintrag in `COURSE-LEARNINGS.md`** nach Template (siehe dort) — nur Memo, keine Regel-Prüfung nötig
+2. **Neuen Eintrag in `COURSE-LEARNINGS.md`** nach Template (siehe dort) — Status initial `raw`
+3. **Sofort-Promotion-Check:** Claude liest den frischen Eintrag und prüft mit drei Fragen, ob ein Punkt aus "Was war ein Fehler" oder "Was hat funktioniert" so offensichtlich systemisch ist, dass er sofort zur Regel werden sollte:
+   - **Wiederholungsrisiko:** Würde dieser Fehler ohne Regel wieder passieren?
+   - **Universalität:** Gilt das für alle zukünftigen Kurse, nicht nur für diese Quelle?
+   - **Prüfbarkeit:** Kann man die Regel später auditieren (§14)?
+
+   Wenn alle drei mit ja → Claude legt Julian Promotion-Kandidaten per `AskUserQuestion` vor. Julian entscheidet. Promovierte Kandidaten werden direkt in `COURSE-CREATOR.md` ergänzt; der LEARNINGS-Eintrag bekommt Status `promoted → CREATOR §X.Y`. Wenn unklar → `raw` lassen, das 3-Kurs-Ritual entscheidet später.
+
+### Audit (nachträgliche Qualitätsprüfung)
+Manueller Befehl von Julian: `/kurs-audit [slug]` (noch zu bauen, Datengrundlage steht in `CREATOR §14`). Der Audit prüft einen fertigen Kurs gegen die Creator-Regeln und schreibt den Report nach `/content/courses/[slug]/audit.md`. Nicht routinemäßig — nur nach Creator-Updates, vor Refactors oder bei Zweifeln.
 
 ---
 
@@ -258,25 +267,32 @@ Der jeweils letzte Kurs dient als primäre Referenz für Struktur, Tonfall und E
 
 ## Lern-System
 
-Das Lern-System sorgt dafür, dass jeder neue Kurs besser wird als der vorherige — über eine **3-Stage-Pipeline**:
+Das Lern-System sorgt dafür, dass jeder neue Kurs besser wird als der vorherige. Grundlage ist eine **klare Rollenverteilung zwischen vier Dokumenten**, ein schneller Rückfluss-Pfad (Sofort-Promotion) und ein Langsam-Filter (3-Kurs-Ritual) für das, was nicht sofort klar ist.
 
-### Die drei Dokumente
-1. **`CLAUDE.md`** (diese Datei) — **Router.** Wird automatisch geladen. Workflow-Übersicht, Pre-Flight, Post-Flight. Details stehen in STYLEGUIDE.
-2. **`COURSE-STYLEGUIDE.md`** — **Regelwerk.** Didaktik, Mobile-First, Qualitäts-Checkliste, Gap-Analyse, Anti-Patterns. **Immer komplett lesen vor Kurs-Erstellung.**
-3. **`COURSE-LEARNINGS.md`** — **Raw Log.** Wachsende Historie mit 5-Felder-Template pro Kurs. Nicht pflichtlesen — wird beim Verdichtungs-Ritual konsultiert.
+### Dokument-Rollen (SSoT & Abgrenzung)
 
-### Die drei Stages
+| Dokument | Rolle | Wann gelesen | Wann geschrieben |
+|---|---|---|---|
+| `CLAUDE.md` | **Router** — Workflow-Übersicht, Pre/Post-Flight, Audit-Verweis | Bei Session-Start (automatisch) | Bei strukturellen Änderungen am Workflow |
+| `COURSE-CREATOR.md` | **Regelwerk (Single Source of Truth)** — Didaktik, Struktur, Design, Qualitäts-Checkliste §9, Gap-Analyse §11, Anti-Patterns §12, Audit-Protokoll §14 | Pre-Flight jeder Kurs-Erstellung **und** beim Audit | Beim Promovieren (sofort im Post-Flight oder im 3-Kurs-Ritual) |
+| `COURSE-LEARNINGS.md` | **Raw Log** der Erfahrungen pro Kurs | Nur beim 3-Kurs-Ritual **oder** direkt nach Post-Flight für Sofort-Promotion-Check | Post-Flight jeder Kurs-Erstellung |
+| `/content/courses/[slug]/gap-analysis.md` | **Vorbereitung** eines einzelnen Kurses (Quellen-Mapping) | Pre-Flight (Referenz, falls vorhanden) | Vor Kurs-Erstellung (Pflicht bei kuratierten Quellen) |
+| `/content/courses/[slug]/audit.md` | **Nachprüfung** eines einzelnen Kurses (Regel-Check) | Optional bei Re-Audit | Beim `/kurs-audit [slug]`-Command |
 
-**Stage 1 — Capture (Post-Flight, nach jedem Kurs):**
-Neuen Eintrag in `COURSE-LEARNINGS.md`. Template: *Was war neu / funktioniert / Fehler / Hypothese / Status*. Low-friction, keine Bewertung.
+**Wichtig:** Die Audit-Kriterien leben als `CREATOR §14` — **nicht** in einer separaten Datei. Dadurch ist garantiert, dass Creator-Regeln und Audit-Checks nicht auseinanderdriften.
 
-**Stage 2 — Verdichten (Pre-Flight, vor Kurs 4, 7, 10…):**
-Claude liest die letzten 3 Einträge und stellt drei Fragen:
+### Drei Promotions-Wege (schnell, langsam, präventiv)
+
+**Weg 1 — Sofort-Promotion (Post-Flight, nach jedem Kurs):**
+Wenn ein Eintrag offensichtlich systemisch ist (Wiederholungsrisiko + Universalität + Prüfbarkeit — siehe Post-Flight Schritt 3 oben), schlägt Claude sofort eine Regel vor. Julian entscheidet. Rückfluss-Latenz: 0 Kurse.
+
+**Weg 2 — Verdichtungs-Ritual (Pre-Flight, vor Kurs 4, 7, 10, 13…):**
+Wenn `(N-1) % 3 == 0` und `N ≥ 4`: Claude liest nur Einträge mit Status `raw` oder `proven` (promovierte werden übersprungen — Rauschen raus) und stellt drei Fragen:
 - Welches Pattern taucht in ≥2 Kursen auf? → Promotion-Kandidat
 - Welcher Fehler wurde wiederholt? → Anti-Pattern-Kandidat
-- Was war Einzelfall? → bleibt im Log
+- Was war Einzelfall? → bleibt `raw`
 
 Julian entscheidet per `AskUserQuestion`, was promoviert wird.
 
-**Stage 3 — Promotion (in STYLEGUIDE):**
-Bestätigte Patterns werden als Regel in der passenden Sektion ergänzt. Wiederholte Fehler wandern in `STYLEGUIDE §12 Anti-Patterns`. Der LEARNINGS-Eintrag wird mit `→ promoted to STYLEGUIDE §X.Y` markiert (nicht gelöscht — Genese bleibt nachvollziehbar).
+**Weg 3 — Promotion (Schreib-Akt):**
+Bestätigte Patterns werden als Regel in der passenden `CREATOR`-Sektion ergänzt. Wiederholte Fehler wandern in `CREATOR §12 Anti-Patterns` (mit Lifecycle-Status `hot`/`dormant`/`archived`). Der LEARNINGS-Eintrag wird mit `→ promoted → CREATOR §X.Y` markiert (nicht gelöscht — Genese bleibt nachvollziehbar).

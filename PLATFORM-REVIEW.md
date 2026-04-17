@@ -6,7 +6,7 @@
 
 ## Zusammenfassung
 
-Die Plattform hat ein **solides technisches Fundament**: Next.js 15 mit SSG, saubere TypeScript-Typen, ein durchdachtes Kurs-Datenmodell, und eine klare Dokumentation (CLAUDE.md, COURSE-STYLEGUIDE.md, LEARNINGS.md). Der erste Kurs (Karpathy LLM Wiki) zeigt, dass das Konzept funktioniert.
+Die Plattform hat ein **solides technisches Fundament**: Next.js 15 mit SSG, saubere TypeScript-Typen, ein durchdachtes Kurs-Datenmodell, und eine klare Dokumentation (CLAUDE.md, COURSE-CREATOR.md, COURSE-LEARNINGS.md). Der erste Kurs (Karpathy LLM Wiki) zeigt, dass das Konzept funktioniert.
 
 **Aber:** Für 10-30 Kurse in 12 Monaten fehlen mehrere Features, die ab Kurs 3-4 zum Engpass werden. Dieses Review identifiziert die Lücken und priorisiert konkrete nächste Schritte.
 
@@ -18,11 +18,11 @@ Die Plattform hat ein **solides technisches Fundament**: Next.js 15 mit SSG, sau
 |---|---|
 | **Kurs-Datenmodell** | Sauber, typsicher, erweiterbar. Element-Union-Type macht neue Element-Typen einfach hinzufügbar. |
 | **Design-System** | CSS Custom Properties pro Kurs sind elegant. Jeder Kurs fühlt sich anders an, ohne dass die Komponenten dupliziert werden. |
-| **Didaktisches Framework** | COURSE-STYLEGUIDE.md ist exzellent — klare Prinzipien, konkrete Regeln, Qualitäts-Checkliste. |
+| **Didaktisches Framework** | COURSE-CREATOR.md ist exzellent — klare Prinzipien, konkrete Regeln, Qualitäts-Checkliste. |
 | **Lern-System** | LEARNINGS.md als wachsendes Dokument ist ein starkes Pattern. Verhindert wiederholte Fehler. |
 | **SSG** | Statische Generierung sorgt für schnelle Ladezeiten und einfaches Hosting. Perfekt für die Skalierung. |
 | **SEO** | JSON-LD Structured Data, OpenGraph-Tags, Sitemap — gut abgedeckt. |
-| **Accessibility** | `prefers-reduced-motion` wird respektiert, Focus-Styles sind da, WCAG AA als Regel im Styleguide. |
+| **Accessibility** | `prefers-reduced-motion` wird respektiert, Focus-Styles sind da, WCAG AA als Regel im Course Creator. |
 
 ---
 
@@ -73,7 +73,7 @@ export interface ImageElement extends BaseElement {
 
 #### 2.3 Kurs-Kategorie im Datenmodell
 
-**Problem:** `CourseMeta` hat `tags`, aber keine dedizierte `category`. Die 4 Säulen aus dem COURSE-STYLEGUIDE existieren nur als Dokumentation, nicht im Code.
+**Problem:** `CourseMeta` hat `tags`, aber keine dedizierte `category`. Die 4 Säulen aus dem COURSE-CREATOR existieren nur als Dokumentation, nicht im Code.
 
 **Vorschlag:** `category` als Pflichtfeld in `CourseMeta`:
 
@@ -149,7 +149,7 @@ Aktuell wird Code über Markdown in `content`-Elementen dargestellt. Ein dedizie
 
 #### 2.8 Kurs-Vernetzung im UI
 
-**Problem:** Der COURSE-STYLEGUIDE empfiehlt Kurs-Querverweise, aber es gibt keine Komponente dafür. `transitionToNext` ist ein String-Feld — es gibt keine automatische Verlinkung zu verwandten Kursen.
+**Problem:** Der COURSE-CREATOR empfiehlt Kurs-Querverweise, aber es gibt keine Komponente dafür. `transitionToNext` ist ein String-Feld — es gibt keine automatische Verlinkung zu verwandten Kursen.
 
 **Vorschlag:**
 - `relatedCourses?: string[]` (Slugs) in `CourseMeta`

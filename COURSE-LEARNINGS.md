@@ -165,4 +165,5 @@ Bestätigte Patterns werden als Regel in der passenden `CREATOR`-Sektion ergänz
   - Modul 2: 4 Content-Blöcke hintereinander (arch-intro → layer 1–3) ohne interaktiven Break
   - Modul 3: 3 Content-Blöcke hintereinander (ops-ingest → query → lint) ohne Break
   - Bewusste Entscheidung: Umbau würde die klare thematische Dreiteilung zerstören. Markierung als Diskussion für künftiges Verdichtungs-Ritual.
+- **Sofort-Promotion-Kandidat?** nein — "Output Compounding" bereits von §12.8 abgedeckt, `source.md`-Gate bereits in §9 Qualitäts-Checkliste. Grenzfall "Sekundäre Quellen als eigene Kategorie" Julian vorgelegt: Einzelfall, Ritual entscheidet später.
 - **Status:** raw

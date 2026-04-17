@@ -50,7 +50,7 @@ Julian kann Kurse direkt auf der Live-Seite editieren via Custom Inline Editor (
    Regel: `Sofort-Promotion-Kandidat?` und `Status` werden **immer** gefüllt, nie leer. So ist im Log sichtbar, ob der Check ausgeführt wurde.
 
 ### Audit (nachträgliche Qualitätsprüfung)
-Manueller Befehl von Julian: `/kurs-audit [slug]` (noch zu bauen, Datengrundlage steht in `CREATOR §14`). Der Audit prüft einen fertigen Kurs gegen die Creator-Regeln und schreibt den Report nach `/content/courses/[slug]/audit.md`. Nicht routinemäßig — nur nach Creator-Updates, vor Refactors oder bei Zweifeln.
+Manueller Befehl von Julian: `/kurs-audit [slug]` (noch zu bauen, Datengrundlage steht in `CREATOR §14`). Der Audit prüft einen fertigen Kurs gegen die Creator-Regeln und hängt eine neue Sektion an `/content/courses/[slug]/audit-log.md` an (append-only, nie überschrieben — der Trail bleibt lesbar in der Datei, nicht nur in Git). Bei systemischen Findings fragt Claude pro Finding einzeln nach, ob ein LEARNINGS-Eintrag entstehen soll. Nicht routinemäßig — nur nach Creator-Updates, vor Refactors oder bei Zweifeln.
 
 ---
 
@@ -283,7 +283,7 @@ Das Lern-System sorgt dafür, dass jeder neue Kurs besser wird als der vorherige
 | `COURSE-CREATOR.md` | **Regelwerk (Single Source of Truth)** — Didaktik, Struktur, Design, Qualitäts-Checkliste §9, Gap-Analyse §11, Anti-Patterns §12, Audit-Protokoll §14 | Pre-Flight jeder Kurs-Erstellung **und** beim Audit | Beim Promovieren (sofort im Post-Flight oder im 3-Kurs-Ritual) |
 | `COURSE-LEARNINGS.md` | **Raw Log** der Erfahrungen pro Kurs | Nur beim 3-Kurs-Ritual **oder** direkt nach Post-Flight für Sofort-Promotion-Check | Post-Flight jeder Kurs-Erstellung |
 | `/content/courses/[slug]/gap-analysis.md` | **Vorbereitung** eines einzelnen Kurses (Quellen-Mapping) | Pre-Flight (Referenz, falls vorhanden) | Vor Kurs-Erstellung (Pflicht bei kuratierten Quellen) |
-| `/content/courses/[slug]/audit.md` | **Nachprüfung** eines einzelnen Kurses (Regel-Check) | Optional bei Re-Audit | Beim `/kurs-audit [slug]`-Command |
+| `/content/courses/[slug]/audit-log.md` | **Append-only Audit-Trail** eines einzelnen Kurses (Regel-Check pro Lauf) | Bei Re-Audit als Referenz für vorigen Stand | Bei jedem `/kurs-audit [slug]`-Lauf wird eine neue Sektion unten angehängt |
 
 **Wichtig:** Die Audit-Kriterien leben als `CREATOR §14` — **nicht** in einer separaten Datei. Dadurch ist garantiert, dass Creator-Regeln und Audit-Checks nicht auseinanderdriften.
 

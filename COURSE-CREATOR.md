@@ -673,6 +673,8 @@ Die Datei bleibt als Audit-Trail erhalten und ist auf der Plattform nicht sichtb
 >
 > Das Audit kommt **Tage oder Wochen nach Kurs-Veröffentlichung** und ist der unabhängige Regel-Check. Es wird manuell per Slash-Command `/kurs-audit [slug]` ausgelöst.
 
+> ⚠️ **Drift-Warnung für Creator-Pflege:** Die Prüfliste in §14.2 referenziert §-Nummern aus §1–§13. Bei **jeder** strukturellen Änderung an diesen Sektionen (Umnummerierung, Regel-Entfernung, neuer Prüfbarer Check) muss §14.2 synchron aktualisiert werden. Sonst prüft der Audit gegen veraltete Regeln. Faustregel: Wer §1–§13 anfasst, scrollt danach zu §14.2 und gleicht ab.
+
 ### 14.1 Wann auditen?
 
 - **Regulär:** Nach signifikanten Creator-Updates (z.B. neue §-Regel) auf Bestandskurse anwenden.
@@ -742,8 +744,9 @@ Der Audit geht diese Kategorien durch. Jeder Check zitiert die Creator-Regel-Num
    - ⚠️ Warnung (kosmetisch, nicht blockend)
    - ❌ kritisch (Regel-Verletzung, sollte nachgebessert werden)
    - `n/a` nicht anwendbar
-3. Findings in `/content/courses/[slug]/audit.md` nach Template (§14.5) schreiben.
-4. Im Chat nur Kurz-Summary ausgeben — siehe §14.4.
+3. Findings als neue Sektion an `/content/courses/[slug]/audit-log.md` anhängen (append-only, Template §14.5).
+4. **Feedback-Loop zu LEARNINGS.** Für jedes Finding mit Status ❌ oder ⚠️ prüfen, ob es **systemisch** wirkt (nicht nur Einzelfall dieses Kurses: ähnliche Verletzung wäre auch in anderen Kursen denkbar, Regel ist prüfbar, aber bisher nicht in §12 als Anti-Pattern geführt). Claude fragt Julian per `AskUserQuestion` **pro systemischem Finding einzeln**, ob es als neuer Eintrag in `COURSE-LEARNINGS.md` festgehalten werden soll (mit `source: audit [slug] YYYY-MM-DD`). Anschließend greift der normale Sofort-Promotion-Check (siehe CLAUDE.md Post-Flight Schritt 3). Einzelfälle bleiben nur im `audit-log.md`.
+5. Im Chat nur Kurz-Summary ausgeben — siehe §14.4.
 
 ### 14.4 Chat-Summary-Format
 
@@ -753,26 +756,41 @@ Nach einem Audit gibt Claude im Chat nur eine Kurzfassung:
 > - Findings: **X total** (Y kritisch ❌, Z Warnungen ⚠️)
 > - Status: bestanden / Nachbesserung nötig
 > - Kritisch: [Stichwort 1], [Stichwort 2]
-> - Details: `/content/courses/[slug]/audit.md`
+> - Systemisch (→ LEARNINGS-Rückfrage): [Stichwort, falls vorhanden]
+> - Details: `/content/courses/[slug]/audit-log.md` (neue Sektion von heute)
 
 Keine Detail-Tabellen im Chat — die liegen in der Datei. Das hält den Chat lesbar und den Audit-Trail dauerhaft verfügbar.
 
-### 14.5 Template für `audit.md`
+### 14.5 Template für `audit-log.md` (append-only)
+
+Pro Kurs existiert **eine** Datei `/content/courses/[slug]/audit-log.md`. Bei jedem Audit wird eine neue Sektion **unten angehängt** — nie überschrieben. Die neueste Sektion steht ganz unten; ältere bleiben als Trail erhalten.
+
+**Datei-Kopf (nur beim ersten Audit anlegen):**
 
 ```markdown
-# Audit: [Kurstitel]
+# Audit-Log: [Kurstitel]
 
-- **Kurs-Slug:** [slug]
-- **Audit-Datum:** YYYY-MM-DD
-- **Creator-Version:** git SHA von COURSE-CREATOR.md
+> Append-only Audit-Trail für Kurs `[slug]`. Jeder Audit-Lauf wird als neue Sektion unten angehängt. Alte Sektionen bleiben unverändert — der Verlauf ist Teil des Lern-Systems.
+```
+
+**Pro Audit-Lauf angehängte Sektion:**
+
+```markdown
+---
+
+## Audit YYYY-MM-DD
+
+- **Creator-Version:** git SHA von COURSE-CREATOR.md zum Audit-Zeitpunkt
 - **Auditor:** Claude
+- **Anlass:** [regulär nach Creator-Update | ad hoc | Refactor-Trigger | Re-Audit nach Nachbesserung]
 
-## Zusammenfassung
+### Zusammenfassung
 
 - **Findings:** X total (Y kritisch ❌, Z Warnungen ⚠️)
 - **Status:** bestanden / Nachbesserung nötig
+- **Vergleich zu letztem Audit:** [entfällt beim Erst-Audit | "2 kritische gefixt, 1 neue Warnung"]
 
-## Regel-Check
+### Regel-Check
 
 | Kategorie | Regel (Creator §) | Status | Stelle im Kurs | Notiz |
 |---|---|---|---|---|
@@ -783,21 +801,22 @@ Keine Detail-Tabellen im Chat — die liegen in der Datei. Das hält den Chat le
 | Artefakte | §11.3 Gap-Analyse | ❌ | — | gap-analysis.md fehlt |
 | Anti-Patterns | §12.7 Emoji-Inflation | ⚠️ | Modul 3 Content-Block | 2 Emojis im Fließtext |
 
-## Empfohlene Nachbesserungen
+### Empfohlene Nachbesserungen
 
 1. **[Kritisch]** gap-analysis.md rückwirkend anlegen (§11.3).
 2. **[Warnung]** `meta.tags` "Productivity" ersetzen durch spezifischere Tags (§8.2).
 3. **[Warnung]** Modul 3 Content-Block: Emojis aus Fließtext entfernen (§12.7).
 
-## Nicht gefixt / bewusst offen gelassen
+### Systemische Findings (an LEARNINGS gemeldet?)
+
+- **§11.3 Gap-Analyse fehlt** → Julian: ja, LEARNINGS-Eintrag angelegt (`audit karpathy-llm-wiki 2026-04-17`).
+- **§12.7 Emoji-Inflation** → Julian: nein, Einzelfall (bereits als Anti-Pattern in §12 geführt).
+
+### Nicht gefixt / bewusst offen gelassen
 
 - …
-
-## Follow-up
-
-- Bei Re-Audit: neues `audit.md` überschreibt dieses — Historie bleibt in Git.
 ```
 
 ### 14.6 Re-Audit
 
-Bei einem Re-Audit (nach Nachbesserung oder nach Creator-Update) wird `audit.md` überschrieben. Die Historie bleibt über Git nachvollziehbar. Pro Re-Audit das Datum und ggf. die neue Creator-Version aktualisieren.
+Bei einem Re-Audit (nach Nachbesserung oder nach Creator-Update) wird **keine** Datei überschrieben. Stattdessen kommt eine neue `## Audit YYYY-MM-DD`-Sektion **unten** in `audit-log.md` dazu. Der Anlass-Vermerk („Re-Audit nach Nachbesserung") und die Zeile „Vergleich zu letztem Audit" machen den Fortschritt explizit. Git zeigt den Diff — aber die lesbare Zeitlinie steht in der Datei selbst.

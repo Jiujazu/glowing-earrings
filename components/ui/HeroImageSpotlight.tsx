@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 interface HeroImageSpotlightProps {
   children: ReactNode;
-  /** Image path — needed for the edge-detect overlay layer. */
-  imageSrc: string;
+  /** Pre-rendered neon-edge overlay (transparent WebP/PNG). */
+  neonSrc: string;
   className?: string;
 }
 
@@ -16,14 +16,12 @@ type XRayState =
 
 export default function HeroImageSpotlight({
   children,
-  imageSrc,
+  neonSrc,
   className = "",
 }: HeroImageSpotlightProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
   const pendingRef = useRef<{ x: number; y: number } | null>(null);
-  const rawId = useId();
-  const filterId = `neon-edges-${rawId.replace(/:/g, "_")}`;
 
   const [xray, setXray] = useState<XRayState>({ phase: "idle" });
   const xrayActiveRef = useRef(false);
@@ -82,10 +80,11 @@ export default function HeroImageSpotlight({
     };
   }, []);
 
-  function prefersReducedMotion() {
+  function isFinePointer() {
     return (
       typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches
     );
   }
 
@@ -98,7 +97,7 @@ export default function HeroImageSpotlight({
 
   function handleMouseDown(e: React.MouseEvent) {
     if (e.button !== 0) return;
-    if (prefersReducedMotion()) return;
+    if (!isFinePointer()) return;
     if (xrayReleaseTimerRef.current) {
       window.clearTimeout(xrayReleaseTimerRef.current);
       xrayReleaseTimerRef.current = null;
@@ -147,52 +146,6 @@ export default function HeroImageSpotlight({
     >
       {children}
 
-      <svg
-        aria-hidden="true"
-        width="0"
-        height="0"
-        style={{ position: "absolute", width: 0, height: 0, pointerEvents: "none" }}
-      >
-        <defs>
-          <filter id={filterId} x="0%" y="0%" width="100%" height="100%">
-            <feColorMatrix
-              type="matrix"
-              values="0.3 0.59 0.11 0 0
-                      0.3 0.59 0.11 0 0
-                      0.3 0.59 0.11 0 0
-                      0   0    0    1 0"
-              result="gray"
-            />
-            <feConvolveMatrix
-              in="gray"
-              order="3"
-              preserveAlpha="true"
-              kernelMatrix="-1 -1 -1
-                            -1  8 -1
-                            -1 -1 -1"
-              result="edges"
-            />
-            <feColorMatrix
-              in="edges"
-              type="matrix"
-              values="0 0 0 0 0.75
-                      0 0 0 0 0.97
-                      0 0 0 0 1.0
-                      2.5 2.5 2.5 0 -0.15"
-              result="neon"
-            />
-            <feGaussianBlur in="neon" stdDeviation="6" result="halo" />
-            <feGaussianBlur in="neon" stdDeviation="1.2" result="core" />
-            <feMerge>
-              <feMergeNode in="halo" />
-              <feMergeNode in="halo" />
-              <feMergeNode in="core" />
-              <feMergeNode in="neon" />
-            </feMerge>
-          </filter>
-        </defs>
-      </svg>
-
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 transition-opacity duration-300 ease-out"
@@ -206,16 +159,13 @@ export default function HeroImageSpotlight({
         }}
       >
         <img
-          src={imageSrc}
+          src={neonSrc}
           alt=""
           aria-hidden="true"
           loading="lazy"
           decoding="async"
           className="block w-full h-full"
-          style={{
-            filter: `url(#${filterId})`,
-            objectFit: "cover",
-          }}
+          style={{ objectFit: "cover" }}
         />
       </div>
 
@@ -234,16 +184,13 @@ export default function HeroImageSpotlight({
           }
         >
           <img
-            src={imageSrc}
+            src={neonSrc}
             alt=""
             aria-hidden="true"
             loading="lazy"
             decoding="async"
             className="block w-full h-full"
-            style={{
-              filter: `url(#${filterId})`,
-              objectFit: "cover",
-            }}
+            style={{ objectFit: "cover" }}
           />
         </div>
       )}

@@ -46,7 +46,7 @@ export default function Home() {
                 className="border-4 border-[var(--neo-border)] -rotate-2 overflow-hidden max-w-sm mx-auto md:max-w-none"
                 style={{ boxShadow: '8px 8px 0px 0px var(--neo-shadow-color)' }}
               >
-                <HeroImageSpotlight imageSrc="/hero-glowing-earrings.jpg">
+                <HeroImageSpotlight neonSrc="/hero-glowing-earrings-neon.webp">
                   <Image
                     src="/hero-glowing-earrings.jpg"
                     alt="A Girl with Glowing Earrings — KI-Kunstwerk"

@@ -9,6 +9,7 @@ import InteractiveGrid from "@/components/ui/InteractiveGrid";
 import Parallax from "@/components/ui/Parallax";
 import WaveShape from "@/components/ui/WaveShape";
 import StarShape from "@/components/ui/StarShape";
+import HeroImageSpotlight from "@/components/ui/HeroImageSpotlight";
 import { Star, Sparkles, Zap } from "lucide-react";
 import { HEADING, HEADING_DISPLAY, LABEL } from "@/lib/typography";
 
@@ -45,14 +46,16 @@ export default function Home() {
                 className="border-4 border-[var(--neo-border)] -rotate-2 overflow-hidden max-w-sm mx-auto md:max-w-none"
                 style={{ boxShadow: '8px 8px 0px 0px var(--neo-shadow-color)' }}
               >
-                <Image
-                  src="/hero-glowing-earrings.jpg"
-                  alt="A Girl with Glowing Earrings — KI-Kunstwerk"
-                  width={600}
-                  height={750}
-                  className="w-full h-auto"
-                  priority
-                />
+                <HeroImageSpotlight neonSrc="/hero-glowing-earrings-neon.webp">
+                  <Image
+                    src="/hero-glowing-earrings.jpg"
+                    alt="A Girl with Glowing Earrings — KI-Kunstwerk"
+                    width={600}
+                    height={750}
+                    className="w-full h-auto block"
+                    priority
+                  />
+                </HeroImageSpotlight>
               </div>
             </ScrollReveal>
             </Parallax>

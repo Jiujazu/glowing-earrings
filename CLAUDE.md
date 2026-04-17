@@ -35,13 +35,19 @@ Julian kann Kurse direkt auf der Live-Seite editieren via Custom Inline Editor (
 
 ### Post-Flight (nach jeder Kurs-Erstellung)
 1. **Auf der Live-URL** den Kurs durchspielen, Feedback einarbeiten
-2. **Neuen Eintrag in `COURSE-LEARNINGS.md`** nach Template (siehe dort) — Status initial `raw`
-3. **Sofort-Promotion-Check:** Claude liest den frischen Eintrag und prüft mit drei Fragen, ob ein Punkt aus "Was war ein Fehler" oder "Was hat funktioniert" so offensichtlich systemisch ist, dass er sofort zur Regel werden sollte:
+2. **Neuen Eintrag in `COURSE-LEARNINGS.md`** nach Template (siehe dort). Zuerst alle Felder bis auf `Sofort-Promotion-Kandidat?` und `Status` ausfüllen — diese zwei kommen in Schritt 3.
+3. **Sofort-Promotion-Check.** Claude liest den frischen Eintrag und prüft jeden Punkt aus "Was war ein Fehler" oder "Was hat funktioniert" mit drei Fragen:
    - **Wiederholungsrisiko:** Würde dieser Fehler ohne Regel wieder passieren?
    - **Universalität:** Gilt das für alle zukünftigen Kurse, nicht nur für diese Quelle?
    - **Prüfbarkeit:** Kann man die Regel später auditieren (§14)?
 
-   Wenn alle drei mit ja → Claude legt Julian Promotion-Kandidaten per `AskUserQuestion` vor. Julian entscheidet. Promovierte Kandidaten werden direkt in `COURSE-CREATOR.md` ergänzt; der LEARNINGS-Eintrag bekommt Status `promoted → CREATOR §X.Y`. Wenn unklar → `raw` lassen, das 3-Kurs-Ritual entscheidet später.
+   Ablauf:
+   - **Alle drei mit ja** → Claude legt Julian den/die Kandidaten per `AskUserQuestion` vor.
+     - Bei **Julian-Ok:** Regel direkt in `COURSE-CREATOR.md` ergänzen → `Sofort-Promotion-Kandidat?` auf `ja (→ CREATOR §X.Y)` → `Status: promoted → CREATOR §X.Y`
+     - Bei **Julian-Nein:** `Sofort-Promotion-Kandidat?` auf `nein (Julian: Einzelfall)` → `Status: raw`
+   - **Mindestens eine Frage unklar/nein** → Kein Claude-Vorschlag nötig → `Sofort-Promotion-Kandidat?` auf `nein` → `Status: raw` — das 3-Kurs-Ritual entscheidet später.
+
+   Regel: `Sofort-Promotion-Kandidat?` und `Status` werden **immer** gefüllt, nie leer. So ist im Log sichtbar, ob der Check ausgeführt wurde.
 
 ### Audit (nachträgliche Qualitätsprüfung)
 Manueller Befehl von Julian: `/kurs-audit [slug]` (noch zu bauen, Datengrundlage steht in `CREATOR §14`). Der Audit prüft einen fertigen Kurs gegen die Creator-Regeln und schreibt den Report nach `/content/courses/[slug]/audit.md`. Nicht routinemäßig — nur nach Creator-Updates, vor Refactors oder bei Zweifeln.

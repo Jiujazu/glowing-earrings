@@ -719,6 +719,14 @@ Der Audit geht diese Kategorien durch. Jeder Check zitiert die Creator-Regel-Num
 - §6.1 Kurs-Theme hat Charakter, nicht generisch?
 - §6.3 WCAG-AA-Kontrast eingehalten?
 
+**Technik (§10)**
+- §10 ReactMarkdown für alle Text-rendernden Komponenten (kein rohes `**Sternchen**`)?
+- §10 `opengraph-image.tsx` mit Default Export, kein Edge Runtime mit Kurs-Imports?
+- §10 Keine `onClick`-Handler in Server Components?
+- §10 `sourceType`-Badge nicht im UI sichtbar?
+- §10 Quell-Anonymisierung sauber (falls Autor nicht genannt)?
+- §10 Mobile-Nav Z-Index: Header `z-[70]`, MobileNav `z-[100]`?
+
 **Artefakte**
 - §11.3 Bei kuratierten Quellen: `gap-analysis.md` vorhanden im Kurs-Ordner?
 - §6.6 `source.md` mit Metadata-Header + Transkript vorhanden?

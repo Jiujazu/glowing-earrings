@@ -198,3 +198,17 @@ Bestätigte Patterns werden als Regel in der passenden `CREATOR`-Sektion ergänz
 - **Hypothese für nächste Kurse:** Audit- und Sofort-Promotion-Fragen müssen jargon-frei sein. Konkret: keine internen Begriffe (Anti-Pattern, promoten, systemisch, Verdichtungs-Ritual), stattdessen einfache Sprache + Optionen mit *Was passiert wenn ich das wähle?*-Erklärung.
 - **Sofort-Promotion-Kandidat?** ja (→ CLAUDE.md Post-Flight Schritt 3 + CREATOR §14.3 Schritt 6)
 - **Status:** raw
+
+### Workflow-Audit: Autor-Stimme ist Pflicht (2026-04-19)
+
+**Quelle:** audit handy-speech-to-text 2026-04-19, Lerner-Perspektive Frage 7
+**Theme:** —
+
+- **Was war neu:** Erster Lerner-Befund zum Tonfall, nicht zur Struktur. Beobachtung: Der Handy-Kurs klang stellenweise Handbuch-nah, obwohl Julians Plattform explizit als kuratierte Empfehlung positioniert ist.
+- **Was hat funktioniert:** Nach dem Fix (zwei Sätze persönliche Note im `intro.hook`: „Ich benutze Handy seit ein paar Wochen täglich. Am stärksten gemerkt habe ich den Unterschied bei langen KI-Prompts…") wirkt der Einstieg als Empfehlung, nicht als Produkt-Summary.
+- **Was war ein Fehler:** Der Kurs startete ohne Julians Stimme. Ohne sie ist der Kurs austauschbar mit dem Original-Material (GitHub-README, Produktseite). Aus Lerner-Sicht: „Warum nicht gleich auf die Handy-Website?"
+- **Julians Standpunkt (wörtlich):** „Das soll auf keinen Fall eine trockene Zweitversion eines offiziellen PDFs sein. Dann könnte man auch auf die jeweiligen Seite gehen. Kommentare, Meinung, etc. müssen Teil meiner Kurse sein. Es ist ja Julian van Diekens Plattform, der persönliche Standpunkt, Humor, Inspiration und hilfreiches Szene-Wissen mit einer Gesamtperspektive des KI-Bereiches (nicht nur ein simples einzelTool) muss zwingend durchkommen und erkennbar sein. Sonst könnte man auch jede andere x-beliebige Seite ansteuern."
+- **Neben-Befund (Subheading-Thema):** Im gleichen Audit kam die Rückfrage, ob die Subheading „die beste Lösung…" entschärft werden müsste. Julians Antwort: Nein — die Behauptung steht, weil er sie persönlich trägt. **Das heißt:** Autor-Stimme ist nicht nur Stilmittel, sondern **Belegmittel für alle subjektiven Claims** des Kurses (Superlativ, Empfehlung, Bewertung). Ohne sichtbare Autor-Position werden solche Claims zu leeren Versprechen; mit ihr sind sie eine offene Empfehlung.
+- **Hypothese für nächste Kurse:** **Pflicht: Pro Kurs mindestens 1–2 Sätze mit Julians Autor-Stimme (persönliche Erfahrung, Meinung, Szene-Wissen, Humor) — bevorzugt im `intro.hook` oder an einem `transitionToNext`.** Prüfbar im Audit §14 per Lese-Check: Gibt es mindestens eine Stelle im Kurs, die der Lerner eindeutig als Julian-Position erkennt („ich benutze…", „mein Tipp…", „aus meiner Sicht…", persönliche Anekdote)? Wenn nein → ❌. Zusätzlich: Jede subjektive Behauptung in Meta oder Body muss entweder durch Autor-Stimme getragen oder durch Vergleichsinhalt belegt werden.
+- **Sofort-Promotion-Kandidat?** ja (→ CREATOR §3.6 Autor-Stimme ist Pflicht + §9 Checklist-Verweis)
+- **Status:** promoted → CREATOR §3.6 (+ §9 Didaktik-Check)

@@ -272,3 +272,35 @@ Nach dem Fix zu prüfen — in jargon-freier AskUserQuestion pro Kandidat:
 3. **Autor-Stimme im Intro oder an einem Modul-Übergang** — potenziell systemisch, aber Geschmacksfrage; Julian entscheidet.
 4. **Sprach-Support bei Tool-Kursen konkret nennen** — wahrscheinlich Einzelfall.
 
+---
+
+## Schritt 10 — LEARNINGS-Check 2026-04-19
+
+- **Creator-Version:** a3f330f (vor dieser Sektion)
+- **Auditor:** Claude
+- **Anlass:** Systemik-Check der Lerner-Findings nach Direkt-Fix
+
+### Julians Entscheidungen zu den drei systemischen Kandidaten
+
+| Finding | Julians Entscheidung | Folge |
+|---|---|---|
+| 1. **Subheading-Versprechen belegen oder entschärfen** | **Nein, Einzelfall.** Wörtlich: „Das darf ruhig ‚die beste Lösung' bleiben. Und zwar weil ich, Julian van Dieken, das selber nutze und als die beste Lösung empfinde." | Subheading **wieder auf „Die beste Lösung…" zurückgedreht** (Fix 2 revertiert). Keine LEARNINGS-Regel. Neben-Befund (s.u.) entstand daraus. |
+| 2. **Erster Aktions-Moment sichtbar machen** bei Tool-Kursen | **Nein, Einzelfall.** | Fix bleibt im Handy-Kurs (neues content-Element in M2). Keine allgemeine Regel. |
+| 3. **Autor-Stimme als Pflicht** | **Ja, Sofort-Promotion.** Wörtlich: „Kommentare, Meinung, etc. müssen Teil meiner Kurse sein. … Sonst könnte man auch jede andere x-beliebige Seite ansteuern." | LEARNINGS-Eintrag angelegt, Sofort-Promotion-Check alle drei ja → Julian wählt „Beide (§3 + §9 Verweis)" → **promoviert zu `CREATOR §3.6 Autor-Stimme ist Pflicht` + Checkpoint in §9 Didaktik-Checkliste.** |
+
+### Neben-Befund (wichtig)
+
+Julians Entscheidung zu Finding 1 und Finding 3 hängen zusammen. Die Subheading „die beste Lösung" darf bleiben, **weil** Julian sie persönlich trägt — aber das verlangt, dass die Autor-Stimme im Kurs sichtbar ist. Daraus folgt eine Verschärfung der neuen §3.6-Regel:
+
+> Subjektive Claims (Superlativ, Empfehlung, Bewertung) sind nur zulässig, wenn sie durch sichtbare Autor-Stimme **oder** durch Vergleichsinhalt im Kurs getragen werden.
+
+Diese Verschärfung ist bereits in §3.6 aufgenommen und im LEARNINGS-Eintrag als „Neben-Befund" dokumentiert. Der Handy-Kurs selbst erfüllt §3.6 durch den im Fix 4 ergänzten Intro-Hook („Ich benutze Handy seit ein paar Wochen täglich…").
+
+### Folge-Änderungen dieser Session
+
+- `content/courses/handy-speech-to-text/course.json` — Subheading zurück auf „Die beste Lösung…" (Revert von Fix 2 dieser Session)
+- `COURSE-LEARNINGS.md` — neuer Eintrag „Workflow-Audit: Autor-Stimme ist Pflicht (2026-04-19)", Status `promoted → CREATOR §3.6 (+ §9)`
+- `COURSE-CREATOR.md` — neue §3.6 „Autor-Stimme ist Pflicht" + Checkpoint in §9 Didaktik mit Verweis auf §3.6
+
+Damit ist der Audit-Zyklus für diesen Lauf abgeschlossen: Regel-Check → Lerner-Perspektive → Fix → LEARNINGS-Check → Promotion.
+

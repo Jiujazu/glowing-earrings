@@ -24,7 +24,7 @@ export default function Home() {
         <InteractiveGrid />
 
         {/* Decorative shapes layer — drifts up slightly = feels closer */}
-        <Parallax speed={-0.18} className="absolute inset-0 pointer-events-none z-10">
+        <Parallax speed={-0.18} mobileSpeed={-0.05} className="absolute inset-0 pointer-events-none z-10">
           <WaveShape className="absolute top-12 right-8 sm:right-16 w-16 h-16 hidden sm:block rotate-12 pointer-events-auto">
             <div className="w-full h-full bg-[var(--pop-turquoise)] border-4 border-[var(--neo-border)]"
               style={{ boxShadow: '4px 4px 0px 0px var(--neo-shadow-color)' }} />
@@ -40,7 +40,7 @@ export default function Home() {
         <Container size="wide" className="relative">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left: Hero image — heavy, drifts slower */}
-            <Parallax speed={0.2}>
+            <Parallax speed={0.2} mobileSpeed={0.05}>
             <ScrollReveal delay={0} duration={700} direction="left">
               <div
                 className="border-4 border-[var(--neo-border)] -rotate-2 overflow-hidden max-w-sm mx-auto md:max-w-none"
@@ -61,7 +61,7 @@ export default function Home() {
             </Parallax>
 
             {/* Right: Text content — lighter, drifts faster */}
-            <Parallax speed={0.45}>
+            <Parallax speed={0.45} mobileSpeed={0.08}>
             <div>
               <ScrollReveal delay={100} duration={600}>
                 <div className={`inline-block px-4 py-2 bg-[var(--pop-turquoise)] border-4 border-[var(--neo-border)] text-black text-sm ${LABEL} mb-8 -rotate-2`}
@@ -110,6 +110,14 @@ export default function Home() {
             </Parallax>
           </div>
         </Container>
+        {/* Subtle Konami hint — only hoverable on desktop since it requires a keyboard */}
+        <div
+          className="hidden sm:block absolute bottom-3 right-4 sm:right-6 text-[10px] font-mono tracking-[0.3em] text-[var(--text-primary)] opacity-10 hover:opacity-60 transition-opacity duration-300 select-none pointer-events-auto z-20"
+          aria-hidden="true"
+          title="Wenn du wüsstest..."
+        >
+          ↑ ↑ ↓ ↓ ← → ← → B A
+        </div>
         <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-[var(--neo-border)]" />
       </section>
 

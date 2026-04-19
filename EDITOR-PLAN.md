@@ -6,10 +6,16 @@ Julian kann direkt auf der Kursseite klicken und Inhalte editieren — ohne extr
 
 ## Zugang
 
-URL mit geheimem Token aufrufen:
+Zwei Wege — beide nutzen dasselbe `EDITOR_SECRET`:
+
+**Variante A (empfohlen): Passwort-Modal**
+Auf einer Kursseite `⌘⇧E` drücken → Modal öffnet sich → Passwort eingeben → 24h Session (HTTP-only-Cookie). Danach erscheint der Bearbeiten-Button; `⌘E` togglet den Edit-Modus.
+
+**Variante B (Legacy): URL-Parameter**
 ```
 https://glowing-earrings.vercel.app/courses/{slug}?edit=EDITOR_SECRET
 ```
+Funktioniert weiterhin, ohne Modal — nützlich für Bookmarks/Shortcuts.
 
 ## Was funktioniert
 
@@ -31,7 +37,10 @@ https://glowing-earrings.vercel.app/courses/{slug}?edit=EDITOR_SECRET
 - **Löschen**: Papierkorb-Button bei Hover
 
 ### Sicherheit
-- `EDITOR_SECRET` Token-Validierung auf allen API-Endpoints
+- `EDITOR_SECRET` Token-Validierung auf allen API-Endpoints (Cookie oder Bearer)
+- HTTP-only-Cookie (HMAC-SHA256 signiert, 24h Expiry, SameSite=Lax)
+- Rate-Limiting auf `/api/editor/auth`: max 5 Fehlversuche / 15 min pro IP
+- Timing-safe Passwort-Vergleich (`timingSafeEqual`)
 - DOMPurify HTML-Sanitization (XSS-Schutz)
 - JSON-Validierung für strukturelle Änderungen
 - SHA-basierte Konflikt-Erkennung bei parallelen Edits
@@ -40,8 +49,9 @@ https://glowing-earrings.vercel.app/courses/{slug}?edit=EDITOR_SECRET
 
 ```
 components/editor/
-  EditModeProvider.tsx    — React Context (Edit-State, Token, Pending Changes)
+  EditModeProvider.tsx    — React Context (Edit-State, Token, Pending Changes), ⌘⇧E Shortcut
   EditModeWrapper.tsx     — Suspense Boundary
+  PasswordPrompt.tsx      — Login-Modal für ⌘⇧E
   EditableText.tsx        — TipTap Wrapper (Markdown ↔ HTML Roundtrip)
   EditableImage.tsx       — Bild-Upload mit Drag & Drop
   EditableVideo.tsx       — Video-URL-Input mit Auto-Erkennung
@@ -50,11 +60,14 @@ components/editor/
   AddElementButton.tsx    — "+" mit Typ-Picker
 
 app/api/editor/
+  auth/route.ts           — POST: Passwort-Login, DELETE: Logout
+  session-check/route.ts  — GET: Cookie-Gültigkeit prüfen
   save/route.ts           — JSON-Änderungen via Octokit committen
   upload/route.ts         — Bilder via Octokit committen
+  history/route.ts        — Commit-History laden
 
 lib/
-  editor-auth.ts          — Token-Validierung
+  editor-auth.ts          — Cookie- und Bearer-Token-Validierung, HMAC-Signierung
   prose-classes.ts        — Shared Prose CSS-Klassen
 ```
 

@@ -8,8 +8,8 @@ import llmWikiMemoryEngine from "./llm-wiki-memory-engine/course.json";
 
 export const courses: Course[] = [
   karpathyLlmWiki as Course,
+  llmWikiMemoryEngine as Course,
   agenticOsContextLevels as Course,
   handySpeechToText as Course,
   storytellingBildung as Course,
-  llmWikiMemoryEngine as Course,
 ];

@@ -437,6 +437,18 @@ Jeder Kurs muss diese Punkte erfüllen, bevor er gepusht wird:
 - [ ] Keine drei Boxen hintereinander
 - [ ] Keine Emojis außer in Takeaway-Checklisten und Easter Eggs
 
+### Anti-AI-Schreibstil (`.claude/skills/anti-ai-writing/SKILL.md`)
+Pflicht für alle Prosa-Teile: Intro, Modul-Texte, Callouts, Übergänge, Outro, Quiz-Feedback. Regelwerk komplett lesen, bevor Modul-Text geschrieben wird. Schnell-Check der häufigsten Stolpersteine:
+- [ ] Keine Em-Dashes (—) als Stilmittel — stattdessen Komma, Punkt oder Doppelpunkt
+- [ ] Keine "Nicht X, sondern Y"-Konstruktionen
+- [ ] Keine KI-Marker-Wörter: *entscheidend, wegweisend, facettenreich, vielschichtig, ganzheitlich, Mehrwert, maßgeblich, Darüber hinaus, Es ist erwähnenswert* (DE) bzw. *delve, crucial, pivotal, vibrant, tapestry, testament, foster, enhance, landscape, showcase, intricate, interplay, furthermore, moreover* (EN)
+- [ ] Keine Bedeutungs-Aufblähung ("Meilenstein", "Wendepunkt", "setting the stage for…")
+- [ ] Keine Kopula-Vermeidung ("ist"/"hat" statt "serves as"/"boasts")
+- [ ] Keine Partizip-Anhängsel am Satzende ("…, highlighting…", "…, was zeigt, dass…")
+- [ ] Keine rhetorischen Dreier-Aufzählungen (außer Pattern-Break)
+- [ ] Aktiv statt Passiv — klare Subjekte
+- [ ] Keine KI-Floskeln ("In der heutigen schnelllebigen Welt…", "Es ist wichtig zu verstehen…")
+
 ### Didaktik
 - [ ] Mindestens 2 Quizzes mit plausiblen Distraktoren und lehrreichem Feedback
 - [ ] Quiz-Feedback erklärt das *Warum* — nicht nur richtig/falsch
@@ -720,6 +732,17 @@ Der Audit geht diese Kategorien durch. Jeder Check zitiert die Creator-Regel-Num
 - §2.3 Keine drei Boxen hintereinander?
 - §6.1 Kurs-Theme hat Charakter, nicht generisch?
 - §6.3 WCAG-AA-Kontrast eingehalten?
+
+**Schreibstil (`.claude/skills/anti-ai-writing/SKILL.md`, referenziert in §9)**
+- §9 Keine Em-Dashes (—) als Stilmittel?
+- §9 Keine "Nicht X, sondern Y"-Konstruktionen?
+- §9 Keine KI-Marker-Wörter? (DE: *entscheidend, wegweisend, facettenreich, vielschichtig, ganzheitlich, Mehrwert, maßgeblich, Darüber hinaus, Es ist erwähnenswert* / EN: *delve, crucial, pivotal, vibrant, tapestry, testament, foster, enhance, landscape, showcase, intricate, interplay, furthermore, moreover*)
+- §9 Keine Bedeutungs-Aufblähung (*Meilenstein, Wendepunkt, setting the stage for, serves as a testament*)?
+- §9 Kopula nicht vermieden (*ist/hat* statt *serves as/boasts*)?
+- §9 Keine Partizip-Anhängsel am Satzende (*…, highlighting…*, *…, was zeigt, dass…*)?
+- §9 Keine rhetorischen Dreier-Aufzählungen (außer Pattern-Break)?
+- §9 Aktiv statt Passiv (klare Subjekte)?
+- §9 Keine KI-Floskeln (*In der heutigen schnelllebigen Welt…*, *I hope this helps!*)?
 
 **Technik (§10)**
 - §10 ReactMarkdown für alle Text-rendernden Komponenten (kein rohes `**Sternchen**`)?

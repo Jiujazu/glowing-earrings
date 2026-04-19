@@ -51,7 +51,7 @@ Julian kann Kurse direkt auf der Live-Seite editieren via Custom Inline Editor (
    Regel: `Sofort-Promotion-Kandidat?` und `Status` werden **immer** gefüllt, nie leer. So ist im Log sichtbar, ob der Check ausgeführt wurde.
 
 ### Audit (nachträgliche Qualitätsprüfung)
-Manueller Befehl von Julian: `/kurs-audit [slug]` — implementiert als Claude-Code-Slash-Command in `.claude/commands/kurs-audit.md`, Regelwerk in `CREATOR §14`. Der Audit prüft einen fertigen Kurs gegen die Creator-Regeln und hängt eine neue Sektion an `/content/courses/[slug]/audit-log.md` an (append-only, nie überschrieben — der Trail bleibt lesbar in der Datei, nicht nur in Git). Bei systemischen Findings fragt Claude pro Finding einzeln nach, ob ein LEARNINGS-Eintrag entstehen soll. Nicht routinemäßig — nur nach Creator-Updates, vor Refactors oder bei Zweifeln.
+Manueller Befehl von Julian: `/kurs-audit [slug]` — implementiert als Claude-Code-Slash-Command in `.claude/commands/kurs-audit.md`, Regelwerk in `CREATOR §14`. Der Audit prüft einen fertigen Kurs in **zwei Perspektiven**: (1) Regel-Check gegen Creator-Regeln, (2) simulierte Lerner-Perspektive (Claude liest den Kurs als Anfänger, prüft Prämisse-Einlösung, Anwendbarkeit, Spaß). Findings werden als neue Sektion an `/content/courses/[slug]/audit-log.md` angehängt (append-only, nie überschrieben). Anschließend fragt Claude per `AskUserQuestion`, ob Nachbesserungen jetzt direkt gemacht werden oder separat. Bei systemischen Findings (nach Fix, nicht vorher) fragt Claude pro Finding einzeln nach, ob ein LEARNINGS-Eintrag entstehen soll. Nicht routinemäßig — nur nach Creator-Updates, vor Refactors oder bei Zweifeln.
 
 ---
 

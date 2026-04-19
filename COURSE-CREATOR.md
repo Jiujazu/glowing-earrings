@@ -733,6 +733,17 @@ Der Audit geht diese Kategorien durch. Jeder Check zitiert die Creator-Regel-Num
 - §6.1 Kurs-Theme hat Charakter, nicht generisch?
 - §6.3 WCAG-AA-Kontrast eingehalten?
 
+**Schreibstil (`.claude/skills/anti-ai-writing/SKILL.md`, referenziert in §9)**
+- §9 Keine Em-Dashes (—) als Stilmittel?
+- §9 Keine "Nicht X, sondern Y"-Konstruktionen?
+- §9 Keine KI-Marker-Wörter? (DE: *entscheidend, wegweisend, facettenreich, vielschichtig, ganzheitlich, Mehrwert, maßgeblich, Darüber hinaus, Es ist erwähnenswert* / EN: *delve, crucial, pivotal, vibrant, tapestry, testament, foster, enhance, landscape, showcase, intricate, interplay, furthermore, moreover*)
+- §9 Keine Bedeutungs-Aufblähung (*Meilenstein, Wendepunkt, setting the stage for, serves as a testament*)?
+- §9 Kopula nicht vermieden (*ist/hat* statt *serves as/boasts*)?
+- §9 Keine Partizip-Anhängsel am Satzende (*…, highlighting…*, *…, was zeigt, dass…*)?
+- §9 Keine rhetorischen Dreier-Aufzählungen (außer Pattern-Break)?
+- §9 Aktiv statt Passiv (klare Subjekte)?
+- §9 Keine KI-Floskeln (*In der heutigen schnelllebigen Welt…*, *I hope this helps!*)?
+
 **Technik (§10)**
 - §10 ReactMarkdown für alle Text-rendernden Komponenten (kein rohes `**Sternchen**`)?
 - §10 `opengraph-image.tsx` mit Default Export, kein Edge Runtime mit Kurs-Imports?

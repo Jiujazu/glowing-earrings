@@ -8,12 +8,19 @@
     "sourceAuthor": "Julian van Dieken",
     "sourceType": "video",
     "category": "ai-creativity",
-    "tags": ["Storytelling", "Education", "Skills"],
+    "tags": [
+      "Storytelling",
+      "Education",
+      "Powerpoint"
+    ],
     "estimatedMinutes": 22,
     "difficulty": "beginner",
     "publishedAt": "2026-04-13",
     "coverImage": "/courses/storytelling-bildung/cover.svg",
-    "relatedCourses": ["agentic-os-context-levels", "karpathy-llm-wiki"],
+    "relatedCourses": [
+      "agentic-os-context-levels",
+      "karpathy-llm-wiki"
+    ],
     "design": {
       "theme": "storytelling-warm",
       "colors": {
@@ -42,7 +49,7 @@
     {
       "id": "problem",
       "title": "Das Problem mit der Wissensvermittlung",
-      "icon": "\uD83C\uDFAF",
+      "icon": "🎯",
       "estimatedMinutes": 3,
       "elements": [
         {
@@ -62,7 +69,7 @@
           "type": "key-concept",
           "title": "Storytelling",
           "description": "Das Erzählen von Geschichten. Über Audio, Video oder Text. Kein Marketing-Buzzword, sondern eine uralte Technik, um Informationen so zu verpacken, dass sie hängen bleiben.",
-          "icon": "\uD83D\uDCD6"
+          "icon": "📖"
         },
         {
           "id": "not-new",
@@ -103,7 +110,7 @@
     {
       "id": "hook-hold-payoff",
       "title": "Hook, Hold, Payoff",
-      "icon": "\uD83C\uDFA3",
+      "icon": "🎣",
       "estimatedMinutes": 4,
       "elements": [
         {
@@ -190,7 +197,7 @@
     {
       "id": "nutzerzentriert",
       "title": "Denke vom Publikum her",
-      "icon": "\uD83E\uDDED",
+      "icon": "🧭",
       "estimatedMinutes": 6,
       "elements": [
         {
@@ -209,7 +216,7 @@
           "type": "key-concept",
           "title": "Nutzerzentrierte Sichtweise",
           "description": "Statt von deinem Wissen auszugehen, denkst du von deinem Publikum her: Was fühlen sie? Was wissen sie schon? Was brauchen sie, um den nächsten Schritt zu machen?",
-          "icon": "\uD83C\uDFAF"
+          "icon": "🎯"
         },
         {
           "id": "abfolge-content",
@@ -239,7 +246,7 @@
           "type": "key-concept",
           "title": "Die Aber-Deshalb-Regel",
           "description": "Wenn zwischen zwei Szenen deiner Geschichte \"und dann\" steht, hast du ein Problem. Ersetze es durch \"aber\" (Wendung, Komplikation) oder \"deshalb\" (logische Folge). Das zwingt dich, Szenen kausal zu verknüpfen statt sie nur aneinanderzureihen.",
-          "icon": "\uD83D\uDCA1"
+          "icon": "💡"
         },
         {
           "id": "aber-deshalb-svg",
@@ -318,7 +325,7 @@
     {
       "id": "praxis-projekte",
       "title": "Drei Projekte, drei Ansätze",
-      "icon": "\uD83D\uDD2C",
+      "icon": "🔬",
       "estimatedMinutes": 5,
       "elements": [
         {
@@ -386,7 +393,7 @@
     {
       "id": "design-fokus",
       "title": "Design ist kein Tüpfelchen auf dem i",
-      "icon": "\uD83C\uDFA8",
+      "icon": "🎨",
       "estimatedMinutes": 4,
       "elements": [
         {
@@ -399,7 +406,7 @@
           "type": "key-concept",
           "title": "Design = Fokus + Struktur",
           "description": "Gutes Design lenkt die Aufmerksamkeit, schafft Hierarchie und gibt dem Auge einen Weg. Schlechtes Design sorgt dafür, dass alles gleichzeitig um Aufmerksamkeit schreit.",
-          "icon": "\uD83C\uDFA8"
+          "icon": "🎨"
         },
         {
           "id": "ppt-sünden",
@@ -527,11 +534,26 @@
     ],
     "nextStep": "Filme heute ein 1-Minuten-Video, das einen einzigen Sachverhalt vermittelt. Egal wie es aussieht. Die erste Version ist immer schlecht, die zehnte ist immer besser.",
     "takeaway": [
-      { "emoji": "\uD83C\uDFA3", "text": "Hook: Fang dein Publikum mit etwas Unerwartetem ein" },
-      { "emoji": "\uD83C\uDFAF", "text": "Fokus: Eine Information pro Zeitpunkt, nicht mehr" },
-      { "emoji": "\u2764\uFE0F", "text": "Emotion: Ohne Gefühl bleibt nichts hängen" },
-      { "emoji": "\uD83C\uDFA8", "text": "Design: Gibt deinen Inhalten Struktur, nicht nur Ästhetik" },
-      { "emoji": "\uD83D\uDE80", "text": "Einfach starten: Plastikkiste und Kamera reicht" }
+      {
+        "emoji": "🎣",
+        "text": "Hook: Fang dein Publikum mit etwas Unerwartetem ein"
+      },
+      {
+        "emoji": "🎯",
+        "text": "Fokus: Eine Information pro Zeitpunkt, nicht mehr"
+      },
+      {
+        "emoji": "❤️",
+        "text": "Emotion: Ohne Gefühl bleibt nichts hängen"
+      },
+      {
+        "emoji": "🎨",
+        "text": "Design: Gibt deinen Inhalten Struktur, nicht nur Ästhetik"
+      },
+      {
+        "emoji": "🚀",
+        "text": "Einfach starten: Plastikkiste und Kamera reicht"
+      }
     ],
     "sourceUrl": "https://www.youtube.com/watch?v=SDrZuTAbN9M",
     "newsletterCTA": "Jede Woche ein neues Tool für kreatives Lehren und Lernen. Kostenlos."

@@ -35,11 +35,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate file type
-    const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/svg+xml", "image/gif"];
+    // Validate file type (SVG is excluded — can contain <script> and executes
+    // in same-origin when loaded directly, enabling XSS escalation from any
+    // editor session).
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/gif"];
     if (!allowedTypes.includes(file.type)) {
       return NextResponse.json(
-        { success: false, message: "Nur Bilder erlaubt (JPEG, PNG, WebP, SVG, GIF)." },
+        { success: false, message: "Nur Bilder erlaubt (JPEG, PNG, WebP, GIF)." },
         { status: 400 }
       );
     }
@@ -64,9 +66,16 @@ export async function POST(request: NextRequest) {
     const arrayBuffer = await file.arrayBuffer();
     const base64Content = Buffer.from(arrayBuffer).toString("base64");
 
+    const owner = process.env.GITHUB_REPO_OWNER;
+    const repo = process.env.GITHUB_REPO_NAME;
+    if (!owner || !repo) {
+      return NextResponse.json(
+        { success: false, message: "Server-Konfiguration fehlt (GITHUB_REPO_OWNER/NAME)." },
+        { status: 500 }
+      );
+    }
+
     const octokit = new Octokit({ auth: githubToken });
-    const owner = process.env.GITHUB_REPO_OWNER || "Jiujazu";
-    const repo = process.env.GITHUB_REPO_NAME || "glowing-earrings";
 
     // Check if file already exists (to get SHA for update)
     let existingSha: string | undefined;

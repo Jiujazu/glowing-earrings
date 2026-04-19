@@ -100,11 +100,30 @@ function applyChanges(
     // Check meta fields
     if (!found && change.elementId.startsWith("meta:")) {
       const metaField = change.elementId.replace("meta:", "");
-      const allowedMetaFields = ["title", "subheading", "subtitle"];
+      const allowedMetaFields = ["title", "subheading", "subtitle", "tags"];
       if (allowedMetaFields.includes(metaField) && metaField in course.meta) {
-        course.meta[metaField] = change.newValue;
-        applied++;
-        found = true;
+        if (metaField === "tags") {
+          try {
+            const parsed = JSON.parse(change.newValue);
+            if (
+              Array.isArray(parsed) &&
+              parsed.every((t: unknown) => typeof t === "string")
+            ) {
+              const cleaned = (parsed as string[])
+                .map((t) => t.trim())
+                .filter(Boolean);
+              course.meta.tags = Array.from(new Set(cleaned));
+              applied++;
+              found = true;
+            }
+          } catch {
+            // invalid JSON — skip
+          }
+        } else {
+          course.meta[metaField] = change.newValue;
+          applied++;
+          found = true;
+        }
       }
     }
 

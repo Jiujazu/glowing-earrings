@@ -13,9 +13,10 @@ import ModuleManager from "@/components/editor/ModuleManager";
 
 interface CoursePlayerProps {
   course: Course;
+  allTags?: string[];
 }
 
-export default function CoursePlayer({ course }: CoursePlayerProps) {
+export default function CoursePlayer({ course, allTags = [] }: CoursePlayerProps) {
   return (
     <CourseThemeProvider design={course.meta.design}>
       <CourseProgressTracker slug={course.meta.slug}>
@@ -24,7 +25,7 @@ export default function CoursePlayer({ course }: CoursePlayerProps) {
       <CourseParallax />
 
       <article className="relative z-10">
-        <CourseIntro intro={course.intro} meta={course.meta} />
+        <CourseIntro intro={course.intro} meta={course.meta} allTags={allTags} />
         <CourseTOC modules={course.modules} />
 
         <CourseErrorBoundary>

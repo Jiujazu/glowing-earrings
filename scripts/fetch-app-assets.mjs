@@ -1,19 +1,24 @@
 #!/usr/bin/env node
-// Halb-automatischer App-Asset-Sammler für Kurse über Apps.
+// Halb-automatischer Asset-Sammler für Kurse über Apps & Tools.
 //
-// Zieht offizielle Icons + Screenshots aus App Store (iTunes Search API)
-// und Google Play Store (HTML-Scrape) in /public/courses/<slug>/app-assets/
-// und schreibt ein manifest.json mit Quell-URLs für die Attribution.
+// Drei Modi, beliebig kombinierbar:
+//   --ios=<id>         iTunes Search API → Icon + Screenshots
+//   --android=<pkg>    Play Store HTML-Scrape → Icon + Screenshots
+//   --url=<webpage>    Beliebige Webseite (Produktseite, GitHub-README-Seite)
+//                      → alle <img>-Tags runterladen
+//
+// Alles landet in /public/courses/<slug>/app-assets/ plus manifest.json
+// mit Quell-URLs für die Attribution im Kurs-Outro.
 //
 // Du entscheidest danach manuell, welche Bilder wirklich in course.json
 // als image- oder step-by-step-Elemente eingebunden werden.
 //
 // Nutzung:
-//   node scripts/fetch-app-assets.mjs --slug=<course-slug> [--ios=<id>] [--android=<package>] [--limit=6]
+//   node scripts/fetch-app-assets.mjs --slug=<course-slug> [--ios=<id>] [--android=<pkg>] [--url=<url>] [--limit=6]
 //
 // Beispiele:
-//   node scripts/fetch-app-assets.mjs --slug=handy-speech-to-text --ios=1557961053 --android=com.aiko.aiko
-//   node scripts/fetch-app-assets.mjs --slug=my-course --ios=284882215
+//   node scripts/fetch-app-assets.mjs --slug=handy-speech-to-text --url=https://handy.computer/
+//   node scripts/fetch-app-assets.mjs --slug=my-course --ios=284882215 --android=com.example
 //
 // App Store ID findest du in der Store-URL: apps.apple.com/app/name/id<ID>
 // Play Store Package in der URL: play.google.com/store/apps/details?id=<PACKAGE>
@@ -103,17 +108,65 @@ async function saveAsset(url, destPath) {
   return { path: destPath, sourceUrl: url, bytes };
 }
 
+async function fetchWebAssets(pageUrl, limit) {
+  const res = await fetch(pageUrl, { headers: { "user-agent": UA } });
+  if (!res.ok) throw new Error(`HTTP ${res.status} für ${pageUrl}`);
+  const html = await res.text();
+
+  const base = new URL(pageUrl);
+  const urls = new Set();
+
+  // <img src=...> — auch srcset greifen wir als erstes src ab.
+  const imgRe = /<img\b[^>]*?\bsrc\s*=\s*["']([^"']+)["']/gi;
+  for (const m of html.matchAll(imgRe)) urls.add(m[1]);
+
+  // <source srcset=...> (picture-Elemente): nur das erste Kandidaten-URL
+  const srcsetRe = /<source\b[^>]*?\bsrcset\s*=\s*["']([^"']+)["']/gi;
+  for (const m of html.matchAll(srcsetRe)) {
+    const first = m[1].split(",")[0].trim().split(/\s+/)[0];
+    if (first) urls.add(first);
+  }
+
+  // Open-Graph-Bilder — oft das Logo oder Hero-Shot.
+  const ogRe = /<meta\b[^>]*?\bproperty\s*=\s*["']og:image["'][^>]*?\bcontent\s*=\s*["']([^"']+)["']/gi;
+  for (const m of html.matchAll(ogRe)) urls.add(m[1]);
+
+  const resolved = [...urls]
+    .filter((u) => !u.startsWith("data:"))
+    .map((u) => {
+      try {
+        return new URL(u, base).toString();
+      } catch {
+        return null;
+      }
+    })
+    .filter(Boolean);
+
+  const deduped = [...new Set(resolved)].slice(0, limit);
+  return { pageUrl, images: deduped };
+}
+
+function slugifyFromUrl(url, fallback) {
+  try {
+    const u = new URL(url);
+    const last = u.pathname.split("/").filter(Boolean).pop() || fallback;
+    return last.replace(/[^A-Za-z0-9._-]/g, "_").slice(0, 60);
+  } catch {
+    return fallback;
+  }
+}
+
 async function main() {
   const args = parseArgs(process.argv);
-  const { slug, ios, android } = args;
+  const { slug, ios, android, url } = args;
   const limit = Number(args.limit || 6);
 
   if (!slug) {
     console.error("Fehlt: --slug=<course-slug>");
     process.exit(1);
   }
-  if (!ios && !android) {
-    console.error("Mindestens --ios=<id> oder --android=<package> angeben.");
+  if (!ios && !android && !url) {
+    console.error("Mindestens --ios=<id>, --android=<package> oder --url=<webpage> angeben.");
     process.exit(1);
   }
 
@@ -147,9 +200,9 @@ async function main() {
         console.log(`  ✓ ${file}`);
       }
       for (let i = 0; i < app.screenshots.length; i++) {
-        const url = app.screenshots[i];
-        const file = `ios-screenshot-${i + 1}${extFromUrl(url)}`;
-        const saved = await saveAsset(url, join(outDir, file));
+        const shot = app.screenshots[i];
+        const file = `ios-screenshot-${i + 1}${extFromUrl(shot)}`;
+        const saved = await saveAsset(shot, join(outDir, file));
         manifest.files.push({ kind: "ios-screenshot", file, ...saved, path: file });
         console.log(`  ✓ ${file}`);
       }
@@ -175,14 +228,38 @@ async function main() {
         console.log(`  ✓ ${file}`);
       }
       for (let i = 0; i < app.screenshots.length; i++) {
-        const url = app.screenshots[i];
-        const file = `android-screenshot-${i + 1}${extFromUrl(url)}`;
-        const saved = await saveAsset(url, join(outDir, file));
+        const shot = app.screenshots[i];
+        const file = `android-screenshot-${i + 1}${extFromUrl(shot)}`;
+        const saved = await saveAsset(shot, join(outDir, file));
         manifest.files.push({ kind: "android-screenshot", file, ...saved, path: file });
         console.log(`  ✓ ${file}`);
       }
     } catch (err) {
       console.error(`  ✗ Android fehlgeschlagen: ${err.message}`);
+    }
+  }
+
+  if (url) {
+    console.log(`\n[Web] Lade Bilder von ${url}…`);
+    try {
+      const web = await fetchWebAssets(url, limit);
+      manifest.sources.web = { pageUrl: web.pageUrl };
+      console.log(`  Gefunden: ${web.images.length} Bilder (Limit ${limit})`);
+
+      for (let i = 0; i < web.images.length; i++) {
+        const src = web.images[i];
+        const base = slugifyFromUrl(src, `web-${i + 1}`);
+        const file = `web-${String(i + 1).padStart(2, "0")}-${base}${extFromUrl(src, "")}`;
+        try {
+          const saved = await saveAsset(src, join(outDir, file));
+          manifest.files.push({ kind: "web", file, ...saved, path: file });
+          console.log(`  ✓ ${file}`);
+        } catch (err) {
+          console.log(`  ✗ ${src}: ${err.message}`);
+        }
+      }
+    } catch (err) {
+      console.error(`  ✗ Web fehlgeschlagen: ${err.message}`);
     }
   }
 

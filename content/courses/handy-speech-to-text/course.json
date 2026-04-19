@@ -13,7 +13,7 @@
       "Tools",
       "Privacy"
     ],
-    "estimatedMinutes": 10,
+    "estimatedMinutes": 12,
     "difficulty": "beginner",
     "publishedAt": "2026-04-12",
     "coverImage": "/courses/handy-speech-to-text/cover.svg",
@@ -50,6 +50,13 @@
       "title": "Was Handy kann",
       "estimatedMinutes": 2,
       "elements": [
+        {
+          "id": "m1-image-hero",
+          "type": "image",
+          "src": "/courses/handy-speech-to-text/intro-hero.png",
+          "alt": "Handy-Logo: Eine weiße, winkende Cartoon-Hand neben dem pinken 'handy'-Schriftzug. Darunter der Slogan 'speak into any text field — the free and open source speech to text app'.",
+          "caption": "Handy: Sprich in jedes Textfeld. Open Source, kostenlos, lokal."
+        },
         {
           "id": "m1-content-1",
           "type": "content",
@@ -107,9 +114,23 @@
           "text": "### Erste Einrichtung\n\nBeim ersten Start fragt dein Betriebssystem nach zwei Berechtigungen:\n\n- **Mikrofon-Zugriff** — damit Handy dich hören kann\n- **Accessibility-Zugriff** — damit es Text in das aktive Textfeld einfügen kann\n\nBeides bestätigen — ohne diese Berechtigungen funktioniert Handy nicht.\n\n### Tastenkürzel wählen\n\nIn den Einstellungen konfigurierst du dein Tastenkürzel. Zwei Modi stehen zur Wahl:\n\n- **Push-to-Talk** (Standard): Taste **drücken und halten** zum Aufnehmen, **loslassen** zum Transkribieren\n- **Toggle-Modus**: Einmal drücken startet die Aufnahme, nochmal drücken stoppt sie"
         },
         {
+          "id": "m2-image-general",
+          "type": "image",
+          "src": "/courses/handy-speech-to-text/settings-general.jpg",
+          "alt": "Handy-Einstellungen im Tab 'Allgemein': Transkriptions-Tastenkürzel auf 'Left Ctrl + Left Option + fn' gesetzt, Push-to-Talk als Toggle aktiviert. Darunter die Ton-Sektion mit Mikrofon-Auswahl (Default), 'Während Aufnahme stummschalten', Audio-Feedback, Ausgabegerät und Lautstärkeregler auf 100%.",
+          "caption": "Der Allgemein-Tab: Tastenkürzel und Push-to-Talk oben, Audio-Setup darunter. Handy zeigt rechts bei der Tastenkürzel-Auswahl live, welche Tasten du drückst."
+        },
+        {
           "id": "m2-content-3",
           "type": "content",
           "text": "### Das richtige Modell wählen\n\nHandy bietet zwei Modell-Familien. Das Modell wird beim ersten Auswählen automatisch heruntergeladen.\n\n**Parakeet V3** ist für die meisten Nutzer die beste Wahl: Es läuft effizient auf der CPU (kein GPU nötig), erkennt die Sprache automatisch und schafft auf mittlerer Hardware etwa 5x Echtzeit-Geschwindigkeit. Größe: ca. 600 MB.\n\n**Whisper** (von OpenAI) bietet verschiedene Größen von Small (487 MB) bis Large (1.1 GB), braucht aber eine GPU für flüssige Performance. Wer eine dedizierte NVIDIA- oder AMD-GPU hat, bekommt damit exzellente Ergebnisse."
+        },
+        {
+          "id": "m2-image-models",
+          "type": "image",
+          "src": "/courses/handy-speech-to-text/settings-models.jpg",
+          "alt": "Handy-Einstellungen im Tab 'Modelle': Überschrift 'Transkriptionsmodelle' mit kurzer Erklärung. Parakeet V3 ist als aktives Modell markiert (mehrsprachig, mit Genauigkeits- und Geschwindigkeitsbalken). Darunter zum Download verfügbar: Whisper Turbo (1,5 GB, mehrsprachig) und Moonshine V2 Small (schnell, nur Englisch).",
+          "caption": "Der Modelle-Tab: Aktives Modell oben markiert, weitere Modelle darunter zum Download. Die Balken rechts zeigen Genauigkeit und Geschwindigkeit relativ zueinander."
         },
         {
           "id": "m2-flashcard-1",
@@ -198,12 +219,31 @@
     {
       "id": "pro-tips",
       "title": "Profi-Tipps",
-      "estimatedMinutes": 2,
+      "estimatedMinutes": 3,
       "elements": [
         {
           "id": "m4-content-1",
           "type": "content",
           "text": "### Custom Dictionary\n\nWenn Handy bestimmte Fachbegriffe, Namen oder Abkürzungen nicht erkennt, kannst du sie in den Einstellungen als **benutzerdefiniertes Wörterbuch** hinzufügen.\n\nBesonders nützlich für Firmen- und Produktnamen, die nicht im Standard-Vokabular vorkommen.\n\n### Debug-Modus\n\nFalls die Transkription mal nicht wie erwartet funktioniert:\n\n- **macOS:** `Cmd+Shift+D`\n- **Windows/Linux:** `Ctrl+Shift+D`\n\nDort siehst du genau, was Handy hört und wo Probleme liegen.\n\n### Transkriptions-History\n\nHandy speichert alle bisherigen Transkriptionen. Praktisch, wenn du einen diktierten Text nachträglich noch brauchst."
+        },
+        {
+          "id": "m4-image-advanced",
+          "type": "image",
+          "src": "/courses/handy-speech-to-text/settings-advanced.jpg",
+          "alt": "Handy-Einstellungen im Tab 'Erweitert'. Oben die Ausgabe-Sektion mit Einfügemethode 'Direkt', 'Zwischenablage nicht ändern' und 'Automatisch absenden: Aus'. Darunter die Transkription-Sektion mit benutzerdefinierten Wörtern als Tags: Claude, Cowork, App, Antigravity, Codex, ChatGPT, Gemini, Prenzelberg. Dazu der Toggle 'Leerzeichen anhängen'. Ganz unten die Verlauf-Sektion mit Verlaufslimit 10 und 'Aufnahmen automatisch löschen: Neueste 10 behalten'.",
+          "caption": "Benutzerdefinierte Wörter landen als Chips im Wörterbuch — Produktnamen, Tool-Namen, sogar Ortsnamen wie 'Prenzelberg' erkennt Handy danach zuverlässig."
+        },
+        {
+          "id": "m4-content-postprocess",
+          "type": "content",
+          "text": "### Nachbearbeitung mit KI\n\nHandy kann jede Transkription direkt nach der Aufnahme durch ein Sprachmodell laufen lassen — zum Glätten der Rechtschreibung, Setzen der Interpunktion, Umwandeln von Zahlwörtern in Ziffern (*'fünfundzwanzig'* → *25*) oder Ersetzen gesprochener Satzzeichen durch Symbole.\n\nDu hinterlegst dafür ein Modell (lokal über Ollama oder per API) und wählst einen Prompt. Handy bringt den Prompt **Improve Transcriptions** als Standard mit — du kannst aber beliebig viele eigene Prompts anlegen, z.B. *\"In förmlichen Briefstil umwandeln\"* oder *\"Als Bullet-Point-Liste strukturieren\"*.\n\nDer Trick dabei: der Platzhalter `${output}` markiert im Prompt die Stelle, an der der transkribierte Text eingesetzt wird. Dadurch kannst du Transkripte in beliebige Kontexte einbetten, bevor sie ins Textfeld fließen."
+        },
+        {
+          "id": "m4-image-postprocess",
+          "type": "image",
+          "src": "/courses/handy-speech-to-text/settings-postprocessing.jpg",
+          "alt": "Handy-Einstellungen im Tab 'Nachbearbeiten': Oben ein Modell-Auswahlfeld ('Modellnamen eingeben'). Darunter die Prompt-Sektion mit Dropdown 'Ausgewählter Prompt: Improve Transcriptions', Button 'Neuen Prompt erstellen', Prompt-Name und ein Textfeld mit den Anweisungen: 'Clean this transcript: 1. Fix spelling, capitalization, and punctuation errors. 2. Convert number words to digits (twenty-five → 25...). 3. Replace spoken punctuation with symbols (period → ., comma...)'. Darunter ein Hinweis zur ${output}-Variable und die Buttons 'Prompt aktualisieren' und 'Prompt löschen'.",
+          "caption": "Der Nachbearbeiten-Tab: Prompt wählen, eigenen anlegen oder den mitgelieferten 'Improve Transcriptions'-Prompt anpassen. ${output} markiert die Einfügestelle für den Transkript-Text."
         },
         {
           "id": "m4-content-2",

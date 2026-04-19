@@ -18,7 +18,8 @@
     "publishedAt": "2026-04-12",
     "coverImage": "/courses/agentic-os-context-levels/cover.svg",
     "relatedCourses": [
-      "karpathy-llm-wiki"
+      "karpathy-llm-wiki",
+      "handy-speech-to-text"
     ],
     "design": {
       "theme": "agentic-os",

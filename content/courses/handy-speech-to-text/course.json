@@ -3,14 +3,14 @@
     "slug": "handy-speech-to-text",
     "title": "Handy App",
     "subheading": "Die beste Lösung zum Diktieren ohne Cloud auf dem Desktop",
-    "subtitle": "Wie du mit einem kostenlosen Open-Source-Tool per Tastenkürzel in jedes Textfeld diktierst — komplett offline, auf jedem Betriebssystem.",
+    "subtitle": "Wie du mit einem kostenlosen Open-Source-Tool per Tastenkürzel in jedes Textfeld diktierst, komplett offline, auf jedem Betriebssystem.",
     "sourceUrl": "https://handy.computer/",
     "sourceAuthor": "cjpais (Open Source)",
     "sourceType": "tool",
     "category": "ai-workflows",
     "tags": [
       "Diktat",
-      "Tools",
+      "Whisper",
       "Privacy"
     ],
     "estimatedMinutes": 12,
@@ -41,7 +41,7 @@
     }
   },
   "intro": {
-    "hook": "Du tippst gerade. Du könntest auch sprechen — dreimal so schnell, ohne die Hände von dem zu nehmen, was du eigentlich tust. Handy ist ein kleines, kostenloses Tool, das genau das macht: Tastenkürzel drücken, sprechen, loslassen — dein Text erscheint. Komplett offline.",
+    "hook": "Du tippst gerade. Du könntest auch sprechen: dreimal so schnell, ohne die Hände von dem zu nehmen, was du eigentlich tust. Handy ist ein kleines, kostenloses Tool, das genau das macht: Tastenkürzel drücken, sprechen, loslassen. Dein Text erscheint. Komplett offline.",
     "sourceContext": "Handy ist ein Open-Source-Projekt von cjpais mit über 17.000 GitHub-Stars. Es läuft auf macOS, Windows und Linux, nutzt OpenAIs Whisper- und NVIDIAs Parakeet-Modelle lokal und sendet kein einziges Audiobyte in die Cloud."
   },
   "modules": [
@@ -60,12 +60,18 @@
         {
           "id": "m1-content-1",
           "type": "content",
-          "text": "Handy macht genau eine Sache: **Sprache in Text umwandeln und in das aktive Textfeld einfügen.**\n\nKein Account, keine Cloud, keine Subscription. Du drückst ein Tastenkürzel, sprichst, lässt los — und der transkribierte Text erscheint dort, wo dein Cursor steht.\n\nDas funktioniert in **jeder App:** E-Mail, Slack, Code-Editor, Browser, Terminal. Überall, wo du tippen kannst, kannst du stattdessen sprechen.\n\nHandy ist bewusst minimalistisch — keine Übersetzung, keine Zusammenfassungen, keine KI-Features. **Ein Werkzeug, das eine Sache perfekt macht.**"
+          "text": "Handy macht genau eine Sache: **Sprache in Text umwandeln und in das aktive Textfeld einfügen.**\n\nKein Account, keine Cloud, keine Subscription. Du drückst ein Tastenkürzel, sprichst, lässt los, der transkribierte Text erscheint dort, wo dein Cursor steht.\n\nDas funktioniert in **jeder App:** E-Mail, Slack, Code-Editor, Browser, Terminal. Überall, wo du tippen kannst, kannst du stattdessen sprechen.\n\nHandy ist bewusst minimalistisch: keine Übersetzung, keine Zusammenfassungen, keine KI-Features. **Ein Werkzeug, das eine Sache perfekt macht.**"
+        },
+        {
+          "id": "m1-key-concept",
+          "type": "key-concept",
+          "title": "Lokale Speech-to-Text",
+          "description": "Spracherkennung, die vollständig auf deinem Gerät läuft. Das Modell (Whisper oder Parakeet) wird einmal heruntergeladen, danach braucht es kein Internet mehr. Kein Audio verlässt je deinen Rechner, keine Cloud ist beteiligt."
         },
         {
           "id": "m1-content-2",
           "type": "content",
-          "text": "### Warum offline?\n\nHandy verarbeitet dein Audio vollständig auf deinem Rechner. Es nutzt dafür OpenAIs Whisper-Modell oder NVIDIAs Parakeet — aber beides läuft lokal auf deiner CPU oder GPU.\n\nKein einziges Audiobyte verlässt dein Gerät. Das ist nicht nur gut für die Privacy, sondern macht Handy auch ohne Internet nutzbar — im Flugzeug, im Café ohne WLAN, überall."
+          "text": "### Warum offline?\n\nHandy verarbeitet dein Audio vollständig auf deinem Rechner. Es nutzt dafür OpenAIs Whisper-Modell oder NVIDIAs Parakeet, aber beides läuft lokal auf deiner CPU oder GPU.\n\nKein einziges Audiobyte verlässt dein Gerät. Das ist nicht nur gut für die Privacy, sondern macht Handy auch ohne Internet nutzbar: im Flugzeug, im Café ohne WLAN, überall."
         },
         {
           "id": "m1-quiz",
@@ -75,12 +81,12 @@
             {
               "text": "Sie wird an OpenAIs Server gesendet und dort transkribiert",
               "correct": false,
-              "feedback": "Nein — Handy nutzt zwar OpenAIs Whisper-Modell, aber es läuft komplett lokal. Kein Audio verlässt dein Gerät."
+              "feedback": "Nein. Handy nutzt zwar OpenAIs Whisper-Modell, aber es läuft komplett lokal. Kein Audio verlässt dein Gerät."
             },
             {
-              "text": "Sie wird lokal auf deinem Rechner verarbeitet — nichts geht ins Internet",
+              "text": "Sie wird lokal auf deinem Rechner verarbeitet, nichts geht ins Internet",
               "correct": true,
-              "feedback": "Genau — die Spracherkennung läuft vollständig auf deiner Hardware. Null Cloud, null Datenübertragung."
+              "feedback": "Genau. Die Spracherkennung läuft vollständig auf deiner Hardware. Null Cloud, null Datenübertragung."
             },
             {
               "text": "Sie wird verschlüsselt in die Cloud gesendet und nach der Transkription gelöscht",
@@ -88,15 +94,15 @@
               "feedback": "Auch verschlüsselt wäre das ein Cloud-Dienst. Handy hat keine Cloud-Komponente."
             }
           ],
-          "explanation": "Privacy by Design: Das Whisper- oder Parakeet-Modell läuft auf deiner CPU oder GPU — keine Internet-Verbindung nötig, kein Datentransfer."
+          "explanation": "Privacy by Design: Das Whisper- oder Parakeet-Modell läuft auf deiner CPU oder GPU, keine Internet-Verbindung nötig, kein Datentransfer."
         },
         {
           "id": "m1-content-3",
           "type": "content",
-          "text": "### Wofür ist das nützlich?\n\nSprechen ist etwa dreimal so schnell wie Tippen. Das macht Handy besonders wertvoll für:\n\n- **Längere E-Mails und Nachrichten** — statt 2 Minuten tippen, 30 Sekunden sprechen\n- **Brain Dumps** — Gedanken unstrukturiert aussprechen und als Text festhalten\n- **KI-Prompts** — lange, kontextreiche Prompts sprechen statt mühsam tippen\n- **Accessibility** — für Menschen mit eingeschränkter Mobilität in den Händen\n\nHandy ist Open Source (MIT-Lizenz), hat über 17.000 GitHub-Stars und läuft nativ auf macOS, Windows und Linux."
+          "text": "### Wofür ist das nützlich?\n\nSprechen ist etwa dreimal so schnell wie Tippen. Das macht Handy besonders wertvoll für:\n\n- **Längere E-Mails und Nachrichten:** statt 2 Minuten tippen, 30 Sekunden sprechen\n- **Brain Dumps:** Gedanken unstrukturiert aussprechen und als Text festhalten\n- **KI-Prompts:** lange, kontextreiche Prompts sprechen statt mühsam tippen\n- **Accessibility:** für Menschen mit eingeschränkter Mobilität in den Händen\n\nHandy ist Open Source (MIT-Lizenz), hat über 17.000 GitHub-Stars und läuft nativ auf macOS, Windows und Linux."
         }
       ],
-      "transitionToNext": "Du weißt jetzt, was Handy kann. Lass es uns installieren und einrichten — dauert 2 Minuten."
+      "transitionToNext": "Du weißt jetzt, was Handy kann. Lass es uns installieren und einrichten. Dauert 2 Minuten."
     },
     {
       "id": "setup",
@@ -106,12 +112,12 @@
         {
           "id": "m2-content-1",
           "type": "content",
-          "text": "Die Installation ist unkompliziert. Auf macOS und Windows geht es am schnellsten über den Package Manager:\n\n- **macOS:** `brew install --cask handy`\n- **Windows:** `winget install cjpais.Handy`\n\nAlternativ kannst du den Installer direkt von [handy.computer](https://handy.computer/) herunterladen — es gibt Builds für macOS (Intel + Apple Silicon), Windows (x64) und Linux (x64)."
+          "text": "Die Installation ist unkompliziert. Auf macOS und Windows geht es am schnellsten über den Package Manager:\n\n- **macOS:** `brew install --cask handy`\n- **Windows:** `winget install cjpais.Handy`\n\nAlternativ kannst du den Installer direkt von [handy.computer](https://handy.computer/) herunterladen. Es gibt Builds für macOS (Intel + Apple Silicon), Windows (x64) und Linux (x64)."
         },
         {
           "id": "m2-content-2",
           "type": "content",
-          "text": "### Erste Einrichtung\n\nBeim ersten Start fragt dein Betriebssystem nach zwei Berechtigungen:\n\n- **Mikrofon-Zugriff** — damit Handy dich hören kann\n- **Accessibility-Zugriff** — damit es Text in das aktive Textfeld einfügen kann\n\nBeides bestätigen — ohne diese Berechtigungen funktioniert Handy nicht.\n\n### Tastenkürzel wählen\n\nIn den Einstellungen konfigurierst du dein Tastenkürzel. Zwei Modi stehen zur Wahl:\n\n- **Push-to-Talk** (Standard): Taste **drücken und halten** zum Aufnehmen, **loslassen** zum Transkribieren\n- **Toggle-Modus**: Einmal drücken startet die Aufnahme, nochmal drücken stoppt sie"
+          "text": "### Erste Einrichtung\n\nBeim ersten Start fragt dein Betriebssystem nach zwei Berechtigungen:\n\n- **Mikrofon-Zugriff:** damit Handy dich hören kann\n- **Accessibility-Zugriff:** damit es Text in das aktive Textfeld einfügen kann\n\nBeides bestätigen. Ohne diese Berechtigungen funktioniert Handy nicht.\n\n### Tastenkürzel wählen\n\nIn den Einstellungen konfigurierst du dein Tastenkürzel. Zwei Modi stehen zur Wahl:\n\n- **Push-to-Talk** (Standard): Taste **drücken und halten** zum Aufnehmen, **loslassen** zum Transkribieren\n- **Toggle-Modus**: Einmal drücken startet die Aufnahme, nochmal drücken stoppt sie"
         },
         {
           "id": "m2-image-general",
@@ -156,28 +162,28 @@
         {
           "id": "m3-content-1",
           "type": "content",
-          "text": "### E-Mails und Nachrichten\n\nCursor ins Textfeld, Tastenkürzel drücken, Antwort sprechen. Besonders bei längeren E-Mails sparst du **enorm** Zeit.\n\nEin Tipp: Sprich in ganzen Sätzen — die Transkription wird deutlich genauer als bei einzelnen Stichworten."
+          "text": "### E-Mails und Nachrichten\n\nCursor ins Textfeld, Tastenkürzel drücken, Antwort sprechen. Besonders bei längeren E-Mails sparst du **enorm** Zeit.\n\nEin Tipp: Sprich in ganzen Sätzen. Die Transkription wird deutlich genauer als bei einzelnen Stichworten."
         },
         {
           "id": "m3-content-1b",
           "type": "content",
-          "text": "### KI-Prompts diktieren\n\nGute Prompts für Claude oder ChatGPT sind oft lang und kontextreich:\n\n*\"Ich arbeite an X, mein Ziel ist Y, bitte beachte Z...\"*\n\nDas zu tippen dauert Minuten — **gesprochen sind es 30 Sekunden.** Bonus: Beim Sprechen formulierst du natürlicher, was oft zu besseren Prompts führt."
+          "text": "### KI-Prompts diktieren\n\nGute Prompts für Claude oder ChatGPT sind oft lang und kontextreich:\n\n*\"Ich arbeite an X, mein Ziel ist Y, bitte beachte Z...\"*\n\nDas zu tippen dauert Minuten. **Gesprochen sind es 30 Sekunden.** Bonus: Beim Sprechen formulierst du natürlicher, was oft zu besseren Prompts führt."
         },
         {
           "id": "m3-content-1c",
           "type": "content",
-          "text": "### Brain Dump → Strukturierte Notiz\n\nÖffne eine leere Notiz und diktiere alles, was dir im Kopf herumschwirrt — unstrukturiert, stream-of-consciousness.\n\nDann kopiere den Text in Claude und lass ihn strukturieren. **Zwei Minuten Brain Dump → saubere Notiz mit Action-Points.**"
+          "text": "### Brain Dump → Strukturierte Notiz\n\nÖffne eine leere Notiz und diktiere alles, was dir im Kopf herumschwirrt: unstrukturiert, stream-of-consciousness.\n\nDann kopiere den Text in Claude und lass ihn strukturieren. **Zwei Minuten Brain Dump → saubere Notiz mit Action-Points.**"
         },
         {
           "id": "m3-flashcard-1",
           "type": "flashcard",
           "front": "Warum ist Diktieren besonders für KI-Prompts so effektiv?",
-          "back": "Weil gute Prompts oft lang und kontextreich sind. Das per Hand zu tippen dauert Minuten — per Sprache sind es Sekunden. Außerdem formuliert man beim Sprechen natürlicher, was oft zu besseren Prompts führt."
+          "back": "Weil gute Prompts oft lang und kontextreich sind. Das per Hand zu tippen dauert Minuten, per Sprache sind es Sekunden. Außerdem formuliert man beim Sprechen natürlicher, was oft zu besseren Prompts führt."
         },
         {
           "id": "m3-content-2",
           "type": "content",
-          "text": "Handy funktioniert in jedem Textfeld — Google Docs im Browser, Slack, VS Code, Terminal. Die einzige Grenze: Handy macht **nur Transkription**. Keine Übersetzung, keine Zusammenfassung, keine Textanalyse. Für alles darüber hinaus kombinierst du es mit anderen Tools."
+          "text": "Handy funktioniert in jedem Textfeld: Google Docs im Browser, Slack, VS Code, Terminal. Die einzige Grenze: Handy macht **nur Transkription**. Keine Übersetzung, keine Zusammenfassung, keine Textanalyse. Für alles darüber hinaus kombinierst du es mit anderen Tools."
         },
         {
           "id": "m3-quiz",
@@ -187,22 +193,22 @@
             {
               "text": "Text in ein Google-Docs-Dokument im Browser diktieren",
               "correct": false,
-              "feedback": "Doch — Handy fügt Text in jedes aktive Textfeld ein, auch im Browser."
+              "feedback": "Doch, Handy fügt Text in jedes aktive Textfeld ein, auch im Browser."
             },
             {
               "text": "Einen Slack-Chat per Sprache beantworten",
               "correct": false,
-              "feedback": "Auch das geht — solange der Cursor im Slack-Textfeld steht."
+              "feedback": "Auch das geht, solange der Cursor im Slack-Textfeld steht."
             },
             {
               "text": "Gesprochene Sprache in Echtzeit in eine andere Sprache übersetzen",
               "correct": true,
-              "feedback": "Richtig — Handy transkribiert nur, es übersetzt nicht."
+              "feedback": "Richtig. Handy transkribiert nur, es übersetzt nicht."
             },
             {
               "text": "Code-Kommentare im VS Code diktieren",
               "correct": false,
-              "feedback": "Klar — Cursor in den Editor, Tastenkürzel, Kommentar sprechen."
+              "feedback": "Klar. Cursor in den Editor, Tastenkürzel, Kommentar sprechen."
             }
           ],
           "explanation": "Handy ist bewusst auf eine Aufgabe fokussiert: Speech-to-Text. Keine Übersetzung, keine Zusammenfassungen. Für alles darüber hinaus kombinierst du Handy mit anderen Tools."
@@ -231,12 +237,12 @@
           "type": "image",
           "src": "/courses/handy-speech-to-text/settings-advanced.jpg",
           "alt": "Handy-Einstellungen im Tab 'Erweitert'. Oben die Ausgabe-Sektion mit Einfügemethode 'Direkt', 'Zwischenablage nicht ändern' und 'Automatisch absenden: Aus'. Darunter die Transkription-Sektion mit benutzerdefinierten Wörtern als Tags: Claude, Cowork, App, Antigravity, Codex, ChatGPT, Gemini, Prenzelberg. Dazu der Toggle 'Leerzeichen anhängen'. Ganz unten die Verlauf-Sektion mit Verlaufslimit 10 und 'Aufnahmen automatisch löschen: Neueste 10 behalten'.",
-          "caption": "Benutzerdefinierte Wörter landen als Chips im Wörterbuch — Produktnamen, Tool-Namen, sogar Ortsnamen wie 'Prenzelberg' erkennt Handy danach zuverlässig."
+          "caption": "Benutzerdefinierte Wörter landen als Chips im Wörterbuch: Produktnamen, Tool-Namen, sogar Ortsnamen wie 'Prenzelberg' erkennt Handy danach zuverlässig."
         },
         {
           "id": "m4-content-postprocess",
           "type": "content",
-          "text": "### Nachbearbeitung mit KI\n\nHandy kann jede Transkription direkt nach der Aufnahme durch ein Sprachmodell laufen lassen — zum Glätten der Rechtschreibung, Setzen der Interpunktion, Umwandeln von Zahlwörtern in Ziffern (*'fünfundzwanzig'* → *25*) oder Ersetzen gesprochener Satzzeichen durch Symbole.\n\nDu hinterlegst dafür ein Modell (lokal über Ollama oder per API) und wählst einen Prompt. Handy bringt den Prompt **Improve Transcriptions** als Standard mit — du kannst aber beliebig viele eigene Prompts anlegen, z.B. *\"In förmlichen Briefstil umwandeln\"* oder *\"Als Bullet-Point-Liste strukturieren\"*.\n\nDer Trick dabei: der Platzhalter `${output}` markiert im Prompt die Stelle, an der der transkribierte Text eingesetzt wird. Dadurch kannst du Transkripte in beliebige Kontexte einbetten, bevor sie ins Textfeld fließen."
+          "text": "### Nachbearbeitung mit KI\n\nHandy kann jede Transkription direkt nach der Aufnahme durch ein Sprachmodell laufen lassen: zum Glätten der Rechtschreibung, Setzen der Interpunktion, Umwandeln von Zahlwörtern in Ziffern (*'fünfundzwanzig'* → *25*) oder Ersetzen gesprochener Satzzeichen durch Symbole.\n\nDu hinterlegst dafür ein Modell (lokal über Ollama oder per API) und wählst einen Prompt. Handy bringt den Prompt **Improve Transcriptions** als Standard mit, du kannst aber beliebig viele eigene Prompts anlegen, z.B. *\"In förmlichen Briefstil umwandeln\"* oder *\"Als Bullet-Point-Liste strukturieren\"*.\n\nDer Trick dabei: der Platzhalter `${output}` markiert im Prompt die Stelle, an der der transkribierte Text eingesetzt wird. Dadurch kannst du Transkripte in beliebige Kontexte einbetten, bevor sie ins Textfeld fließen."
         },
         {
           "id": "m4-image-postprocess",
@@ -248,7 +254,7 @@
         {
           "id": "m4-content-2",
           "type": "content",
-          "text": "### Automation per CLI\n\nHandy lässt sich auch über die Kommandozeile steuern. Das ist mächtig, wenn du es in Automationen einbaust — z.B. per Shortcut-App (Raycast, Alfred) oder in Shell-Skripten:"
+          "text": "### Automation per CLI\n\nHandy lässt sich auch über die Kommandozeile steuern. Das ist mächtig, wenn du es in Automationen einbaust, z.B. per Shortcut-App (Raycast, Alfred) oder in Shell-Skripten:"
         },
         {
           "id": "m4-code-block",
@@ -265,7 +271,7 @@
           "id": "m4-flashcard",
           "type": "flashcard",
           "front": "Warum hat Handy CLI-Flags, obwohl es eine Desktop-App ist?",
-          "back": "CLI-Flags erlauben Automation: Du kannst Handy per Skript, Shortcut-App oder Hotkey-Manager fernsteuern. Die Desktop-App ist das Frontend, die CLI die Programmierschnittstelle — beides zusammen macht Handy sowohl einfach als auch automatisierbar."
+          "back": "CLI-Flags erlauben Automation: Du kannst Handy per Skript, Shortcut-App oder Hotkey-Manager fernsteuern. Die Desktop-App ist das Frontend, die CLI die Programmierschnittstelle. Beides zusammen macht Handy sowohl einfach als auch automatisierbar."
         },
         {
           "id": "m4-content-3",
@@ -276,7 +282,7 @@
           "id": "m4-easter-egg",
           "type": "easter-egg",
           "trigger": "hover",
-          "content": "Fun Fact: Dieser gesamte Kurs hätte in ca. 3 Minuten per Handy diktiert werden können statt in 10 Minuten getippt. Probier's aus — diktiere deinen nächsten Kurs-Vorschlag für diese Plattform."
+          "content": "Fun Fact: Dieser gesamte Kurs hätte in ca. 3 Minuten per Handy diktiert werden können statt in 10 Minuten getippt. Probier's aus: diktiere deinen nächsten Kurs-Vorschlag für diese Plattform."
         }
       ]
     }
@@ -284,8 +290,8 @@
   "outro": {
     "synthesis": [
       "Handy macht genau eine Sache: Sprache zu Text, lokal, in jedem Textfeld. Kein Account, keine Cloud, keine Kosten.",
-      "Parakeet V3 ist für die meisten Nutzer die beste Wahl — läuft auf der CPU, erkennt Sprachen automatisch.",
-      "Push-to-Talk ist der schnellste Workflow: Taste halten, sprechen, loslassen — Text erscheint.",
+      "Parakeet V3 ist für die meisten Nutzer die beste Wahl: läuft auf der CPU, erkennt Sprachen automatisch.",
+      "Push-to-Talk ist der schnellste Workflow: Taste halten, sprechen, loslassen, Text erscheint.",
       "Besonders wertvoll für lange Texte, Brain Dumps, KI-Prompts und als Accessibility-Tool."
     ],
     "nextStep": "Installiere Handy jetzt (2 Minuten), wähle Parakeet V3 als Modell, und diktiere deine nächste E-Mail statt sie zu tippen. Du wirst überrascht sein, wie natürlich es sich anfühlt.",
@@ -296,11 +302,11 @@
       },
       {
         "emoji": "🔒",
-        "text": "100% lokal — kein Audio verlässt deinen Rechner"
+        "text": "100% lokal, kein Audio verlässt deinen Rechner"
       },
       {
         "emoji": "💻",
-        "text": "macOS, Windows, Linux — überall gleich"
+        "text": "macOS, Windows, Linux: überall gleich"
       },
       {
         "emoji": "🧠",

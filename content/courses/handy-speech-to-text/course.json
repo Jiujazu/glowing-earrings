@@ -2,7 +2,7 @@
   "meta": {
     "slug": "handy-speech-to-text",
     "title": "Handy App",
-    "subheading": "Die beste Lösung zum Diktieren ohne Cloud auf dem Desktop",
+    "subheading": "Eine offene Lösung zum Diktieren ohne Cloud auf dem Desktop",
     "subtitle": "Wie du mit einem kostenlosen Open-Source-Tool per Tastenkürzel in jedes Textfeld diktierst, komplett offline, auf jedem Betriebssystem.",
     "sourceUrl": "https://handy.computer/",
     "sourceAuthor": "cjpais (Open Source)",
@@ -41,7 +41,7 @@
     }
   },
   "intro": {
-    "hook": "Du tippst gerade. Du könntest auch sprechen: dreimal so schnell, ohne die Hände von dem zu nehmen, was du eigentlich tust. Handy ist ein kleines, kostenloses Tool, das genau das macht: Tastenkürzel drücken, sprechen, loslassen. Dein Text erscheint. Komplett offline.",
+    "hook": "Du tippst gerade. Du könntest auch sprechen: dreimal so schnell, ohne die Hände von dem zu nehmen, was du eigentlich tust. Handy ist ein kleines, kostenloses Tool, das genau das macht: Tastenkürzel drücken, sprechen, loslassen. Dein Text erscheint. Komplett offline.\n\nIch benutze Handy seit ein paar Wochen täglich. Am stärksten gemerkt habe ich den Unterschied bei langen KI-Prompts: was vorher drei Minuten Tippen war, ist jetzt ein halber Satz in normalem Tempo.",
     "sourceContext": "Handy ist ein Open-Source-Projekt von cjpais mit über 17.000 GitHub-Stars. Es läuft auf macOS, Windows und Linux, nutzt OpenAIs Whisper- und NVIDIAs Parakeet-Modelle lokal und sendet kein einziges Audiobyte in die Cloud."
   },
   "modules": [
@@ -127,9 +127,14 @@
           "caption": "Der Allgemein-Tab: Tastenkürzel und Push-to-Talk oben, Audio-Setup darunter. Handy zeigt rechts bei der Tastenkürzel-Auswahl live, welche Tasten du drückst."
         },
         {
+          "id": "m2-content-recording-moment",
+          "type": "content",
+          "text": "### Wie sich die Aufnahme anfühlt\n\nSobald du dein Tastenkürzel drückst, passiert Folgendes:\n\n- Das **Tray-Icon** (macOS: Menüleiste, Windows: Infobereich, Linux: Status-Tray) wechselt sichtbar auf einen Aufnahme-Zustand\n- Optional spielt Handy einen kurzen **Aufnahme-Sound** ab (per Default an, im Allgemein-Tab abschaltbar)\n- Das Mikrofon-LED deines Geräts leuchtet, wie bei jedem Programm, das aufnimmt\n\nKein großes Overlay, kein Popup über deinem Text. Das ist bewusst so: Handy will dich beim Tippen nicht stören. Du sprichst in einen unsichtbaren Buffer, und sobald du die Taste loslässt, siehst du den Text erscheinen, als hättest du ihn selbst geschrieben."
+        },
+        {
           "id": "m2-content-3",
           "type": "content",
-          "text": "### Das richtige Modell wählen\n\nHandy bietet zwei Modell-Familien. Das Modell wird beim ersten Auswählen automatisch heruntergeladen.\n\n**Parakeet V3** ist für die meisten Nutzer die beste Wahl: Es läuft effizient auf der CPU (kein GPU nötig), erkennt die Sprache automatisch und schafft auf mittlerer Hardware etwa 5x Echtzeit-Geschwindigkeit. Größe: ca. 600 MB.\n\n**Whisper** (von OpenAI) bietet verschiedene Größen von Small (487 MB) bis Large (1.1 GB), braucht aber eine GPU für flüssige Performance. Wer eine dedizierte NVIDIA- oder AMD-GPU hat, bekommt damit exzellente Ergebnisse."
+          "text": "### Das richtige Modell wählen\n\nHandy bietet zwei Modell-Familien. Das Modell wird beim ersten Auswählen automatisch heruntergeladen.\n\n**Parakeet V3** ist für die meisten Nutzer die beste Wahl: Es läuft effizient auf der CPU (kein GPU nötig), erkennt die Sprache automatisch und schafft auf mittlerer Hardware etwa 5x Echtzeit-Geschwindigkeit. Größe: ca. 600 MB. Parakeet V3 deckt 25 europäische Sprachen ab, darunter Deutsch mit guter Qualität für Fließtext und Fachvokabular.\n\n**Whisper** (von OpenAI) bietet verschiedene Größen von Small (487 MB) bis Large (1.1 GB), unterstützt knapp 100 Sprachen und kann für seltenere Sprachen die bessere Wahl sein, braucht aber eine GPU für flüssige Performance. Wer eine dedizierte NVIDIA- oder AMD-GPU hat, bekommt damit exzellente Ergebnisse."
         },
         {
           "id": "m2-image-models",

@@ -6,10 +6,24 @@ import { timingSafeEqual } from "crypto";
  * Returns null if valid, or an error NextResponse if invalid.
  */
 export async function validateEditorAuth(request: NextRequest): Promise<NextResponse | null> {
-  // CSRF: Validate Origin header in production
-  const origin = request.headers.get("origin");
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
-  if (origin && siteUrl && process.env.NODE_ENV === "production") {
+  // CSRF: Validate Origin header in production. Missing/null origin is
+  // rejected too — a mutating authenticated route must not trust requests
+  // that omit the origin.
+  if (process.env.NODE_ENV === "production") {
+    const origin = request.headers.get("origin");
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
+    if (!siteUrl) {
+      return NextResponse.json(
+        { success: false, message: "Server-Konfiguration fehlt (NEXT_PUBLIC_SITE_URL)." },
+        { status: 500 }
+      );
+    }
+    if (!origin || origin === "null") {
+      return NextResponse.json(
+        { success: false, message: "Origin-Header erforderlich." },
+        { status: 403 }
+      );
+    }
     try {
       const originHost = new URL(origin).hostname;
       const siteHost = new URL(siteUrl).hostname;
@@ -20,7 +34,10 @@ export async function validateEditorAuth(request: NextRequest): Promise<NextResp
         );
       }
     } catch {
-      // Invalid URL — skip
+      return NextResponse.json(
+        { success: false, message: "Ungültiger Origin." },
+        { status: 403 }
+      );
     }
   }
 

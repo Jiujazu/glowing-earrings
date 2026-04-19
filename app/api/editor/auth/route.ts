@@ -50,7 +50,7 @@ function checkOrigin(request: NextRequest): NextResponse | null {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
   if (!siteUrl) {
     return NextResponse.json(
-      { success: false, message: "Server-Konfiguration fehlt." },
+      { success: false, message: "Server-Konfiguration fehlt (NEXT_PUBLIC_SITE_URL)." },
       { status: 500 }
     );
   }

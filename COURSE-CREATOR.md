@@ -135,6 +135,17 @@ Nicht-Einhaltung = Anti-Pattern §12.8.
 - Jedes Mal neu und individuell — keine Templates, keine Wiederholungen
 - Dürfen auch einfach nur charmant sein, ohne Lerneffekt
 
+### 3.6 Autor-Stimme ist Pflicht
+
+Die Plattform ist Julian van Diekens kuratierte Empfehlung, kein neutrales Handbuch. Deshalb:
+
+- **Pro Kurs mindestens 1–2 Sätze mit Julians Autor-Stimme** — persönliche Erfahrung, Meinung, Szene-Wissen, Humor, kleine Anekdote. Bevorzugt im `intro.hook` oder an einem `transitionToNext`.
+- **Erkennungsmerkmal:** Der Lerner muss mindestens eine Stelle eindeutig als Julian-Position lesen können — „ich benutze…", „mein Tipp…", „aus meiner Sicht…", persönliche Beobachtung.
+- **Belegmittel für subjektive Claims:** Subjektive Behauptungen in Meta oder Body (Superlativ, Empfehlung, Bewertung — z.B. „die beste Lösung") sind **nur zulässig, wenn sie durch sichtbare Autor-Stimme oder durch Vergleichsinhalt im Kurs getragen werden.** Ein Superlativ ohne Deckung wird zu einem leeren Versprechen.
+- **Warum die Regel existiert:** Ohne Autor-Position wird der Kurs austauschbar mit der Original-Quelle (Produktseite, GitHub-README, Paper). Der Lerner fragt zu Recht: „Warum nicht direkt auf die Website?" Die Antwort liegt in Julians Standpunkt, seinem Szene-Wissen, seinem Urteil.
+
+Prüfpunkt in §9 Didaktik-Checkliste. Herkunft: LEARNINGS „Workflow-Audit: Autor-Stimme ist Pflicht", audit handy-speech-to-text 2026-04-19.
+
 ---
 
 ## §4 Kursstruktur
@@ -482,6 +493,7 @@ Pflicht für alle Prosa-Teile: Intro, Modul-Texte, Callouts, Übergänge, Outro,
 - [ ] Modul-Titel kurz und prägnant (max 4-5 Wörter, keine Emojis)
 - [ ] Modul-Übergänge vorhanden (bevorzugt Kurs-Querverweise)
 - [ ] Outro mit Synthese, konkretem nächsten Schritt und Takeaway
+- [ ] §3.6 — Autor-Stimme vorhanden: mind. 1–2 Sätze persönliche Note (Erfahrung/Meinung/Szene-Wissen) im Intro oder an einem Modul-Übergang. Subjektive Claims (Superlativ, Empfehlung) durch Autor-Stimme oder Vergleichsinhalt gedeckt.
 - [ ] `relatedCourses` gegenseitig gesetzt
 - [ ] **Pflicht-Minima per Grep verifiziert** (vor Commit ausführen, Werte müssen ≥ angegebener Zahl sein):
   - `rg -c '"type": "key-concept"' content/courses/[slug]/course.json` → ≥ 1

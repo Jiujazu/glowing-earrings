@@ -168,7 +168,7 @@ Plus: Link zum Originalmaterial. Die Modul-Übersicht wird automatisch durch die
 | `flashcard` | Zusammenhänge und "Warum"-Fragen trainieren | Ja (min. 3 pro Kurs) |
 | `reflection` | Praxisbezug: "Wie würdest du das anwenden?" | Ja (min. 1 pro Kurs) |
 | `easter-egg` | Verstecktes Element mit Charme | Ja (min. 1 pro Kurs) |
-| `image` | Bild mit Lightbox-Zoom | Wenn vorhanden |
+| `image` | Bild mit Lightbox-Zoom — Pflicht bei Software-/Prozess-Themen (siehe §6.8) | Wenn Tool/Prozess Thema |
 | `video` | YouTube/Vimeo lazy-loaded | Wenn vorhanden |
 | `code-block` | Code/Config mit Copy-Button — für Dateistrukturen und Configs | Wenn vorhanden |
 | `step-by-step` | Akkordeon-Schritte mit Markdown — für mehrstufige Tutorials | Wenn vorhanden |
@@ -356,6 +356,28 @@ Vor dem Finalisieren eines Kurses: **Kursinhalte gegen das Original-Transkript p
 - Keine Verwechslung von Szenen oder Beispielen
 - Reihenfolge der Themen entspricht dem Original (sofern nicht bewusst umstrukturiert)
 
+### 6.8 Reale Screenshots & Fotos
+
+> Wo immer Programme, Tools, Prozesse oder konkrete Abläufe Kursthema sind, gehören echte Screenshots oder Fotos hinein — keine Textbeschreibung als Ersatz, keine Stock-Grafik, keine reine SVG-Abstraktion.
+
+**Warum:** Ein UI-Screenshot zeigt in zwei Sekunden, was ein Absatz Fließtext umständlich beschreibt. Lernende sehen sofort, was sie auf dem eigenen Bildschirm wiederfinden — das senkt die Hürde zum Nachmachen massiv.
+
+**Wann verpflichtend:**
+- **Tool-/Software-Vorstellung** → Screenshot der Oberfläche, der relevanten Buttons, der Settings
+- **Prozess-/Workflow-Erklärung** → Foto oder Screenshot jedes wichtigen Schritts
+- **Terminal-/Code-Ausgabe** → echter Output statt nachgebauter Text-Block (für Code-Beispiele bleibt `code-block` korrekt — gemeint ist der Programm-Output)
+- **Konkretes Beispiel-Ergebnis** → echter Screenshot (Chat-Verlauf, generiertes Bild, exportierte Datei)
+
+**Wann nicht nötig:**
+- Rein konzeptionelle Module ohne Software-/Prozess-Bezug
+- Wenn kein passender Screenshot existiert und die Quelle keinen liefert (dann lieber weglassen als nachstellen — keine Fake-Screenshots)
+
+**Längen-Toleranz:** Screenshots und Fotos dürfen den Kurs länger machen. Lieber ein Modul mehr und drei zusätzliche Bilder als ein dichter Textblock, der die Konkretheit verschluckt. Konkretheit geht vor Kürze.
+
+**Quelle der Bilder:** Bevorzugt aus dem Originalmaterial (Video-Frames, Artikel-Screenshots). Falls die Quelle keine liefert, eigene Screenshots am Live-Tool aufnehmen — und in der Caption transparent kennzeichnen.
+
+**Speicher-Ort:** Alle Bild-Assets unter `/public/courses/[slug]/`. Dateinamen kebab-case und beschreibend (`screenshot_settings-mikrofon.png`, `foto_workflow-step-2.jpg`).
+
 ---
 
 ## §7 Tonfall
@@ -470,6 +492,7 @@ Pflicht für alle Prosa-Teile: Intro, Modul-Texte, Callouts, Übergänge, Outro,
 - [ ] Cover-SVG im neo-brutalen Editorial-Stil vorhanden (`public/courses/[slug]/cover.svg`)
 - [ ] SVG-Visualisierungen wo sinnvoll (Übersichten, Vergleiche, Architekturen) — nicht erzwingen (siehe §6.5)
 - [ ] SVG-Pfeile korrekt: Tip-x > Base-x für rechts-zeigend
+- [ ] §6.8 — Bei Software-/Tool-/Prozess-Bezug: reale Screenshots oder Fotos eingebunden, nicht nur Textbeschreibungen. Mehr Länge ist okay.
 
 ### Quelldateien
 - [ ] `source.md` mit Metadata-Header (Typ, URL, Autor) vorhanden
@@ -732,6 +755,7 @@ Der Audit geht diese Kategorien durch. Jeder Check zitiert die Creator-Regel-Num
 - §2.3 Keine drei Boxen hintereinander?
 - §6.1 Kurs-Theme hat Charakter, nicht generisch?
 - §6.3 WCAG-AA-Kontrast eingehalten?
+- §6.8 Bei Software-/Tool-/Prozess-Themen: reale Screenshots oder Fotos vorhanden statt Textbeschreibung? (Längere Module sind okay, wenn sie konkreter werden.)
 
 **Schreibstil (`.claude/skills/anti-ai-writing/SKILL.md`, referenziert in §9)**
 - §9 Keine Em-Dashes (—) als Stilmittel?

@@ -9,6 +9,7 @@ import {
   useRef,
 } from "react";
 import { useSearchParams } from "next/navigation";
+import PasswordPrompt from "./PasswordPrompt";
 
 export interface EditorChange {
   elementId: string;
@@ -46,6 +47,11 @@ function deserializeMap(str: string): Map<string, EditorChange> {
   return new Map(JSON.parse(str));
 }
 
+function readUiMarkerCookie(): boolean {
+  if (typeof document === "undefined") return false;
+  return document.cookie.split(";").some((c) => c.trim().startsWith("editor_ui=1"));
+}
+
 export default function EditModeProvider({
   courseSlug,
   children,
@@ -55,7 +61,15 @@ export default function EditModeProvider({
 }) {
   const searchParams = useSearchParams();
   const editorToken = searchParams.get("edit") || "";
-  const canEdit = editorToken.length > 0;
+  const [cookieAuthed, setCookieAuthed] = useState(false);
+  const [promptOpen, setPromptOpen] = useState(false);
+
+  // Hydrate auth state from UI marker cookie on mount
+  useEffect(() => {
+    setCookieAuthed(readUiMarkerCookie());
+  }, []);
+
+  const canEdit = editorToken.length > 0 || cookieAuthed;
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [pendingChanges, setPendingChanges] = useState<Map<string, EditorChange>>(
@@ -133,12 +147,30 @@ export default function EditModeProvider({
     return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, [pendingChanges]);
 
-  // Keyboard shortcuts: Cmd+E, Cmd+Z, Cmd+Shift+Z
+  // Global shortcut: Cmd+Shift+E opens password prompt (works even for
+  // unauthenticated visitors — the Bot discovery surface stays small since
+  // nothing visual hints at it).
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (
+        (e.metaKey || e.ctrlKey) &&
+        e.shiftKey &&
+        e.key.toLowerCase() === "e"
+      ) {
+        e.preventDefault();
+        setPromptOpen((prev) => !prev);
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // Authenticated shortcuts: Cmd+E toggle, Cmd+Z undo, Cmd+Shift+Z redo
   useEffect(() => {
     if (!canEdit) return;
 
     function handleKeyDown(e: KeyboardEvent) {
-      if ((e.metaKey || e.ctrlKey) && e.key === "e") {
+      if ((e.metaKey || e.ctrlKey) && !e.shiftKey && e.key === "e") {
         e.preventDefault();
         setIsEditMode((prev) => !prev);
       }
@@ -156,9 +188,24 @@ export default function EditModeProvider({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [canEdit, undo, redo]);
 
-  // If can't edit, just render children without context
+  const handleLoginSuccess = useCallback(() => {
+    setCookieAuthed(true);
+    setPromptOpen(false);
+    setIsEditMode(true);
+  }, []);
+
+  // If can't edit, render children + password prompt (for Cmd+Shift+E).
   if (!canEdit) {
-    return <>{children}</>;
+    return (
+      <>
+        {children}
+        <PasswordPrompt
+          open={promptOpen}
+          onClose={() => setPromptOpen(false)}
+          onSuccess={handleLoginSuccess}
+        />
+      </>
+    );
   }
 
   return (
@@ -208,6 +255,12 @@ export default function EditModeProvider({
           </>
         )}
       </button>
+
+      <PasswordPrompt
+        open={promptOpen}
+        onClose={() => setPromptOpen(false)}
+        onSuccess={handleLoginSuccess}
+      />
     </EditModeContext.Provider>
   );
 }

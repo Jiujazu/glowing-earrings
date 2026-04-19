@@ -3,17 +3,23 @@
     "slug": "llm-wiki-memory-engine",
     "title": "Die Karpathy Methode — Teil 2",
     "subheading": "Das lebende Wiki",
-    "subtitle": "Dein Wiki aus Teil 1 funktioniert — aber was passiert ab 200 Seiten? Memory Lifecycle, Knowledge Graph und Automation machen es zum selbstpflegenden System.",
+    "subtitle": "Dein Wiki aus Teil 1 funktioniert. Aber was passiert ab 200 Seiten? Memory Lifecycle, Knowledge Graph und Automation machen es zum selbstpflegenden System.",
     "sourceUrl": "https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2",
     "sourceAuthor": "rohitg00",
     "sourceType": "gist",
     "category": "ai-tech",
-    "tags": ["Wissensmanagement", "Wiki", "Knowledge Graph"],
+    "tags": [
+      "Wissensmanagement",
+      "Wiki",
+      "Knowledge Graph"
+    ],
     "estimatedMinutes": 22,
     "difficulty": "advanced",
     "publishedAt": "2026-04-16",
     "coverImage": "/courses/llm-wiki-memory-engine/cover.svg",
-    "relatedCourses": ["karpathy-llm-wiki"],
+    "relatedCourses": [
+      "karpathy-llm-wiki"
+    ],
     "design": {
       "theme": "living-knowledge",
       "colors": {
@@ -316,7 +322,15 @@
           "language": "yaml",
           "filename": "wiki-hooks.yml",
           "code": "hooks:\n  on-new-source:\n    - extract_entities\n    - update_graph\n    - ingest_to_wiki\n    - update_index\n\n  on-session-end:\n    - crystallize_session\n    - promote_findings\n\n  on-query:\n    - search_hybrid          # BM25 + Vector + Graph\n    - score_response\n    - file_if_quality > 0.8  # nur gute Antworten ins Wiki\n\n  on-schedule:\n    - lint_contradictions     # wöchentlich\n    - decay_retention         # täglich\n    - consolidate_tiers       # monatlich\n    - clean_orphans           # wöchentlich",
-          "highlightLines": [10, 11, 15, 18, 19, 20, 21]
+          "highlightLines": [
+            10,
+            11,
+            15,
+            18,
+            19,
+            20,
+            21
+          ]
         },
         {
           "id": "aq-easter",
@@ -452,12 +466,30 @@
     ],
     "nextStep": "Ergänze deine CLAUDE.md um drei Dinge: Entity-Typen (welche Knoten soll dein Wiki kennen), Beziehungstypen (welche Kanten sind erlaubt) und Widerspruchs-Regeln (was passiert bei Konflikten). Das dauert 30 Minuten und ist der größte Einzelhebel.",
     "takeaway": [
-      { "emoji": "\u23f3", "text": "Confidence + Retention: Wissen altert — und das ist ein Feature" },
-      { "emoji": "\ud83d\udd78\ufe0f", "text": "Knowledge Graph: Navigiere Bedeutung, nicht Keywords" },
-      { "emoji": "\ud83d\udd0d", "text": "Hybrid Search: BM25 + Vector + Graph > jede Einzelmethode" },
-      { "emoji": "\u2699\ufe0f", "text": "Event-Hooks: Bookkeeping automatisieren, Richtung behalten" },
-      { "emoji": "\ud83d\udd04", "text": "Self-Healing: Widersprüche, Orphans und Stale Claims auto-repariert" },
-      { "emoji": "\ud83d\udcdc", "text": "Schema als Produkt: CLAUDE.md ist das Betriebssystem deines Wikis" }
+      {
+        "emoji": "⏳",
+        "text": "Confidence + Retention: Wissen altert — und das ist ein Feature"
+      },
+      {
+        "emoji": "🕸️",
+        "text": "Knowledge Graph: Navigiere Bedeutung, nicht Keywords"
+      },
+      {
+        "emoji": "🔍",
+        "text": "Hybrid Search: BM25 + Vector + Graph > jede Einzelmethode"
+      },
+      {
+        "emoji": "⚙️",
+        "text": "Event-Hooks: Bookkeeping automatisieren, Richtung behalten"
+      },
+      {
+        "emoji": "🔄",
+        "text": "Self-Healing: Widersprüche, Orphans und Stale Claims auto-repariert"
+      },
+      {
+        "emoji": "📜",
+        "text": "Schema als Produkt: CLAUDE.md ist das Betriebssystem deines Wikis"
+      }
     ],
     "sourceUrl": "https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2",
     "newsletterCTA": "Jede Woche ein Konzept wie dieses — von Knowledge Graphs bis Agent-Workflows. Kostenlos, kuratiert, direkt anwendbar."

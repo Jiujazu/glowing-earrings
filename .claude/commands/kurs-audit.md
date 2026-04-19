@@ -94,30 +94,9 @@ Die neue Sektion beginnt mit `---` als Trenner und folgt dem Template aus `COURS
 - ...
 ```
 
-### 6. Feedback-Loop zu LEARNINGS (§14.3 Schritt 4)
+### 6. Chat-Summary (§14.4)
 
-Für **jedes** Finding mit Status ❌ oder ⚠️ prüfen: **systemisch oder Einzelfall?**
-
-Systemisch = alle drei:
-- Ähnliche Verletzung in anderen Kursen denkbar (nicht nur in diesem Kurs problematisch)
-- Regel ist prüfbar
-- Noch nicht als Anti-Pattern in §12 geführt
-
-Pro systemisches Finding: Julian via `AskUserQuestion` **einzeln** fragen:
-
-> „Finding X ist systemisch. Soll ein LEARNINGS-Eintrag entstehen?"
-> - Ja, als neuen Eintrag mit `source: audit $ARGUMENTS YYYY-MM-DD` anlegen
-> - Nein, Einzelfall
-
-Bei „ja":
-- Neuen Eintrag in `COURSE-LEARNINGS.md` unten anhängen (nach Template dort, Feld `Quelle` = `audit $ARGUMENTS YYYY-MM-DD`)
-- **Sofort-Promotion-Check** auf diesen Eintrag anwenden (siehe `CLAUDE.md` Post-Flight Schritt 3 — drei Fragen: Wiederholungsrisiko, Universalität, Prüfbarkeit). Ergebnis in die Felder `Sofort-Promotion-Kandidat?` und `Status` eintragen.
-
-In der Audit-Sektion (§14.5 Template) unter „Systemische Findings" jedes systemische Finding mit Julians Entscheidung dokumentieren.
-
-### 7. Chat-Summary (§14.4)
-
-Nach Abschluss im Chat **nur die Kurzfassung** ausgeben — keine Detail-Tabelle:
+Nach Abschluss im Chat **nur die Kurzfassung** ausgeben, keine Detail-Tabelle:
 
 > **Audit für `$ARGUMENTS` abgeschlossen.**
 > - Findings: **X total** (Y kritisch ❌, Z Warnungen ⚠️)
@@ -126,10 +105,53 @@ Nach Abschluss im Chat **nur die Kurzfassung** ausgeben — keine Detail-Tabelle
 > - Systemisch (→ LEARNINGS): [Stichwort, falls vorhanden; sonst „keine"]
 > - Details: `/content/courses/$ARGUMENTS/audit-log.md` (neue Sektion von heute)
 
+### 7. Nachbesserung-Übergang (§14.3 Schritt 5, Pflicht)
+
+Wenn Findings mit ❌ oder ⚠️ existieren: Julian via `AskUserQuestion` fragen, ob die Nachbesserungen **jetzt direkt** umgesetzt werden oder als **separater Task** laufen.
+
+Formulierung in einfacher Sprache (LEARNINGS `Workflow-Audit: Audit-Fragen-Stil`), Optionen mit Konsequenz-Erklärung:
+
+> „Die Findings sind im audit-log dokumentiert. Wie weiter?"
+> - Jetzt direkt fixen → ich mache die Änderungen am Kurs, committe sie separat vom Audit-Log
+> - Als separater Task → ich stoppe hier; die offenen Punkte bleiben im audit-log für später
+
+Bei **„jetzt"** → Schritt 8.
+Bei **„separater Task"** → Schritt 9 entfällt in dieser Session. Die LEARNINGS-Rückfrage wird im Fix-Task nachgezogen.
+
+### 8. Fixes + Re-Audit-Sektion (nur bei „jetzt")
+
+- Fixes pro Finding am Kurs ausführen (`course.json`, ggf. `source.md`, `gap-analysis.md`, Geschwister-Kurse bei Reziprozität).
+- **Pflicht-Minima per Grep verifizieren** (§9): `rg -c '"type": "key-concept|quiz|flashcard|reflection|easter-egg"'` — Soll-Werte 1/2/3/1/1.
+- **Re-Audit-Sektion** als neue Sektion unten in `audit-log.md` anhängen (append-only). Inhalt: Anlass = „Direkt-Fix nach Erst-Audit", Fix-Protokoll-Tabelle (Finding → Regel → Fix → Verifikation), Grep-Output der Pflicht-Minima, bewusst belassene Ausnahmen.
+- Commits: Audit-Befund und Kurs-Fixes in **getrennten Commits**.
+
+### 9. Feedback-Loop zu LEARNINGS (§14.3 Schritt 6, **nach Fix**)
+
+Wichtig: Dieser Check passiert **nach** dem Fix, weil erst dann klar ist, ob die Regel trivial greift oder ein tieferes Problem offenbart wurde (Beispiel: Der Grep-Check-Vorschlag entstand aus dem Fix-Erlebnis, nicht aus dem Befund).
+
+Für **jedes** Finding mit Status ❌ oder ⚠️ prüfen: **systemisch oder Einzelfall?**
+
+Systemisch = alle drei:
+- Ähnliche Verletzung in anderen Kursen denkbar (nicht nur in diesem Kurs problematisch)
+- Regel ist prüfbar
+- Noch nicht als Anti-Pattern in §12 geführt
+
+Pro systemisches Finding: Julian via `AskUserQuestion` **einzeln** fragen, in jargon-freier Sprache mit Konsequenz-Optionen (siehe LEARNINGS `Workflow-Audit: Audit-Fragen-Stil`):
+
+> „Finding X ist systemisch. Soll daraus eine Regel für alle Kurse werden?"
+> - Ja, als neuen Eintrag mit `source: audit $ARGUMENTS YYYY-MM-DD` in LEARNINGS anlegen
+> - Nein, Einzelfall, nur im audit-log belassen
+
+Bei „ja":
+- Neuen Eintrag in `COURSE-LEARNINGS.md` unten anhängen (nach Template dort, Feld `Quelle` = `audit $ARGUMENTS YYYY-MM-DD`)
+- **Sofort-Promotion-Check** auf diesen Eintrag anwenden (siehe `CLAUDE.md` Post-Flight Schritt 3, drei Fragen: Wiederholungsrisiko, Universalität, Prüfbarkeit). Ergebnis in die Felder `Sofort-Promotion-Kandidat?` und `Status` eintragen.
+
+In der Audit-Sektion (§14.5 Template) unter „Systemische Findings" jedes systemische Finding mit Julians Entscheidung dokumentieren.
+
 ## Wichtig
 
-- **Append-only:** `audit-log.md` wird nie überschrieben. Jeder Lauf hängt unten an.
+- **Append-only:** `audit-log.md` wird nie überschrieben. Jeder Lauf (inkl. Re-Audit nach Fix) hängt unten an.
 - **SSoT:** Alle Regeln in `COURSE-CREATOR.md §1–§14`. Bei Unklarheit dort nachschlagen, nicht hier.
-- **Kein Kurs-Inhalt ändern:** Das Audit schreibt nur `audit-log.md` und ggf. einen neuen `COURSE-LEARNINGS.md`-Eintrag. `course.json` bleibt unangetastet — Nachbesserungen sind ein separater Task.
+- **Commits getrennt:** Audit-Befund (`audit-log.md`) und Kurs-Fixes (`course.json` etc.) immer in separaten Commits. Der Befund ist Protokoll, der Fix ist Arbeit, beide haben eigene Commit-Historien.
 - **Creator-Version im Header:** Die git-SHA von `COURSE-CREATOR.md` zum Audit-Zeitpunkt gehört in jede neue Sektion, damit spätere Re-Audits nachvollziehen können, gegen welche Regel-Version geprüft wurde.
-- **Kein Commit am Ende:** Schreibe nur die Dateien. Julian entscheidet, ob/wann committed wird.
+- **LEARNINGS erst nach Fix:** Schritt 9 folgt Schritt 8. Wird der Fix auf einen separaten Task verschoben, rutscht auch der LEARNINGS-Check dorthin — kein Learning ohne Praxistest.

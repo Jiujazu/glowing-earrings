@@ -196,5 +196,5 @@ Bestätigte Patterns werden als Regel in der passenden `CREATOR`-Sektion ergänz
 - **Was hat funktioniert:** Sobald die Frage in einfachen Worten + drei klar abgegrenzten Optionen mit Konsequenz formuliert war, konnte Julian entscheiden.
 - **Was war ein Fehler:** Ursprüngliche `AskUserQuestion`-Formulierungen mit Fachbegriffen wie *systemisch, promovieren, Anti-Pattern, Sofort-Promotion-Check* haben Julian blockiert. Er konnte die Frage nicht bewerten und bat um Klärung.
 - **Hypothese für nächste Kurse:** Audit- und Sofort-Promotion-Fragen müssen jargon-frei sein. Konkret: keine internen Begriffe (Anti-Pattern, promoten, systemisch, Verdichtungs-Ritual), stattdessen einfache Sprache + Optionen mit *Was passiert wenn ich das wähle?*-Erklärung.
-- **Sofort-Promotion-Kandidat?** ja (→ CLAUDE.md Post-Flight Schritt 3 + CREATOR §14.3 Schritt 4)
+- **Sofort-Promotion-Kandidat?** ja (→ CLAUDE.md Post-Flight Schritt 3 + CREATOR §14.3 Schritt 6)
 - **Status:** raw

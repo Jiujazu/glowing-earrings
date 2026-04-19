@@ -90,9 +90,9 @@
 
 ## Re-Audit 2026-04-19 (Nachbesserung)
 
-- **Creator-Version:** (nach Ergänzung §14.3 Schritt 6 + §9 Pflicht-Minima-Grep-Check)
+- **Creator-Version:** (nach Ergänzung §14.3 Nachbesserung-Übergang + §9 Pflicht-Minima-Grep-Check)
 - **Auditor:** Claude
-- **Anlass:** Direkt-Fix nach Erst-Audit. Julian hat per Post-Audit-AskUserQuestion „alle 6 Nachbesserungen jetzt umsetzen" gewählt (§14.3 Schritt 6).
+- **Anlass:** Direkt-Fix nach Erst-Audit. Julian hat per Post-Audit-AskUserQuestion „alle 6 Nachbesserungen jetzt umsetzen" gewählt (§14.3 Nachbesserung-Übergang).
 
 ### Zusammenfassung
 
@@ -128,6 +128,6 @@ rg -c '"type": "easter-egg"'  course.json  → 1  ≥ 1 ✅
 
 ### Übergabe
 
-- Audit-Befund (diese Datei) und Kurs-Fixes werden in getrennten Commits abgelegt, so wie §14.3 Schritt 6 es fordert.
+- Audit-Befund (diese Datei) und Kurs-Fixes werden in getrennten Commits abgelegt, so wie §14.3 Nachbesserung-Übergang es fordert.
 - Vercel deployt automatisch nach Push auf `main`.
 

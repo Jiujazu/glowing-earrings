@@ -801,11 +801,11 @@ Der Audit geht diese Kategorien durch. Jeder Check zitiert die Creator-Regel-Num
    - ❌ kritisch (Regel-Verletzung, sollte nachgebessert werden)
    - `n/a` nicht anwendbar
 3. Findings als neue Sektion an `/content/courses/[slug]/audit-log.md` anhängen (append-only, Template §14.5).
-4. **Feedback-Loop zu LEARNINGS.** Für jedes Finding mit Status ❌ oder ⚠️ prüfen, ob es **systemisch** wirkt (nicht nur Einzelfall dieses Kurses: ähnliche Verletzung wäre auch in anderen Kursen denkbar, Regel ist prüfbar, aber bisher nicht in §12 als Anti-Pattern geführt). Claude fragt Julian per `AskUserQuestion` **pro systemischem Finding einzeln**, ob es als neuer Eintrag in `COURSE-LEARNINGS.md` festgehalten werden soll (mit `source: audit [slug] YYYY-MM-DD`). Anschließend greift der normale Sofort-Promotion-Check (siehe CLAUDE.md Post-Flight Schritt 3). Einzelfälle bleiben nur im `audit-log.md`.
-5. Im Chat nur Kurz-Summary ausgeben — siehe §14.4.
-6. **Nachbesserung-Übergang (Pflicht).** Wenn Findings mit ❌ oder ⚠️ existieren: Julian per `AskUserQuestion` fragen, ob die Nachbesserungen **jetzt direkt** umgesetzt werden sollen oder als **separater Task** laufen. Befund (audit-log) und Fix (course.json) bleiben getrennt, aber der Übergang ist zwingend — ein Audit ohne expliziten Nachbesserung-Schritt wäre ein halber Workflow.
-   - Bei „jetzt": Claude führt die Fixes am Kurs durch, commit-separat vom Audit-Log.
-   - Bei „separater Task": Claude stoppt; die Nachbesserungen bleiben als Punkt im `audit-log.md` offen.
+4. Im Chat Kurz-Summary ausgeben, siehe §14.4.
+5. **Nachbesserung-Übergang (Pflicht).** Wenn Findings mit ❌ oder ⚠️ existieren: Julian per `AskUserQuestion` fragen, ob die Nachbesserungen **jetzt direkt** umgesetzt werden sollen oder als **separater Task** laufen. Befund (audit-log) und Fix (course.json) bleiben in getrennten Commits, aber der Übergang ist zwingend, ein Audit ohne expliziten Nachbesserung-Schritt wäre ein halber Workflow.
+   - Bei „jetzt": Claude führt die Fixes am Kurs durch, commit-separat vom Audit-Log. Danach Re-Audit-Sektion in `audit-log.md` anhängen (Fix-Protokoll, Grep-Verifikation der Pflicht-Minima, bewusst belassene Ausnahmen).
+   - Bei „separater Task": Claude stoppt; die Nachbesserungen bleiben als Punkt im `audit-log.md` offen. Schritt 6 (LEARNINGS-Check) wird im Fix-Task nachgezogen, nicht hier.
+6. **Feedback-Loop zu LEARNINGS (nach Fix, nicht vorher).** Für jedes Finding mit Status ❌ oder ⚠️ prüfen, ob es **systemisch** wirkt (nicht nur Einzelfall dieses Kurses: ähnliche Verletzung wäre auch in anderen Kursen denkbar, Regel ist prüfbar, aber bisher nicht in §12 als Anti-Pattern geführt). **Wichtig:** Der Check passiert erst nach dem Fix, weil erst dann klar ist, ob der Fix trivial war oder ein tieferes Problem offenbart hat, und welche Regel-Form (z.B. Grep-Check, Checklisten-Punkt) wirklich greift. Claude fragt Julian per `AskUserQuestion` **pro systemischem Finding einzeln**, ob es als neuer Eintrag in `COURSE-LEARNINGS.md` festgehalten werden soll (mit `source: audit [slug] YYYY-MM-DD`). Anschließend greift der normale Sofort-Promotion-Check (siehe CLAUDE.md Post-Flight Schritt 3). Einzelfälle bleiben nur im `audit-log.md`.
 
 ### 14.4 Chat-Summary-Format
 

@@ -10,7 +10,7 @@ import NewsletterCTA from "@/components/layout/NewsletterCTA";
 import Badge from "@/components/ui/Badge";
 import IconBox from "@/components/ui/IconBox";
 import { getIconForEmoji } from "@/lib/icon-map";
-import { HEADING, LABEL } from "@/lib/typography";
+import { HEADING } from "@/lib/typography";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { useEditMode } from "@/components/editor/EditModeProvider";
 

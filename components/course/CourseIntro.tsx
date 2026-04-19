@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import type { CourseIntro as CourseIntroType, CourseMeta } from "@/lib/types";
 import { formatDuration, getDifficultyLabel } from "@/lib/course-utils";
@@ -8,18 +9,26 @@ import { HEADING, LABEL } from "@/lib/typography";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import dynamic from "next/dynamic";
 import { useEditMode } from "@/components/editor/EditModeProvider";
+import MetaEditButton from "@/components/editor/MetaEditButton";
 
 const EditableText = dynamic(() => import("@/components/editor/EditableText"), {
   ssr: false,
 });
 
+const MetaEditPanel = dynamic(
+  () => import("@/components/editor/MetaEditPanel"),
+  { ssr: false }
+);
+
 interface CourseIntroProps {
   intro: CourseIntroType;
   meta: CourseMeta;
+  allTags?: string[];
 }
 
-export default function CourseIntro({ intro, meta }: CourseIntroProps) {
+export default function CourseIntro({ intro, meta, allTags = [] }: CourseIntroProps) {
   const { isEditMode } = useEditMode();
+  const [isMetaPanelOpen, setIsMetaPanelOpen] = useState(false);
 
   const titleContent = (
     <h1
@@ -74,9 +83,12 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
       <div className="max-w-3xl mx-auto">
         {/* Badges */}
         <ScrollReveal delay={meta.coverImage ? 50 : 0} duration={600}>
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="flex flex-wrap items-center gap-2 mb-6">
             <Badge variant="course">{getDifficultyLabel(meta.difficulty)}</Badge>
             <Badge variant="course">{formatDuration(meta.estimatedMinutes)}</Badge>
+            {isEditMode && (
+              <MetaEditButton onClick={() => setIsMetaPanelOpen(true)} />
+            )}
           </div>
         </ScrollReveal>
 
@@ -143,6 +155,15 @@ export default function CourseIntro({ intro, meta }: CourseIntroProps) {
           </div>
         </ScrollReveal>
       </div>
+
+      {isEditMode && (
+        <MetaEditPanel
+          meta={meta}
+          allTags={allTags}
+          open={isMetaPanelOpen}
+          onClose={() => setIsMetaPanelOpen(false)}
+        />
+      )}
     </section>
   );
 }

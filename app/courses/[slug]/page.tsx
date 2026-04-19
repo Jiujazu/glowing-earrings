@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getCourseBySlug, getAllCoursesIncludingDrafts } from "@/lib/course-utils";
+import { getCourseBySlug, getAllCoursesIncludingDrafts, getAllTags } from "@/lib/course-utils";
 import CoursePlayer from "@/components/course/CoursePlayer";
 
 interface CoursePageProps {
@@ -44,6 +44,8 @@ export default async function CoursePage({ params }: CoursePageProps) {
     notFound();
   }
 
+  const allTags = getAllTags();
+
   return (
     <>
       {/* JSON-LD Structured Data */}
@@ -71,7 +73,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
           }),
         }}
       />
-      <CoursePlayer course={course} />
+      <CoursePlayer course={course} allTags={allTags} />
     </>
   );
 }

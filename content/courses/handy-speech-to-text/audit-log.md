@@ -85,3 +85,49 @@
 ### Nicht gefixt / bewusst offen gelassen
 
 - Keine Nachbesserungen im `course.json` — das Audit schreibt per Protokoll nur `audit-log.md`. Julian entscheidet, ob und wann die Fixes in einem separaten Task umgesetzt werden.
+
+---
+
+## Re-Audit 2026-04-19 (Nachbesserung)
+
+- **Creator-Version:** (nach Ergänzung §14.3 Schritt 6 + §9 Pflicht-Minima-Grep-Check)
+- **Auditor:** Claude
+- **Anlass:** Direkt-Fix nach Erst-Audit. Julian hat per Post-Audit-AskUserQuestion „alle 6 Nachbesserungen jetzt umsetzen" gewählt (§14.3 Schritt 6).
+
+### Zusammenfassung
+
+- **Findings aus Erst-Audit:** 6 (3 ❌ + 3 ⚠️)
+- **Gefixt:** 6 (alle)
+- **Bewusst belassen:** 1 Em-Dash im wörtlichen Slogan-Zitat in `alt`-Text (Reportage, kein Stilmittel)
+- **Status:** grün — alle Pflicht-Regeln erfüllt
+
+### Fix-Protokoll
+
+| Finding (Erst-Audit) | Regel | Fix | Verifikation |
+|---|---|---|---|
+| Kein `key-concept`-Element | §1.5, §4.2 | `m1-key-concept` „Lokale Speech-to-Text" in Modul 1 ergänzt | `rg -c '"type": "key-concept"' course.json` → `1` ✅ |
+| 31 Em-Dashes als Stilmittel | §9 Anti-AI-Writing | 30 Vorkommen durch Komma / Punkt / Doppelpunkt ersetzt (kontextabhängig) | `rg '—' course.json` → nur noch 1 (Zeile 57, Zitat im `alt`-Text) ✅ |
+| `agentic-os-context-levels` listet `handy-speech-to-text` nicht zurück | §5.4 Reziprozität | Slug in `agentic-os-context-levels/course.json` `meta.relatedCourses` ergänzt | `grep -A3 relatedCourses` beider Kurse zeigt gegenseitige Referenz ✅ |
+| Tag `Tools` generisch | §8.2, §12.5 | Ersetzt durch `Whisper` (Tags nun: Diktat, Whisper, Privacy) | `grep -A4 '"tags"'` ✅ |
+| `gap-analysis.md` fehlt | §11.3 | `gap-analysis.md` angelegt: Quelle-Kurs-Mapping (Website-Säulen + README), bewusst weggelassene Abschnitte, Kurs-Ergänzungen | Datei existiert ✅ |
+| `source.md` nur Header, leerer Inhalt | §6.6 | Mit GitHub-README von `cjpais/Handy` befüllt (Abruf 2026-04-19 via `raw.githubusercontent.com`), Hinweis auf Website-Kürze oben erklärt | Datei enthält kuratierte Langform ✅ |
+
+### Pflicht-Minima (§9 Grep-Check, neu eingeführt durch dieses Audit)
+
+```
+rg -c '"type": "key-concept"' course.json  → 1  ≥ 1 ✅
+rg -c '"type": "quiz"'        course.json  → 2  ≥ 2 ✅
+rg -c '"type": "flashcard"'   course.json  → 3  ≥ 3 ✅
+rg -c '"type": "reflection"'  course.json  → 1  ≥ 1 ✅
+rg -c '"type": "easter-egg"'  course.json  → 1  ≥ 1 ✅
+```
+
+### Bewusst belassen
+
+- **Ein verbleibender Em-Dash** in Zeile 57 (`alt`-Text): wörtliches Slogan-Zitat `'speak into any text field — the free and open source speech to text app'`. Reportage aus dem abgebildeten Screenshot, kein AI-Stilmittel — würde der Sanitär-Regel widersprechen, den Slogan zu verfälschen. §9 Ausnahme „Zitate originalgetreu".
+
+### Übergabe
+
+- Audit-Befund (diese Datei) und Kurs-Fixes werden in getrennten Commits abgelegt, so wie §14.3 Schritt 6 es fordert.
+- Vercel deployt automatisch nach Push auf `main`.
+

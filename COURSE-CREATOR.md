@@ -792,29 +792,50 @@ Der Audit geht diese Kategorien durch. Jeder Check zitiert die Creator-Regel-Num
 **Anti-Patterns (nur `hot`-Status aus §12)**
 - Alle aktuell auf `hot` stehenden Einträge einzeln prüfen — Stelle im Kurs nennen, falls verletzt.
 
+**Lerner-Perspektive (qualitativ anderer Check, Pflicht)**
+
+Claude wechselt bewusst den Mindset: nicht Regel-Check, sondern Rollenspiel als Anfänger, der zufällig auf die Landing-Page geklickt hat und das Thema vorher nicht kannte. Antworten sind keine ✅/❌-Haken, sondern kurze narrative Urteile mit Bezug auf konkrete Kurs-Stellen (Modul-ID, Element-ID).
+
+Prüffragen:
+1. **Prämisse eingelöst?** Was versprach das Intro, und wurde jede Teilbehauptung im Kurs erfüllt?
+2. **Habe ich das gelernt, was versprochen wurde?** Deckt der Inhalt die Meta-Versprechen von `title`, `subheading`, `subtitle`?
+3. **Hat mich der Kurs weitergebracht?** Gibt es einen erkennbaren Vorher-Nachher-Zustand?
+4. **Sind die Infos vollständig oder hätte mir etwas gefehlt?** Welche naheliegenden Folgefragen bleiben offen?
+5. **Kann ich das Wissen jetzt anwenden?** Gibt es konkrete Schritte, Beispiele, Transfer-Anker?
+6. **Sind Anleitungen konkret genug zum Nachmachen?** Bei Tool-/Workflow-Kursen: reichen Screenshots + Erklärungen, um es selbst zu machen?
+7. **Hat es Spaß gemacht, war es unterhaltsam?** Gibt es Stellen, die Energie reingeben (Easter-Eggs, überraschende Formulierungen, Callouts mit Witz)? Oder ist es eher Pflichtlektüre?
+8. **Ist der Kurs vollständig für seine Prämisse?** Oder fühlt er sich abgebrochen/unfertig an?
+
+**Wichtig — Disclaimer:** Claude kann Lerner-Erlebnis nur **simulieren**, nicht echt haben. Kein echtes Spaß-Empfinden, keine echte Frustration. Der Wert liegt im bewussten Perspektivwechsel, nicht in empirischer Wahrheit. Ein echter Test wäre nur durch Julian oder reale Tester möglich. Das Audit-Protokoll macht diesen Vorbehalt explizit („simulierte Lerner-Perspektive, kein Ersatz für echte Nutzertests").
+
+Lerner-Findings können in die gleiche „Empfohlene Nachbesserungen"-Liste einfließen wie Regel-Findings, mit Präfix `[Lerner]` statt `[Kritisch]`/`[Warnung]` — weil es kein Regel-Schweregrad ist, sondern eine Erlebnis-Lücke.
+
 ### 14.3 Audit-Prozess (für Slash-Command `/kurs-audit [slug]`)
 
 1. Slug einlesen, `content/courses/[slug]/course.json` + begleitende `source.md`/`gap-analysis.md` öffnen.
-2. Prüfliste aus §14.2 abarbeiten. Pro Punkt Status vergeben:
+2. **Regel-Check:** Prüfliste aus §14.2 abarbeiten (außer Block „Lerner-Perspektive"). Pro Punkt Status vergeben:
    - ✅ erfüllt
    - ⚠️ Warnung (kosmetisch, nicht blockend)
    - ❌ kritisch (Regel-Verletzung, sollte nachgebessert werden)
    - `n/a` nicht anwendbar
-3. Findings als neue Sektion an `/content/courses/[slug]/audit-log.md` anhängen (append-only, Template §14.5).
-4. Im Chat Kurz-Summary ausgeben, siehe §14.4.
-5. **Nachbesserung-Übergang (Pflicht).** Wenn Findings mit ❌ oder ⚠️ existieren: Julian per `AskUserQuestion` fragen, ob die Nachbesserungen **jetzt direkt** umgesetzt werden sollen oder als **separater Task** laufen. Befund (audit-log) und Fix (course.json) bleiben in getrennten Commits, aber der Übergang ist zwingend, ein Audit ohne expliziten Nachbesserung-Schritt wäre ein halber Workflow.
+3. **Lerner-Perspektive (Pflicht, Mindset-Wechsel).** Vor diesem Block: course.json mental zuklappen. Den Kurs im Lesefluss durchgehen (Modul für Modul, wie ein Anfänger es täte). Die 8 Fragen aus §14.2 Block „Lerner-Perspektive" **narrativ** beantworten — Ja/Teilweise/Nein + Begründung + konkrete Kurs-Stelle. Der Disclaimer („simulierte Perspektive") gehört in den Audit-Log-Block.
+4. Findings aus Schritt 2 **und** 3 als neue Sektion an `/content/courses/[slug]/audit-log.md` anhängen (append-only, Template §14.5). Lerner-Findings werden unter `[Lerner]` statt `[Kritisch]`/`[Warnung]` einsortiert.
+5. Im Chat Kurz-Summary ausgeben, siehe §14.4.
+6. **Nachbesserung-Übergang (Pflicht).** Wenn Findings mit ❌, ⚠️ oder `[Lerner]` existieren: Julian per `AskUserQuestion` fragen, ob die Nachbesserungen **jetzt direkt** umgesetzt werden sollen oder als **separater Task** laufen. Befund (audit-log) und Fix (course.json) bleiben in getrennten Commits, aber der Übergang ist zwingend, ein Audit ohne expliziten Nachbesserung-Schritt wäre ein halber Workflow.
    - Bei „jetzt": Claude führt die Fixes am Kurs durch, commit-separat vom Audit-Log. Danach Re-Audit-Sektion in `audit-log.md` anhängen (Fix-Protokoll, Grep-Verifikation der Pflicht-Minima, bewusst belassene Ausnahmen).
-   - Bei „separater Task": Claude stoppt; die Nachbesserungen bleiben als Punkt im `audit-log.md` offen. Schritt 6 (LEARNINGS-Check) wird im Fix-Task nachgezogen, nicht hier.
-6. **Feedback-Loop zu LEARNINGS (nach Fix, nicht vorher).** Für jedes Finding mit Status ❌ oder ⚠️ prüfen, ob es **systemisch** wirkt (nicht nur Einzelfall dieses Kurses: ähnliche Verletzung wäre auch in anderen Kursen denkbar, Regel ist prüfbar, aber bisher nicht in §12 als Anti-Pattern geführt). **Wichtig:** Der Check passiert erst nach dem Fix, weil erst dann klar ist, ob der Fix trivial war oder ein tieferes Problem offenbart hat, und welche Regel-Form (z.B. Grep-Check, Checklisten-Punkt) wirklich greift. Claude fragt Julian per `AskUserQuestion` **pro systemischem Finding einzeln**, ob es als neuer Eintrag in `COURSE-LEARNINGS.md` festgehalten werden soll (mit `source: audit [slug] YYYY-MM-DD`). Anschließend greift der normale Sofort-Promotion-Check (siehe CLAUDE.md Post-Flight Schritt 3). Einzelfälle bleiben nur im `audit-log.md`.
+   - Bei „separater Task": Claude stoppt; die Nachbesserungen bleiben als Punkt im `audit-log.md` offen. Schritt 7 (LEARNINGS-Check) wird im Fix-Task nachgezogen, nicht hier.
+7. **Feedback-Loop zu LEARNINGS (nach Fix, nicht vorher).** Für jedes Finding mit Status ❌, ⚠️ oder `[Lerner]` prüfen, ob es **systemisch** wirkt (nicht nur Einzelfall dieses Kurses: ähnliche Verletzung wäre auch in anderen Kursen denkbar, Regel ist prüfbar, aber bisher nicht in §12 als Anti-Pattern geführt). **Wichtig:** Der Check passiert erst nach dem Fix, weil erst dann klar ist, ob der Fix trivial war oder ein tieferes Problem offenbart hat, und welche Regel-Form (z.B. Grep-Check, Checklisten-Punkt) wirklich greift. Claude fragt Julian per `AskUserQuestion` **pro systemischem Finding einzeln**, ob es als neuer Eintrag in `COURSE-LEARNINGS.md` festgehalten werden soll (mit `source: audit [slug] YYYY-MM-DD`). Anschließend greift der normale Sofort-Promotion-Check (siehe CLAUDE.md Post-Flight Schritt 3). Einzelfälle bleiben nur im `audit-log.md`.
 
 ### 14.4 Chat-Summary-Format
 
 Nach einem Audit gibt Claude im Chat nur eine Kurzfassung:
 
 > **Audit für `[slug]` abgeschlossen.**
-> - Findings: **X total** (Y kritisch ❌, Z Warnungen ⚠️)
+> - Regel-Findings: **X total** (Y kritisch ❌, Z Warnungen ⚠️)
+> - Lerner-Perspektive: **Kurz-Urteil** (z.B. „Prämisse eingelöst, aber Transfer-Schritte fehlen" / „rund und spielbar")
 > - Status: bestanden / Nachbesserung nötig
 > - Kritisch: [Stichwort 1], [Stichwort 2]
+> - Lerner-Lücken: [Stichwort, falls vorhanden]
 > - Systemisch (→ LEARNINGS-Rückfrage): [Stichwort, falls vorhanden]
 > - Details: `/content/courses/[slug]/audit-log.md` (neue Sektion von heute)
 
@@ -860,11 +881,27 @@ Pro Kurs existiert **eine** Datei `/content/courses/[slug]/audit-log.md`. Bei je
 | Artefakte | §11.3 Gap-Analyse | ❌ | — | gap-analysis.md fehlt |
 | Anti-Patterns | §12.7 Emoji-Inflation | ⚠️ | Modul 3 Content-Block | 2 Emojis im Fließtext |
 
+### Lerner-Perspektive
+
+> Simulierter Durchlauf als Anfänger, der das Thema vorher nicht kannte. Kein Ersatz für echte Nutzertests.
+
+1. **Prämisse eingelöst?** Ja/Teilweise/Nein — [Begründung, konkrete Stelle]
+2. **Was versprochen wurde auch gelernt?** …
+3. **Weitergebracht?** …
+4. **Vollständig, oder fehlt etwas?** …
+5. **Anwendbar?** …
+6. **Anleitungen konkret genug zum Nachmachen?** …
+7. **Spaß / Unterhaltsam?** …
+8. **Vollständig für die Prämisse?** …
+
+**Gesamt-Urteil:** [1–2 Sätze, was das Lernerlebnis gebracht hat und woran es hakt]
+
 ### Empfohlene Nachbesserungen
 
 1. **[Kritisch]** gap-analysis.md rückwirkend anlegen (§11.3).
 2. **[Warnung]** `meta.tags` "Productivity" ersetzen durch spezifischere Tags (§8.2).
 3. **[Warnung]** Modul 3 Content-Block: Emojis aus Fließtext entfernen (§12.7).
+4. **[Lerner]** Modul 4: Transfer-Beispiel fehlt — der Kurs erklärt „was", aber nicht „wie im eigenen Alltag anwenden".
 
 ### Systemische Findings (an LEARNINGS gemeldet?)
 

@@ -24,7 +24,7 @@ Führe ein Audit für den Kurs `$ARGUMENTS` durch. Folge dem Protokoll aus **`CO
   - `/content/courses/$ARGUMENTS/gap-analysis.md` — falls vorhanden
   - `/content/courses/$ARGUMENTS/audit-log.md` — falls vorhanden (= Re-Audit, vorige Sektionen als Vergleichsbasis lesen)
 
-### 2. Prüfliste aus CREATOR §14.2 abarbeiten
+### 2. Regel-Check: Prüfliste aus CREATOR §14.2 abarbeiten
 
 Pro Check Status vergeben:
 - ✅ erfüllt
@@ -37,12 +37,33 @@ Pro Check Status vergeben:
 
 Bei jedem Finding: **Stelle im Kurs nennen** (z.B. „Modul 3 Content-Block", „meta.tags").
 
-### 3. Anlass bestimmen
+### 3. Lerner-Perspektive (Pflicht, Mindset-Wechsel)
+
+**Mental umschalten:** course.json zuklappen. Den Kurs im Lesefluss durchgehen — Intro, Modul 1, Modul 2, … Outro. So, wie ein Anfänger es täte, der das Thema vorher nicht kannte.
+
+Die **8 Fragen aus §14.2 Block „Lerner-Perspektive"** narrativ beantworten:
+
+1. Prämisse eingelöst?
+2. Habe ich gelernt, was versprochen wurde?
+3. Hat mich der Kurs weitergebracht?
+4. Sind die Infos vollständig oder hätte etwas gefehlt?
+5. Kann ich das Wissen jetzt anwenden?
+6. Sind Anleitungen konkret genug zum Nachmachen?
+7. Spaß / Unterhaltsam?
+8. Vollständig für die Prämisse?
+
+Pro Frage: **Ja / Teilweise / Nein + kurze Begründung + konkrete Kurs-Stelle** (Modul-ID, Element-ID). Am Ende 1–2 Sätze Gesamt-Urteil.
+
+**Disclaimer in den Audit-Log aufnehmen:** „simulierte Lerner-Perspektive, kein Ersatz für echte Nutzertests".
+
+Lerner-Findings, die zu einer Nachbesserung führen, landen in der Liste „Empfohlene Nachbesserungen" mit Präfix `[Lerner]` statt `[Kritisch]`/`[Warnung]`.
+
+### 4. Anlass bestimmen
 
 - Erst-Audit → `regulär nach Creator-Update` / `ad hoc` / `Refactor-Trigger` (aus Kontext ableiten; im Zweifel Julian fragen)
 - Audit-log existiert bereits → `Re-Audit nach Nachbesserung` oder `Re-Audit nach Creator-Update`
 
-### 4. Vergleich zum letzten Audit
+### 5. Vergleich zum letzten Audit
 
 Falls `audit-log.md` bereits existiert:
 - Vorige Findings mit aktuellen abgleichen
@@ -50,7 +71,7 @@ Falls `audit-log.md` bereits existiert:
 
 Falls Erst-Audit: „entfällt beim Erst-Audit".
 
-### 5. audit-log.md schreiben — **APPEND-ONLY**
+### 6. audit-log.md schreiben — **APPEND-ONLY**
 
 Datei: `/content/courses/$ARGUMENTS/audit-log.md`
 
@@ -70,7 +91,8 @@ Die neue Sektion beginnt mit `---` als Trenner und folgt dem Template aus `COURS
 
 ### Zusammenfassung
 
-- **Findings:** X total (Y kritisch ❌, Z Warnungen ⚠️)
+- **Regel-Findings:** X total (Y kritisch ❌, Z Warnungen ⚠️)
+- **Lerner-Perspektive:** [Kurzurteil in 1 Zeile]
 - **Status:** bestanden / Nachbesserung nötig
 - **Vergleich zu letztem Audit:** ...
 
@@ -80,10 +102,26 @@ Die neue Sektion beginnt mit `---` als Trenner und folgt dem Template aus `COURS
 |---|---|---|---|---|
 | ... | ... | ... | ... | ... |
 
+### Lerner-Perspektive
+
+> Simulierter Durchlauf als Anfänger, der das Thema vorher nicht kannte. Kein Ersatz für echte Nutzertests.
+
+1. **Prämisse eingelöst?** Ja/Teilweise/Nein — [Begründung, konkrete Stelle]
+2. **Was versprochen wurde auch gelernt?** ...
+3. **Weitergebracht?** ...
+4. **Vollständig, oder fehlt etwas?** ...
+5. **Anwendbar?** ...
+6. **Anleitungen konkret genug zum Nachmachen?** ...
+7. **Spaß / Unterhaltsam?** ...
+8. **Vollständig für die Prämisse?** ...
+
+**Gesamt-Urteil:** [1–2 Sätze]
+
 ### Empfohlene Nachbesserungen
 
 1. **[Kritisch]** ... (§...)
 2. **[Warnung]** ... (§...)
+3. **[Lerner]** ... (Frage X aus Lerner-Perspektive)
 
 ### Systemische Findings (an LEARNINGS gemeldet?)
 
@@ -94,20 +132,22 @@ Die neue Sektion beginnt mit `---` als Trenner und folgt dem Template aus `COURS
 - ...
 ```
 
-### 6. Chat-Summary (§14.4)
+### 7. Chat-Summary (§14.4)
 
 Nach Abschluss im Chat **nur die Kurzfassung** ausgeben, keine Detail-Tabelle:
 
 > **Audit für `$ARGUMENTS` abgeschlossen.**
-> - Findings: **X total** (Y kritisch ❌, Z Warnungen ⚠️)
+> - Regel-Findings: **X total** (Y kritisch ❌, Z Warnungen ⚠️)
+> - Lerner-Perspektive: **Kurz-Urteil**
 > - Status: bestanden / Nachbesserung nötig
 > - Kritisch: [Stichwort 1], [Stichwort 2]
+> - Lerner-Lücken: [Stichwort, falls vorhanden]
 > - Systemisch (→ LEARNINGS): [Stichwort, falls vorhanden; sonst „keine"]
 > - Details: `/content/courses/$ARGUMENTS/audit-log.md` (neue Sektion von heute)
 
-### 7. Nachbesserung-Übergang (§14.3 Schritt 5, Pflicht)
+### 8. Nachbesserung-Übergang (§14.3 Schritt 6, Pflicht)
 
-Wenn Findings mit ❌ oder ⚠️ existieren: Julian via `AskUserQuestion` fragen, ob die Nachbesserungen **jetzt direkt** umgesetzt werden oder als **separater Task** laufen.
+Wenn Findings mit ❌, ⚠️ oder `[Lerner]` existieren: Julian via `AskUserQuestion` fragen, ob die Nachbesserungen **jetzt direkt** umgesetzt werden oder als **separater Task** laufen.
 
 Formulierung in einfacher Sprache (LEARNINGS `Workflow-Audit: Audit-Fragen-Stil`), Optionen mit Konsequenz-Erklärung:
 
@@ -115,21 +155,21 @@ Formulierung in einfacher Sprache (LEARNINGS `Workflow-Audit: Audit-Fragen-Stil`
 > - Jetzt direkt fixen → ich mache die Änderungen am Kurs, committe sie separat vom Audit-Log
 > - Als separater Task → ich stoppe hier; die offenen Punkte bleiben im audit-log für später
 
-Bei **„jetzt"** → Schritt 8.
-Bei **„separater Task"** → Schritt 9 entfällt in dieser Session. Die LEARNINGS-Rückfrage wird im Fix-Task nachgezogen.
+Bei **„jetzt"** → Schritt 9.
+Bei **„separater Task"** → Schritt 10 entfällt in dieser Session. Die LEARNINGS-Rückfrage wird im Fix-Task nachgezogen.
 
-### 8. Fixes + Re-Audit-Sektion (nur bei „jetzt")
+### 9. Fixes + Re-Audit-Sektion (nur bei „jetzt")
 
 - Fixes pro Finding am Kurs ausführen (`course.json`, ggf. `source.md`, `gap-analysis.md`, Geschwister-Kurse bei Reziprozität).
 - **Pflicht-Minima per Grep verifizieren** (§9): `rg -c '"type": "key-concept|quiz|flashcard|reflection|easter-egg"'` — Soll-Werte 1/2/3/1/1.
 - **Re-Audit-Sektion** als neue Sektion unten in `audit-log.md` anhängen (append-only). Inhalt: Anlass = „Direkt-Fix nach Erst-Audit", Fix-Protokoll-Tabelle (Finding → Regel → Fix → Verifikation), Grep-Output der Pflicht-Minima, bewusst belassene Ausnahmen.
 - Commits: Audit-Befund und Kurs-Fixes in **getrennten Commits**.
 
-### 9. Feedback-Loop zu LEARNINGS (§14.3 Schritt 6, **nach Fix**)
+### 10. Feedback-Loop zu LEARNINGS (§14.3 Schritt 7, **nach Fix**)
 
 Wichtig: Dieser Check passiert **nach** dem Fix, weil erst dann klar ist, ob die Regel trivial greift oder ein tieferes Problem offenbart wurde (Beispiel: Der Grep-Check-Vorschlag entstand aus dem Fix-Erlebnis, nicht aus dem Befund).
 
-Für **jedes** Finding mit Status ❌ oder ⚠️ prüfen: **systemisch oder Einzelfall?**
+Für **jedes** Finding mit Status ❌, ⚠️ oder `[Lerner]` prüfen: **systemisch oder Einzelfall?**
 
 Systemisch = alle drei:
 - Ähnliche Verletzung in anderen Kursen denkbar (nicht nur in diesem Kurs problematisch)

@@ -52,12 +52,14 @@ export default function SaveButton() {
 
       clearTimeout(timeout);
 
-      if (!response.ok && response.status >= 500) {
-        throw new Error(`Server error: ${response.status}`);
+      let data: { success?: boolean; message?: string } | null = null;
+      try {
+        data = await response.json();
+      } catch {
+        // Non-JSON response (e.g. Vercel error page) — fall through
       }
-      const data = await response.json();
 
-      if (data.success) {
+      if (response.ok && data?.success) {
         setSaveState("success");
         clearChanges();
         setLastSaved(new Date());
@@ -67,9 +69,11 @@ export default function SaveButton() {
         );
         setTimeout(() => setSaveState("idle"), 2000);
       } else {
+        const message =
+          data?.message || `Speichern fehlgeschlagen (HTTP ${response.status}).`;
         setSaveState("error");
-        setErrorMessage(data.message || "Speichern fehlgeschlagen.");
-        toast?.showToast(data.message || "Speichern fehlgeschlagen", "error");
+        setErrorMessage(message);
+        if (!isAutosave) toast?.showToast(message, "error");
       }
     } catch {
       setSaveState("error");

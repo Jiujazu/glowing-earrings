@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
     }
 
     const octokit = new Octokit({ auth: githubToken });
-    const filePath = `content/courses/${slug}.json`;
+    const filePath = `content/courses/${slug}/course.json`;
 
     const { data: commits } = await octokit.rest.repos.listCommits({
       owner,

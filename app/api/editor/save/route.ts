@@ -222,7 +222,7 @@ export async function POST(request: NextRequest) {
     }
 
     const octokit = new Octokit({ auth: githubToken });
-    const filePath = `content/courses/${slug}.json`;
+    const filePath = `content/courses/${slug}/course.json`;
 
     // Fetch current file from GitHub
     let fileData;
@@ -236,7 +236,7 @@ export async function POST(request: NextRequest) {
       fileData = response.data;
     } catch {
       return NextResponse.json(
-        { success: false, message: `Kurs-Datei "${slug}.json" nicht gefunden.` },
+        { success: false, message: `Kurs-Datei "${filePath}" nicht gefunden.` },
         { status: 404 }
       );
     }

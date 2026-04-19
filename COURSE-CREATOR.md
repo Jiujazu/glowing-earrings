@@ -472,6 +472,7 @@ Pflicht für alle Prosa-Teile: Intro, Modul-Texte, Callouts, Übergänge, Outro,
 - [ ] Keine KI-Floskeln ("In der heutigen schnelllebigen Welt…", "Es ist wichtig zu verstehen…")
 
 ### Didaktik
+- [ ] Mindestens 1 Key-Concept (zentraler Begriff als Card)
 - [ ] Mindestens 2 Quizzes mit plausiblen Distraktoren und lehrreichem Feedback
 - [ ] Quiz-Feedback erklärt das *Warum* — nicht nur richtig/falsch
 - [ ] Mindestens 3 Flashcards, die Zusammenhänge testen (nicht nur Definitionen)
@@ -482,6 +483,12 @@ Pflicht für alle Prosa-Teile: Intro, Modul-Texte, Callouts, Übergänge, Outro,
 - [ ] Modul-Übergänge vorhanden (bevorzugt Kurs-Querverweise)
 - [ ] Outro mit Synthese, konkretem nächsten Schritt und Takeaway
 - [ ] `relatedCourses` gegenseitig gesetzt
+- [ ] **Pflicht-Minima per Grep verifiziert** (vor Commit ausführen, Werte müssen ≥ angegebener Zahl sein):
+  - `rg -c '"type": "key-concept"' content/courses/[slug]/course.json` → ≥ 1
+  - `rg -c '"type": "quiz"' content/courses/[slug]/course.json` → ≥ 2
+  - `rg -c '"type": "flashcard"' content/courses/[slug]/course.json` → ≥ 3
+  - `rg -c '"type": "reflection"' content/courses/[slug]/course.json` → ≥ 1
+  - `rg -c '"type": "easter-egg"' content/courses/[slug]/course.json` → ≥ 1
 
 ### Design
 - [ ] Kurs-Theme hat Charakter (kein generisches Template)
@@ -735,6 +742,7 @@ Der Audit geht diese Kategorien durch. Jeder Check zitiert die Creator-Regel-Num
 - §3.4 Externe Frameworks (nur wenn verwendet) — alle 5 Kriterien erfüllt? (Max 1 pro Kurs, etabliertes Framework, visuell getrennt, Attribution, im Zweifel weggelassen)
 
 **Elemente**
+- §1.5/§4.2 Mindestens 1 Key-Concept im Kurs?
 - §4.3 Mindestens 2 Quizzes mit plausiblen Distraktoren + erklärendem Feedback?
 - §4.4 Mindestens 3 Flashcards mit "Warum"-Fragen?
 - §4.5 Mindestens 1 Reflexionsfrage mit Praxisbezug?
@@ -742,6 +750,7 @@ Der Audit geht diese Kategorien durch. Jeder Check zitiert die Creator-Regel-Num
 - §4.2 Element-Reihenfolge variiert zwischen Modulen?
 - §6.4 SVGs im neo-brutalen Editorial-Stil?
 - §6.5 SVG-Triage: SVGs sinnvoll platziert, nicht erzwungen?
+- §9 Pflicht-Minima per Grep verifizierbar (`rg -c '"type": "key-concept"' …` ≥ 1, etc.)?
 
 **Meta**
 - §8.1 Schwierigkeitsgrad korrekt?

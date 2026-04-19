@@ -167,3 +167,34 @@ Bestätigte Patterns werden als Regel in der passenden `CREATOR`-Sektion ergänz
   - Bewusste Entscheidung: Umbau würde die klare thematische Dreiteilung zerstören. Markierung als Diskussion für künftiges Verdichtungs-Ritual.
 - **Sofort-Promotion-Kandidat?** nein — "Output Compounding" bereits von §12.8 abgedeckt, `source.md`-Gate bereits in §9 Qualitäts-Checkliste. Grenzfall "Sekundäre Quellen als eigene Kategorie" Julian vorgelegt: Einzelfall, Ritual entscheidet später.
 - **Status:** raw
+
+### Kurs 3 Audit: Handy App (2026-04-19)
+
+**Quelle:** audit handy-speech-to-text 2026-04-19 — Erst-Audit gegen Creator-Version `eeeede8`
+**Theme:** Dark, Minimal (Grün + Gelb)
+
+- **Was war neu:** Erster Audit-basierter LEARNINGS-Eintrag für einen bereits live gestellten Kurs. Anlass: ad hoc.
+- **Was hat funktioniert (vom Audit bestätigt):**
+  - Reale Screenshots statt Textbeschreibung (§6.8) — 5 UI-Shots decken Setup und Pro-Tipps ab
+  - Prose-first, keine Box-Karussells (§2.3, §12.6)
+  - Emojis strikt auf Takeaway-Liste beschränkt (§3.1, §12.7)
+- **Was war ein Fehler (Audit-Findings):**
+  - **§1.5 Pflicht-Minimum Key-Concept fehlt komplett.** Null `key-concept`-Elemente im Kurs. Das Pflicht-Minimum aus §1.5 („min. 1 Key-Concept pro Kurs") ist verletzt. Wurde in der Qualitäts-Checkliste §9 nicht geprüft.
+  - §9 Em-Dash-Inflation: 31 Em-Dashes im JSON — Einzelfall (Julian).
+  - §5.4 relatedCourses einseitig gesetzt — Einzelfall (Julian).
+  - §6.6 source.md leer als Stub — Einzelfall (Julian).
+- **Hypothese für nächste Kurse:** Pflicht-Minima (1 Key-Concept, 2 Quiz, 3 Flashcards, 1 Reflexion, 1 Easter Egg) sind per Grep gegen das fertige `course.json` maschinell prüfbar. Ein automatischer Zählcheck vor Commit würde die Lücke schließen, die hier durch manuelles Übersehen entstanden ist.
+- **Sofort-Promotion-Kandidat?** ja (→ CREATOR §9 Didaktik-Checkliste, Pflicht-Minima per Grep)
+- **Status:** promoted → CREATOR §9 (Pflicht-Minima Grep-Check für key-concept, quiz, flashcard, reflection, easter-egg)
+
+### Workflow-Audit: Audit-Fragen-Stil (2026-04-19)
+
+**Quelle:** Meta-Feedback Julian während `audit handy-speech-to-text 2026-04-19`
+**Theme:** —
+
+- **Was war neu:** Erstes Feedback explizit zur Form, nicht zum Inhalt der Audit-Rückfragen.
+- **Was hat funktioniert:** Sobald die Frage in einfachen Worten + drei klar abgegrenzten Optionen mit Konsequenz formuliert war, konnte Julian entscheiden.
+- **Was war ein Fehler:** Ursprüngliche `AskUserQuestion`-Formulierungen mit Fachbegriffen wie *systemisch, promovieren, Anti-Pattern, Sofort-Promotion-Check* haben Julian blockiert. Er konnte die Frage nicht bewerten und bat um Klärung.
+- **Hypothese für nächste Kurse:** Audit- und Sofort-Promotion-Fragen müssen jargon-frei sein. Konkret: keine internen Begriffe (Anti-Pattern, promoten, systemisch, Verdichtungs-Ritual), stattdessen einfache Sprache + Optionen mit *Was passiert wenn ich das wähle?*-Erklärung.
+- **Sofort-Promotion-Kandidat?** ja (→ CLAUDE.md Post-Flight Schritt 3 + CREATOR §14.3 Schritt 4)
+- **Status:** raw

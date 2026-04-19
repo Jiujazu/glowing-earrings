@@ -1,0 +1,40 @@
+{
+  "slug": "handy-speech-to-text",
+  "fetchedAt": "2026-04-19T15:02:42.273Z",
+  "notice": "Offizielle Store-Assets. Nutzung redaktionell, mit Quellen-Attribution im Kurs-Outro.",
+  "sources": {
+    "web": {
+      "pageUrl": "https://handy.computer/"
+    }
+  },
+  "files": [
+    {
+      "kind": "web",
+      "file": "web-01-wordcab.png.png",
+      "path": "web-01-wordcab.png.png",
+      "sourceUrl": "https://handy.computer/sponsor-images/wordcab.png",
+      "bytes": 425240
+    },
+    {
+      "kind": "web",
+      "file": "web-02-epicenter.png.png",
+      "path": "web-02-epicenter.png.png",
+      "sourceUrl": "https://handy.computer/sponsor-images/epicenter.png",
+      "bytes": 4241
+    },
+    {
+      "kind": "web",
+      "file": "web-03-boltai.jpg.jpg",
+      "path": "web-03-boltai.jpg.jpg",
+      "sourceUrl": "https://handy.computer/sponsor-images/boltai.jpg",
+      "bytes": 59549
+    },
+    {
+      "kind": "web",
+      "file": "web-04-og-banner.png.png",
+      "path": "web-04-og-banner.png.png",
+      "sourceUrl": "https://handy.computer/og-banner.png",
+      "bytes": 66999
+    }
+  ]
+}

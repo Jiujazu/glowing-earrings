@@ -3,7 +3,7 @@ import {
   Layers, Folder, FolderOpen, Building2, FileText, Ruler, Inbox,
   Search, Wrench, Heart, Rocket, Key, Lightbulb, BarChart3,
   AlertTriangle, Sparkles, Dices, PenLine, ClipboardList, HelpCircle,
-  Image, Clapperboard, MessageCircleQuestion, Microscope, Quote,
+  Image, Clapperboard, MessageCircleQuestion, Microscope,
   Star, Anchor, Eye, BookMarked, Compass, Cpu, Globe, Link,
   type LucideIcon,
 } from "lucide-react";

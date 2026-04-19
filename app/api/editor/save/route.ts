@@ -212,14 +212,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const owner = process.env.GITHUB_REPO_OWNER;
-    const repo = process.env.GITHUB_REPO_NAME;
-    if (!owner || !repo) {
-      return NextResponse.json(
-        { success: false, message: "Server-Konfiguration fehlt (GITHUB_REPO_OWNER/NAME)." },
-        { status: 500 }
-      );
-    }
+    const owner = process.env.GITHUB_REPO_OWNER || "Jiujazu";
+    const repo = process.env.GITHUB_REPO_NAME || "glowing-earrings";
 
     const octokit = new Octokit({ auth: githubToken });
     const filePath = `content/courses/${slug}/course.json`;

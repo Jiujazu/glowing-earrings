@@ -52,12 +52,19 @@ export function verifySessionToken(token: string | undefined | null): boolean {
 function checkOrigin(request: NextRequest): NextResponse | null {
   if (process.env.NODE_ENV !== "production") return null;
   const origin = request.headers.get("origin");
+  // Expected hostname: prefer NEXT_PUBLIC_SITE_URL, fall back to the request's
+  // own host (set by the platform, not by the attacker — safe for CSRF compare).
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
-  if (!siteUrl) {
-    return NextResponse.json(
-      { success: false, message: "Server-Konfiguration fehlt (NEXT_PUBLIC_SITE_URL)." },
-      { status: 500 }
-    );
+  let siteHost = "";
+  if (siteUrl) {
+    try {
+      siteHost = new URL(siteUrl).hostname;
+    } catch {
+      // ignored — fall back to request host
+    }
+  }
+  if (!siteHost) {
+    siteHost = request.nextUrl.hostname;
   }
   if (!origin || origin === "null") {
     return NextResponse.json(
@@ -67,7 +74,6 @@ function checkOrigin(request: NextRequest): NextResponse | null {
   }
   try {
     const originHost = new URL(origin).hostname;
-    const siteHost = new URL(siteUrl).hostname;
     if (originHost !== siteHost && !originHost.endsWith(`.${siteHost}`)) {
       return NextResponse.json(
         { success: false, message: "Ungültiger Origin." },

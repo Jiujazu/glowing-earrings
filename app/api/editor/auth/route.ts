@@ -48,11 +48,16 @@ function checkOrigin(request: NextRequest): NextResponse | null {
   if (process.env.NODE_ENV !== "production") return null;
   const origin = request.headers.get("origin");
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
-  if (!siteUrl) {
-    return NextResponse.json(
-      { success: false, message: "Server-Konfiguration fehlt (NEXT_PUBLIC_SITE_URL)." },
-      { status: 500 }
-    );
+  let siteHost = "";
+  if (siteUrl) {
+    try {
+      siteHost = new URL(siteUrl).hostname;
+    } catch {
+      // ignored — fall back to request host
+    }
+  }
+  if (!siteHost) {
+    siteHost = request.nextUrl.hostname;
   }
   if (!origin || origin === "null") {
     return NextResponse.json(
@@ -62,7 +67,6 @@ function checkOrigin(request: NextRequest): NextResponse | null {
   }
   try {
     const originHost = new URL(origin).hostname;
-    const siteHost = new URL(siteUrl).hostname;
     if (originHost !== siteHost && !originHost.endsWith(`.${siteHost}`)) {
       return NextResponse.json(
         { success: false, message: "Ungültiger Origin." },

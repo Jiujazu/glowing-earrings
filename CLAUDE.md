@@ -18,8 +18,9 @@ Eine kostenlose, interaktive Lernplattform für generative KI. Kuratiert von Jul
 
 ### Pre-Flight (vor jeder Kurs-Erstellung)
 1. **Lies `COURSE-CREATOR.md` komplett** — insbesondere die Timeout-Warnung ganz oben, §1 Autoren-Prozess und §9 Qualitäts-Checkliste
-2. **Lies den letzten fertigen Kurs** als Referenz für Struktur, Tonfall, Element-Einsatz
-3. **Verdichtungs-Check:** Wenn Kursnummer N ≥ 4 und `(N-1) % 3 == 0` (also Kurs 4, 7, 10, 13…), die letzten 3 Einträge in `COURSE-LEARNINGS.md` lesen und Julian Promotion-Kandidaten vorschlagen (siehe Lern-System unten). **Ansonsten ist `COURSE-LEARNINGS.md` kein Pre-Flight-Pflichtdokument.**
+2. **Lies `.claude/skills/anti-ai-writing/SKILL.md`** — gilt für alle Prosa-Teile (Intro, Modul-Text, Callouts, Outro, Quiz-Feedback)
+3. **Lies den letzten fertigen Kurs** als Referenz für Struktur, Tonfall, Element-Einsatz
+4. **Verdichtungs-Check:** Wenn Kursnummer N ≥ 4 und `(N-1) % 3 == 0` (also Kurs 4, 7, 10, 13…), die letzten 3 Einträge in `COURSE-LEARNINGS.md` lesen und Julian Promotion-Kandidaten vorschlagen (siehe Lern-System unten). **Ansonsten ist `COURSE-LEARNINGS.md` kein Pre-Flight-Pflichtdokument.**
 
 ### Phasen (Kurzübersicht — Details in CREATOR §1)
 1. Quelle identifizieren (Tweet / Artikel / Video / Gist / Paper)

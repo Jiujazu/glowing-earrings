@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Container from "@/components/ui/Container";
 import { HEADING, PROSE_HEADINGS } from "@/lib/typography";
 
@@ -6,6 +7,22 @@ export const metadata: Metadata = {
   title: "Impressum",
   robots: { index: false, follow: false },
 };
+
+const ImpressumAddress = dynamic(
+  () =>
+    import("@/components/impressum/ImpressumSensitiveData").then(
+      (m) => m.ImpressumAddress
+    ),
+  { ssr: false, loading: () => <span>…</span> }
+);
+
+const ImpressumEmail = dynamic(
+  () =>
+    import("@/components/impressum/ImpressumSensitiveData").then(
+      (m) => m.ImpressumEmail
+    ),
+  { ssr: false, loading: () => <span>…</span> }
+);
 
 export default function ImpressumPage() {
   return (
@@ -18,33 +35,15 @@ export default function ImpressumPage() {
           className={`prose prose-lg max-w-none text-[var(--text-primary)] ${PROSE_HEADINGS} prose-headings:text-[var(--text-primary)] prose-p:text-[var(--text-primary)] prose-strong:text-[var(--text-primary)]`}
         >
           <h2>Angaben gemäß § 5 DDG</h2>
-          <p>
-            Julian van Dieken
-            <br />
-            Creative Media &amp; Education van Dieken
-            <br />
-            Ateliers Hinterhof
-            <br />
-            Pappelallee 7–8
-            <br />
-            10437 Berlin
-          </p>
+          <ImpressumAddress />
 
           <h2>Kontakt</h2>
           <p>
-            Telefon: [Telefonnummer eintragen]
-            <br />
-            E-Mail: [E-Mail-Adresse eintragen]
+            E-Mail: <ImpressumEmail />
           </p>
 
           <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
-          <p>
-            Julian van Dieken
-            <br />
-            Pappelallee 7–8
-            <br />
-            10437 Berlin
-          </p>
+          <ImpressumAddress />
 
           <h2>Streitbeilegung</h2>
           <p>
@@ -92,9 +91,7 @@ export default function ImpressumPage() {
             der Seiten verantwortlich. Die verlinkten Seiten wurden zum
             Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft.
             Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht
-            erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten
-            Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung
-            nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir
+            erkennbar. Bei Bekanntwerden von Rechtsverletzungen werden wir
             derartige Links umgehend entfernen.
           </p>
 

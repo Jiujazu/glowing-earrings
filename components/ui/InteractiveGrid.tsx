@@ -162,8 +162,13 @@ export default function InteractiveGrid({
     const my = mouseRef.current.y;
     const now = performance.now();
 
-    // Prune expired effects
-    wavesRef.current = wavesRef.current.filter(w => (now - w.time) < 4000);
+    // Prune expired effects — Wellen fliegen raus, sobald sie unsichtbar sind
+    // (Fade-basiert statt fester 4s — verhindert blockierte Taps nach sichtbarem Ende)
+    wavesRef.current = wavesRef.current.filter(w => {
+      const elapsed = (now - w.time) / 1000;
+      const fadeRate = Math.max(0.3, 1.2 - w.intensity * 0.04);
+      return 1 - elapsed * fadeRate > 0.01;
+    });
     bendsRef.current = bendsRef.current.filter(b => (now - b.time) < 1500);
     // Screen shake
     const isShaking = now < shakeUntilRef.current;
@@ -478,10 +483,9 @@ export default function InteractiveGrid({
       }
     }
 
-    // Touch tap → small wave (mobile, non-blocking — passive listener, scroll bleibt frei)
+    // Touch tap → wave (mobile, non-blocking — passive listener, scroll bleibt frei)
     function onTouchStart(e: TouchEvent) {
       if (!isVisibleRef.current) return;
-      if (wavesRef.current.length >= 2) return;
       const rect = cachedRectRef.current;
       if (!rect) return;
       const touch = e.touches[0];
@@ -489,6 +493,8 @@ export default function InteractiveGrid({
       const x = touch.clientX - rect.left;
       const y = touch.clientY - rect.top;
       if (x < 0 || x > rect.width || y < 0 || y > rect.height) return;
+      // FIFO-Cap: älteste Welle kickt raus, neuer Tap kommt immer durch
+      if (wavesRef.current.length >= 3) wavesRef.current.shift();
       wavesRef.current.push({ x, y, time: performance.now(), intensity: 2.5 });
       if (!isActiveRef.current) {
         isActiveRef.current = true;

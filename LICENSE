@@ -1,0 +1,62 @@
+# License
+
+Glowing Earrings besteht aus zwei Teilen mit unterschiedlichen Lizenzen.
+
+## 1. Kurs-Inhalte (Content)
+
+Alle Dateien unter `content/`, `public/courses/` sowie alle kuratierten Texte,
+Grafiken, Bilder, Videos, Aufgaben und Quizzes der Kurse stehen unter:
+
+**Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International**
+(CC BY-NC-SA 4.0)
+
+Copyright © 2026 Julian van Dieken
+
+Du darfst diese Inhalte:
+- **teilen** — kopieren und weiterverbreiten in beliebigem Format
+- **bearbeiten** — remixen, verändern und darauf aufbauen
+
+Unter folgenden Bedingungen:
+- **Namensnennung** — Julian van Dieken und https://glowing-earrings.vercel.app
+  nennen, die Lizenz angeben, Änderungen kenntlich machen
+- **Nicht kommerziell** — keine kommerzielle Nutzung (kein Weiterverkauf,
+  keine werbefinanzierten Einbettungen, keine SEO- oder Content-Farms,
+  kein Training kommerzieller KI-Modelle auf diesen Inhalten)
+- **Weitergabe unter gleichen Bedingungen** — wenn du Inhalte remixt,
+  bearbeitest oder erweiterst, muss dein Werk unter derselben Lizenz
+  (CC BY-NC-SA 4.0) stehen
+
+Voller Lizenztext: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.de
+
+## 2. Code
+
+Aller Code (Next.js-App, React-Komponenten, Utilities, Konfiguration) steht
+unter der **MIT License**.
+
+MIT License
+
+Copyright (c) 2026 Julian van Dieken
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR IN CONNECTION WITH THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+---
+
+**Fragen oder Interesse an einer abweichenden (z.B. kommerziellen)
+Vereinbarung?** Kontakt über das Impressum auf
+https://glowing-earrings.vercel.app/impressum

@@ -57,6 +57,10 @@ export default function CourseIntro({ intro, meta, allTags = [] }: CourseIntroPr
     </div>
   );
 
+  const tldrContent = intro.tldr ? (
+    <p className="text-base leading-relaxed">{intro.tldr}</p>
+  ) : null;
+
   const sourceContent = (
     <p className="text-base">{intro.sourceContext}</p>
   );
@@ -129,6 +133,25 @@ export default function CourseIntro({ intro, meta, allTags = [] }: CourseIntroPr
             hookContent
           )}
         </ScrollReveal>
+
+        {/* TLDR */}
+        {intro.tldr && (
+          <ScrollReveal delay={225} duration={700}>
+            <div
+              className="p-5 border-4 border-[var(--course-border)] mb-6"
+              style={{ backgroundColor: "var(--course-surface)" }}
+            >
+              <p className={`text-xs ${LABEL} text-[var(--course-primary)] mb-2`}>TLDR</p>
+              {isEditMode ? (
+                <EditableText elementId="intro-tldr" content={intro.tldr} fieldPath="tldr">
+                  {tldrContent}
+                </EditableText>
+              ) : (
+                tldrContent
+              )}
+            </div>
+          </ScrollReveal>
+        )}
 
         {/* Source Context */}
         <ScrollReveal delay={250}>

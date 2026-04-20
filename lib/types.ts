@@ -51,6 +51,7 @@ export interface CourseDesign {
 
 export interface CourseIntro {
   hook: string;
+  tldr?: string;
   sourceContext: string;
 }
 

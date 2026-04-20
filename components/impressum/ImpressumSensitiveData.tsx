@@ -17,5 +17,5 @@ export function ImpressumAddress() {
 }
 
 export function ImpressumEmail() {
-  return <span>impressum [ät] glowing-earrings.de</span>;
+  return <span>impressum [ät] glowing-earrings.com</span>;
 }

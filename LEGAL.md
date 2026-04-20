@@ -143,6 +143,18 @@ Der bestehende CREATOR-Workflow mit Gap-Analyse, klarer Quellenangabe und Transf
 
 ---
 
+## Plattform-Strategie: Multi-Source als Haltung
+
+Glowing Earrings positioniert sich als **kuratierte Aufbereitung aus mehreren Quellen**, nicht als Nacherzählung von Einzelquellen. Das ist zugleich die rechtlich stärkste Haltung:
+
+- **Weniger Ableitungsabhängigkeit:** Ein Kurs, der aus 2–3+ Quellen + eigenen Ergänzungen besteht, ist als eigenständiges Werk leichter zu begründen (§ 23 UrhG freie Bearbeitung) als eine Single-Source-Aufbereitung.
+- **Attribution in den Daten, nicht im Marketing:** Quellenangaben erfüllen § 51 UrhG / § 63 UrhG, ohne dass die Plattform sie als Verkaufsargument inszeniert.
+- **Arbeitsmaterial bleibt lokal:** Volltranskripte und Rohnotizen gehören nicht ins öffentliche Repo — siehe `COURSE-CREATOR.md §3.7`.
+
+Diese Strategie ist in `COURSE-CREATOR.md §3.7 Quellen-Strategie & Attribution` operationalisiert.
+
+---
+
 ## Quellen
 
 - [§ 51 UrhG — Zitate (dejure.org)](https://dejure.org/gesetze/UrhG/51.html)

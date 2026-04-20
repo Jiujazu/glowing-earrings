@@ -42,7 +42,7 @@
     }
   },
   "intro": {
-    "hook": "KI-Agents werden jeden Tag besser — aber sie werden immer nur so gut sein wie der Kontext, den du ihnen gibst. Die Menschen und Unternehmen, die am meisten aus diesen Tools herausholen, sind diejenigen mit der besten Kontext-Infrastruktur.",
+    "tldr": "Claude ist so gut wie der Kontext, den du ihm gibst. Klingt banal, hat aber sieben Stufen. Sie reichen von \"ich hab einen Prompt eingegeben\" bis zu \"Claude kennt meinen kompletten Workflow und hilft meinem ganzen Team\". Mit jeder Stufe wird das Tool spürbar nützlicher. Dieser Kurs zeigt dir alle sieben und hilft dir einzuschätzen, auf welcher du gerade stehst.",
     "sourceContext": "Dieses Framework stammt aus der Praxis von Power-Usern, die Claude Code und Co-work als zentrales Arbeitswerkzeug einsetzen. Es destilliert gesammelte Erfahrungen in 7 klar abgegrenzte Level — vom einfachen Chat-Prompt bis zum geteilten Business OS für ganze Teams."
   },
   "modules": [

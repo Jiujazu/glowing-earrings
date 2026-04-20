@@ -47,7 +47,7 @@
     }
   },
   "intro": {
-    "hook": "Du hast Hunderte Artikel gelesen, Dutzende Podcasts gehört, Notizen in fünf verschiedenen Apps verteilt — und findest trotzdem nichts wieder, wenn du es brauchst. Was wäre, wenn ein LLM das für dich organisiert?",
+    "tldr": "Du hast Hunderte Artikel gelesen und Notizen in fünf Apps verteilt. Trotzdem findest du nichts wieder, wenn du es brauchst. Andrej Karpathy hat eine Lösung entwickelt: Ein LLM baut aus deinen Markdown-Dateien eine persönliche Wissensdatenbank, hält sie aktuell und setzt Querverweise. Du richtest das einmal ein und hörst auf, dieselben Fragen zweimal zu googeln. Dieser Kurs zeigt dir das Konzept und wie du dein eigenes Wiki aufsetzt.",
     "sourceContext": "Andrej Karpathy — Ex-Director of AI bei Tesla, Mitgründer von OpenAI, eine der einflussreichsten Stimmen in der KI-Welt — hat ein Konzept veröffentlicht, das er \"LLM Wiki\" nennt: eine persönliche Knowledge Base, die von einem LLM gebaut, gepflegt und durchsuchbar gehalten wird."
   },
   "modules": [

@@ -51,10 +51,8 @@ export default function CourseIntro({ intro, meta, allTags = [] }: CourseIntroPr
     </p>
   );
 
-  const hookContent = (
-    <div className="text-lg leading-relaxed mb-8 border-l-4 border-[var(--course-primary)] pl-4 font-medium">
-      {intro.hook}
-    </div>
+  const tldrContent = (
+    <p className="text-base leading-relaxed">{intro.tldr}</p>
   );
 
   const sourceContent = (
@@ -119,15 +117,21 @@ export default function CourseIntro({ intro, meta, allTags = [] }: CourseIntroPr
           )}
         </ScrollReveal>
 
-        {/* Hook */}
+        {/* TLDR */}
         <ScrollReveal delay={200} duration={700}>
-          {isEditMode ? (
-            <EditableText elementId="intro-hook" content={intro.hook} fieldPath="hook">
-              {hookContent}
-            </EditableText>
-          ) : (
-            hookContent
-          )}
+          <div
+            className="p-5 border-4 border-[var(--course-border)] mb-6"
+            style={{ backgroundColor: "var(--course-surface)" }}
+          >
+            <p className={`text-xs ${LABEL} text-[var(--course-primary)] mb-2`}>TLDR</p>
+            {isEditMode ? (
+              <EditableText elementId="intro-tldr" content={intro.tldr} fieldPath="tldr">
+                {tldrContent}
+              </EditableText>
+            ) : (
+              tldrContent
+            )}
+          </div>
         </ScrollReveal>
 
         {/* Source Context */}

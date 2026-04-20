@@ -42,7 +42,7 @@
     }
   },
   "intro": {
-    "hook": "Dein Wiki funktioniert. Du hast Quellen, Markdown-Seiten, einen Index. Aber ab 200 Seiten wird es langsam, Widersprüche schleichen sich ein, und alte Fakten wiegen genauso schwer wie neue. Das Original-Konzept hat kein Immunsystem — und keine Idee von Zeit.",
+    "tldr": "Dein Wiki aus Teil 1 wächst. Leider auch in die falsche Richtung: Ab 200 Seiten wird es langsam, alte Fakten gammeln unbemerkt vor sich hin, Widersprüche stapeln sich. Das Konzept hat keine Idee von Zeit und kein Immunsystem. Dieser Kurs baut beides ein, mit Confidence Scoring, Knowledge Graphs und Event-Hooks, damit dein Wiki sich selbst pflegt.",
     "sourceContext": "Dieser Kurs basiert auf dem Gist von rohitg00, der Karpathys LLM-Wiki-Konzept mit Erfahrungen aus dem Bau von agentmemory erweitert — einer produktionsreifen Memory Engine für KI-Agenten. Wo Karpathy die Theorie liefert, liefert rohitg00 die Praxis: Confidence Scoring, Knowledge Graphs, Event-Hooks und Multi-Agent-Kollaboration."
   },
   "modules": [

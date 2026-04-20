@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import Link from "@tiptap/extension-link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { marked } from "marked";
@@ -17,6 +18,7 @@ const turndown = new TurndownService({
   codeBlockStyle: "fenced",
   emDelimiter: "*",
   strongDelimiter: "**",
+  hr: "---",
 });
 
 // Add strikethrough support for GFM compatibility
@@ -81,7 +83,14 @@ export default function EditableText({
   );
 
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [
+      StarterKit,
+      Link.configure({
+        openOnClick: false,
+        autolink: true,
+        HTMLAttributes: { rel: "noopener noreferrer", target: "_blank" },
+      }),
+    ],
     content: htmlContent,
     editable: true,
     immediatelyRender: false,
@@ -209,6 +218,49 @@ export default function EditableText({
             title="Code"
           >
             <code className="text-xs">{`</>`}</code>
+          </ToolbarButton>
+          <ToolbarButton
+            active={editor.isActive("codeBlock")}
+            onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+            title="Code-Block"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><polyline points="9 9 7 12 9 15"/><polyline points="15 9 17 12 15 15"/></svg>
+          </ToolbarButton>
+          <div className="w-px h-5 bg-[var(--course-text)]/15 mx-1" />
+          <ToolbarButton
+            active={editor.isActive("link")}
+            onClick={() => {
+              if (editor.isActive("link")) {
+                editor.chain().focus().extendMarkRange("link").unsetLink().run();
+                return;
+              }
+              const previousUrl = editor.getAttributes("link").href as string | undefined;
+              const url = window.prompt("URL:", previousUrl ?? "https://");
+              if (url === null) return;
+              if (url === "") {
+                editor.chain().focus().extendMarkRange("link").unsetLink().run();
+                return;
+              }
+              editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
+            }}
+            title="Link einfügen / entfernen"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </ToolbarButton>
+          <ToolbarButton
+            active={false}
+            onClick={() => editor.chain().focus().unsetAllMarks().clearNodes().run()}
+            title="Formatierung entfernen"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 7V4h16v3"/><path d="M5 20h6"/><path d="M13 4 8 20"/><path d="m15 15 5 5"/><path d="m20 15-5 5"/></svg>
+          </ToolbarButton>
+          <div className="w-px h-5 bg-[var(--course-text)]/15 mx-1" />
+          <ToolbarButton
+            active={false}
+            onClick={() => editor.chain().focus().setHorizontalRule().run()}
+            title="Trennlinie"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="4" y1="12" x2="20" y2="12"/></svg>
           </ToolbarButton>
         </div>
 

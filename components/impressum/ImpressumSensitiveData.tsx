@@ -12,6 +12,8 @@ export function ImpressumAddress() {
       Pappelallee 7–8
       <br />
       10437 Berlin
+      <br />
+      USt.-IdNr.: DE286116692
     </p>
   );
 }

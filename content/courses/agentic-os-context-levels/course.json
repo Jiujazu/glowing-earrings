@@ -4,9 +4,13 @@
     "title": "Die 7 Stufen von Claude",
     "subheading": "Kontext-Struktur für das eigene KI-Betriebssystem erklärt",
     "subtitle": "In 7 Stufen vom Chat-Prompt zum KI-Betriebssystem, für Solo-Arbeit und ganze Teams.",
-    "sourceUrl": "https://www.youtube.com/watch?v=l5Diqeoffa4",
-    "sourceAuthor": "BenAI",
-    "sourceType": "video",
+    "sources": [
+      {
+        "url": "https://www.youtube.com/watch?v=l5Diqeoffa4",
+        "author": "BenAI",
+        "type": "video"
+      }
+    ],
     "category": "ai-workflows",
     "tags": [
       "Claude",
@@ -487,7 +491,6 @@
         "text": "Level 7: Business OS — Sync, Permissions und ein Context Operator für das ganze Team"
       }
     ],
-    "sourceUrl": "https://youtu.be/l5Diqeoffa4?si=XOhAGiM3wwofATUS",
     "newsletterCTA": "Du willst wissen, wenn wir neue Kurse zu AI Workflows, Context Engineering und Productivity veröffentlichen? Dann ist 'Ein gutes Ding' genau richtig für dich."
   }
 }

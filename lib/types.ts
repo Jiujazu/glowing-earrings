@@ -11,14 +11,27 @@ export interface Course {
 
 export type CourseCategory = "ai-tech" | "ai-creativity" | "ai-society" | "ai-workflows";
 
+export type CourseSourceType =
+  | "tweet"
+  | "video"
+  | "article"
+  | "document"
+  | "gist"
+  | "tool"
+  | "other";
+
+export interface CourseSource {
+  url: string;
+  author: string;
+  type: CourseSourceType;
+}
+
 export interface CourseMeta {
   slug: string;
   title: string;
   subheading?: string;
   subtitle: string;
-  sourceUrl: string;
-  sourceAuthor: string;
-  sourceType: "tweet" | "video" | "article" | "document" | "gist" | "tool" | "other";
+  sources: CourseSource[];
   category: CourseCategory;
   tags: string[];
   estimatedMinutes: number;
@@ -187,7 +200,6 @@ export interface CourseOutro {
   synthesis: string[];
   nextStep: string;
   takeaway?: TakeawayItem[];
-  sourceUrl: string;
   newsletterCTA: string;
 }
 

@@ -4,9 +4,13 @@
     "title": "Handy - Die beste Speech-to-Text App",
     "subheading": "Eine schnelle kostenlose Lösung zum lokalen Diktieren",
     "subtitle": "Wie du mit diesem Open-Source-Tool per Tastenkürzel in jedes Textfeld diktierst, komplett offline, auf jedem Betriebssystem.",
-    "sourceUrl": "https://handy.computer/",
-    "sourceAuthor": "cjpais (Open Source)",
-    "sourceType": "tool",
+    "sources": [
+      {
+        "url": "https://handy.computer/",
+        "author": "cjpais (Open Source)",
+        "type": "tool"
+      }
+    ],
     "category": "ai-workflows",
     "tags": [
       "Diktat",
@@ -322,7 +326,6 @@
         "text": "Sprechen ist ~3x schneller als Tippen"
       }
     ],
-    "sourceUrl": "https://handy.computer/",
     "newsletterCTA": "Du magst Tools, die einfach funktionieren? In 'Ein gutes Ding' findest du regelmäßig handverlesene KI-Tools und Workflows."
   }
 }

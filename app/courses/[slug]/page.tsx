@@ -66,10 +66,11 @@ export default async function CoursePage({ params }: CoursePageProps) {
             timeRequired: `PT${course.meta.estimatedMinutes}M`,
             inLanguage: "de",
             isAccessibleForFree: true,
-            author: {
-              "@type": "Person",
-              name: course.meta.sourceAuthor,
-            },
+            citation: course.meta.sources.map((s) => ({
+              "@type": "CreativeWork",
+              name: s.author,
+              url: s.url,
+            })),
           }),
         }}
       />

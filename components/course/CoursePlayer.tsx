@@ -34,7 +34,7 @@ export default function CoursePlayer({ course, allTags = [] }: CoursePlayerProps
           </div>
 
           <div className="border-t-4 border-[var(--course-text)]/10">
-            <CourseOutro outro={course.outro} courseSlug={course.meta.slug} relatedSlugs={course.meta.relatedCourses} />
+            <CourseOutro outro={course.outro} courseSlug={course.meta.slug} sources={course.meta.sources} relatedSlugs={course.meta.relatedCourses} />
           </div>
         </CourseErrorBoundary>
       </article>

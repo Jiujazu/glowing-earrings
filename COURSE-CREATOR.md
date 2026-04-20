@@ -247,7 +247,7 @@ Alle Callout-Typen sollen ein **konsistentes Grunddesign** haben (gleiche Grunds
 | Synthese | 3-5 Kernerkenntnisse in eigenen Worten | `synthesis` |
 | Nächster Schritt | Spezifisch und sofort umsetzbar, nicht vage | `nextStep` |
 | Takeaway | Checkliste oder Übersicht zum Screenshotten | `takeaway` |
-| Quellenlink | Nochmaliger Link zum Original | `sourceUrl` |
+| Quellen | Automatisch aus `meta.sources` gerendert — nicht im Outro duplizieren | — |
 | Newsletter-CTA | Kontextuell zum Kursthema | `newsletterCTA` |
 
 ---
@@ -275,7 +275,7 @@ Quellen können sein:
 - **Externe Inhalte:** Tweets, Artikel, Videos, Gists, Papers von Dritten
 - **Eigene Inhalte (Julian):** Vorwiegend YouTube-Videos, in denen Julian einzelne Themen oder Abläufe vorstellt. Diese werden als Kurs in Textform aufbereitet, ergänzt durch Zusatzmaterialien (z.B. PDFs, Checklisten).
 
-Bei Julian-Kursen: `sourceAuthor: "Julian van Dieken"`, `sourceType: "video"`, Link zum YouTube-Video als `sourceUrl`.
+Bei Julian-Kursen: `sources: [{ author: "Julian van Dieken", type: "video", url: "…" }]`. Mehrere Quellen möglich — jede mit eigener `url`, `author`, `type`.
 
 ### 5.4 Kurs-Vernetzung
 
@@ -557,8 +557,8 @@ Pflicht für alle Prosa-Teile: Intro, Modul-Texte, Callouts, Übergänge, Outro,
 - **`opengraph-image.tsx` braucht Default Export**, kein GET-Handler. Kein Edge Runtime mit Kurs-Imports.
 - **Kein `onClick` in Server Components** — Event-Handler erzwingen Client Components.
 - **Kurse IMMER in Teilen erstellen (Pflicht).** Siehe Warnung ganz oben und §1.6.
-- **sourceType-Badge nicht im UI zeigen** — nur interne Metadaten.
-- **Quell-Anonymisierung:** Wenn ein Autor nicht genannt werden soll, alle Bezüge ersetzen, `sourceAuthor` neutral halten, Promotion entfernen. Quell-URL bleibt.
+- **Source-`type`-Badge nicht im UI zeigen** — nur interne Metadaten.
+- **Quell-Anonymisierung:** Wenn ein Autor nicht genannt werden soll, alle Bezüge ersetzen, `sources[].author` neutral halten, Promotion entfernen. Quell-URL bleibt.
 - **Mobile-Nav Z-Index:** Header `z-[70]`, MobileNav `z-[100]` — sonst Konflikte.
 
 ---
@@ -810,7 +810,7 @@ Der Audit geht diese Kategorien durch. Jeder Check zitiert die Creator-Regel-Num
 - §10 ReactMarkdown für alle Text-rendernden Komponenten (kein rohes `**Sternchen**`)?
 - §10 `opengraph-image.tsx` mit Default Export, kein Edge Runtime mit Kurs-Imports?
 - §10 Keine `onClick`-Handler in Server Components?
-- §10 `sourceType`-Badge nicht im UI sichtbar?
+- §10 Source-`type`-Badge nicht im UI sichtbar?
 - §10 Quell-Anonymisierung sauber (falls Autor nicht genannt)?
 - §10 Mobile-Nav Z-Index: Header `z-[70]`, MobileNav `z-[100]`?
 

@@ -1,5 +1,5 @@
 import { courses } from "@/content/courses";
-import type { Course, CourseMeta, CourseCategory } from "./types";
+import type { Course, CourseCategory, CourseSourceType } from "./types";
 
 export function getAllCourses(): Course[] {
   return courses.filter((c) => !c.meta.draft);
@@ -54,10 +54,8 @@ export function getDifficultyLabel(
   return labels[difficulty];
 }
 
-export function getSourceTypeLabel(
-  sourceType: CourseMeta["sourceType"]
-): string {
-  const labels: Record<CourseMeta["sourceType"], string> = {
+export function getSourceTypeLabel(sourceType: CourseSourceType): string {
+  const labels: Record<CourseSourceType, string> = {
     tweet: "Tweet",
     video: "Video",
     article: "Artikel",
@@ -70,7 +68,7 @@ export function getSourceTypeLabel(
 }
 
 export function getSourceLinkLabel(
-  sourceType: CourseMeta["sourceType"],
+  sourceType: CourseSourceType,
   sourceUrl: string
 ): string {
   switch (sourceType) {

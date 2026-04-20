@@ -4,9 +4,13 @@
     "title": "Storytelling in der Bildung",
     "subheading": "Wie du Inhalte auf den Punkt bringst",
     "subtitle": "Warum gute Geschichten mehr bewirken als jede PowerPoint und wie du das nutzen kannst.",
-    "sourceUrl": "https://www.youtube.com/watch?v=SDrZuTAbN9M",
-    "sourceAuthor": "Julian van Dieken",
-    "sourceType": "video",
+    "sources": [
+      {
+        "url": "https://www.youtube.com/watch?v=SDrZuTAbN9M",
+        "author": "Julian van Dieken",
+        "type": "video"
+      }
+    ],
     "category": "ai-creativity",
     "tags": [
       "Storytelling",
@@ -555,7 +559,6 @@
         "text": "Einfach starten: Plastikkiste und Kamera reicht"
       }
     ],
-    "sourceUrl": "https://www.youtube.com/watch?v=SDrZuTAbN9M",
     "newsletterCTA": "Jede Woche ein neues Tool für kreatives Lehren und Lernen. Kostenlos."
   }
 }

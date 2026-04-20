@@ -4,9 +4,13 @@
     "title": "Die Karpathy Methode: Teil 1",
     "subheading": "Persönliche Knowledge Base mit KI",
     "subtitle": "Wie du nach Andrej Karpathys Konzept eine persönliche Knowledge Base mit KI baust, die wächst und nie veraltet.",
-    "sourceUrl": "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
-    "sourceAuthor": "Andrej Karpathy",
-    "sourceType": "gist",
+    "sources": [
+      {
+        "url": "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+        "author": "Andrej Karpathy",
+        "type": "gist"
+      }
+    ],
     "category": "ai-tech",
     "tags": [
       "Wissensmanagement",
@@ -370,7 +374,6 @@
         "text": "Lint: Regelmäßig Qualität und Konsistenz prüfen"
       }
     ],
-    "sourceUrl": "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
     "newsletterCTA": "Jede Woche ein Tool oder Konzept wie dieses — direkt in deiner Inbox."
   }
 }

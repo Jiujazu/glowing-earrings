@@ -27,6 +27,9 @@ export default function HeroImageSpotlight({
   const xrayActiveRef = useRef(false);
   const xrayReleaseTimerRef = useRef<number | null>(null);
   const lastPointerRef = useRef({ x: 50, y: 50 });
+  const longPressTimerRef = useRef<number | null>(null);
+  const touchStartPosRef = useRef<{ x: number; y: number } | null>(null);
+  const xrayFromTouchRef = useRef(false);
 
   useEffect(() => {
     const el = wrapperRef.current;
@@ -70,16 +73,50 @@ export default function HeroImageSpotlight({
       if (!t) return;
       el!.style.setProperty("--spotlight-opacity", "1");
       updatePointer(t.clientX, t.clientY);
+
+      // Long-press → Xray-Charge (~400ms; bricht ab, sobald der Finger > 10px wandert = Scroll)
+      touchStartPosRef.current = { x: t.clientX, y: t.clientY };
+      if (longPressTimerRef.current) window.clearTimeout(longPressTimerRef.current);
+      longPressTimerRef.current = window.setTimeout(() => {
+        longPressTimerRef.current = null;
+        if (xrayReleaseTimerRef.current) {
+          window.clearTimeout(xrayReleaseTimerRef.current);
+          xrayReleaseTimerRef.current = null;
+        }
+        xrayFromTouchRef.current = true;
+        xrayActiveRef.current = true;
+        setXray({ phase: "charging" });
+      }, 400);
     }
 
     function onTouchMove(e: TouchEvent) {
       const t = e.touches[0];
       if (!t) return;
       updatePointer(t.clientX, t.clientY);
+
+      const start = touchStartPosRef.current;
+      if (start && longPressTimerRef.current) {
+        const dx = t.clientX - start.x;
+        const dy = t.clientY - start.y;
+        if (dx * dx + dy * dy > 100) {
+          window.clearTimeout(longPressTimerRef.current);
+          longPressTimerRef.current = null;
+        }
+      }
     }
 
     function onTouchEnd() {
       el!.style.setProperty("--spotlight-opacity", "0");
+      if (longPressTimerRef.current) {
+        window.clearTimeout(longPressTimerRef.current);
+        longPressTimerRef.current = null;
+      }
+      touchStartPosRef.current = null;
+      if (xrayFromTouchRef.current) {
+        xrayFromTouchRef.current = false;
+        const { x, y } = lastPointerRef.current;
+        endXray(x, y);
+      }
     }
 
     if (isFinePointer) {
@@ -175,11 +212,17 @@ export default function HeroImageSpotlight({
           "--mx": "50%",
           "--my": "50%",
           "--spotlight-opacity": "0",
+          // Verhindert iOS-„Bild speichern"-Callout und Android-Drag-to-Save
+          WebkitTouchCallout: "none",
+          WebkitUserSelect: "none",
+          userSelect: "none",
         } as React.CSSProperties
       }
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseLeave}
+      onContextMenu={(e) => e.preventDefault()}
+      onDragStart={(e) => e.preventDefault()}
     >
       {children}
 

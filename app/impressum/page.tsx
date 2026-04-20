@@ -45,6 +45,15 @@ export default function ImpressumPage() {
           <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
           <ImpressumAddress />
 
+          <h2>Kursinhalte</h2>
+          <p>
+            Jeder Kurs basiert auf einer öffentlich zugänglichen Quelle: einem
+            Tweet, Artikel, Video oder Paper. Die Originalquelle wird jeweils
+            verlinkt und als Urheber genannt. Kursstruktur, Didaktik und die
+            eigenen Texte sind Julians eigenständige Arbeit und urheberrechtlich
+            geschützt.
+          </p>
+
           <h2>Streitbeilegung</h2>
           <p>
             Die Europäische Kommission stellt eine Plattform zur
@@ -106,15 +115,9 @@ export default function ImpressumPage() {
             kommerziellen Gebrauch gestattet.
           </p>
           <p>
-            Die Kursinhalte basieren auf öffentlich zugänglichen Quellen Dritter
-            und werden mit Quellenangabe als transformierte Lernmaterialien
-            dargestellt. Soweit die Inhalte auf dieser Seite nicht vom Betreiber
-            erstellt wurden, werden die Urheberrechte Dritter beachtet.
-            Insbesondere werden Inhalte Dritter als solche gekennzeichnet.
-            Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam
-            werden, bitten wir um einen entsprechenden Hinweis. Bei
-            Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte
-            umgehend entfernen.
+            Sollten Sie auf eine Urheberrechtsverletzung aufmerksam werden,
+            bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von
+            Rechtsverletzungen werden wir betroffene Inhalte umgehend entfernen.
           </p>
         </div>
       </Container>

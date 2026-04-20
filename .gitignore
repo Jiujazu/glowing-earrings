@@ -41,3 +41,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# course source material (transcripts, raw notes) — kept local only
+content/courses/*/source.md

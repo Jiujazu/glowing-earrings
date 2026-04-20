@@ -22,7 +22,7 @@ Zwischen jedem Teil kurz prüfen, dass das JSON valide ist. Wer das ignoriert, v
 
 ## §1 Autoren-Prozess
 
-Der Weg von einer Quelle zum fertigen Kurs — in dieser Reihenfolge:
+Der Weg von Quellen zum fertigen Kurs — in dieser Reihenfolge:
 
 ### 1.1 Quelle lesen & Typ bestimmen
 - **Original komplett lesen/ansehen** (Tweet, Artikel, Video, Gist, Paper)
@@ -105,7 +105,7 @@ Jeder Content-Block braucht mindestens 2 verschiedene optische Gewichtungen. Ein
 - **Humor: subtil & clever.** Der Ton ist der eines klugen Gesprächspartners, nicht eines Comedians.
 
 ### 3.2 Quelltreue
-- Inhalte stammen **primär** aus dem Ausgangsmaterial. Externe Ergänzungen sind nur unter den Kriterien in §3.4 erlaubt.
+- Inhalte stammen **überwiegend** aus den gewählten Quellen. Mehrere Quellen sind normal und gewünscht (siehe §3.7). Externe Framework-Ergänzungen nur unter den Kriterien in §3.4.
 - Konkrete Zahlen, Tool-Namen, Statistiken, Beispiele **müssen** erhalten bleiben
 - Kurzes Material = kurzer Kurs. Ein Tweet wird kein 6-Modul-Kurs
 - Anekdoten und Metaphern aus dem Original beibehalten — sie sind der emotionale Anker
@@ -123,7 +123,7 @@ Zusätzliche Konzepte aus fremden Quellen (z.B. "Aber-Deshalb-Regel" von Trey Pa
 1. **Implizit-explizit oder etabliertes Framework:** Das externe Konzept muss entweder eine implizite Annahme des Originals explizit machen, oder ein voll entwickeltes, öffentlich bekanntes Framework sein. **Keine eigenen Mini-Theorien, keine erfundenen "Regeln".**
 2. **Visuelle Trennung:** Ergänzungen müssen als `context-box` dargestellt werden — nie als regulärer Content. Die Lesende muss sofort erkennen: *Das ist nicht aus dem Original.*
 3. **Transparente Attribution:** Autor **und** Herkunft (Medium, Institution) werden explizit genannt. Kein "bekanntes Prinzip" ohne Quelle.
-4. **Max 1 pro Kurs.** Bei mehr wird der Kurs zur Sekundärliteratur und verliert den Bezug zur Hauptquelle.
+4. **Maßhalten.** Mehrere sind möglich, wenn jede einzelne alle Kriterien erfüllt. Wenn der Kurs zur bloßen Zusammenstellung fremder Konzepte wird, fehlt Julians Kuration — siehe §3.6 Autor-Stimme.
 5. **Im Zweifel weglassen.** Wenn das Original auch ohne das Framework auskommt, braucht es das Framework nicht. Der Test: *Macht die Ergänzung das Kursthema konkret besser verständlich — oder wirkt sie nur schlau?*
 
 Nicht-Einhaltung = Anti-Pattern §12.8.
@@ -139,12 +139,24 @@ Nicht-Einhaltung = Anti-Pattern §12.8.
 
 Die Plattform ist Julian van Diekens kuratierte Empfehlung, kein neutrales Handbuch. Deshalb:
 
-- **Pro Kurs mindestens 1–2 Sätze mit Julians Autor-Stimme** — persönliche Erfahrung, Meinung, Szene-Wissen, Humor, kleine Anekdote. Bevorzugt im `intro.hook` oder an einem `transitionToNext`.
+- **Pro Kurs mindestens 1–2 Sätze mit Julians Autor-Stimme** — persönliche Erfahrung, Meinung, Szene-Wissen, Humor, kleine Anekdote. Bevorzugt im `intro.tldr` oder an einem `transitionToNext`.
 - **Erkennungsmerkmal:** Der Lerner muss mindestens eine Stelle eindeutig als Julian-Position lesen können — „ich benutze…", „mein Tipp…", „aus meiner Sicht…", persönliche Beobachtung.
 - **Belegmittel für subjektive Claims:** Subjektive Behauptungen in Meta oder Body (Superlativ, Empfehlung, Bewertung — z.B. „die beste Lösung") sind **nur zulässig, wenn sie durch sichtbare Autor-Stimme oder durch Vergleichsinhalt im Kurs getragen werden.** Ein Superlativ ohne Deckung wird zu einem leeren Versprechen.
 - **Warum die Regel existiert:** Ohne Autor-Position wird der Kurs austauschbar mit der Original-Quelle (Produktseite, GitHub-README, Paper). Der Lerner fragt zu Recht: „Warum nicht direkt auf die Website?" Die Antwort liegt in Julians Standpunkt, seinem Szene-Wissen, seinem Urteil.
 
 Prüfpunkt in §9 Didaktik-Checkliste. Herkunft: LEARNINGS „Workflow-Audit: Autor-Stimme ist Pflicht", audit handy-speech-to-text 2026-04-19.
+
+### 3.7 Quellen-Strategie & Attribution
+
+Ein Kurs ist eine kuratierte Aufbereitung — keine Nacherzählung einer Einzelquelle.
+
+- **Multi-Source ist Default.** Ein Kurs speist sich typischerweise aus mehreren Quellen (z.B. ein Hauptvideo + ergänzender Artikel + eigene Beispiele) plus Julians Kuration. Eine Einzelquelle ist möglich, aber kein Gütesiegel.
+- **Attribution gehört in die Daten, nicht ins Schaufenster.** Jede genutzte Quelle wird im `course.json` erfasst. In der UI erscheinen Quellen am Kursende als dezenter „Quellen & Weiterführendes"-Block. Startseite, Kurs-Karten und Kurs-Intros bewerben nicht eine Quelle als Aufhänger.
+- **Transformation steht im Vordergrund.** Der Kurs ist Julians Werk — nicht die deutsche Übersetzung des Originals.
+- **Arbeitsmaterial bleibt lokal.** Volltranskripte, Rohnotizen, Originaltexte (`source.md`) gehören nicht ins öffentliche Repo. Sie liegen lokal, werden per `.gitignore` ausgeschlossen.
+- **Rechtliche Verankerung:** Siehe `LEGAL.md` für die rechtliche Begründung.
+
+Herkunft: Workflow-Entscheidung April 2026 — Weg vom Single-Source-Konzept hin zu kuratierter Mehrquellen-Aufbereitung.
 
 ---
 
@@ -152,12 +164,16 @@ Prüfpunkt in §9 Didaktik-Checkliste. Herkunft: LEARNINGS „Workflow-Audit: Au
 
 ### 4.1 Intro (Pflicht)
 
-Beantwortet zwei Kernfragen:
+Beantwortet zwei Kernfragen — jedes Feld hat eine klar abgegrenzte Rolle:
 
 | Frage | Umsetzung | Feld |
 |---|---|---|
-| Wer spricht hier? | Kurze Einordnung der Quelle/Person | `sourceContext` |
-| Warum sollte mich das interessieren? | Hook: Problem, Versprechen, Überraschung | `hook` |
+| Wer spricht hier? | Credentials der Quelle/Person + Quellenformat (kein Kursinhalt) | `sourceContext` |
+| Warum sollte mich das interessieren? | TLDR: Hook → Lösung → "Dieser Kurs…" | `tldr` |
+
+**TLDR-Struktur:** 4–6 Sätze. Die ersten 1–2 Sätze benennen das konkrete Problem des Lerners (das ist der Hook). Dann die Lösung. Letzter Satz beginnt immer mit "Dieser Kurs…" und beschreibt, was der Kurs liefert. Anti-AI-Stil gilt hier besonders strikt (keine Em-Dashes, keine KI-Marker, kein Pathos).
+
+**Rollen-Trennung:** Subtitle (auf Kurskartenansicht sichtbar), TLDR und sourceContext dürfen dieselbe Information nicht wiederholen. Subtitle = Nutzenversprechen in einem Satz. TLDR = vollständige Story. sourceContext = Credentials + Quellenformat, kein Kursinhalt.
 
 Plus: Link zum Originalmaterial. Die Modul-Übersicht wird automatisch durch die Kapitel-Navigation angezeigt.
 
@@ -266,7 +282,7 @@ Bei Julian-Kursen: `sourceAuthor: "Julian van Dieken"`, `sourceType: "video"`, L
 Kurse stehen nicht isoliert. Wo immer möglich:
 - **Outro:** Verweis auf thematisch verwandte Kurse auf der Plattform
 - **Modul-Übergänge:** Bei letztem Modul bevorzugt Querverweis statt interner Cliff-Hanger
-- **Sequel-Kurse:** Direkte Anknüpfung an Vorgänger über Hook und Recap. "Teil 2" im Subheading macht die Zugehörigkeit sofort klar. `relatedCourses` gegenseitig setzen.
+- **Sequel-Kurse:** Direkte Anknüpfung an Vorgänger über TLDR und Recap. "Teil 2" im Subheading macht die Zugehörigkeit sofort klar. `relatedCourses` gegenseitig setzen.
 - **Ziel:** Ein natürliches Netz aus Lernpfaden, das organisch wächst
 
 ---
@@ -494,6 +510,7 @@ Pflicht für alle Prosa-Teile: Intro, Modul-Texte, Callouts, Übergänge, Outro,
 - [ ] Modul-Übergänge vorhanden (bevorzugt Kurs-Querverweise)
 - [ ] Outro mit Synthese, konkretem nächsten Schritt und Takeaway
 - [ ] §3.6 — Autor-Stimme vorhanden: mind. 1–2 Sätze persönliche Note (Erfahrung/Meinung/Szene-Wissen) im Intro oder an einem Modul-Übergang. Subjektive Claims (Superlativ, Empfehlung) durch Autor-Stimme oder Vergleichsinhalt gedeckt.
+- [ ] §4.1 — Rollen-Trennung: Subtitle, TLDR und sourceContext wiederholen nicht dieselbe Information. TLDR beginnt mit Problem (Hook), endet mit "Dieser Kurs…". sourceContext enthält nur Credentials + Quellenformat, keinen Kursinhalt.
 - [ ] `relatedCourses` gegenseitig gesetzt
 - [ ] **Pflicht-Minima per Grep verifiziert** (vor Commit ausführen, Werte müssen ≥ angegebener Zahl sein):
   - `rg -c '"type": "key-concept"' content/courses/[slug]/course.json` → ≥ 1
@@ -742,7 +759,7 @@ Nicht-Ziel: Routine-Audit nach jedem Kurs. Dafür ist die Qualitäts-Checkliste 
 Der Audit geht diese Kategorien durch. Jeder Check zitiert die Creator-Regel-Nummer (Rückverweis — SSoT bleibt eindeutig).
 
 **Struktur**
-- §4.1 Intro vorhanden mit Wer/Warum/Was + Quellenlink?
+- §4.1 Intro vorhanden mit Wer/Warum/Was + Quellenlink? TLDR beginnt mit Problem-Hook, endet mit "Dieser Kurs…"? Subtitle, TLDR, sourceContext haben klar getrennte Rollen ohne Wiederholungen?
 - §4.2 Modul-Anzahl und -Länge im Rahmen?
 - §4.7 Outro mit Synthese + konkretem nächsten Schritt + Takeaway?
 - §5.4 `relatedCourses` gegenseitig gesetzt?
@@ -751,7 +768,7 @@ Der Audit geht diese Kategorien durch. Jeder Check zitiert die Creator-Regel-Num
 - §3.1 Tonfall snack-sized, keine graue Wand?
 - §3.2 Inhalte primär aus der Quelle, keine Halluzinationen?
 - §3.3 Scaffolding: Fachbegriffe in Context-Boxen erklärt?
-- §3.4 Externe Frameworks (nur wenn verwendet) — alle 5 Kriterien erfüllt? (Max 1 pro Kurs, etabliertes Framework, visuell getrennt, Attribution, im Zweifel weggelassen)
+- §3.4 Externe Frameworks (nur wenn verwendet) — alle 5 Kriterien erfüllt? (etabliertes Framework, visuell getrennt, Attribution, maßhalten, im Zweifel weggelassen)
 
 **Elemente**
 - §1.5/§4.2 Mindestens 1 Key-Concept im Kurs?

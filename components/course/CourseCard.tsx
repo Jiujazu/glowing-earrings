@@ -78,8 +78,6 @@ export default function CourseCard({ meta, totalModules }: { meta: CourseMeta; t
         <div className="flex items-center justify-between pt-3 border-t-2 border-[var(--neo-border)]">
           <div className="flex items-center gap-3 text-xs font-bold text-[var(--text-primary)] uppercase tracking-wide">
             <span>{formatDuration(meta.estimatedMinutes)}</span>
-            <span>·</span>
-            <span>{meta.sourceAuthor}</span>
           </div>
           <Link
             href={`/courses/${meta.slug}`}

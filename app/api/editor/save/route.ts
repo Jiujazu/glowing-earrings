@@ -86,8 +86,8 @@ function applyChanges(
     }
 
     // Check intro fields
-    if (!found && change.elementId === "intro-hook") {
-      course.intro.hook = change.newValue;
+    if (!found && change.elementId === "intro-tldr") {
+      course.intro.tldr = change.newValue;
       applied++;
       found = true;
     }

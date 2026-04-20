@@ -98,9 +98,6 @@ export default async function OgImage({
           <div style={{ fontSize: "18px", color: colors.textMuted }}>
             ~{meta.estimatedMinutes} Min.
           </div>
-          <div style={{ fontSize: "18px", color: colors.textMuted }}>
-            {meta.sourceAuthor}
-          </div>
         </div>
       </div>
     ),

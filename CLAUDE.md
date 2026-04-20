@@ -4,7 +4,7 @@
 
 ## Was ist Glowing Earrings?
 
-Eine kostenlose, interaktive Lernplattform für generative KI. Kuratiert von Julian van Dieken (Creative Media & Education, Berlin). Jeder Kurs basiert auf einer konkreten Originalquelle und wird in ein spielbares Lernerlebnis transformiert.
+Eine kostenlose, interaktive Lernplattform für generative KI. Kuratiert von Julian van Dieken (Creative Media & Education, Berlin). Jeder Kurs ist eine kuratierte Aufbereitung — gespeist aus verschiedenen Quellen, transformiert in ein spielerisches Lernerlebnis.
 
 **Live:** https://glowing-earrings.vercel.app
 **Repo:** https://github.com/Jiujazu/glowing-earrings

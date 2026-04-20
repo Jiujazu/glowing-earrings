@@ -27,13 +27,17 @@ export default function HeroImageSpotlight({
   const xrayActiveRef = useRef(false);
   const xrayReleaseTimerRef = useRef<number | null>(null);
   const lastPointerRef = useRef({ x: 50, y: 50 });
+  const longPressTimerRef = useRef<number | null>(null);
+  const touchStartPosRef = useRef<{ x: number; y: number } | null>(null);
+  const xrayFromTouchRef = useRef(false);
 
   useEffect(() => {
     const el = wrapperRef.current;
     if (!el) return;
     if (typeof window === "undefined") return;
-    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const isFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
     function flush() {
       rafRef.current = 0;
@@ -43,13 +47,17 @@ export default function HeroImageSpotlight({
       el.style.setProperty("--my", `${p.y}%`);
     }
 
-    function onMove(e: MouseEvent) {
+    function updatePointer(clientX: number, clientY: number) {
       const rect = el!.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      const x = ((clientX - rect.left) / rect.width) * 100;
+      const y = ((clientY - rect.top) / rect.height) * 100;
       pendingRef.current = { x, y };
       lastPointerRef.current = { x, y };
       if (!rafRef.current) rafRef.current = requestAnimationFrame(flush);
+    }
+
+    function onMove(e: MouseEvent) {
+      updatePointer(e.clientX, e.clientY);
     }
 
     function onEnter() {
@@ -60,15 +68,81 @@ export default function HeroImageSpotlight({
       el!.style.setProperty("--spotlight-opacity", "0");
     }
 
-    el.addEventListener("mousemove", onMove);
-    el.addEventListener("mouseenter", onEnter);
-    el.addEventListener("mouseleave", onLeave);
+    function onTouchStart(e: TouchEvent) {
+      const t = e.touches[0];
+      if (!t) return;
+      el!.style.setProperty("--spotlight-opacity", "1");
+      updatePointer(t.clientX, t.clientY);
+
+      // Long-press → Xray-Charge (~400ms; bricht ab, sobald der Finger > 10px wandert = Scroll)
+      touchStartPosRef.current = { x: t.clientX, y: t.clientY };
+      if (longPressTimerRef.current) window.clearTimeout(longPressTimerRef.current);
+      longPressTimerRef.current = window.setTimeout(() => {
+        longPressTimerRef.current = null;
+        if (xrayReleaseTimerRef.current) {
+          window.clearTimeout(xrayReleaseTimerRef.current);
+          xrayReleaseTimerRef.current = null;
+        }
+        xrayFromTouchRef.current = true;
+        xrayActiveRef.current = true;
+        setXray({ phase: "charging" });
+      }, 400);
+    }
+
+    function onTouchMove(e: TouchEvent) {
+      const t = e.touches[0];
+      if (!t) return;
+      updatePointer(t.clientX, t.clientY);
+
+      const start = touchStartPosRef.current;
+      if (start && longPressTimerRef.current) {
+        const dx = t.clientX - start.x;
+        const dy = t.clientY - start.y;
+        if (dx * dx + dy * dy > 100) {
+          window.clearTimeout(longPressTimerRef.current);
+          longPressTimerRef.current = null;
+        }
+      }
+    }
+
+    function onTouchEnd() {
+      el!.style.setProperty("--spotlight-opacity", "0");
+      if (longPressTimerRef.current) {
+        window.clearTimeout(longPressTimerRef.current);
+        longPressTimerRef.current = null;
+      }
+      touchStartPosRef.current = null;
+      if (xrayFromTouchRef.current) {
+        xrayFromTouchRef.current = false;
+        const { x, y } = lastPointerRef.current;
+        endXray(x, y);
+      }
+    }
+
+    if (isFinePointer) {
+      el.addEventListener("mousemove", onMove);
+      el.addEventListener("mouseenter", onEnter);
+      el.addEventListener("mouseleave", onLeave);
+    } else {
+      // Passive-Listener → Scroll bleibt frei, Spotlight folgt dem Finger
+      el.addEventListener("touchstart", onTouchStart, { passive: true });
+      el.addEventListener("touchmove", onTouchMove, { passive: true });
+      el.addEventListener("touchend", onTouchEnd);
+      el.addEventListener("touchcancel", onTouchEnd);
+    }
 
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      el.removeEventListener("mousemove", onMove);
-      el.removeEventListener("mouseenter", onEnter);
-      el.removeEventListener("mouseleave", onLeave);
+      if (isFinePointer) {
+        el.removeEventListener("mousemove", onMove);
+        el.removeEventListener("mouseenter", onEnter);
+        el.removeEventListener("mouseleave", onLeave);
+      } else {
+        el.removeEventListener("touchstart", onTouchStart);
+        el.removeEventListener("touchmove", onTouchMove);
+        el.removeEventListener("touchend", onTouchEnd);
+        el.removeEventListener("touchcancel", onTouchEnd);
+      }
     };
   }, []);
 
@@ -138,11 +212,17 @@ export default function HeroImageSpotlight({
           "--mx": "50%",
           "--my": "50%",
           "--spotlight-opacity": "0",
+          // Verhindert iOS-„Bild speichern"-Callout und Android-Drag-to-Save
+          WebkitTouchCallout: "none",
+          WebkitUserSelect: "none",
+          userSelect: "none",
         } as React.CSSProperties
       }
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseLeave}
+      onContextMenu={(e) => e.preventDefault()}
+      onDragStart={(e) => e.preventDefault()}
     >
       {children}
 

@@ -2,8 +2,8 @@
   "meta": {
     "slug": "handy-speech-to-text",
     "title": "Handy - Die beste Speech-to-Text App",
-    "subheading": "Die beste Lösung zum Diktieren ohne Cloud auf dem Desktop",
-    "subtitle": "Wie du mit einem kostenlosen Open-Source-Tool per Tastenkürzel in jedes Textfeld diktierst, komplett offline, auf jedem Betriebssystem.",
+    "subheading": "Eine schnelle kostenlose Lösung zum lokalen Diktieren",
+    "subtitle": "Wie du mit diesem Open-Source-Tool per Tastenkürzel in jedes Textfeld diktierst, komplett offline, auf jedem Betriebssystem.",
     "sourceUrl": "https://handy.computer/",
     "sourceAuthor": "cjpais (Open Source)",
     "sourceType": "tool",
@@ -41,8 +41,8 @@
     }
   },
   "intro": {
-    "hook": "Du tippst gerade. Du könntest auch sprechen: dreimal so schnell, ohne die Hände von dem zu nehmen, was du eigentlich tust. Handy ist ein kleines, kostenloses Tool, das genau das macht: Tastenkürzel drücken, sprechen, loslassen. Dein Text erscheint. Komplett offline.\n\nIch benutze Handy seit ein paar Wochen täglich. Am stärksten gemerkt habe ich den Unterschied bei langen KI-Prompts: was vorher drei Minuten Tippen war, ist jetzt ein halber Satz in normalem Tempo.",
-    "sourceContext": "Handy ist ein Open-Source-Projekt von cjpais mit über 17.000 GitHub-Stars. Es läuft auf macOS, Windows und Linux, nutzt OpenAIs Whisper- und NVIDIAs Parakeet-Modelle lokal und sendet kein einziges Audiobyte in die Cloud."
+    "tldr": "Sprechen ist dreimal schneller als Tippen. Aber Siri und Co. nerven oft rum und machen Fehler. Handy nutzt starke KI-Modelle, aber lokal: kein Account, keine Cloud, kein Audio, das irgendwo landet. Taste halten, sprechen, loslassen, Text erscheint. Dieser Kurs zeigt das Setup und warum das tatsächlich einen Unterschied macht.",
+    "sourceContext": "Handy ist ein Open-Source-Projekt von cjpais mit über 17.000 GitHub-Stars. Läuft auf macOS, Windows und Linux, nutzt OpenAIs Whisper und NVIDIAs Parakeet als Modelle."
   },
   "modules": [
     {

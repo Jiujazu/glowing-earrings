@@ -51,14 +51,8 @@ export default function CourseIntro({ intro, meta, allTags = [] }: CourseIntroPr
     </p>
   );
 
-  const hookContent = (
-    <div className="text-lg leading-relaxed mb-8 border-l-4 border-[var(--course-primary)] pl-4 font-medium">
-      {intro.hook}
-    </div>
-  );
-
-  const sourceContent = (
-    <p className="text-base">{intro.sourceContext}</p>
+  const tldrContent = (
+    <p className="text-base leading-relaxed">{intro.tldr}</p>
   );
 
   return (
@@ -119,39 +113,20 @@ export default function CourseIntro({ intro, meta, allTags = [] }: CourseIntroPr
           )}
         </ScrollReveal>
 
-        {/* Hook */}
+        {/* TLDR */}
         <ScrollReveal delay={200} duration={700}>
-          {isEditMode ? (
-            <EditableText elementId="intro-hook" content={intro.hook} fieldPath="hook">
-              {hookContent}
-            </EditableText>
-          ) : (
-            hookContent
-          )}
-        </ScrollReveal>
-
-        {/* Source Context */}
-        <ScrollReveal delay={250}>
           <div
             className="p-5 border-4 border-[var(--course-border)]"
             style={{ backgroundColor: "var(--course-surface)" }}
           >
-            <p className={`text-xs ${LABEL} text-[var(--course-text-muted)] mb-2`}>Quelle</p>
+            <p className={`text-xs ${LABEL} text-[var(--course-primary)] mb-2`}>TLDR</p>
             {isEditMode ? (
-              <EditableText elementId="intro-source" content={intro.sourceContext} fieldPath="sourceContext">
-                {sourceContent}
+              <EditableText elementId="intro-tldr" content={intro.tldr} fieldPath="tldr">
+                {tldrContent}
               </EditableText>
             ) : (
-              sourceContent
+              tldrContent
             )}
-            <a
-              href={meta.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-sm font-bold text-[var(--course-primary)] hover:underline decoration-2 mt-2 uppercase tracking-wide"
-            >
-              Zum Original →
-            </a>
           </div>
         </ScrollReveal>
       </div>

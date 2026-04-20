@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import type { CourseIntro as CourseIntroType, CourseMeta } from "@/lib/types";
-import { formatDuration, getDifficultyLabel } from "@/lib/course-utils";
+import { formatDuration, getDifficultyLabel, getSourceLinkLabel } from "@/lib/course-utils";
 import Badge from "@/components/ui/Badge";
 import { HEADING, LABEL } from "@/lib/typography";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -154,7 +154,7 @@ export default function CourseIntro({ intro, meta, allTags = [] }: CourseIntroPr
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-sm font-bold text-[var(--course-primary)] hover:underline decoration-2 mt-2 uppercase tracking-wide"
             >
-              Zum Original →
+              {getSourceLinkLabel(meta.sourceType, meta.sourceUrl)} →
             </a>
           </div>
         </ScrollReveal>

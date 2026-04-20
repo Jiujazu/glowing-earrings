@@ -68,3 +68,27 @@ export function getSourceTypeLabel(
   };
   return labels[sourceType];
 }
+
+export function getSourceLinkLabel(
+  sourceType: CourseMeta["sourceType"],
+  sourceUrl: string
+): string {
+  switch (sourceType) {
+    case "gist":
+      return "Zum GitHub-Gist";
+    case "video":
+      if (/youtu\.?be/i.test(sourceUrl)) return "Zum YouTube-Video";
+      if (/vimeo/i.test(sourceUrl)) return "Zum Vimeo-Video";
+      return "Zum Video";
+    case "article":
+      return "Zum Artikel";
+    case "document":
+      return "Zum Dokument";
+    case "tool":
+      return "Zur Website";
+    case "tweet":
+      return "Zum Tweet";
+    default:
+      return "Zum Original";
+  }
+}

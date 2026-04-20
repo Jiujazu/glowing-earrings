@@ -48,7 +48,7 @@
   },
   "intro": {
     "tldr": "Du hast Hunderte Artikel gelesen und Notizen in fünf Apps verteilt. Trotzdem findest du nichts wieder, wenn du es brauchst. Andrej Karpathy hat eine Lösung entwickelt: Ein LLM baut aus deinen Markdown-Dateien eine persönliche Wissensdatenbank, hält sie aktuell und setzt Querverweise. Du richtest das einmal ein und hörst auf, dieselben Fragen zweimal zu googeln. Dieser Kurs zeigt dir das Konzept und wie du dein eigenes Wiki aufsetzt.",
-    "sourceContext": "Andrej Karpathy war Director of AI bei Tesla und Mitgründer von OpenAI. Hier geht's zum GitHub-Gist:"
+    "sourceContext": "Andrej Karpathy war Director of AI bei Tesla und Mitgründer von OpenAI."
   },
   "modules": [
     {

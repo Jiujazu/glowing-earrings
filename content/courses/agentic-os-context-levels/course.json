@@ -43,7 +43,7 @@
   },
   "intro": {
     "tldr": "Claude ist so gut wie der Kontext, den du ihm gibst. Klingt banal, hat aber sieben Stufen. Sie reichen von \"ich hab einen Prompt eingegeben\" bis zu \"Claude kennt meinen kompletten Workflow und hilft meinem ganzen Team\". Mit jeder Stufe wird das Tool spürbar nützlicher. Dieser Kurs zeigt dir alle sieben und hilft dir einzuschätzen, auf welcher du gerade stehst.",
-    "sourceContext": "Das Framework stammt von Power-Usern, die Claude Code täglich als zentrales Arbeitswerkzeug einsetzen. Hier das YouTube-Video:"
+    "sourceContext": "Das Framework stammt von Power-Usern, die Claude Code täglich als zentrales Arbeitswerkzeug einsetzen."
   },
   "modules": [
     {

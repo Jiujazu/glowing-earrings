@@ -8,7 +8,7 @@
 
 | Quelle-Abschnitt | Kurs-Stelle | Warum / Didaktisches Ziel |
 |---|---|---|
-| Website-Tagline „press a shortcut, speak, and have your words appear in any text field" | `intro.hook` | Klares Versprechen, 1-Satz-Hook — gleiche Mechanik wie Quelle |
+| Website-Tagline „press a shortcut, speak, and have your words appear in any text field" | `intro.tldr` | Klares Versprechen, 1-Satz-Hook — gleiche Mechanik wie Quelle |
 | Website-Säule **Free** + **Open Source** (17.000+ Stars, MIT) | `m1-content-1` + `outro.synthesis[2]` | Einordnung als Community-Tool, nicht SaaS — wichtig für Vertrauensbildung |
 | Website-Säule **Private** (kein Cloud-Transfer) | `m1-key-concept` „Lokale Speech-to-Text" + `m1-content-2` + `m1-quiz` | Pflicht-Begriff als Card, weil es das differenzierende Merkmal gegenüber SaaS-Konkurrenz ist |
 | Website-Säule **Simple** („one tool, one job") | `m1-content-1` + `outro.takeaway` | Begründet, warum Handy keine Transkriptions-Suite sein will |

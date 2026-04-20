@@ -318,7 +318,8 @@ export default function InteractiveGrid({
     if (!canvas) return;
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (window.matchMedia("(hover: none)").matches) return;
+
+    const isCoarsePointer = window.matchMedia("(hover: none)").matches;
 
     let running = true;
 
@@ -477,6 +478,24 @@ export default function InteractiveGrid({
       }
     }
 
+    // Touch tap → small wave (mobile, non-blocking — passive listener, scroll bleibt frei)
+    function onTouchStart(e: TouchEvent) {
+      if (!isVisibleRef.current) return;
+      if (wavesRef.current.length >= 2) return;
+      const rect = cachedRectRef.current;
+      if (!rect) return;
+      const touch = e.touches[0];
+      if (!touch) return;
+      const x = touch.clientX - rect.left;
+      const y = touch.clientY - rect.top;
+      if (x < 0 || x > rect.width || y < 0 || y > rect.height) return;
+      wavesRef.current.push({ x, y, time: performance.now(), intensity: 1.5 });
+      if (!isActiveRef.current) {
+        isActiveRef.current = true;
+        loop();
+      }
+    }
+
     // Listen for wave events from shapes
     function onWaveEvent(e: Event) {
       if (!isVisibleRef.current) return;
@@ -510,14 +529,18 @@ export default function InteractiveGrid({
 
     cachedRectRef.current = canvas.getBoundingClientRect();
     draw();
-    document.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseleave", onMouseLeave);
-    document.addEventListener("click", onClick);
-    document.addEventListener("dblclick", onDblClick);
-    document.addEventListener("mousedown", onMouseDown);
-    document.addEventListener("mouseup", onMouseUp);
-    document.addEventListener("contextmenu", onContextMenu);
-    document.addEventListener("keydown", onKeyDown);
+    if (isCoarsePointer) {
+      document.addEventListener("touchstart", onTouchStart, { passive: true });
+    } else {
+      document.addEventListener("mousemove", onMouseMove);
+      document.addEventListener("mouseleave", onMouseLeave);
+      document.addEventListener("click", onClick);
+      document.addEventListener("dblclick", onDblClick);
+      document.addEventListener("mousedown", onMouseDown);
+      document.addEventListener("mouseup", onMouseUp);
+      document.addEventListener("contextmenu", onContextMenu);
+      document.addEventListener("keydown", onKeyDown);
+    }
     document.addEventListener("grid-wave", onWaveEvent);
 
     function onScroll() {
@@ -549,14 +572,18 @@ export default function InteractiveGrid({
       running = false;
       isActiveRef.current = false;
       cancelAnimationFrame(rafRef.current);
-      document.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseleave", onMouseLeave);
-      document.removeEventListener("click", onClick);
-      document.removeEventListener("dblclick", onDblClick);
-      document.removeEventListener("mousedown", onMouseDown);
-      document.removeEventListener("mouseup", onMouseUp);
-      document.removeEventListener("contextmenu", onContextMenu);
-      document.removeEventListener("keydown", onKeyDown);
+      if (isCoarsePointer) {
+        document.removeEventListener("touchstart", onTouchStart);
+      } else {
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseleave", onMouseLeave);
+        document.removeEventListener("click", onClick);
+        document.removeEventListener("dblclick", onDblClick);
+        document.removeEventListener("mousedown", onMouseDown);
+        document.removeEventListener("mouseup", onMouseUp);
+        document.removeEventListener("contextmenu", onContextMenu);
+        document.removeEventListener("keydown", onKeyDown);
+      }
       document.removeEventListener("grid-wave", onWaveEvent);
       window.removeEventListener("scroll", onScroll);
       resizeObserver.disconnect();

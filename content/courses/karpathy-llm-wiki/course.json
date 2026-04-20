@@ -3,7 +3,7 @@
     "slug": "karpathy-llm-wiki",
     "title": "Die Karpathy Methode — Teil 1",
     "subheading": "Persönliche Knowledge Base mit KI",
-    "subtitle": "Wie du mit KI eine persönliche Knowledge Base baust, die wächst und nie veraltet — nach Andrej Karpathys Konzept.",
+    "subtitle": "Ein Ort für dein Wissen, der mit jeder Notiz nützlicher wird.",
     "sourceUrl": "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
     "sourceAuthor": "Andrej Karpathy",
     "sourceType": "gist",
@@ -48,7 +48,7 @@
   },
   "intro": {
     "tldr": "Du hast Hunderte Artikel gelesen und Notizen in fünf Apps verteilt. Trotzdem findest du nichts wieder, wenn du es brauchst. Andrej Karpathy hat eine Lösung entwickelt: Ein LLM baut aus deinen Markdown-Dateien eine persönliche Wissensdatenbank, hält sie aktuell und setzt Querverweise. Du richtest das einmal ein und hörst auf, dieselben Fragen zweimal zu googeln. Dieser Kurs zeigt dir das Konzept und wie du dein eigenes Wiki aufsetzt.",
-    "sourceContext": "Andrej Karpathy — Ex-Director of AI bei Tesla, Mitgründer von OpenAI, eine der einflussreichsten Stimmen in der KI-Welt — hat ein Konzept veröffentlicht, das er \"LLM Wiki\" nennt: eine persönliche Knowledge Base, die von einem LLM gebaut, gepflegt und durchsuchbar gehalten wird."
+    "sourceContext": "Andrej Karpathy war Director of AI bei Tesla und Mitgründer von OpenAI. Das Original ist ein kurzer Gist auf GitHub."
   },
   "modules": [
     {

@@ -3,7 +3,7 @@
     "slug": "handy-speech-to-text",
     "title": "Handy - Die beste Speech-to-Text App",
     "subheading": "Eine schnelle kostenlose Lösung zum lokalen Diktieren",
-    "subtitle": "Wie du mit diesem Open-Source-Tool per Tastenkürzel in jedes Textfeld diktierst, komplett offline, auf jedem Betriebssystem.",
+    "subtitle": "Per Tastenkürzel in jedes Textfeld diktieren, offline und auf jedem Betriebssystem.",
     "sourceUrl": "https://handy.computer/",
     "sourceAuthor": "cjpais (Open Source)",
     "sourceType": "tool",
@@ -42,7 +42,7 @@
   },
   "intro": {
     "tldr": "Sprechen ist dreimal schneller als Tippen. Aber Siri und Co. nerven oft rum und machen Fehler. Handy nutzt starke KI-Modelle, aber lokal: kein Account, keine Cloud, kein Audio, das irgendwo landet. Taste halten, sprechen, loslassen, Text erscheint. Dieser Kurs zeigt das Setup und warum das tatsächlich einen Unterschied macht.",
-    "sourceContext": "Handy ist ein Open-Source-Projekt von cjpais mit über 17.000 GitHub-Stars. Es läuft auf macOS, Windows und Linux, nutzt OpenAIs Whisper- und NVIDIAs Parakeet-Modelle lokal und sendet kein einziges Audiobyte in die Cloud."
+    "sourceContext": "Handy ist ein Open-Source-Projekt von cjpais mit über 17.000 GitHub-Stars. Läuft auf macOS, Windows und Linux, nutzt OpenAIs Whisper und NVIDIAs Parakeet als Modelle."
   },
   "modules": [
     {

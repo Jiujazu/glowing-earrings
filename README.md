@@ -35,3 +35,10 @@ content/courses/  -> Kurs-Daten als TypeScript
 lib/              -> Types, Utilities, Newsletter-Client
 public/           -> Statische Assets
 ```
+
+## Lizenz
+
+- **Kurs-Inhalte** (`content/`, `public/courses/`): CC BY-NC-SA 4.0
+- **Code**: MIT License
+
+Details in [`LICENSE`](./LICENSE).

@@ -32,8 +32,9 @@ export default function HeroImageSpotlight({
     const el = wrapperRef.current;
     if (!el) return;
     if (typeof window === "undefined") return;
-    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const isFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
     function flush() {
       rafRef.current = 0;
@@ -43,13 +44,17 @@ export default function HeroImageSpotlight({
       el.style.setProperty("--my", `${p.y}%`);
     }
 
-    function onMove(e: MouseEvent) {
+    function updatePointer(clientX: number, clientY: number) {
       const rect = el!.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      const x = ((clientX - rect.left) / rect.width) * 100;
+      const y = ((clientY - rect.top) / rect.height) * 100;
       pendingRef.current = { x, y };
       lastPointerRef.current = { x, y };
       if (!rafRef.current) rafRef.current = requestAnimationFrame(flush);
+    }
+
+    function onMove(e: MouseEvent) {
+      updatePointer(e.clientX, e.clientY);
     }
 
     function onEnter() {
@@ -60,15 +65,47 @@ export default function HeroImageSpotlight({
       el!.style.setProperty("--spotlight-opacity", "0");
     }
 
-    el.addEventListener("mousemove", onMove);
-    el.addEventListener("mouseenter", onEnter);
-    el.addEventListener("mouseleave", onLeave);
+    function onTouchStart(e: TouchEvent) {
+      const t = e.touches[0];
+      if (!t) return;
+      el!.style.setProperty("--spotlight-opacity", "1");
+      updatePointer(t.clientX, t.clientY);
+    }
+
+    function onTouchMove(e: TouchEvent) {
+      const t = e.touches[0];
+      if (!t) return;
+      updatePointer(t.clientX, t.clientY);
+    }
+
+    function onTouchEnd() {
+      el!.style.setProperty("--spotlight-opacity", "0");
+    }
+
+    if (isFinePointer) {
+      el.addEventListener("mousemove", onMove);
+      el.addEventListener("mouseenter", onEnter);
+      el.addEventListener("mouseleave", onLeave);
+    } else {
+      // Passive-Listener → Scroll bleibt frei, Spotlight folgt dem Finger
+      el.addEventListener("touchstart", onTouchStart, { passive: true });
+      el.addEventListener("touchmove", onTouchMove, { passive: true });
+      el.addEventListener("touchend", onTouchEnd);
+      el.addEventListener("touchcancel", onTouchEnd);
+    }
 
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      el.removeEventListener("mousemove", onMove);
-      el.removeEventListener("mouseenter", onEnter);
-      el.removeEventListener("mouseleave", onLeave);
+      if (isFinePointer) {
+        el.removeEventListener("mousemove", onMove);
+        el.removeEventListener("mouseenter", onEnter);
+        el.removeEventListener("mouseleave", onLeave);
+      } else {
+        el.removeEventListener("touchstart", onTouchStart);
+        el.removeEventListener("touchmove", onTouchMove);
+        el.removeEventListener("touchend", onTouchEnd);
+        el.removeEventListener("touchcancel", onTouchEnd);
+      }
     };
   }, []);
 

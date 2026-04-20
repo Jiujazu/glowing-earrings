@@ -489,7 +489,7 @@ export default function InteractiveGrid({
       const x = touch.clientX - rect.left;
       const y = touch.clientY - rect.top;
       if (x < 0 || x > rect.width || y < 0 || y > rect.height) return;
-      wavesRef.current.push({ x, y, time: performance.now(), intensity: 1.5 });
+      wavesRef.current.push({ x, y, time: performance.now(), intensity: 2.5 });
       if (!isActiveRef.current) {
         isActiveRef.current = true;
         loop();

@@ -70,13 +70,17 @@ interface Course {
 
 ### CourseMeta
 ```typescript
+interface CourseSource {
+  url: string;               // Link zum Originalmaterial
+  author: string;            // Name des Autors
+  type: "tweet" | "video" | "article" | "document" | "gist" | "tool" | "other";
+}
+
 interface CourseMeta {
   slug: string;              // URL-safe, englisch, kebab-case
   title: string;             // Griffiger deutscher Kursname
   subtitle: string;          // 1-2 Sätze Beschreibung
-  sourceUrl: string;         // Link zum Originalmaterial
-  sourceAuthor: string;      // Name des Autors
-  sourceType: "tweet" | "video" | "article" | "document" | "gist" | "other";
+  sources: CourseSource[];   // Mehrere Quellen möglich; erste gilt als primär
   category: "ai-tech" | "ai-creativity" | "ai-society" | "ai-workflows";
   tags: string[];            // z.B. ["Knowledge Management", "LLM"]
   estimatedMinutes: number;  // Geschätzte Gesamtdauer
@@ -148,10 +152,10 @@ interface CourseOutro {
   synthesis: string[];      // 3-5 Kernerkenntnisse
   nextStep: string;         // Konkreter Handlungsimpuls
   takeaway?: TakeawayItem[]; // Checkliste mit Emoji + Text
-  sourceUrl: string;        // Nochmaliger Link zum Original
   newsletterCTA: string;    // Kontextueller Newsletter-Hook
 }
 ```
+Quellen werden nicht im Outro dupliziert — sie stehen in `meta.sources` und werden am Ende automatisch gerendert.
 
 ---
 

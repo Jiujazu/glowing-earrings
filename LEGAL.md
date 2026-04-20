@@ -41,7 +41,7 @@ Wenn das neue Werk "hinreichenden Abstand" zum Original hat, ist es **keine zust
 
 ## 3. Regeln nach Quellentyp
 
-### Tweets / X-Posts (`sourceType: "tweet"`)
+### Tweets / X-Posts (`type: "tweet"`)
 
 - **Meist keine Schöpfungshöhe** wegen Kürze ("kleine Münze" reicht bei 280 Zeichen selten)
 - **Ausnahme:** besonders kreative, literarische oder individuelle Formulierungen
@@ -51,7 +51,7 @@ Wenn das neue Werk "hinreichenden Abstand" zum Original hat, ist es **keine zust
 
 **Empfehlung:** Kernidee aufgreifen, selbst formulieren, Autor + Link nennen. Screenshots vermeiden — lieber Link + eigener Text.
 
-### YouTube-Videos (`sourceType: "video"`)
+### YouTube-Videos (`type: "video"`)
 
 - **Immer geschützt** (Filmwerk/Laufbilder — auch ohne Schöpfungshöhe-Prüfung)
 - **Offizielles iframe-Embed:** grundsätzlich okay — EuGH hat bestätigt, dass Embedding keine neue öffentliche Zugänglichmachung ist, solange das Video **nicht offensichtlich illegal** hochgeladen wurde
@@ -61,7 +61,7 @@ Wenn das neue Werk "hinreichenden Abstand" zum Original hat, ist es **keine zust
 
 **Empfehlung:** `VideoEmbed`-Komponente mit offiziellem Embed nutzen (bereits Standard). Keine Downloads. Bei Transkript-Zitaten kurze Ausschnitte mit Quellenangabe.
 
-### GitHub-Repos (`sourceType: "gist"` / Code-Quellen)
+### GitHub-Repos (`type: "gist"` / Code-Quellen)
 
 - **Code ist geschützt** (oft mit sehr geringer Schöpfungshöhe)
 - **Aber: Lizenz entscheidet.** Immer die `LICENSE`-Datei prüfen:
@@ -84,7 +84,7 @@ Wenn das neue Werk "hinreichenden Abstand" zum Original hat, ist es **keine zust
 - Reddits Nutzungsbedingungen geben **Reddit** Rechte, nicht Dritten — Drittnutzung braucht weiter Autor-Erlaubnis oder Zitatrecht
 - Längere Posts/Kommentare: wie Blogpost behandeln
 
-### Artikel / Blogposts / Paper (`sourceType: "article"` / `"document"`)
+### Artikel / Blogposts / Paper (`type: "article"` / `"document"`)
 
 - **Immer geschützt**, auch ohne Urhebervermerk
 - Nutzung nur über Zitatrecht oder substantielle eigenständige Transformation
@@ -114,7 +114,7 @@ Wenn das neue Werk "hinreichenden Abstand" zum Original hat, ist es **keine zust
 
 1. **Transformation explizit machen** — deutlich mehr eigener Text als zitiertes Material.
 2. **Zitat-Kennzeichnung standardisieren** — wörtliche Übernahmen in `callout variant="quote"` mit Autor + Link.
-3. **Quellenangabe vollständig** — `sourceUrl`, `sourceAuthor`, `sourceType` in `CourseMeta` plus Wiederholung im Outro (Standard ist bereits konform).
+3. **Quellenangabe vollständig** — jede Quelle als Eintrag in `meta.sources[]` mit `url`, `author`, `type`. Wird automatisch am Ende des Kurses gerendert.
 4. **Bilder/Thumbnails** — selbst erstellen, CC0-Quellen nutzen oder eigene Illustrationen. Hot-Linking fremder Bilder vermeiden.
 5. **YouTube** — nur offizielles Embed, keine heruntergeladenen Clips.
 6. **GitHub** — Lizenz-Check als Teil der Gap-Analyse bei Code-Quellen, Lizenz in `source.md` dokumentieren.

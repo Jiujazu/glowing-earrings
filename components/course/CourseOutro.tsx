@@ -4,8 +4,8 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import type { CourseOutro as CourseOutroType } from "@/lib/types";
-import { getCourseBySlug, formatDuration, getDifficultyLabel } from "@/lib/course-utils";
+import type { CourseOutro as CourseOutroType, CourseSource } from "@/lib/types";
+import { getCourseBySlug, formatDuration, getDifficultyLabel, getSourceLinkLabel } from "@/lib/course-utils";
 import NewsletterCTA from "@/components/layout/NewsletterCTA";
 import Badge from "@/components/ui/Badge";
 import IconBox from "@/components/ui/IconBox";
@@ -52,10 +52,11 @@ function InlineOutroEdit({
 interface CourseOutroProps {
   outro: CourseOutroType;
   courseSlug: string;
+  sources: CourseSource[];
   relatedSlugs?: string[];
 }
 
-export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseOutroProps) {
+export default function CourseOutro({ outro, courseSlug, sources, relatedSlugs }: CourseOutroProps) {
   const editMode = useEditMode();
   const isEditMode = editMode.isEditMode;
   const [localSynthesis, setLocalSynthesis] = useState<string[]>(outro.synthesis);
@@ -160,19 +161,29 @@ export default function CourseOutro({ outro, courseSlug, relatedSlugs }: CourseO
           </div>
         </ScrollReveal>
 
-        {/* Source Link */}
-        <ScrollReveal>
-          <div className="text-center mb-12">
-            <a
-              href={outro.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-[var(--course-text-muted)] hover:text-[var(--course-primary)] transition-colors underline underline-offset-4"
-            >
-              Zur Originalquelle →
-            </a>
-          </div>
-        </ScrollReveal>
+        {/* Source Links */}
+        {sources.length > 0 && (
+          <ScrollReveal>
+            <div className="text-center mb-12 text-sm text-[var(--course-text-muted)] space-y-1">
+              <p className="uppercase tracking-wide text-xs mb-2">
+                {sources.length === 1 ? "Quelle" : "Quellen"}
+              </p>
+              {sources.map((source, i) => (
+                <p key={i}>
+                  {source.author}:{" "}
+                  <a
+                    href={source.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[var(--course-primary)] transition-colors underline underline-offset-4"
+                  >
+                    {getSourceLinkLabel(source.type, source.url)} →
+                  </a>
+                </p>
+              ))}
+            </div>
+          </ScrollReveal>
+        )}
 
         {/* Related Courses */}
         {relatedCourses.length > 0 && (

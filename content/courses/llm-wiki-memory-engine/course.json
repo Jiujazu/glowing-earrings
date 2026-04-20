@@ -4,9 +4,13 @@
     "title": "Die Karpathy Methode: Teil 2",
     "subheading": "Das lebende Wiki",
     "subtitle": "Dein Wiki aus Teil 1 funktioniert. Aber was passiert ab 200 Seiten? Man verliert den Überblick. Memory Lifecycle, Knowledge Graph und Automation machen es zum selbstpflegenden System.",
-    "sourceUrl": "https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2",
-    "sourceAuthor": "rohitg00",
-    "sourceType": "gist",
+    "sources": [
+      {
+        "url": "https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2",
+        "author": "rohitg00",
+        "type": "gist"
+      }
+    ],
     "category": "ai-tech",
     "tags": [
       "Wissensmanagement",
@@ -492,7 +496,6 @@
         "text": "Schema als Produkt: CLAUDE.md ist das Betriebssystem deines Wikis"
       }
     ],
-    "sourceUrl": "https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2",
     "newsletterCTA": "Jede Woche ein Konzept wie dieses — von Knowledge Graphs bis Agent-Workflows. Kostenlos, kuratiert, direkt anwendbar."
   }
 }

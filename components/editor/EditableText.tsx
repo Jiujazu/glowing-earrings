@@ -31,24 +31,30 @@ function ToolbarButton({
   active,
   onClick,
   title,
+  disabled = false,
   children,
 }: {
   active: boolean;
   onClick: () => void;
   title: string;
+  disabled?: boolean;
   children: React.ReactNode;
 }) {
   return (
     <button
       type="button"
+      disabled={disabled}
       onMouseDown={(e) => {
         e.preventDefault(); // Prevent editor blur
+        if (disabled) return;
         onClick();
       }}
       className={`px-2 py-1 rounded text-xs font-medium transition-all duration-150 ${
-        active
-          ? "bg-[var(--course-primary)] text-white"
-          : "hover:bg-[var(--course-text)]/10 text-[var(--course-text)]"
+        disabled
+          ? "opacity-30 cursor-not-allowed text-[var(--course-text)]"
+          : active
+            ? "bg-[var(--course-primary)] text-white"
+            : "hover:bg-[var(--course-text)]/10 text-[var(--course-text)]"
       }`}
       title={title}
     >
@@ -81,6 +87,10 @@ export default function EditableText({
   const htmlContent = DOMPurify.sanitize(
     marked.parse(content, { async: false }) as string
   );
+
+  const hasLocalChange =
+    "pendingChanges" in editMode &&
+    editMode.pendingChanges.has(`${elementId}:${fieldPath}`);
 
   const editor = useEditor({
     extensions: [
@@ -261,6 +271,21 @@ export default function EditableText({
             title="Trennlinie"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="4" y1="12" x2="20" y2="12"/></svg>
+          </ToolbarButton>
+          <div className="ml-auto" />
+          <ToolbarButton
+            active={false}
+            disabled={!hasLocalChange}
+            onClick={() => {
+              editor.commands.setContent(htmlContent);
+              setLocalContent(null);
+              if ("unregisterChange" in editMode) {
+                editMode.unregisterChange(elementId, fieldPath);
+              }
+            }}
+            title="Änderungen dieses Blocks verwerfen"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><polyline points="3 4 3 9 8 9"/></svg>
           </ToolbarButton>
         </div>
 

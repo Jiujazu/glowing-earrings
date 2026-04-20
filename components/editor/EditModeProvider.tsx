@@ -22,6 +22,7 @@ interface EditModeContextValue {
   toggleEditMode: () => void;
   pendingChanges: Map<string, EditorChange>;
   registerChange: (change: EditorChange) => void;
+  unregisterChange: (elementId: string, fieldPath: string) => void;
   clearChanges: () => void;
   undo: () => void;
   redo: () => void;
@@ -102,6 +103,26 @@ export default function EditModeProvider({
       historyRef.current = historyRef.current.slice(0, historyIndexRef.current + 1);
       historyRef.current.push(serialized);
       // Keep max 50 history entries
+      if (historyRef.current.length > 50) {
+        historyRef.current = historyRef.current.slice(-50);
+      }
+      historyIndexRef.current = historyRef.current.length - 1;
+
+      return next;
+    });
+    updateHistoryState();
+  }, [updateHistoryState]);
+
+  const unregisterChange = useCallback((elementId: string, fieldPath: string) => {
+    const key = `${elementId}:${fieldPath}`;
+    setPendingChanges((prev) => {
+      if (!prev.has(key)) return prev;
+      const next = new Map(prev);
+      next.delete(key);
+
+      const serialized = serializeMap(next);
+      historyRef.current = historyRef.current.slice(0, historyIndexRef.current + 1);
+      historyRef.current.push(serialized);
       if (historyRef.current.length > 50) {
         historyRef.current = historyRef.current.slice(-50);
       }
@@ -215,6 +236,7 @@ export default function EditModeProvider({
         toggleEditMode,
         pendingChanges,
         registerChange,
+        unregisterChange,
         clearChanges,
         undo,
         redo,

@@ -264,6 +264,7 @@ lib/
 6. **Newsletter-Provider:** Noch nicht entschieden — die Integration ist abstrakt gebaut
 7. **Kein Analytics:** DSGVO-konform von Tag 1
 8. **Impressum/Datenschutz:** E-Mail-Adressen müssen noch eingetragen werden (Platzhalter)
+9. **Lizenz:** Kurs-Inhalte unter CC BY-NC-SA 4.0, Code unter MIT (siehe `LICENSE`). Bei neuen Kursen keine Lizenz-Hinweise in Kurs-Dateien nötig — die Top-Level-LICENSE deckt alles ab.
 
 ---
 

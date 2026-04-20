@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import type { CourseIntro as CourseIntroType, CourseMeta } from "@/lib/types";
-import { formatDuration, getDifficultyLabel, getSourceLinkLabel } from "@/lib/course-utils";
+import { formatDuration, getDifficultyLabel } from "@/lib/course-utils";
 import Badge from "@/components/ui/Badge";
 import { HEADING, LABEL } from "@/lib/typography";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -53,10 +53,6 @@ export default function CourseIntro({ intro, meta, allTags = [] }: CourseIntroPr
 
   const tldrContent = (
     <p className="text-base leading-relaxed">{intro.tldr}</p>
-  );
-
-  const sourceContent = (
-    <p className="text-base">{intro.sourceContext}</p>
   );
 
   return (
@@ -120,7 +116,7 @@ export default function CourseIntro({ intro, meta, allTags = [] }: CourseIntroPr
         {/* TLDR */}
         <ScrollReveal delay={200} duration={700}>
           <div
-            className="p-5 border-4 border-[var(--course-border)] mb-6"
+            className="p-5 border-4 border-[var(--course-border)]"
             style={{ backgroundColor: "var(--course-surface)" }}
           >
             <p className={`text-xs ${LABEL} text-[var(--course-primary)] mb-2`}>TLDR</p>
@@ -131,31 +127,6 @@ export default function CourseIntro({ intro, meta, allTags = [] }: CourseIntroPr
             ) : (
               tldrContent
             )}
-          </div>
-        </ScrollReveal>
-
-        {/* Source Context */}
-        <ScrollReveal delay={250}>
-          <div
-            className="p-5 border-4 border-[var(--course-border)]"
-            style={{ backgroundColor: "var(--course-surface)" }}
-          >
-            <p className={`text-xs ${LABEL} text-[var(--course-text-muted)] mb-2`}>Quelle</p>
-            {isEditMode ? (
-              <EditableText elementId="intro-source" content={intro.sourceContext} fieldPath="sourceContext">
-                {sourceContent}
-              </EditableText>
-            ) : (
-              sourceContent
-            )}
-            <a
-              href={meta.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-sm font-bold text-[var(--course-primary)] hover:underline decoration-2 mt-2 uppercase tracking-wide"
-            >
-              {getSourceLinkLabel(meta.sourceType, meta.sourceUrl)} →
-            </a>
           </div>
         </ScrollReveal>
       </div>

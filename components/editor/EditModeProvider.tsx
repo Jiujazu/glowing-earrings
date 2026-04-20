@@ -53,7 +53,17 @@ function readUiMarkerCookie(): boolean {
   return document.cookie.split(";").some((c) => c.trim().startsWith("editor_ui=1"));
 }
 
-export default function EditModeProvider({
+export default function EditModeProvider(props: {
+  courseSlug: string;
+  children: React.ReactNode;
+}) {
+  if (process.env.NEXT_PUBLIC_EDITOR_ENABLED !== "true") {
+    return <>{props.children}</>;
+  }
+  return <EditModeProviderInner {...props} />;
+}
+
+function EditModeProviderInner({
   courseSlug,
   children,
 }: {

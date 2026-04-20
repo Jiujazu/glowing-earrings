@@ -95,6 +95,10 @@ function checkOrigin(request: NextRequest): NextResponse | null {
  * valid, or an error NextResponse if invalid.
  */
 export async function validateEditorAuth(request: NextRequest): Promise<NextResponse | null> {
+  if (process.env.EDITOR_ENABLED !== "true") {
+    return NextResponse.json({ success: false, message: "Not found." }, { status: 404 });
+  }
+
   const originError = checkOrigin(request);
   if (originError) return originError;
 

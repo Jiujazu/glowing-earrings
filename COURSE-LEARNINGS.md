@@ -212,3 +212,23 @@ Bestätigte Patterns werden als Regel in der passenden `CREATOR`-Sektion ergänz
 - **Hypothese für nächste Kurse:** **Pflicht: Pro Kurs mindestens 1–2 Sätze mit Julians Autor-Stimme (persönliche Erfahrung, Meinung, Szene-Wissen, Humor) — bevorzugt im `intro.hook` oder an einem `transitionToNext`.** Prüfbar im Audit §14 per Lese-Check: Gibt es mindestens eine Stelle im Kurs, die der Lerner eindeutig als Julian-Position erkennt („ich benutze…", „mein Tipp…", „aus meiner Sicht…", persönliche Anekdote)? Wenn nein → ❌. Zusätzlich: Jede subjektive Behauptung in Meta oder Body muss entweder durch Autor-Stimme getragen oder durch Vergleichsinhalt belegt werden.
 - **Sofort-Promotion-Kandidat?** ja (→ CREATOR §3.6 Autor-Stimme ist Pflicht + §9 Checklist-Verweis)
 - **Status:** promoted → CREATOR §3.6 (+ §9 Didaktik-Check)
+
+### Platform-Update: TLDR-Feature (2026-04-20)
+
+**Quelle:** Julian-Feedback, alle 5 bestehenden Kurse überarbeitet
+**Theme:** Plattform-Feature (neues Intro-Feld `tldr`, Redesign der Intro-Blöcke)
+
+- **Was war neu:** Neues Pflichtfeld `intro.tldr` ersetzt `intro.hook`. Für alle 5 Kurse TLDRs nach dem Schema Problem → Lösung → "Dieser Kurs…" geschrieben. Erste systematische Rollen-Trennung zwischen Subtitle, TLDR und sourceContext.
+- **Was hat funktioniert:**
+  - Problem → Lösung → "Dieser Kurs…"-Struktur ist ein natürlicher Lesefluss. Lerner wissen nach 4–6 Sätzen, ob der Kurs für sie ist.
+  - Hook geht nicht verloren: Er steckt als erste 1–2 Sätze im TLDR. Keine separate Funktion, kein separates Feld nötig.
+  - Rollen-Trennung (Subtitle = Versprechen, TLDR = Story, sourceContext = Credentials + Quellenformat) macht jeden Block lesbarer und verhindert Wiederholungen.
+  - Anti-AI-Cleanup der sourceContext-Boxen: "Das Original ist ein..." durch "Hier der GitHub-Gist:" etc. ersetzt. Klingt sofort weniger steif.
+- **Was war ein Fehler:**
+  - Erster Bereinigungsversuch hat Subtitles zu stark abgespeckt. Vergessen: Subtitle ist auf der Kursübersichtsseite die einzige sichtbare Information neben Titel und Subheading. Zu kurze Subtitles gaben dort zu wenig Kontext für Erstentscheider.
+  - Em-Dashes saßen in Titeln ("Die Karpathy Methode — Teil 1") und alten Subtitles und wurden erst nach visuellem Review gefixt.
+- **Hypothese für nächste Kurse:**
+  - Subtitle-Änderungen immer aus der Perspektive der Kurskartenansicht prüfen: Reicht der Text, um ohne TLDR-Kontext eine Entscheidung zu treffen?
+  - TLDR-Struktur und Rollen-Trennung sind ab sofort Standard — keine offene Hypothese mehr.
+- **Sofort-Promotion-Kandidat?** ja (→ CREATOR §4.1)
+- **Status:** promoted → CREATOR §4.1 (TLDR-Struktur, Rollen-Trennung Subtitle/TLDR/sourceContext, Rollen-Trennungs-Checklistenpunkt §9)

@@ -83,6 +83,10 @@ function checkOrigin(request: NextRequest): NextResponse | null {
 }
 
 export async function POST(request: NextRequest) {
+  if (process.env.EDITOR_ENABLED !== "true") {
+    return NextResponse.json({ success: false, message: "Not found." }, { status: 404 });
+  }
+
   const originError = checkOrigin(request);
   if (originError) return originError;
 
@@ -168,6 +172,10 @@ export async function POST(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
+  if (process.env.EDITOR_ENABLED !== "true") {
+    return NextResponse.json({ success: false, message: "Not found." }, { status: 404 });
+  }
+
   const originError = checkOrigin(request);
   if (originError) return originError;
 

@@ -139,7 +139,7 @@ Nicht-Einhaltung = Anti-Pattern §12.8.
 
 Die Plattform ist Julian van Diekens kuratierte Empfehlung, kein neutrales Handbuch. Deshalb:
 
-- **Pro Kurs mindestens 1–2 Sätze mit Julians Autor-Stimme** — persönliche Erfahrung, Meinung, Szene-Wissen, Humor, kleine Anekdote. Bevorzugt im `intro.hook` oder an einem `transitionToNext`.
+- **Pro Kurs mindestens 1–2 Sätze mit Julians Autor-Stimme** — persönliche Erfahrung, Meinung, Szene-Wissen, Humor, kleine Anekdote. Bevorzugt im `intro.tldr` oder an einem `transitionToNext`.
 - **Erkennungsmerkmal:** Der Lerner muss mindestens eine Stelle eindeutig als Julian-Position lesen können — „ich benutze…", „mein Tipp…", „aus meiner Sicht…", persönliche Beobachtung.
 - **Belegmittel für subjektive Claims:** Subjektive Behauptungen in Meta oder Body (Superlativ, Empfehlung, Bewertung — z.B. „die beste Lösung") sind **nur zulässig, wenn sie durch sichtbare Autor-Stimme oder durch Vergleichsinhalt im Kurs getragen werden.** Ein Superlativ ohne Deckung wird zu einem leeren Versprechen.
 - **Warum die Regel existiert:** Ohne Autor-Position wird der Kurs austauschbar mit der Original-Quelle (Produktseite, GitHub-README, Paper). Der Lerner fragt zu Recht: „Warum nicht direkt auf die Website?" Die Antwort liegt in Julians Standpunkt, seinem Szene-Wissen, seinem Urteil.
@@ -152,12 +152,16 @@ Prüfpunkt in §9 Didaktik-Checkliste. Herkunft: LEARNINGS „Workflow-Audit: Au
 
 ### 4.1 Intro (Pflicht)
 
-Beantwortet zwei Kernfragen:
+Beantwortet zwei Kernfragen — jedes Feld hat eine klar abgegrenzte Rolle:
 
 | Frage | Umsetzung | Feld |
 |---|---|---|
-| Wer spricht hier? | Kurze Einordnung der Quelle/Person | `sourceContext` |
-| Warum sollte mich das interessieren? | Hook: Problem, Versprechen, Überraschung | `hook` |
+| Wer spricht hier? | Credentials der Quelle/Person + Quellenformat (kein Kursinhalt) | `sourceContext` |
+| Warum sollte mich das interessieren? | TLDR: Hook → Lösung → "Dieser Kurs…" | `tldr` |
+
+**TLDR-Struktur:** 4–6 Sätze. Die ersten 1–2 Sätze benennen das konkrete Problem des Lerners (das ist der Hook). Dann die Lösung. Letzter Satz beginnt immer mit "Dieser Kurs…" und beschreibt, was der Kurs liefert. Anti-AI-Stil gilt hier besonders strikt (keine Em-Dashes, keine KI-Marker, kein Pathos).
+
+**Rollen-Trennung:** Subtitle (auf Kurskartenansicht sichtbar), TLDR und sourceContext dürfen dieselbe Information nicht wiederholen. Subtitle = Nutzenversprechen in einem Satz. TLDR = vollständige Story. sourceContext = Credentials + Quellenformat, kein Kursinhalt.
 
 Plus: Link zum Originalmaterial. Die Modul-Übersicht wird automatisch durch die Kapitel-Navigation angezeigt.
 
@@ -266,7 +270,7 @@ Bei Julian-Kursen: `sourceAuthor: "Julian van Dieken"`, `sourceType: "video"`, L
 Kurse stehen nicht isoliert. Wo immer möglich:
 - **Outro:** Verweis auf thematisch verwandte Kurse auf der Plattform
 - **Modul-Übergänge:** Bei letztem Modul bevorzugt Querverweis statt interner Cliff-Hanger
-- **Sequel-Kurse:** Direkte Anknüpfung an Vorgänger über Hook und Recap. "Teil 2" im Subheading macht die Zugehörigkeit sofort klar. `relatedCourses` gegenseitig setzen.
+- **Sequel-Kurse:** Direkte Anknüpfung an Vorgänger über TLDR und Recap. "Teil 2" im Subheading macht die Zugehörigkeit sofort klar. `relatedCourses` gegenseitig setzen.
 - **Ziel:** Ein natürliches Netz aus Lernpfaden, das organisch wächst
 
 ---
@@ -494,6 +498,7 @@ Pflicht für alle Prosa-Teile: Intro, Modul-Texte, Callouts, Übergänge, Outro,
 - [ ] Modul-Übergänge vorhanden (bevorzugt Kurs-Querverweise)
 - [ ] Outro mit Synthese, konkretem nächsten Schritt und Takeaway
 - [ ] §3.6 — Autor-Stimme vorhanden: mind. 1–2 Sätze persönliche Note (Erfahrung/Meinung/Szene-Wissen) im Intro oder an einem Modul-Übergang. Subjektive Claims (Superlativ, Empfehlung) durch Autor-Stimme oder Vergleichsinhalt gedeckt.
+- [ ] §4.1 — Rollen-Trennung: Subtitle, TLDR und sourceContext wiederholen nicht dieselbe Information. TLDR beginnt mit Problem (Hook), endet mit "Dieser Kurs…". sourceContext enthält nur Credentials + Quellenformat, keinen Kursinhalt.
 - [ ] `relatedCourses` gegenseitig gesetzt
 - [ ] **Pflicht-Minima per Grep verifiziert** (vor Commit ausführen, Werte müssen ≥ angegebener Zahl sein):
   - `rg -c '"type": "key-concept"' content/courses/[slug]/course.json` → ≥ 1
@@ -742,7 +747,7 @@ Nicht-Ziel: Routine-Audit nach jedem Kurs. Dafür ist die Qualitäts-Checkliste 
 Der Audit geht diese Kategorien durch. Jeder Check zitiert die Creator-Regel-Nummer (Rückverweis — SSoT bleibt eindeutig).
 
 **Struktur**
-- §4.1 Intro vorhanden mit Wer/Warum/Was + Quellenlink?
+- §4.1 Intro vorhanden mit Wer/Warum/Was + Quellenlink? TLDR beginnt mit Problem-Hook, endet mit "Dieser Kurs…"? Subtitle, TLDR, sourceContext haben klar getrennte Rollen ohne Wiederholungen?
 - §4.2 Modul-Anzahl und -Länge im Rahmen?
 - §4.7 Outro mit Synthese + konkretem nächsten Schritt + Takeaway?
 - §5.4 `relatedCourses` gegenseitig gesetzt?

@@ -42,7 +42,7 @@
   },
   "intro": {
     "hook": "Du tippst gerade. Du könntest auch sprechen: dreimal so schnell, ohne die Hände von dem zu nehmen, was du eigentlich tust. Handy ist ein kleines, kostenloses Tool, das genau das macht: Tastenkürzel drücken, sprechen, loslassen. Dein Text erscheint. Komplett offline.\n\nIch benutze Handy seit ein paar Wochen täglich. Am stärksten gemerkt habe ich den Unterschied bei langen KI-Prompts: was vorher drei Minuten Tippen war, ist jetzt ein halber Satz in normalem Tempo.",
-    "tldr": "Sprechen ist dreimal schneller als Tippen. Handy macht daraus: Taste halten, sprechen, loslassen — Text erscheint, offline, kostenlos, ohne Account. Dieser Kurs ist im Kern ein Werbespot. Aber ein ehrlicher, mit Setup-Anleitung.",
+    "tldr": "Sprechen ist dreimal schneller als Tippen. Aber Siri und Co. nerven oft rum und machen Fehler. Handy nutzt die beste KI-Leistung, aber lokal — kein Account, keine Cloud, kein Audio, das irgendwo landet. Taste halten, sprechen, loslassen, Text erscheint. Dieser Kurs zeigt das Setup und warum das tatsächlich den Unterschied macht.",
     "sourceContext": "Handy ist ein Open-Source-Projekt von cjpais mit über 17.000 GitHub-Stars. Es läuft auf macOS, Windows und Linux, nutzt OpenAIs Whisper- und NVIDIAs Parakeet-Modelle lokal und sendet kein einziges Audiobyte in die Cloud."
   },
   "modules": [

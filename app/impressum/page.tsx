@@ -1,28 +1,15 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import Container from "@/components/ui/Container";
 import { HEADING, PROSE_HEADINGS } from "@/lib/typography";
+import {
+  ImpressumAddressBlock,
+  ImpressumEmailBlock,
+} from "@/components/impressum/ImpressumDynamicBlocks";
 
 export const metadata: Metadata = {
   title: "Impressum",
   robots: { index: false, follow: false },
 };
-
-const ImpressumAddress = dynamic(
-  () =>
-    import("@/components/impressum/ImpressumSensitiveData").then(
-      (m) => m.ImpressumAddress
-    ),
-  { ssr: false, loading: () => <span>…</span> }
-);
-
-const ImpressumEmail = dynamic(
-  () =>
-    import("@/components/impressum/ImpressumSensitiveData").then(
-      (m) => m.ImpressumEmail
-    ),
-  { ssr: false, loading: () => <span>…</span> }
-);
 
 export default function ImpressumPage() {
   return (
@@ -35,15 +22,15 @@ export default function ImpressumPage() {
           className={`prose prose-lg max-w-none text-[var(--text-primary)] ${PROSE_HEADINGS} prose-headings:text-[var(--text-primary)] prose-p:text-[var(--text-primary)] prose-strong:text-[var(--text-primary)]`}
         >
           <h2>Angaben gemäß § 5 DDG</h2>
-          <ImpressumAddress />
+          <ImpressumAddressBlock />
 
           <h2>Kontakt</h2>
           <p>
-            E-Mail: <ImpressumEmail />
+            E-Mail: <ImpressumEmailBlock />
           </p>
 
           <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
-          <ImpressumAddress />
+          <ImpressumAddressBlock />
 
           <h2>Kursinhalte</h2>
           <p>
